@@ -1,0 +1,68 @@
+/* app css stylesheet */
+
+/*********
+ * COLORS
+**********/
+@background: #F7F5FC;
+@bright: #F205B3;
+@neutral: #5A7302;
+@neutral-dark: #324001;
+@black: #2F2916;
+
+html {
+    background-color: @background;
+    color: @black;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: @bright;
+}
+
+.button {
+    border-color: @neutral-dark;
+    border-style: solid;
+    border-width: 2px;
+    background-color: @neutral;
+    padding: 0.5em;
+    font-size: 1.5em;
+    color: @background;
+}
+
+input {
+    &[type="button"],&[type="submit"] {
+        .button;
+    }
+}
+button {
+    .button;
+}
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
