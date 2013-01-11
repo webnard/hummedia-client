@@ -1,0 +1,6 @@
+[submodule "app/lib/popcorn-js"]
+	path = app/lib/popcorn-js
+	url = git://github.com/mozilla/popcorn-js.git
+[submodule "app/lib/hummedia-popcorn-plugins"]
+	path = app/lib/hummedia-popcorn-plugins
+	url = git@bitbucket.org:htrscdev/popcorn-plugins.git
