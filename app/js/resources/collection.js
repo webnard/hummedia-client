@@ -2,8 +2,9 @@
 
 angular.module('hummedia.services').
     factory('Collection', ['$resource', 'appConfig', function($resource, config){
-        return $resource(config.apiBase + '/collection/:id', {id: '@id'},
+        var resource = $resource(config.apiBase + '/collection/:identifier', {identifier: '@identifier'},
         {
-            query: {method: 'GET', headers: {dogs: 'bark'}, isArray: true}
+            search: {method: 'GET', isArray: true}
         });
+        return resource;
     }]);

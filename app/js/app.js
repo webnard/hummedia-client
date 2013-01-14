@@ -12,4 +12,10 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
   }]).
   config(['$locationProvider', function($locationProvider) {
     //$locationProvider.html5Mode(true);
+  }]).
+  config(['$httpProvider', function($httpProvider) {
+    /**
+     * @todo This does not currently work with backend
+     */
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
   }]);
