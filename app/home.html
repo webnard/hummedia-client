@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/styles.css"></link>
+<link rel="script" type="text/javascript" href="js/jquery-1.8.3.min.js"></link>
+</head>
+	<body>
+		<nav>
+			<table id="navtable"><tr>			
+			<td style="width:5px;"></td>			
+			<td>Humanities Online Media</td>
+			<td><td>			
+			<td class="navlink"><a href="">Login</a><a href="">Courses</a><a href="">Contact</a></td>
+			<td style="width:5px;"><td>
+			</tr><table>
+									
+		</nav>
+		<div class="ghost" id="content">			
+			<a id="coursesbutton" class="bwbuttondark" href="">Media for My Courses</a>
+			<form>
+			<input type="text" id="searchbar"></input><input type="submit" value="Search" id="searchbutton"></input>
+			</form>		
+		</div>
+	</body>
+</html>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+  $("div").click(function(){
+    $(this).hide();
+  });
+});
+</script>
