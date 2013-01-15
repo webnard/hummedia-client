@@ -6,6 +6,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/search', {templateUrl: 'partials/search/search.html', controller: SearchCtrl});
     $routeProvider.when('/search/:query', {templateUrl: 'partials/search/search.html', controller: SearchCtrl});
+    $routeProvider.when('/', {templateUrl: 'partials/home.html'});
     //$routeProvider.otherwise({redirectTo: '/view1'});
   }]).
   config(['$locationProvider', function($locationProvider) {
