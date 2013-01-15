@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/styles.css"></link>
-<link rel="script" type="text/javascript" href="js/jquery-1.8.3.min.js"></link>
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<script src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+//Function to cycle backgrounds
+var background_number = 1;
+$(document).ready(function(){
+    $('#navtitle').click(function(){
+        $('html').css('background-image','url(img/' + background_number + '.jpg)');
+        background_number++;
+        if(background_number>=6){
+            background_number = 1;
+        }
+    });
+});
+</script>
+<title>Humanities Online Media</title>
 </head>
 	<body>
 		<nav>
 			<table id="navtable"><tr>			
 			<td style="width:5px;"></td>			
-			<td>Humanities Online Media</td>
+			<td id="navtitle">Humanities Online Media</td>
 			<td><td>			
 			<td class="navlink"><a href="">Login</a><a href="">Courses</a><a href="">Contact</a></td>
 			<td style="width:5px;"><td>
-			</tr><table>
+			</tr></table>
 									
 		</nav>
 		<div class="ghost" id="content">			
 			<a id="coursesbutton" class="bwbuttondark" href="">Media for My Courses</a>
-			<form>
-			<input type="text" id="searchbar"></input><input type="submit" value="Search" id="searchbutton"></input>
-			</form>		
+			<form class="searchform">
+                            <input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
+                            <input class="searchbutton" type="submit" value="Go" />
+                        </form>
 		</div>
 	</body>
 </html>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-  $("div").click(function(){
-    $(this).hide();
-  });
-});
-</script>
