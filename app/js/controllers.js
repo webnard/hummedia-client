@@ -3,7 +3,7 @@
 /* Controllers */
 
 
-function MyCtrl1($scope, config) {console.log(config.apiBase)}
+function MyCtrl1($scope, config) {}
 MyCtrl1.$inject = ['$scope','appConfig'];
 
 

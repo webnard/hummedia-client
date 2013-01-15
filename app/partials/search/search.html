@@ -1,4 +1,9 @@
-<input type="search" data-ng-model="query" placeholder="Doctor Strangelove, or How I Learned to Stop Worrying and Love the Bomb">
-<ul data-ng-repeat="result in results">
-    <li>{{result.title}}</li>
-</ul>
+<input type="search" data-ng-model="query" autofocus="autofocus" placeholder="Doctor Strangelove, or How I Learned to Stop Worrying and Love the Bomb" data-ng-change="change()">
+<section id="search-results">
+    <div data-ng-show="hasResults()">
+        No results found.
+    </div>
+    <ul data-ng-repeat="result in results">
+        <li><a data-ng-href="#/collection/{{result.identifier}}">{{result.title}}</a></li>
+    </ul>
+</section>
