@@ -2,9 +2,4 @@
 
 /* Directives */
 
-angular.module('hummedia.directives', []).
-  directive('appVersion', ['version', function(version) {
-    return function(scope, elm, attrs) {
-      elm.text(version);
-    };
-  }]);
+angular.module('hummedia.directives', []);

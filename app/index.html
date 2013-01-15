@@ -1,23 +1,10 @@
 <!doctype html>
-<html lang="en" ng-app="hummedia">
+<html lang="en" data-ng-app="hummedia">
 <head>
   <meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="css/styles.css" />
-<script type="text/javascript">
-//Function to cycle backgrounds
-var background_number = 1;
-$(document).ready(function(){
-    $('#navtitle').click(function(){
-        $('html').css('background-image','url(img/' + background_number + '.jpg)');
-        background_number++;
-        if(background_number>=6){
-            background_number = 1;
-        }
-    });
-});
-</script>
-<title>Humanities Online Media</title>
   <link rel="stylesheet" href="css/cssreset-min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/styles.css" />
+  <title>Humanities Online Media</title>
 
   <!-- use compiled css in production
   <link rel="stylesheet" href="css/app.css"/>
@@ -25,23 +12,23 @@ $(document).ready(function(){
   <link rel="stylesheet/less" href="css/app.less"/>
 </head>
 <body>
-		<nav>
-			<table id="navtable"><tr>			
-			<td style="width:5px;"></td>			
-			<td id="navtitle">Humanities Online Media</td>
-			<td><td>			
-			<td class="navlink"><a href="">Login</a><a href="">Courses</a><a href="">Contact</a></td>
-			<td style="width:5px;"><td>
-			</tr></table>
-									
-		</nav>
-		<div class="ghost" id="content">			
-			<a id="coursesbutton" class="bwbuttondark" href="">Media for My Courses</a>
-			<form class="searchform">
-                            <input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
-                            <input class="searchbutton" type="submit" value="Go" />
-                        </form>
-		</div>
+    <nav>
+            <table id="navtable"><tr>			
+            <td style="width:5px;"></td>			
+            <td id="navtitle">Humanities Online Media</td>
+            <td><td>			
+            <td class="navlink"><a href="">Login</a><a href="">Courses</a><a href="">Contact</a></td>
+            <td style="width:5px;"><td>
+            </tr></table>
+
+    </nav>
+    <div class="ghost" id="content">			
+            <a id="coursesbutton" class="bwbuttondark" href="">Media for My Courses</a>
+            <form class="searchform">
+                <input class="searchfield" type="text" value="Search..." onfocus="if (this.value == 'Search...') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search...';}" />
+                <input class="searchbutton" type="submit" value="Go" />
+            </form>
+    </div>
 
   <!-- LIBRARIES -->
   <!-- Use CDN in production -->
@@ -66,5 +53,19 @@ $(document).ready(function(){
   <script src="js/resources/collection.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
+  
+  <script type="text/javascript">
+    //Function to cycle backgrounds
+    var background_number = 1;
+    $(document).ready(function(){
+        $('#navtitle').click(function(){
+            $('html').css('background-image','url(img/' + background_number + '.jpg)');
+            background_number++;
+            if(background_number>=6){
+                background_number = 1;
+            }
+        });
+    });
+   </script>
 </body>
 </html>
