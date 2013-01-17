@@ -1,11 +1,19 @@
-<div id="search_content">
-<input type="search" data-ng-model="query" autofocus="autofocus" placeholder="Doctor Strangelove, or How I Learned to Stop Worrying and Love the Bomb" data-ng-change="change()">
-<section id="search-results">
-    <div data-ng-show="hasResults()">
-        No results found.
+<section id="search">
+    <div id="search_content">
+	<form class="searchform">
+	    <input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
+	    <input class="searchbutton" type="submit" value="Go" />
+	</form>
+	<p>
+	{{results.length}} result<span data-ng-show="results.length != 1">s</span> found.
+	</p>
     </div>
-    <ul data-ng-repeat="result in results">
-        <li><a data-ng-href="#/collection/{{result.identifier}}">{{result.title}}</a></li>
-    </ul>
+    <section id="search-results">
+	<ul>
+	    <li data-ng-repeat="result in results"><a data-ng-href="#/collection/{{result.identifier}}">
+		    <h1>{{result.title}}</h1>
+		    <p class="description">{{result.description}}</p>
+	    </a></li>
+	</ul>
+    </section>
 </section>
-</div>

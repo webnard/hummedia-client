@@ -6,9 +6,17 @@ function SearchCtrl($scope, $routeParams, Collection, $location) {
     
     $scope.query = $routeParams.query; // the user's search query
     $scope.results = Collection.search();
-    
-    // did we get anything from the search? updates the view accordingly
-    $scope.hasResults = function() { return !$scope.results.length; }
+    $scope.results = [
+	{title: 'Once Upon a Midnight Dreary'},
+	{title: 'As I Pondered'},
+	{title: 'Weak\'n\'Weary'},
+	{title: 'Over Many a Quaint and Curious'},
+	{title: 'Vol. 3 of Forgotten Lore', description: "When a crazy bird comes a'tapping, the residents start lamenting over lost love in this laugh-out-loud comedy."},
+	{title: 'Tis a Visitor'},
+	{title: 'I Muttered, Only This'},
+	{title: 'Sorrow for my Sweet Lenore'},
+	{title: 'NEVERMORE'}
+    ];
     
     // For fun and excitement, update the URL as the user types their search
     $scope.change = function() {
