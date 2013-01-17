@@ -62,24 +62,24 @@ nav{
 /**************************
  * Search Form Styling
 ***************************/
-.search-sizing{
+#search {
     min-width:400px;
     width: 70%;
-}
-#search {
-    .search-sizing;
     margin: auto;
 }
 @max-search-height: 150px;
 #search_content{
         .ghost;
         .content;
+	padding: 0;
 	max-height: @max-search-height;
-	/*.search-sizing;*/
 	position: fixed;
 	width: inherit;
-	min-width: 400px;
+	min-width:400px;
 	text-align: left;
+	& > div {
+	    padding: 10px;
+	}
 	.searchform {
 	    width: 70%;
 	    margin-left: 15%;
@@ -152,11 +152,10 @@ nav{
 	-ms-filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e9e9e', endColorstr='#454545'); /* ie8 */
 }
 #search-results {
-    min-width: 400px;
+    width: 100%;
     padding-top: (@max-search-height + @content-top + 25px);
     li {
 	margin: auto;
-	.search-sizing;
 	.ghost;
 	border-radius: 0;
 	padding: 10px;
