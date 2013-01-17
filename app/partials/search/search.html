@@ -2,7 +2,7 @@
     <div id="search_content">
 	<!-- Without this div we get bad sizing issues -->
 	<div>
-	    <form class="searchform">
+	    <form class="searchform" data-ng-submit="refresh()">
 		<input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
 		<input class="searchbutton" type="submit" value="Go" />
 	    </form>
