@@ -1,0 +1,22 @@
+<div id="collection_content2">
+<div>
+    <h2>{{collection_data.title}}</h2>
+    <p>{{collection_data.description}}</p>
+</div>
+    <div data-ng-repeat="video in collection_data.videos" class="video_list">
+        <table>
+            <tr>
+                <td>
+        <img src="http://placekitten.com/g/300/200" width="300" height="200"/>
+        <p>{{video.title}}</p>
+                </td>
+                <td>
+        <p style="text-align: left; padding-right: 10px;">{{video.description}}<br />
+        Language: {{video.language}}<br />
+        Date: {{video.date | date:'longDate'}}
+        </p>
+                </td>
+        </tr>
+        </table>
+    <div>    
+</div>
