@@ -169,7 +169,7 @@ nav{
 #search-results {
     width: 100%;
     padding-top: (@max-search-height + @content-top + 25px);
-    li {
+    .result {
 	margin: auto;
 	.ghost;
 	position: relative;
@@ -179,6 +179,35 @@ nav{
 	min-height: 75px;
 	.transition(color linear 0.1s);
 	.transition(text-shadow linear 0.1s);
+	
+	/**
+	 * @todo: Maybe show these details by default on mobile devices?
+	**/
+	.languages {
+	    display: inline-block;
+	    li {
+		&:not(:last-child):after {
+		    content: ',';
+		}
+		&:first-child:before {
+		    content: '[';
+		}
+		&:last-child:after {
+		    content: ']';
+		}
+	    }
+	}
+	.details {
+	    visibility: hidden;
+	    font-size: 0.8em;
+	    text-align: left;
+	    margin-top: 10px;
+	    margin-bottom: 0px;
+	    color: rgba(0,0,0,.50);
+	}
+	&:hover .details {
+	    visibility: visible;
+	}
 	& > a {
 	    color: inherit;
 	    display: block;
