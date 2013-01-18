@@ -6,8 +6,11 @@
 		<input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
 		<input class="searchbutton" type="submit" value="Go" />
 	    </form>
-	    <p data-ng-show="!isSearching">
-	    {{results.length}} result<span data-ng-show="results.length != 1">s</span> found.
+	    <p data-ng-show="!isSearching && hasSearched">
+		<ng-pluralize count="results.length" when="{'0': 'No results.',
+			      'one': 'One result.',
+			      'other': '{} results found.'}">
+		</ng-pluralize>
 	    </p>
 	    <p data-ng-show="isSearching">
 		Searching…

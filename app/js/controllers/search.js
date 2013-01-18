@@ -11,6 +11,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.query = $routeParams.query; // the user's search query
     $scope.results = [];
     $scope.isSearching = false;
+    $scope.hasSearched = false;
     
     // when we slide up the search box
     var slideupval = $("#search_content").offset().top;
@@ -60,8 +61,10 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	clearTimeout(timer);
 	timer = null;
 	if(/^\s*$/.test($scope.query)) {
+	    $scope.results = [];
 	    return;
 	}
+	$scope.hasSearched = true;
 	$scope.isSearching = true;
 	lastsearch = Date.now();
 	//$scope.results = Collection.search();
