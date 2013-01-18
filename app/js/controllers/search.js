@@ -2,11 +2,15 @@
  * Handles searching and displaying search results to the user
  */
 'use strict';
-function SearchCtrl($scope, $routeParams, Collection, $location) {
+function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     
-    var lastsearch; // when the last update was performed
-    var timeout = 1000; // milliseconds between searches
+    var lastsearch = Date.now(); // when the last update was performed
+    var timeout = 500; // milliseconds between searches
+    var timer = null; // the timer waiting to perform another search
+    
     $scope.query = $routeParams.query; // the user's search query
+    $scope.results = [];
+    $scope.isSearching = false;
     
     // when we slide up the search box
     var slideupval = $("#search_content").offset().top;
@@ -35,30 +39,40 @@ function SearchCtrl($scope, $routeParams, Collection, $location) {
     };
     
     $scope.refresh = function() {
+	clearTimeout(timer);
+	timer = null;
+	if(/^\s*$/.test($scope.query)) {
+	    return;
+	}
+	$scope.isSearching = true;
 	lastsearch = Date.now();
-	$scope.results = Collection.search();
-//	$scope.results = [
-//	    {title: 'Once Upon a Midnight Dreary'},
-//	    {title: 'As I Pondered'},
-//	    {title: 'Weak\'n\'Weary'},
-//	    {title: 'Over Many a Quaint and Curious'},
-//	    {title: 'Vol. 3 of Forgotten Lore', description: "When a crazy bird comes a'tapping, the residents start lamenting over lost love in this laugh-out-loud comedy."},
-//	    {title: 'Tis a Visitor'},
-//	    {title: 'I Muttered, Only This'},
-//	    {title: 'Sorrow for my Sweet Lenore'},
-//	    {title: 'NEVERMORE'}
-//	];
+	//$scope.results = Collection.search();
+	
+	$scope.results = Video.search({q: $scope.query}, function(){
+	    $scope.isSearching = false;
+	    angular.forEach($scope.results, function(result) {
+		result.type = 'video';
+	    });
+	});
     };
 
-    $scope.refresh();
+    if($scope.query !== undefined) {
+	$scope.refresh();
+    }
     
     // For fun and excitement, update the URL as the user types their search
     $scope.change = function() {
         $location.search("query",$scope.query);
-	if(Date.now() - lastsearch > timeout) {
-	    $scope.refresh(); // auto load data if 
+	if(Date.now() - lastsearch > timeout && !timer) {
+	    $scope.refresh(); // auto load data
+	}
+	else
+	{
+	    clearTimeout(timer);
+	    timer = null;
+	    timer = setTimeout(function(){$scope.refresh()}, timeout);
 	}
     };
 }
 // always inject this in so we can later compress this JavaScript
-SearchCtrl.$inject = ['$scope', '$routeParams', 'Collection', '$location'];
+SearchCtrl.$inject = ['$scope', '$routeParams', 'Collection', 'Video', '$location'];
