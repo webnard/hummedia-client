@@ -177,8 +177,6 @@ nav{
 	border-radius: 0;
 	padding: 10px;
 	min-height: 75px;
-	.transition(color linear 0.1s);
-	.transition(text-shadow linear 0.1s);
 	
 	/**
 	 * @todo: Maybe show these details by default on mobile devices?
@@ -198,15 +196,11 @@ nav{
 	    }
 	}
 	.details {
-	    visibility: hidden;
 	    font-size: 0.8em;
 	    text-align: left;
 	    margin-top: 10px;
 	    margin-bottom: 0px;
 	    color: rgba(0,0,0,.50);
-	}
-	&:hover .details {
-	    visibility: visible;
 	}
 	& > a {
 	    color: inherit;

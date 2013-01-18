@@ -18,24 +18,6 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     var originalSearchTop = $("#search_content").css('margin-top'); // so we can put it back
     var isTopped = false;
     var originalBackground = $("#search_content").css('background-color');
-    var originalFontColor = $("#search-results li.result").css('color');
-    var hovering = false;
-    
-    $("#search-results ul").on('mouseover','li.result', function(){
-	hovering = true;
-	if(originalFontColor === undefined) { // this may happen if there are no result elements on the page yet
-	    originalFontColor = $("#search-results li.result").css('color');
-	}
-	$("#search-results li.result").not($(this)).css('text-shadow','0px 0px 10px black').css('color','rgba(0,0,0,0)');
-	$(this).css('text-shadow','none').css('color',originalFontColor);
-    }).on('mouseleave', 'li.result', function(ev){
-	hovering = false;
-	setTimeout(function(){
-	    if(!hovering) {
-		$('#search-results ul li.result').css('text-shadow','none').css('color',originalFontColor);
-	    }
-	},0);
-    });
     
     // slides the search box up as we scroll down
     /** @todo: remove this event when leaving this controller **/
