@@ -8,8 +8,8 @@
         <table>
             <tr>
                 <td>
-        <img src="http://placekitten.com/g/300/200" width="300" height="200"/>
-        <p>{{video.title}}</p>
+        <a href="#/{{video.type.toLowerCase()}}/{{video.identifier}}"><img src="http://placekitten.com/g/300/200" width="300" height="200"/></a>
+        <a style="text-align: center;" class="plain_link" href="#/{{video.type.toLowerCase()}}/{{video.identifier}}">{{video.title}}</a>
                 </td>
                 <td>
         <p style="text-align: left; padding-right: 10px;">{{video.description}}<br />
