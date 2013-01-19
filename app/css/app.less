@@ -1,3 +1,20 @@
+/*************************
+ * "Functions"
+**************************/
+.transition(@rules) {
+    -webkit-transition: @rules;
+    -o-transition: @rules;
+    -moz-transition: @rules;
+    -ie-transition: @rules;
+    transition: @rules;
+}
+.box-shadow(@rules) {
+    -webkit-box-shadow: @rules;
+    -moz-box-shadow: @rules;
+    -ie-box-shadow: @rules;
+    -o-box-shadow: @rules;
+    box-shadow: @rules;
+}
 /**************************
  * Main
 ***************************/
@@ -71,17 +88,14 @@ nav{
 #search_content{
         .ghost;
         .content;
+	z-index: 2;
 	padding: 0;
 	max-height: @max-search-height;
 	position: fixed;
 	width: inherit;
 	min-width:400px;
 	text-align: left;
-	-webkit-transition: margin-top linear 0.1s;
-	-moz-transition: margin-top linear 0.1s;
-	-ie-transition: margin-top linear 0.1s;
-	-o-transition: margin-top linear 0.1s;
-	transition: margin-top linear 0.1s;
+	.transition(margin-top linear 0.1s);
 	& > div {
 	    padding: 10px;
 	}
@@ -109,9 +123,7 @@ nav{
 	-moz-border-radius: 2em;
 	border-radius: 2em;
 
-	-webkit-box-shadow: 0 1px 0px rgba(0,0,0,.1);
-	-moz-box-shadow: 0 1px 0px rgba(0,0,0,.1);
-	box-shadow: 0 1px 0px rgba(0,0,0,.1);
+	.box-shadow(0 1px 0px rgba(0,0,0,.1));
 
 	background: #f1f1f1;
 	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ededed));
@@ -134,9 +146,7 @@ nav{
 	-moz-border-radius: 2em;
 	border-radius: 2em;
 
-	-moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
-	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: inset 0 1px 2px rgba(0,0,0,.2);
+	.box-shadow(inset 0 1px 2px rgba(0,0,0,.2));
 }
 .searchform .searchbutton {
 	color: #fff;
@@ -159,18 +169,45 @@ nav{
 #search-results {
     width: 100%;
     padding-top: (@max-search-height + @content-top + 25px);
-    li {
+    .result {
 	margin: auto;
 	.ghost;
+	position: relative;
+	z-index: 1;
 	border-radius: 0;
 	padding: 10px;
 	min-height: 75px;
+	
+	/**
+	 * @todo: Maybe show these details by default on mobile devices?
+	**/
+	.languages {
+	    display: inline-block;
+	    li {
+		&:not(:last-child):after {
+		    content: ',';
+		}
+		&:first-child:before {
+		    content: '[';
+		}
+		&:last-child:after {
+		    content: ']';
+		}
+	    }
+	}
+	.details {
+	    font-size: 0.8em;
+	    text-align: left;
+	    margin-top: 10px;
+	    margin-bottom: 0px;
+	    color: rgba(0,0,0,.50);
+	}
 	& > a {
-	    color: black;
+	    color: inherit;
 	    display: block;
 	    width: 100%;
 	    height: 100%;
-	    text-decoration: none;
+	    text-decoration: inherit;
 	}
 	h1 {
 	    font-size: 1.6em;

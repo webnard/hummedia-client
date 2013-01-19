@@ -6,14 +6,29 @@
 		<input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
 		<input class="searchbutton" type="submit" value="Go" />
 	    </form>
-	    <p>
-	    {{results.length}} result<span data-ng-show="results.length != 1">s</span> found.
+	    <p data-ng-show="!isSearching && hasSearched">
+		<ng-pluralize count="results.length" when="{'0': 'No results.',
+			      'one': 'One result.',
+			      'other': '{} results found.'}">
+		</ng-pluralize>
+	    </p>
+	    <p data-ng-show="isSearching">
+		Searching…
 	    </p>
 	</div>
     </div>
     <section id="search-results">
 	<ul>
-	    <li data-ng-repeat="result in results"><a data-ng-href="#/collection/{{result.identifier}}">
+	    <li class="result" data-ng-repeat="result in results"><a data-ng-href="#/{{result.type}}/{{result.identifier}}">
+		    <div class="details">
+			<ng-switch on="result.date.length == 10">
+				<time datetime="{{result.date}}" data-ng-switch-when="true">{{result.date | date:'longDate'}}</time>
+				<time datetime="{{result.date}}" data-ng-switch-when="false">{{result.date}}</time>
+			</ng-switch>
+			<ul class="languages">
+			    <li data-ng-repeat="lg in result.language">{{lg | language}}</li>
+			</ul>
+		    </div>
 		    <h1>{{result.title}}</h1>
 		    <p class="description">{{result.description}}</p>
 	    </a></li>
