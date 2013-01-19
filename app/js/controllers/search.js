@@ -20,8 +20,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     var originalBackground = $("#search_content").css('background-color');
     
     // slides the search box up as we scroll down
-    /** @todo: remove this event when leaving this controller **/
-    document.onscroll = function() {
+    var checkScrollPosition = function() {
 	if(window.scrollY > slideupval) {
 	    if(!isTopped) {
 		$("#search_content").css('margin-top','0px');
@@ -39,6 +38,17 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	}
     };
     
+    /**
+     * @todo We should find a way to bind this to a specific element within this scope
+     */
+    $(window).on('scroll', checkScrollPosition);
+
+    // remove the scroll function
+    $scope.$on('$destroy', function cleanup() {
+	$(window).off('scroll', checkScrollPosition);
+    });
+    
+    // performs another search
     $scope.refresh = function() {
 	clearTimeout(timer);
 	timer = null;
