@@ -12,7 +12,20 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.results = [];
     $scope.isSearching = false;
     $scope.hasSearched = false;
+    $scope.isAdvanced = function(){return !!$location.search().advanced;};
+    $scope.toggleAdvanced = function() {
+	if($scope.isAdvanced()) {
+	    $location.search('advanced',null);
+	}
+	else
+	{
+	    $location.search('advanced');
+	}
+    }
     
+    /**
+     * @todo - Move presentational material to a directive
+     */
     // when we slide up the search box
     var slideupval = $("#search_content").offset().top;
     var originalSearchTop = $("#search_content").css('margin-top'); // so we can put it back
