@@ -1,5 +1,5 @@
 <section id="search">
-    <div id="search_content">
+    <div id="search_content" data-pop-me-up>
 	<!-- Without this div we get bad sizing issues -->
 	<div>
 	    <a data-ng-click="toggleAdvanced()" class="advanced-toggle">
@@ -8,23 +8,33 @@
 		    <span ng-switch-when="true">Hide Advanced</span>
 		</ng-switch>
 	    </a>
-	    <form class="searchform" data-ng-submit="refresh()">
-		<input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
-		<input class="searchbutton" type="submit" value="Go" />
+	    <form data-ng-submit="refresh()">
+		<div class="searchform">
+		    <input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
+		    <input class="searchbutton" type="submit" value="Go" />
+		</div>
+		<p data-ng-show="!isSearching && hasSearched">
+		    <ng-pluralize count="results.length" when="{'0': 'No results.',
+				  'one': 'One result.',
+				  'other': '{} results found.'}">
+		    </ng-pluralize>
+		</p>
+		<p data-ng-show="isSearching">
+		    Searching…
+		</p>
+		<div data-ng-show="isAdvanced()">
+		    <hr/>
+		    <fieldset id="search-advanced">
+			<legend>Advanced Options</legend>
+			<ul>
+			    <li>
+				<label for="search-form-date">Creation Date</label>
+				<input type="date" id="search-form-date" name="date">
+			    </li>
+			</ul>
+		    </fieldset>
+		</div>
 	    </form>
-	    <p data-ng-show="!isSearching && hasSearched">
-		<ng-pluralize count="results.length" when="{'0': 'No results.',
-			      'one': 'One result.',
-			      'other': '{} results found.'}">
-		</ng-pluralize>
-	    </p>
-	    <p data-ng-show="isSearching">
-		Searching…
-	    </p>
-	    <div id="search-advanced" ng-class="{true: 'active'}[isAdvanced()]">
-		<hr/>
-		<label for="search-form-date">Creation Date</label><input type="date" id="search-form-date" name="date">
-	    </div>
 	</div>
     </div>
     <section id="search-results">
@@ -36,7 +46,7 @@
 				<time datetime="{{result.date}}" data-ng-switch-when="false">{{result.date}}</time>
 			</ng-switch>
 			<ul class="languages">
-			    <li data-ng-repeat="lg in result.language">{{lg | language}}</li>
+			    <li data-ng-model="date" data-ng-repeat="lg in result.language">{{lg | language}}</li>
 			</ul>
 		    </div>
 		    <h1>{{result.title}}</h1>

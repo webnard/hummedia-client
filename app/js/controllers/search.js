@@ -21,45 +21,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	{
 	    $location.search('advanced');
 	}
-    }
-    
-    /**
-     * @todo - Move presentational material to a directive
-     */
-    // when we slide up the search box
-    var slideupval = $("#search_content").offset().top;
-    var originalSearchTop = $("#search_content").css('margin-top'); // so we can put it back
-    var isTopped = false;
-    var originalBackground = $("#search_content").css('background-color');
-    
-    // slides the search box up as we scroll down
-    var checkScrollPosition = function() {
-	if(window.scrollY > slideupval) {
-	    if(!isTopped) {
-		$("#search_content").css('margin-top','0px');
-		$("#search_content").css("box-shadow","0px 0px 100px black");
-		$("#search_content").css("background-color","#EEE");
-	    }
-	    isTopped = true;
-	}
-	else if(isTopped)
-	{
-	    $("#search_content").css('margin-top',originalSearchTop);
-	    $("#search_content").css("box-shadow","none");
-	    $("#search_content").css("background-color",originalBackground);
-	    isTopped = false;
-	}
     };
-    
-    /**
-     * @todo We should find a way to bind this to a specific element within this scope
-     */
-    $(window).on('scroll', checkScrollPosition);
-
-    // remove the scroll function
-    $scope.$on('$destroy', function cleanup() {
-	$(window).off('scroll', checkScrollPosition);
-    });
     
     // performs another search
     $scope.refresh = function() {
