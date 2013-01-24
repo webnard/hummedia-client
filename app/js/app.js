@@ -7,7 +7,6 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.when('/search', {templateUrl: 'partials/search/search.html', controller: SearchCtrl, reloadOnSearch: false});
     $routeProvider.when('/', {templateUrl: 'partials/home.html'});
     $routeProvider.when('/collection/:id', {templateUrl: 'partials/collection.html', controller: CollectionCtrl});
-    $routeProvider.when('/collection/:id/list-view', {templateUrl: 'partials/collection_list.html', controller: CollectionCtrl});
     $routeProvider.otherwise({redirectTo: '/'});
   }]).
   config(['$locationProvider', function($locationProvider) {
