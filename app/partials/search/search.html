@@ -1,27 +1,30 @@
-<fieldset id="search-advanced" data-ng-class="{active: isAdvanced()}" form="search-form">
-    <legend>Advanced Options</legend>
-    <ul>
-	<li>
-	    <label for="search-form-date">Creation Date</label>
-	    <input type="date" id="search-form-date" name="date" data-ng-model="advanced.date">
-	</li>
-    </ul>
-</fieldset>
 <section id="search">
     <div id="search_content" data-pop-me-up>
 	<!-- Without this div we get bad sizing issues -->
 	<div>
-	    <a data-ng-click="toggleAdvanced()" class="advanced-toggle">
-		<ng-switch on="isAdvanced()">
-		    <span ng-switch-when="false">Advanced</span>
-		    <span ng-switch-when="true">Hide Advanced</span>
-		</ng-switch>
-	    </a>
+	    <span class="advanced-toggle">
+		<a data-ng-click="toggleAdvanced()">
+		    <ng-switch on="isAdvanced()">
+			<span ng-switch-when="false">Advanced</span>
+			<span ng-switch-when="true">Basic</span>
+		    </ng-switch>
+		</a>
+	    </span>
 	    <form id="search-form" data-ng-submit="refresh()">
-		<div class="searchform">
+		<div class="searchform" data-ng-show="!isAdvanced()">
 		    <input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
 		    <input class="searchbutton" type="submit" value="Go" />
 		</div>
+		<fieldset id="search-advanced" data-ng-show="isAdvanced()" form="search-form">
+		    <legend>Advanced Search</legend>
+		    <ul>
+			<li>
+			    <label for="search-form-date">Creation Date</label>
+			    <input type="date" id="search-form-date" name="date" data-ng-model="advanced.date">
+			</li>
+		    </ul>
+		    <input type="submit" value="Go">
+		</fieldset>
 		<p data-ng-show="!isSearching && hasSearched">
 		    <ng-pluralize count="results.length" when="{'0': 'No results.',
 				  'one': 'One result.',

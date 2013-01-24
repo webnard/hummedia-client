@@ -10,8 +10,9 @@ angular.module('hummedia.directives', [])
     .directive('popMeUp', function(){
 	return function($scope, elm, attr) {
 	    // when we slide up the search box
-	    var slideupval = $(elm).offset().top;
-	    var originalSearchTop = $(elm).css('margin-top'); // so we can put it back
+	    var slideupval = $(elm).offset().top - $("nav").height(); // @todo: This should be less generic
+	    var originalSearchMarginTop = $(elm).css('margin-top'); // so we can put it back
+	    var originalSearchTop = $(elm).css('top'); // so we can put it back
 	    var isTopped = false;
 	    var originalBackground = $(elm).css('background-color');
 
@@ -20,6 +21,7 @@ angular.module('hummedia.directives', [])
 		if(window.scrollY > slideupval) {
 		    if(!isTopped) {
 			$(elm).css('margin-top','0px');
+			$(elm).css('top','0');
 			$(elm).css("box-shadow","0px 0px 100px black");
 			$(elm).css("background-color","#EEE");
 		    }
@@ -27,7 +29,8 @@ angular.module('hummedia.directives', [])
 		}
 		else if(isTopped)
 		{
-		    $(elm).css('margin-top',originalSearchTop);
+		    $(elm).css('margin-top',originalSearchMarginTop);
+		    $(elm).css('top',originalSearchTop);
 		    $(elm).css("box-shadow","none");
 		    $(elm).css("background-color",originalBackground);
 		    isTopped = false;
