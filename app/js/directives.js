@@ -3,6 +3,10 @@
 /* Directives */
 
 angular.module('hummedia.directives', [])
+    /***
+     * Currently this is being used only on the search box.
+     * This slides up the search box when the user scrolls down the page, then fixes it
+     */
     .directive('popMeUp', function(){
 	return function($scope, elm, attr) {
 	    // when we slide up the search box

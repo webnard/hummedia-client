@@ -1,3 +1,12 @@
+<fieldset id="search-advanced" data-ng-class="{active: isAdvanced()}" form="search-form">
+    <legend>Advanced Options</legend>
+    <ul>
+	<li>
+	    <label for="search-form-date">Creation Date</label>
+	    <input type="date" id="search-form-date" name="date" data-ng-model="advanced.date">
+	</li>
+    </ul>
+</fieldset>
 <section id="search">
     <div id="search_content" data-pop-me-up>
 	<!-- Without this div we get bad sizing issues -->
@@ -8,7 +17,7 @@
 		    <span ng-switch-when="true">Hide Advanced</span>
 		</ng-switch>
 	    </a>
-	    <form data-ng-submit="refresh()">
+	    <form id="search-form" data-ng-submit="refresh()">
 		<div class="searchform">
 		    <input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
 		    <input class="searchbutton" type="submit" value="Go" />
@@ -22,18 +31,6 @@
 		<p data-ng-show="isSearching">
 		    Searching…
 		</p>
-		<div data-ng-show="isAdvanced()">
-		    <hr/>
-		    <fieldset id="search-advanced">
-			<legend>Advanced Options</legend>
-			<ul>
-			    <li>
-				<label for="search-form-date">Creation Date</label>
-				<input type="date" id="search-form-date" name="date">
-			    </li>
-			</ul>
-		    </fieldset>
-		</div>
 	    </form>
 	</div>
     </div>

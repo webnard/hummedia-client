@@ -12,6 +12,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.results = [];
     $scope.isSearching = false;
     $scope.hasSearched = false;
+    $scope.advanced = {};
     $scope.isAdvanced = function(){return !!$location.search().advanced;};
     $scope.toggleAdvanced = function() {
 	if($scope.isAdvanced()) {
@@ -36,7 +37,10 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	lastsearch = Date.now();
 	//$scope.results = Collection.search();
 	
-	$scope.results = Video.search({q: $scope.query}, function(){
+	var method = $scope.isAdvanced()? Video.advancedSearch : Video.search;
+	var obj = $scope.isAdvanced()? $scope.advanced : {q: $scope.query};
+
+	$scope.results = method(obj, function(){
 	    $scope.isSearching = false;
 	    angular.forEach($scope.results, function(result) {
 		result.type = 'video';
