@@ -17,7 +17,6 @@
             <table id="navtable"><tr>			
             <td style="width:5px;"></td>			
             <td id="navtitle"><a href="#">Humanities Online Media</a></td>
-            <td><td>			
             <td class="navlink"><a href="">Login</a><a href="">Courses</a><a href="#/search">Search</a><a href="">Contact</a></td>
             <td style="width:5px;"><td>
             </tr></table>
@@ -53,16 +52,23 @@
   <script src="js/controllers/collection.js"></script>
   
   <script type="text/javascript">
-    //Function to cycle backgrounds
-    var background_number = 1;
+    //Functions to cycle random backgrounds
+    function getRandomInt (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    var background_number = getRandomInt (1, 5);
     $(document).ready(function(){
+        $('html').css('background-image', 'url(img/' + background_number + '.jpg)');
         $('#navtitle').click(function(){
-            $('html').css('background-image','url(img/' + background_number + '.jpg)');
             background_number++;
             if(background_number>=6){
                 background_number = 1;
             }
+            $('html').css('background-image','url(img/' + background_number + '.jpg)');
         });
+        $('#navtitle a').click(function(e){
+            e.stopPropagation();
+        })
     });
    </script>
 </body>
