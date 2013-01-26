@@ -6,7 +6,8 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.when('/search', {title: "Hummedia | Search", templateUrl: 'partials/search/search.html', controller: SearchCtrl, reloadOnSearch: false});
     $routeProvider.when('/', {title: "Hummedia", templateUrl: 'partials/home.html'});
     $routeProvider.when('/collection/:id', {title: "Hummedia | Collection", templateUrl: 'partials/collection.html', controller: CollectionCtrl});
-    $routeProvider.when('/admin/collection', {title: "Hummedia | Collections", admin: true, templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
+    $routeProvider.when('/video/:id', {templateUrl: 'partials/video.html', controller: VideoCtrl});    
+	$routeProvider.when('/admin/collection', {title: "Hummedia | Collections", admin: true, templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/user', {title: "Hummedia | Users", admin: true, templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
     $routeProvider.when('/collection', {title: "Hummedia | Collections", templateUrl: 'partials/collections.html', controller: CollectionsCtrl});
     $routeProvider.when('/developer', {title: "Hummedia | Developer", templateUrl: 'partials/developer.html'});
@@ -35,55 +36,4 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
               });
           };
       }]);
-  }]).
-  /*!
-    document title modification partially from jkoreska @ http://stackoverflow.com/a/13407227/390977
-  */
-  run(['$location', '$rootScope', 'user', '$window', function($location, $rootScope, user, $window) {
-      // updates page title on URL change
-      $rootScope.$on('$routeChangeSuccess', function(ev, current, previous) {
-          // so crawlers can view cached pages and see our titles
-          if(!current.$$route)
-              return;
-          $rootScope.title = current.$$route.title;
-      });
-
-      // require login for specific pages
-      $rootScope.$on('$routeChangeStart', function(ev, current, previous) {
-          if(!current.$$route)
-              return;
-
-          // 0 -- able to view page.
-          // 1 -- login required, not found
-          // 2 -- admin status required, not held
-          var denied = function() {
-              if(current.$$route.login && !user.exists)
-                  return 1;
-              if(current.$$route.admin && !user.canCreate)
-                  return 2;
-              return 0;
-          }
-
-          if(denied()) {
-              var redirect = $window.location.toString();
-              var oldPath = $location.path();
-              $location.path("/");
-
-              user.checkStatus().then(function() {
-                   var denyStatus = denied();
-                   if(!denyStatus) {
-                       $location.path(oldPath);
-                       return;
-                   }
-
-
-                   setTimeout(function(){
-                       if(!user.exists)
-                          user.prompt(false, redirect);
-                       else if(denyStatus == 2 && !user.canCreate)
-                          alert("You are not authorized to view that page.");
-                   },1); // has to happen after path change
-              });
-          }
-      });
   }]);
