@@ -130,7 +130,7 @@ nav{
         .content;
 	z-index: 2;
 	padding: 0;
-	max-height: @max-search-height;
+	/*max-height: @max-search-height;*/
 	position: fixed;
 	width: inherit;
 	min-width:400px;
@@ -263,7 +263,13 @@ nav{
 /************************
 * Advanced search options
 *************************/
-#search {
+#search_content {
+    &.advanced {
+	position: relative;
+	margin-bottom: -@max-search-height;
+	max-height: none;
+	width: 100%;
+    }
     .advanced-toggle {
 	display: block;
 	text-align: right;
@@ -280,14 +286,22 @@ nav{
 	padding-top: 10px;
     }
     li {
+	&:not(:last-child) {
+	    margin-bottom: 10px;
+	}
 	input, textarea, label {
 	    display: inline-block;
 	    vertical-align: middle;
+	    width: 150px;
 	}
 	label {
+	    width: 100px;
 	    margin-right: 5px;
 	}
 	input {
+	    padding: 3px;
+	    border: solid 1px #bcbbbb;
+	    outline: none;
 	    padding-right: 3px;
 	    padding-left: 3px;
 	    border-radius: 10px;

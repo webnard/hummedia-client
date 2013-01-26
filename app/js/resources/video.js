@@ -20,7 +20,10 @@ angular.module('hummedia.services').
 	    
 	    // note that these are auto URI-encoded by the resource.search method below
 	    angular.forEach(params, function(val, key) {
-		advParams.q += (advParams.q? "&" : "") + "dc." + key + ":" + val;
+		if(val === "") { // don't include empty keys
+		    return;
+		}
+		advParams.q += (advParams.q? "&" : "") + "dc." + key + ":\"" + val + "\"";
 	    });
 	    newArgs[0] = advParams;
 	    

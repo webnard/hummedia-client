@@ -1,5 +1,5 @@
 <section id="search">
-    <div id="search_content" data-pop-me-up>
+    <div id="search_content" data-pop-me-up="!isAdvanced()" data-ng-class="{advanced: isAdvanced()}" data-scroll-top-when="isAdvanced()" >
 	<!-- Without this div we get bad sizing issues -->
 	<div>
 	    <span class="advanced-toggle">
@@ -19,11 +19,23 @@
 		    <legend>Advanced Search</legend>
 		    <ul>
 			<li>
+			    <label for="search-form-title">Title</label>
+			    <input type="text" id="search-form-title" name="title" data-ng-model="advanced.title">
+			</li>
+			<li>
+			    <label for="search-form-description">Description</label>
+			    <input type="text" id="search-form-description" name="title" data-ng-model="advanced.description">
+			</li>
+			<li>
 			    <label for="search-form-date">Creation Date</label>
 			    <input type="date" id="search-form-date" name="date" data-ng-model="advanced.date">
 			</li>
+			<!--<li>
+			    <label for="search-form-director">Director</label>
+			    <input type="text" id="search-form-director" name="director" data-ng-model="advanced.director">
+			</li>-->
 		    </ul>
-		    <input type="submit" value="Go">
+		    <input type="submit" data-disable-when="!canSearch()" value="Go">
 		</fieldset>
 		<p data-ng-show="!isSearching && hasSearched">
 		    <ng-pluralize count="results.length" when="{'0': 'No results.',

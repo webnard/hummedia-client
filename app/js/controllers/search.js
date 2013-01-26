@@ -23,12 +23,28 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	    $location.search('advanced');
 	}
     };
+
+    // tells us whether or not a search can possibly be performed
+    $scope.canSearch = function() {
+	if($scope.isAdvanced()) {
+	    for(var i in $scope.advanced) {
+		if($scope.advanced.hasOwnProperty(i) && $scope.advanced[i] !== '') {
+		    return true;
+		}
+	    }
+	    return false;
+	}
+	else
+	{
+	    return $scope.query !== '' && $scope.query !== undefined;
+	}
+    };
     
     // performs another search
     $scope.refresh = function() {
 	clearTimeout(timer);
 	timer = null;
-	if(/^\s*$/.test($scope.query)) {
+	if(!$scope.canSearch()) {
 	    $scope.results = [];
 	    return;
 	}
