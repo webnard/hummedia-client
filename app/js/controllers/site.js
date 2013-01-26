@@ -4,7 +4,7 @@ function SiteCtrl($scope, $http) {
     function getRandomInt (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    $http.jsonp("http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=a9480efda97ac40c0a33781dcfc54d0f&tags=nature%2C+architecture&license=1&privacy_filter=1&safe_search=1&content_type=1&format=json&jsoncallback=JSON_CALLBACK")
+    $http.jsonp("http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=78516abde0b618f9816d5efb10642812&tags=nature%2C+architecture&license=1&privacy_filter=1&safe_search=1&content_type=1&format=json&jsoncallback=JSON_CALLBACK")
     .success(function(data){
         var images = data.photos.photo;
         var imagecount = images.length;
@@ -17,7 +17,7 @@ function SiteCtrl($scope, $http) {
         $scope.image = images[num];
         console.log($scope.image);
         //Get Photo Creator data
-        $http.jsonp("http://api.flickr.com/services/rest/?method=flickr.people.getInfo&api_key=a9480efda97ac40c0a33781dcfc54d0f&user_id="+$scope.image.owner+"&format=json&jsoncallback=JSON_CALLBACK")
+        $http.jsonp("http://api.flickr.com/services/rest/?method=flickr.people.getInfo&api_key=78516abde0b618f9816d5efb10642812&user_id="+$scope.image.owner+"&format=json&jsoncallback=JSON_CALLBACK")
         .success(function(data){
             if(data.person.hasOwnProperty('realname') && data.person.realname._content!=''){
                 $scope.img_username = data.person.realname._content;
