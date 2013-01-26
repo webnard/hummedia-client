@@ -36,4 +36,4 @@ function SiteCtrl($scope, $http) {
     });
 }
 // always inject this in so we can later compress this JavaScript
-CollectionCtrl.$inject = ['$scope', '$http'];
+SiteCtrl.$inject = ['$scope', '$http'];
