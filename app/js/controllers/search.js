@@ -24,6 +24,10 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	}
     };
 
+    $scope.$watch(function(){return $routeParams.query}, function(val){
+	$scope.query = val;
+    });
+
     // tells us whether or not a search can possibly be performed
     $scope.canSearch = function() {
 	if($scope.isAdvanced()) {
