@@ -8,5 +8,5 @@
 'use strict';
 angular.module('hummedia.config', []).
   constant('appConfig', {
-      apiBase: 'https://hummedia.byu.edu/api/v2/'
+      apiBase: 'https://zelda.byu.edu/api/v2/'
   });
