@@ -6,6 +6,8 @@ angular.module('hummedia.services').
         {
             search: {method: 'GET', isArray: true, params: {searchtype: 'keyword', q: '@q'}}
         });
+
+	resource.validSearchKeys = ["title","description","date"];
     
 	/**
 	 * Wrapper for the search method that alters the parameter list passed in.
@@ -20,7 +22,7 @@ angular.module('hummedia.services').
 	    
 	    // note that these are auto URI-encoded by the resource.search method below
 	    angular.forEach(params, function(val, key) {
-		if(val === "") { // don't include empty keys
+		if(!val || resource.validSearchKeys.indexOf(key) === -1) { // don't include empty values or invalid keys
 		    return;
 		}
 		advParams.q += (advParams.q? "&" : "") + "dc." + key + ":\"" + val + "\"";

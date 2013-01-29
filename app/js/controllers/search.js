@@ -13,10 +13,16 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.isSearching = false;
     $scope.hasSearched = false;
     $scope.advanced = {};
+    
     $scope.isAdvanced = function(){return !!$location.search().advanced;};
+    
+    // turns advanced search on or off
     $scope.toggleAdvanced = function() {
 	if($scope.isAdvanced()) {
 	    $location.search('advanced',null);
+	    for(var i = 0; i<Video.validSearchKeys.length; i++) {
+		$location.search(Video.validSearchKeys[i], null);
+	    }
 	}
 	else
 	{
@@ -32,7 +38,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.canSearch = function() {
 	if($scope.isAdvanced()) {
 	    for(var i in $scope.advanced) {
-		if($scope.advanced.hasOwnProperty(i) && $scope.advanced[i] !== '') {
+		if($scope.advanced.hasOwnProperty(i) && $scope.advanced[i] !== '' && $scope.advanced[i] !== undefined) {
 		    return true;
 		}
 	    }
@@ -40,11 +46,11 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	}
 	else
 	{
-	    return $scope.query !== '' && $scope.query !== undefined;
+	    return !!$scope.query; // user input will always be true except when an empty string
 	}
     };
     
-    // performs another search
+    // performs another search (if canSearch())
     $scope.refresh = function() {
 	clearTimeout(timer);
 	timer = null;
@@ -55,11 +61,19 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	$scope.hasSearched = true;
 	$scope.isSearching = true;
 	lastsearch = Date.now();
-	//$scope.results = Collection.search();
 	
-	var method = $scope.isAdvanced()? Video.advancedSearch : Video.search;
-	var obj = $scope.isAdvanced()? $scope.advanced : {q: $scope.query};
-
+	var method, obj; // the method we search with, and the query we send it
+	if($scope.isAdvanced()) {
+	    method = Video.advancedSearch;
+	    obj = $scope.advanced;
+	    $location.search(jQuery.extend({},$location.search(),$scope.advanced));
+	}
+	else
+	{
+	    method = Video.search;
+	    obj = {q: $scope.query};
+	}
+	
 	$scope.results = method(obj, function(){
 	    $scope.isSearching = false;
 	    angular.forEach($scope.results, function(result) {
@@ -68,9 +82,8 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	});
     };
 
-    if($scope.query !== undefined) {
-	$scope.refresh();
-    }
+    // kick things off if there are already queries in the URL
+    $scope.refresh();
     
     // For fun and excitement, update the URL as the user types their search
     $scope.change = function() {
