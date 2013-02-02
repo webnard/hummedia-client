@@ -1,7 +1,13 @@
 <div id="home_content">			
             <a id="coursesbutton" class="bwbuttondark" href="">Media for My Courses</a>
-            <form class="searchform" ng-submit="change()" ng-controller="SearchCtrl">
-                <input ng-model="query" class="searchfield" type="search" placeholder="Search..." />
-                <input class="searchbutton" type="submit" value="Go" />
+            <form class="searchform">
+                <input id="homesearch" class="searchfield" type="search" placeholder="Search..." />
+                <input class="searchbutton" type="submit" onclick="run_search(); return false;" value="Go" />
             </form>
 </div>
+<script>
+var run_search = function(){
+    var query = $('#homesearch').val();
+    window.location = "#/search?query="+query;
+};
+</script>
