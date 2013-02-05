@@ -70,6 +70,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	}
 	else
 	{
+	    $location.search("query",$scope.query);
 	    method = Video.search;
 	    obj = {q: $scope.query};
 	}
@@ -81,13 +82,11 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	    });
 	});
     };
-
     // kick things off if there are already queries in the URL
     $scope.refresh();
     
     // For fun and excitement, update the URL as the user types their search
     $scope.change = function() {
-        $location.search("query",$scope.query);
 	if(Date.now() - lastsearch > timeout && !timer) {
 	    $scope.refresh(); // auto load data
 	}
