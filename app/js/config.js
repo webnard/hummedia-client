@@ -8,5 +8,6 @@
 'use strict';
 angular.module('hummedia.config', []).
   constant('appConfig', {
-      apiBase: 'https://zelda.byu.edu/api/v2/'
+      apiBase: 'https://zelda.byu.edu/api/v2/',
+      flickrKey: 'your key here'
   });

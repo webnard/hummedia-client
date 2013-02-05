@@ -1,6 +1,6 @@
 
 'use strict';
-function SiteCtrl($scope, $http) {
+function SiteCtrl($scope, $http, appConfig) {
     function getRandomInt (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -9,11 +9,9 @@ function SiteCtrl($scope, $http) {
     var imagecount = photo_ids.length;
     var num = getRandomInt(0,imagecount-1);
     var photo_id = photo_ids[num];
-    console.log(photo_id);
-    $http.jsonp("http://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key=b87e337e9091368d25a03a475c8836b2&photo_id="+photo_id+"&format=json&jsoncallback=JSON_CALLBACK")
+    $http.jsonp("http://api.flickr.com/services/rest/?method=flickr.photos.getInfo&api_key="+appConfig.flickrKey+"&photo_id="+photo_id+"&format=json&jsoncallback=JSON_CALLBACK")
     .success(function(data){
         var photo = data.photo;
-        console.log(photo);
         var farm_id = photo.farm;
         var server_id = photo.server;
         var id = photo.id;
@@ -32,4 +30,4 @@ function SiteCtrl($scope, $http) {
     });
 }
 // always inject this in so we can later compress this JavaScript
-SiteCtrl.$inject = ['$scope', '$http'];
+SiteCtrl.$inject = ['$scope', '$http', 'appConfig'];
