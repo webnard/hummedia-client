@@ -58,7 +58,7 @@
 				<time datetime="{{result.date}}" data-ng-switch-when="false">{{result.date}}</time>
 			</ng-switch>
 			<ul class="languages">
-			    <li data-ng-model="date" data-ng-repeat="lg in result.language">{{lg | language}}</li>
+			    <li data-ng-repeat="lg in result.language">{{lg | language}}</li>
 			</ul>
 		    </div>
 		    <h1>{{result.title}}</h1>
