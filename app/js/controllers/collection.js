@@ -1,6 +1,3 @@
-/**
- * Handles searching and displaying search results to the user
- */
 'use strict';
 function CollectionCtrl($scope, $routeParams, Collection) {
     $scope.collection_data = Collection.get({identifier:$routeParams.id, full:'true'});
