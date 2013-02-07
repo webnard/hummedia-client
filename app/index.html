@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ng-app="hummedia" ng-controller="SiteCtrl" style="background: url({{img_url}}) no-repeat center center fixed; background-size: cover;">
+<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl" ng-style="style">
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/cssreset-min.css"/>
@@ -26,7 +26,7 @@
     <ng-view>
     </ng-view>
     <footer>
-        <p><a target="blank" href="{{img_profile}}">{{image_title}} by {{img_username}}</a></p>
+        <p><a target="blank" ng-href="{{img_profile}}">{{image_title}} by {{img_username}}</a></p>
         <img style="float:right;" width="20" src="img/cc.png" />
     </footer>
 

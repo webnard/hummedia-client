@@ -1,3 +1,8 @@
+/**************
+ * Colors
+***************/
+@smoke: rgba(50,50,50,1);
+
 /*************************
  * "Functions"
 **************************/
@@ -22,6 +27,9 @@ html {
 	font-family: sans-serif;
 	overflow-x:hidden;
         font-family: 'Rambla', sans-serif;
+	background: no-repeat center center fixed;
+	background-size: cover;
+	background-color: @smoke;
 }
 #coursesbutton{
 	margin-bottom: 20px;
@@ -85,7 +93,7 @@ html {
 }
 footer{
     width:100%;
-    background-color: #323232;
+    background-color: @smoke;
     color: gray;
     position: absolute;
     bottom: 0px;
@@ -106,7 +114,7 @@ footer{
 * Nav Elements
 *************/
 nav{	
-	background-color: rgba(50,50,50,1);
+	background-color: @smoke;
 	position: absolute;
 	top: 0px;
 	width: 100%;

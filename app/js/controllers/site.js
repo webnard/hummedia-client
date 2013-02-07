@@ -16,7 +16,10 @@ function SiteCtrl($scope, $http, appConfig) {
         var server_id = photo.server;
         var id = photo.id;
         var secret = photo.secret;
-        $scope.img_url = "http://farm"+ farm_id + ".staticflickr.com/" + server_id + "/" + id +"_" + secret + "_b.jpg";
+        $scope.style = {
+	    "background-image": "url(http://farm"+ farm_id + ".staticflickr.com/" + server_id + "/" + id +"_" + secret + "_b.jpg)"
+	};
+    
         $scope.image_title = photo['title']['_content'];
         $scope.img_profile = photo['urls']['url']['0']['_content'];
         var owner = photo.owner;
@@ -26,7 +29,6 @@ function SiteCtrl($scope, $http, appConfig) {
             else{
                 $scope.img_username = owner.username;
             };
-            
     });
 }
 // always inject this in so we can later compress this JavaScript
