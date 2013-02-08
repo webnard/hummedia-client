@@ -20,15 +20,19 @@
 		    <ul>
 			<li>
 			    <label for="search-form-title">Title</label>
-			    <input type="text" id="search-form-title" name="title" data-ng-model="advanced.title">
+			    <input type="text" id="search-form-title" name="title" data-ng-model="advanced['ma:title']">
 			</li>
 			<li>
 			    <label for="search-form-description">Description</label>
-			    <input type="text" id="search-form-description" name="title" data-ng-model="advanced.description">
+			    <input type="text" id="search-form-description" name="title" data-ng-model="advanced['ma:description']">
 			</li>
 			<li>
-			    <label for="search-form-date">Creation Date</label>
-			    <input type="date" id="search-form-date" name="date" data-ng-model="advanced.date">
+			    <label for="search-form-yearfrom">From Year</label>
+			    <input type="number" placeholder="1878" id="search-form-yearfrom" name="yearfrom" data-ng-model="advanced.yearfrom" min="1878" max="{{maxYear}}">
+			</li>
+			<li>
+			    <label for="search-form-yearto">To Year</label>
+			    <input type="number" placeholder="{{maxYear}}" id="search-form-yearto" name="yearto" data-ng-model="advanced.yearto" min="1878" max="{{maxYear}}">
 			</li>
 			<!--<li>
 			    <label for="search-form-director">Director</label>

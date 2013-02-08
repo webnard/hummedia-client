@@ -12,6 +12,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.results = [];
     $scope.isSearching = false;
     $scope.hasSearched = false;
+    $scope.maxYear = new window.Date().getFullYear() + 1; // don't let anyone search past the current year (plus one, let's be generous)
     $scope.advanced = {};
     
     $scope.isAdvanced = function(){return !!$location.search().advanced;};
