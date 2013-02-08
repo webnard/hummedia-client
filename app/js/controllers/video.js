@@ -1,6 +1,6 @@
 'use strict';
 function VideoCtrl($scope, $routeParams, Video) {
-    $scope.video = Video.get({identifier:$routeParams.id, full:'true'});
+    $scope.video = Video.get({identifier:$routeParams.id});
     console.log($scope.video);
 
 }
