@@ -2,44 +2,53 @@
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 
-describe('my app', function() {
+describe('hummedia app', function() {
 
   beforeEach(function() {
     browser().navigateTo('../../app/index.html');
   });
 
+  describe ('search', function() {
+        beforeEach(function() {
+            browser().navigateTo("#/search");
+        });
 
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    expect(browser().location().url()).toBe("/view1");
+        it('should render the search input box when user is on the search page', function() {
+            expect(element('#search-form input[type=search]','Search Input').count()).toEqual(1);
+        });
+
+        it('should have a link for the advanced search on the form', function() {
+            expect(element('#search_content .advanced-toggle', 'Advanced Link').text()).toMatch('Advanced');
+        });
+
+        it('should be able to go to advanced search from the basic search page', function() {
+            element('#search_content .advanced-toggle a', 'Advanced Link').click();
+            expect(element('#search-advanced:visible', 'Advanced Search').count()).toBe(1);
+            expect(browser().location().search()).toEqual({advanced: true});
+        });
+
+        it('should update the search box when the URL changes', function() {
+            browser().navigateTo('#/search?query=Potato%20Casserole');
+            expect(input('query').val()).toEqual('Potato Casserole');
+        });
   });
 
+  describe('advanced search', function() {
+        beforeEach(function() {
+            browser().navigateTo("#/search?advanced");
+        });
 
-  describe('view1', function() {
+        it('should display the advanced search fields', function() {
+            expect(element('#search-advanced:visible', 'Advanced Search Fields').count()).toBe(1);
+        });
 
-    beforeEach(function() {
-      browser().navigateTo('#/view1');
-    });
+        it('should not allow submitting with blank fields', function() {
+            expect(element('#search-advanced input[type=submit]', 'Submit Button').attr('disabled')).toBeTruthy();
+        });
 
-
-    it('should render view1 when user navigates to /view1', function() {
-      expect(element('[ng-view] p:first').text()).
-        toMatch(/partial for view 1/);
-    });
-
-  });
-
-
-  describe('view2', function() {
-
-    beforeEach(function() {
-      browser().navigateTo('#/view2');
-    });
-
-
-    it('should render view2 when user navigates to /view2', function() {
-      expect(element('[ng-view] p:first').text()).
-        toMatch(/partial for view 2/);
-    });
-
+        it('should allow submitting after filling in a field', function() {
+            input("advanced['ma:title']").enter('Sam Walton');
+            expect(element('#search-advanced input[type=submit]', 'Submit Button').attr('disabled')).toBeFalsy();
+        });
   });
 });
