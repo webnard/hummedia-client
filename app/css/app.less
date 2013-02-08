@@ -1,3 +1,8 @@
+/**************
+ * Colors
+***************/
+@smoke: rgba(50,50,50,1);
+
 /*************************
  * "Functions"
 **************************/
@@ -19,14 +24,15 @@
  * Main
 ***************************/
 html { 
-	background: url(../img/6.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
-	background-size: cover;
 	font-family: sans-serif;
 	overflow-x:hidden;
         font-family: 'Rambla', sans-serif;
+	background: no-repeat center center fixed;
+	background-size: cover;
+	background-color: @smoke;
 }
 #coursesbutton{
 	margin-bottom: 20px;
@@ -87,11 +93,30 @@ html {
     text-decoration: none;
     color: black;
 }
+footer{
+    width:100%;
+    background-color: @smoke;
+    color: gray;
+    position: absolute;
+    bottom: 0px;
+    a{
+        text-decoration: none;
+        color: gray;
+    }
+    p{
+        float: right;
+    }
+}
+#container{
+    min-height: 100%;
+    position: absolute;
+    width: 100%;
+}
 /*************
 * Nav Elements
 *************/
 nav{	
-	background-color: rgba(50,50,50,1);
+	background-color: @smoke;
 	position: relative;
 	top: 0px;
 	width: 100%;
@@ -121,7 +146,7 @@ nav{
 ***************************/
 #search {
     min-width:400px;
-    width: 50%;
+    width: 70%;
     margin: auto;
 }
 @max-search-height: 150px;
@@ -130,6 +155,7 @@ nav{
         .content;
 	z-index: 2;
 	padding: 0;
+	max-height: @max-search-height;
 	position: fixed;
 	width: inherit;
 	min-width:400px;
@@ -211,6 +237,7 @@ nav{
 #search-results {
     width: 100%;
     padding-top: (@max-search-height + @content-top + 25px);
+    margin-bottom: 50px;
     .result {
 	margin: auto;
 	.ghost;

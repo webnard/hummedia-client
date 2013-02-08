@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ng-app="hummedia">
+<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl" ng-style="style">
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/cssreset-min.css"/>
@@ -13,6 +13,7 @@
   <link rel="stylesheet/less" href="css/app.less"/>
 </head>
 <body>
+    <div id="container">
     <nav>
             <table id="navtable"><tr>			
             <td style="width:5px;"></td>			
@@ -24,7 +25,12 @@
     </nav>
     <ng-view>
     </ng-view>
+    <footer>
+        <p><a target="blank" ng-href="{{img_profile}}">{{image_title}} by {{img_username}}</a></p>
+        <img style="float:right;" width="20" src="img/cc.png" />
+    </footer>
 
+    </div>
   <!-- LIBRARIES -->
   <!-- Use CDN in production -->
   <script src="js/jquery-1.9.0.min.js"></script>
@@ -49,26 +55,7 @@
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
   <script src="js/controllers/collection.js"></script>
-  
-  <script type="text/javascript">
-    //Functions to cycle random backgrounds
-    function getRandomInt (min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    var background_number = getRandomInt (1, 5);
-    $(document).ready(function(){
-        $('html').css('background-image', 'url(img/' + background_number + '.jpg)');
-        $('#navtitle').click(function(){
-            background_number++;
-            if(background_number>=6){
-                background_number = 1;
-            }
-            $('html').css('background-image','url(img/' + background_number + '.jpg)');
-        });
-        $('#navtitle a').click(function(e){
-            e.stopPropagation();
-        })
-    });
-   </script>
+  <script src="js/controllers/site.js"></script>
+
 </body>
 </html>
