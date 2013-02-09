@@ -1,10 +1,12 @@
 <div id="video_content">
 <div id="wrapper">
     <div>
-    <h2>{{video.title}}</h2>
-    <p style="font-size:.8em; color: rgba(0,0,0,.75);">{{video.date | date:'longDate'}} [{{video.language | language}}]</p>
-    <img src="http://placekitten.com/g/600/400" height="400" width="600"/>
-    <p>{{video.description}}</p>
+    <h2>{{video['ma:title']}}</h2>
+    <p style="font-size:.8em; color: rgba(0,0,0,.75);">{{video['ma:date'] | date:'longDate'}} [{{video['ma:hasLanguage'][0] | language}}]</p>
+    <div class="flowplayer" style="height:400px; width:600px;">
+        <video src="{{video.url}}"></video>
+    </div>
+    <p>{{video['ma:description']}}</p>
     </div>
 </div>        
 </div>
