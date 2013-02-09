@@ -57,7 +57,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.canSearch = function() {
 	if($scope.isAdvanced()) {
 	    for(var i in $scope.advanced) {
-		if($scope.advanced.hasOwnProperty(i) && $scope.advanced[i] !== '' && $scope.advanced[i] !== undefined) {
+		if($scope.advanced.hasOwnProperty(i) && !!$scope.advanced[i]) {
 		    return true;
 		}
 	    }
@@ -84,7 +84,16 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	var method, obj; // the method we search with, and the query we send it
 	if($scope.isAdvanced()) {
 	    method = Video.advancedSearch;
-	    obj = $scope.advanced;
+	    
+	    // remove empty elements from the object
+	    //obj = $.grep($scope.advanced, function(key, val){ console.log(key,val); });
+	    obj = (function(){
+		    var newObj = {};
+		    angular.forEach($scope.advanced, function(val, key){
+		    if(!!val) {
+			 newObj[key] = val;
+		    }
+	    }); return newObj })();
 	    $location.search(jQuery.extend({},$location.search(),$scope.advanced));
 	}
 	else
