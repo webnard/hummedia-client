@@ -30,6 +30,8 @@ function SiteCtrl($scope, $http, appConfig) {
                 $scope.img_username = owner.username;
             };
     });
+
+    
 }
 // always inject this in so we can later compress this JavaScript
 SiteCtrl.$inject = ['$scope', '$http', 'appConfig'];
