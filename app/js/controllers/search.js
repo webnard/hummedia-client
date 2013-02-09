@@ -14,8 +14,16 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.hasSearched = false;
     $scope.maxYear = new window.Date().getFullYear() + 1; // don't let anyone search past the current year (plus one, let's be generous)
     $scope.advanced = {};
-    
     $scope.isAdvanced = function(){return !!$location.search().advanced;};
+    
+    // initialize advanced properties
+    if($scope.isAdvanced) {
+	angular.forEach($location.search(), function(val,key){
+	    if(Video.advancedParams.indexOf(key) !== -1) {
+		$scope.advanced[key] = val;
+	    }
+	});
+    }
     
     // turns advanced search on or off
     $scope.toggleAdvanced = function() {
@@ -31,6 +39,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	}
     };
 
+    // change the query in the text box based on the URL's parameters
     $scope.$watch(function(){return $routeParams.query}, function(val){
 	$scope.query = val;
     });
@@ -85,16 +94,23 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	if($scope.isAdvanced()) {
 	    method = Video.advancedSearch;
 	    
-	    // remove empty elements from the object
-	    //obj = $.grep($scope.advanced, function(key, val){ console.log(key,val); });
+	    // remove empty elements from the object and our search
 	    obj = (function(){
 		    var newObj = {};
+		    var newSearch = $location.search();
 		    angular.forEach($scope.advanced, function(val, key){
-		    if(!!val) {
-			 newObj[key] = val;
-		    }
-	    }); return newObj })();
-	    $location.search(jQuery.extend({},$location.search(),$scope.advanced));
+			if(!!val) {
+			     newObj[key] = val;
+			}
+			else
+			{
+			    delete newSearch[key];
+			    delete $scope.advanced[key];
+			}
+		    });
+		    $location.search(jQuery.extend({}, newSearch, $scope.advanced));
+		    return newObj;
+	    })();
 	}
 	else
 	{
