@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl" ng-style="style">
+<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl" data-ng-style="style">
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/cssreset-min.css"/>
@@ -21,6 +21,10 @@
 	    <a href="">Courses</a>
 	    <a href="#/search">Search</a>
 	    <a href="">Contact</a>
+	    <span class="language" data-ng-controller="LanguageCtrl">
+		<label for="nav-language" class="icon-globe"></label>
+		<select id="nav-language" ng-model="language" ng-options="lang.value as lang.label for lang in languages"></select>
+	    </span>
     </nav>
     <ng-view>
     </ng-view>
@@ -49,6 +53,7 @@
   <script src="js/services.js"></script>
 
   <!-- CONTROLLERS -->
+  <script src="js/controllers/language.js"></script>
   <script src="js/controllers/search.js"></script>
   <script src="js/resources/video.js"></script>
   <script src="js/resources/collection.js"></script>
