@@ -50,5 +50,30 @@ describe('hummedia app', function() {
             input("advanced['ma:title']").enter('Sam Walton');
             expect(element('#search-advanced input[type=submit]', 'Submit Button').attr('disabled')).toBeFalsy();
         });
+    
+	describe('url', function() {
+	    beforeEach(function(){
+		 browser().navigateTo("#/search?advanced");
+		 input("advanced['ma:title']").enter("Henry David Thoreau");
+		 element('#search-advanced input[type=submit]').click();
+	    });
+	
+	    it('should be updated on submission', function() {
+		 expect(browser().location().search()).toEqual({'advanced': true, 'ma:title': 'Henry David Thoreau'});
+	    });
+	
+	    it('should have advanced-specific parameters removed on return to basic search', function() {
+		 element('.advanced-toggle a').click();
+		 expect(browser().location().search()).toEqual({});
+	    });
+	
+	    it('should update the input boxes based on its parameters', function() {
+		 browser().navigateTo("#/search?advanced&ma:title=Ben&ma:description=Leslie&yearfrom=1980&yearto=2000");
+		 expect(input("advanced['ma:title']", "Title input").val()).toEqual('Ben');
+		 expect(input("advanced['ma:description']", "Description input").val()).toEqual('Leslie');
+		 expect(input("advanced.yearfrom", "Year from input").val()).toEqual('1980');
+		 expect(input("advanced.yearto", "Year to input").val()).toEqual('2000');
+	    });
+	});
   });
 });

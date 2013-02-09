@@ -7,5 +7,7 @@ angular.module('hummedia.services').
             search: {method: 'GET', isArray: true, params: {searchtype: 'keyword', q: '@q'}},
 	    advancedSearch: {method: 'GET', isArray: true}
         });
+	resource.advancedParams = ['yearfrom','yearto','ma:title','ma:description'];
+	
         return resource;
     }]);

@@ -21,9 +21,9 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.toggleAdvanced = function() {
 	if($scope.isAdvanced()) {
 	    $location.search('advanced',null);
-	    for(var i = 0; i<Video.validSearchKeys.length; i++) {
-		$location.search(Video.validSearchKeys[i], null);
-	    }
+	    angular.forEach($scope.advanced, function(val, key){
+		$location.search(key, null);
+	    });
 	}
 	else
 	{
@@ -34,6 +34,24 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.$watch(function(){return $routeParams.query}, function(val){
 	$scope.query = val;
     });
+
+    // watch the advanced parameters as well; trust the Video resource's whitelist
+    for(var i = 0; i<Video.advancedParams.length; i++) {
+	(function(){
+	    var key = Video.advancedParams[i];
+	    $scope.$watch(function(){return $routeParams[key]}, function(val){
+		// if the string is the same exact thing numerically as a string, use the int
+		// this will allow for input into number-typed HTML fields
+		if(parseFloat(val) + "" === val) {
+		    $scope.advanced[key] = parseFloat(val);
+		}
+		else
+		{
+		    $scope.advanced[key] = val;
+		}
+	    });
+	})();
+    }
 
     // tells us whether or not a search can possibly be performed
     $scope.canSearch = function() {
