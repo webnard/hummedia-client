@@ -1,20 +1,56 @@
 <section id="search">
-    <div id="search_content">
+    <div id="search_content" data-pop-me-up="!isAdvanced()" data-ng-class="{advanced: isAdvanced()}" data-scroll-top-when="isAdvanced()" >
 	<!-- Without this div we get bad sizing issues -->
 	<div>
-	    <form class="searchform" data-ng-submit="refresh()">
-		<input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
-		<input class="searchbutton" type="submit" value="Go" />
+	    <span class="advanced-toggle">
+		<a data-ng-click="toggleAdvanced()">
+		    <ng-switch on="isAdvanced()">
+			<span ng-switch-when="false">Advanced</span>
+			<span ng-switch-when="true">Basic</span>
+		    </ng-switch>
+		</a>
+	    </span>
+	    <form id="search-form" data-ng-submit="refresh()">
+		<div class="searchform" data-ng-show="!isAdvanced()">
+		    <input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
+		    <input class="searchbutton" type="submit" value="Go" />
+		</div>
+		<fieldset id="search-advanced" data-ng-show="isAdvanced()" form="search-form">
+		    <legend>Advanced Search</legend>
+		    <ul>
+			<li>
+			    <label for="search-form-title">Title</label>
+			    <input type="text" id="search-form-title" name="title" data-ng-model="advanced['ma:title']">
+			</li>
+			<li>
+			    <label for="search-form-description">Description</label>
+			    <input type="text" id="search-form-description" name="title" data-ng-model="advanced['ma:description']">
+			</li>
+			<li>
+			    <label for="search-form-yearfrom">From Year</label>
+			    <input type="number" placeholder="1878" id="search-form-yearfrom" name="yearfrom" data-ng-model="advanced.yearfrom" min="1878" max="{{maxYear}}">
+			</li>
+			<li>
+			    <label for="search-form-yearto">To Year</label>
+			    <input type="number" placeholder="{{maxYear}}" id="search-form-yearto" name="yearto" data-ng-model="advanced.yearto" min="1878" max="{{maxYear}}">
+			</li>
+			<!--<li>
+			    <label for="search-form-director">Director</label>
+			    <input type="text" id="search-form-director" name="director" data-ng-model="advanced.director">
+			</li>-->
+		    </ul>
+		    <input type="submit" data-disable-when="!canSearch()" value="Go">
+		</fieldset>
+		<p data-ng-show="!isSearching && hasSearched">
+		    <ng-pluralize count="results.length" when="{'0': 'No results.',
+				  'one': 'One result.',
+				  'other': '{} results found.'}">
+		    </ng-pluralize>
+		</p>
+		<p data-ng-show="isSearching">
+		    Searching…
+		</p>
 	    </form>
-	    <p data-ng-show="!isSearching && hasSearched">
-		<ng-pluralize count="results.length" when="{'0': 'No results.',
-			      'one': 'One result.',
-			      'other': '{} results found.'}">
-		</ng-pluralize>
-	    </p>
-	    <p data-ng-show="isSearching">
-		Searching…
-	    </p>
 	</div>
     </div>
     <section id="search-results">

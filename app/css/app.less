@@ -24,6 +24,9 @@
  * Main
 ***************************/
 html { 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
 	font-family: sans-serif;
 	overflow-x:hidden;
         font-family: 'Rambla', sans-serif;
@@ -66,7 +69,6 @@ html {
         margin: auto;
         padding-top: 10px;
         border-radius: 10px;
-        margin-bottom: 20px;
 }
 #home_content{
         .ghost;
@@ -115,7 +117,7 @@ footer{
 *************/
 nav{	
 	background-color: @smoke;
-	position: absolute;
+	position: relative;
 	top: 0px;
 	width: 100%;
 	left: 0px;
@@ -144,7 +146,7 @@ nav{
 ***************************/
 #search {
     min-width:400px;
-    width: 70%;
+    width: 50%;
     margin: auto;
 }
 @max-search-height: 150px;
@@ -251,8 +253,9 @@ nav{
 	.languages {
 	    display: inline-block;
 	    li {
+		display: inline;
 		&:not(:last-child):after {
-		    content: ',';
+		    content: ', ';
 		}
 		&:first-child:before {
 		    content: '[';
@@ -282,6 +285,61 @@ nav{
 	p {
 	    font-size: 1em;
 	}
+    }
+}
+/************************
+* Advanced search options
+*************************/
+#search_content {
+    &.advanced {
+	position: relative;
+	margin-bottom: -@max-search-height;
+	max-height: none;
+	width: 100%;
+    }
+    .advanced-toggle {
+	display: block;
+	text-align: right;
+	padding-bottom: 5px;
+	color: blue;
+	font-size: 0.8em;
+    }
+}
+#search-advanced {
+    legend {
+	font-size: 1.1em;
+    }
+    ul {
+	padding-top: 10px;
+    }
+    li {
+	&:not(:last-child) {
+	    margin-bottom: 10px;
+	}
+	input, textarea, label {
+	    display: inline-block;
+	    vertical-align: middle;
+	    width: 150px;
+	}
+	label {
+	    width: 100px;
+	    margin-right: 5px;
+	}
+	input {
+	    padding: 3px;
+	    border: solid 1px #bcbbbb;
+	    outline: none;
+	    padding-right: 3px;
+	    padding-left: 3px;
+	    border-radius: 10px;
+	    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+	}
+    }
+    input[type=submit] {
+	min-width: 50px;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
     }
 }
 /**********************

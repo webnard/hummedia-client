@@ -12,70 +12,125 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     $scope.results = [];
     $scope.isSearching = false;
     $scope.hasSearched = false;
+    $scope.maxYear = new window.Date().getFullYear() + 1; // don't let anyone search past the current year (plus one, let's be generous)
+    $scope.advanced = {};
+    $scope.isAdvanced = function(){return !!$location.search().advanced;};
     
-    // when we slide up the search box
-    var slideupval = $("#search_content").offset().top;
-    var originalSearchTop = $("#search_content").css('margin-top'); // so we can put it back
-    var isTopped = false;
-    var originalBackground = $("#search_content").css('background-color');
-    
-    // slides the search box up as we scroll down
-    var checkScrollPosition = function() {
-	if(window.scrollY > slideupval) {
-	    if(!isTopped) {
-		$("#search_content").css('margin-top','0px');
-		$("#search_content").css("box-shadow","0px 0px 100px black");
-		$("#search_content").css("background-color","#EEE");
+    // initialize advanced properties
+    if($scope.isAdvanced) {
+	angular.forEach($location.search(), function(val,key){
+	    if(Video.advancedParams.indexOf(key) !== -1) {
+		$scope.advanced[key] = val;
 	    }
-	    isTopped = true;
+	});
+    }
+    
+    // turns advanced search on or off
+    $scope.toggleAdvanced = function() {
+	if($scope.isAdvanced()) {
+	    $location.search('advanced',null);
+	    angular.forEach($scope.advanced, function(val, key){
+		$location.search(key, null);
+	    });
 	}
-	else if(isTopped)
+	else
 	{
-	    $("#search_content").css('margin-top',originalSearchTop);
-	    $("#search_content").css("box-shadow","none");
-	    $("#search_content").css("background-color",originalBackground);
-	    isTopped = false;
+	    $location.search('advanced');
+	}
+    };
+
+    // change the query in the text box based on the URL's parameters
+    $scope.$watch(function(){return $routeParams.query}, function(val){
+	$scope.query = val;
+    });
+
+    // watch the advanced parameters as well; trust the Video resource's whitelist
+    for(var i = 0; i<Video.advancedParams.length; i++) {
+	(function(){
+	    var key = Video.advancedParams[i];
+	    $scope.$watch(function(){return $routeParams[key]}, function(val){
+		// if the string is the same exact thing numerically as a string, use the int
+		// this will allow for input into number-typed HTML fields
+		if(parseFloat(val) + "" === val) {
+		    $scope.advanced[key] = parseFloat(val);
+		}
+		else
+		{
+		    $scope.advanced[key] = val;
+		}
+	    });
+	})();
+    }
+
+    // tells us whether or not a search can possibly be performed
+    $scope.canSearch = function() {
+	if($scope.isAdvanced()) {
+	    for(var i in $scope.advanced) {
+		if($scope.advanced.hasOwnProperty(i) && !!$scope.advanced[i]) {
+		    return true;
+		}
+	    }
+	    return false;
+	}
+	else
+	{
+	    return !!$scope.query; // user input will always be true except when an empty string
 	}
     };
     
-    /**
-     * @todo We should find a way to bind this to a specific element within this scope
-     */
-    $(window).on('scroll', checkScrollPosition);
-
-    // remove the scroll function
-    $scope.$on('$destroy', function cleanup() {
-	$(window).off('scroll', checkScrollPosition);
-    });
-    
-    // performs another search
+    // performs another search (if canSearch())
     $scope.refresh = function() {
 	clearTimeout(timer);
 	timer = null;
-	if(/^\s*$/.test($scope.query)) {
+	if(!$scope.canSearch()) {
 	    $scope.results = [];
 	    return;
 	}
 	$scope.hasSearched = true;
 	$scope.isSearching = true;
 	lastsearch = Date.now();
-	//$scope.results = Collection.search();
 	
-	$scope.results = Video.search({q: $scope.query}, function(){
+	var method, obj; // the method we search with, and the query we send it
+	if($scope.isAdvanced()) {
+	    method = Video.advancedSearch;
+	    
+	    // remove empty elements from the object and our search
+	    obj = (function(){
+		    var newObj = {};
+		    var newSearch = $location.search();
+		    angular.forEach($scope.advanced, function(val, key){
+			if(!!val) {
+			     newObj[key] = val;
+			}
+			else
+			{
+			    delete newSearch[key];
+			    delete $scope.advanced[key];
+			}
+		    });
+		    $location.search(jQuery.extend({}, newSearch, $scope.advanced));
+		    return newObj;
+	    })();
+	}
+	else
+	{
+	    $location.search("query",$scope.query);
+	    method = Video.search;
+	    obj = {q: $scope.query};
+	}
+	
+	$scope.results = method(obj, function(){
 	    $scope.isSearching = false;
 	    angular.forEach($scope.results, function(result) {
 		result.type = 'video';
 	    });
 	});
     };
-
-    if($scope.query !== undefined) {
-	$scope.refresh();
-    }
+    // kick things off if there are already queries in the URL
+    $scope.refresh();
     
     // For fun and excitement, update the URL as the user types their search
     $scope.change = function() {
-        $location.search("query",$scope.query);
 	if(Date.now() - lastsearch > timeout && !timer) {
 	    $scope.refresh(); // auto load data
 	}
