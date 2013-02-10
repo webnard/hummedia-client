@@ -3,9 +3,12 @@
 /**
  * Allows the user to change their locale
  */
-function LanguageCtrl($scope) {
-    $scope.language = 'es';
+function LanguageCtrl($scope, language) {
+    $scope.language = language.current;
+    $scope.languages = language.list;
     
-    $scope.languages = [{label: "English", value: "en"}, {label: "Español", value: "es"}];
+    $scope.$watch($scope.language, function(val) {
+	language.current = val;
+    });
 };
-LanguageCtrl.inject = ['$scope'];
+LanguageCtrl.inject = ['$scope','language'];
