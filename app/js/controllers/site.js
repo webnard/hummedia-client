@@ -4,7 +4,7 @@ function SiteCtrl($scope, $http, appConfig) {
     function getRandomInt (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    var photo_ids = ['510175383','30950009', '2685376029', '5803011292', '7608871682'];
+    var photo_ids = ['510175383','30950009', '2685376029', '5803011292', '7608871682', '3814815269', '202917381'];
     //var photo_ids = ['7608871682'];
     var imagecount = photo_ids.length;
     var num = getRandomInt(0,imagecount-1);
