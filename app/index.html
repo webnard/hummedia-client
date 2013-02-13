@@ -17,10 +17,10 @@
     <div id="container">
     <nav id="navtable">
             <a id="navtitle" href="#">Humanities Online Media</a>
-            <a href="">Login</a>
-	    <a href="">Courses</a>
-	    <a href="#/search">Search</a>
-	    <a href="">Contact</a>
+            <a href="">{{Login | tr}}</a>
+	    <a href="">{{Courses | tr}}</a>
+	    <a href="#/search">{{Search | tr}}</a>
+	    <a href="">{{Contact | tr}}</a>
 	    <span class="language" data-ng-controller="LanguageCtrl">
 		<label for="nav-language" class="icon-globe"></label>
 		<select id="nav-language" ng-model="language" ng-options="lang.value as lang.label for lang in languages"></select>

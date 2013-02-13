@@ -7,7 +7,7 @@ function LanguageCtrl($scope, language) {
     $scope.language = language.current;
     $scope.languages = language.list;
     
-    $scope.$watch($scope.language, function(val) {
+    $scope.$watch('language', function(val) {
 	language.current = val;
     });
 };

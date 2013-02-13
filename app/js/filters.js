@@ -12,4 +12,10 @@ angular.module('hummedia.filters', [])
         return languages[n];
         }
     };
-});
+})
+// translates strings into the user's current locale
+.filter('tr', ['language',function (language) {
+    return function(str) {
+	return language.translate(str);
+    }
+}]);
