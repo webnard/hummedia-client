@@ -5,8 +5,8 @@
 	    <span class="advanced-toggle">
 		<a data-ng-click="toggleAdvanced()">
 		    <ng-switch on="isAdvanced()">
-			<span ng-switch-when="false">Advanced</span>
-			<span ng-switch-when="true">Basic</span>
+			<span ng-switch-when="false">{{"Advanced" | tr}}</span>
+			<span ng-switch-when="true">{{"Basic" | tr}}</span>
 		    </ng-switch>
 		</a>
 	    </span>
@@ -16,22 +16,22 @@
 		    <input class="searchbutton" type="submit" value="Go" />
 		</div>
 		<fieldset id="search-advanced" data-ng-show="isAdvanced()" form="search-form">
-		    <legend>Advanced Search</legend>
+		    <legend>{{"Advanced Search" | tr}}</legend>
 		    <ul>
 			<li>
-			    <label for="search-form-title">Title</label>
+			    <label for="search-form-title">{{"Title" | tr}}</label>
 			    <input type="text" id="search-form-title" name="title" data-ng-model="advanced['ma:title']">
 			</li>
 			<li>
-			    <label for="search-form-description">Description</label>
+			    <label for="search-form-description">{{"Description" | tr}}</label>
 			    <input type="text" id="search-form-description" name="title" data-ng-model="advanced['ma:description']">
 			</li>
 			<li>
-			    <label for="search-form-yearfrom">From Year</label>
+			    <label for="search-form-yearfrom">{{"From Year" | tr}}</label>
 			    <input type="number" placeholder="1878" id="search-form-yearfrom" name="yearfrom" data-ng-model="advanced.yearfrom" min="1878" max="{{maxYear}}">
 			</li>
 			<li>
-			    <label for="search-form-yearto">To Year</label>
+			    <label for="search-form-yearto">{{"To Year" | tr}}</label>
 			    <input type="number" placeholder="{{maxYear}}" id="search-form-yearto" name="yearto" data-ng-model="advanced.yearto" min="1878" max="{{maxYear}}">
 			</li>
 			<!--<li>
@@ -48,7 +48,7 @@
 		    </ng-pluralize>
 		</p>
 		<p data-ng-show="isSearching">
-		    Searching…
+		    {{"Searching…" | tr}}
 		</p>
 	    </form>
 	</div>
