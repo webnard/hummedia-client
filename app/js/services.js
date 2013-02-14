@@ -13,10 +13,13 @@ angular.module('hummedia.services', ['ngResource'], ['$provide', function($provi
     $provide.factory('language', ['$location','$http',function($location, $http){
 	var defaultLang = "en"; // default
 	var language = {};
-	var translations = null; // to be loaded
+	var translations = null; // to be loaded; a key-value object of translations
 	var loadingTranslations = false;
 	
 	Object.defineProperty(language, "list", {
+	    /**
+	     * @todo: Load this in dynamically?
+	     */
 	    value: [{label: "English", value: "en"},{ label: "Español", value: "es"}],
 	    configurable: false,
 	    enumerable: true,
@@ -35,7 +38,7 @@ angular.module('hummedia.services', ['ngResource'], ['$provide', function($provi
 		window.localStorage['language'] = str;
 		/**
 		 * @todo: Figure out how to reload the angular localization files
-		 * and get them to work
+		 * and get them to work when switching languages. Right now simply calling loadLanguage won't work
 		 */
 		//window.location.reload();
 	    },
@@ -48,29 +51,20 @@ angular.module('hummedia.services', ['ngResource'], ['$provide', function($provi
 	
 	// lazily loading translations
 	language.translate = function(str) {
-	    if(translations === null) {
+	    if(translations === null) { // should only ever happen when we switch a language
 		
-		if(loadingTranslations) {
-		    return;
-		}
-		loadingTranslations = true;
-		
-		/**
-		 * @todo: Figure out how to defer this
-		 * @todo: Remove hard-codedness
-		 */
-		$http.get('/app/translations/' + this.current + '.json')
-		.success(function(data) {
-		    loadingTranslations = false;
-		    translations = data;
-		})
-		.error(function() {
-		    loadingTranslations = false;
-		    translations = {};
-		});
-		return this.translate(str);
+		translations = {};
+		$http.get(window.location.pathname + '/translations/' + this.current + '.json')
+		    .success(function(data) {
+			loadingTranslations = false;
+			translations = data;
+		    })
+		    .error(function() {
+			loadingTranslations = false;
+			translations = {};
+		    });
 	    }
-	    else if(translations[str] === undefined) {
+	    else if(translations[str] === undefined || translations[str] === "") {
 		return str;
 	    }
 	    else
