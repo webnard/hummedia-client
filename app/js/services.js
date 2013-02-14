@@ -12,11 +12,20 @@ angular.module('hummedia.services', ['ngResource'], ['$provide', function($provi
 	var translations = null; // to be loaded; a key-value object of translations
 	var loadingTranslations = false;
 	
+	var languages = $http.get(window.location.pathname + '/translations/ALL.json')
+	    .then(function(response) {
+		var codes = [];
+		for(var i = 0; i<response.data.length; i++) {
+		    codes.push({label: response.data[i], value: response.data[i]});
+		}
+		return codes;
+	    });
+	
 	Object.defineProperty(language, "list", {
 	    /**
 	     * @todo: Load this in dynamically?
 	     */
-	    value: [{label: "English", value: "en"},{ label: "Español", value: "es"}],
+	    value: languages,
 	    configurable: false,
 	    enumerable: true,
 	    writable: false
