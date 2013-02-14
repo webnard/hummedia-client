@@ -1,0 +1,12 @@
+msgid "Login"
+msgstr ""
+
+msgid "Courses"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
