@@ -1,16 +1,12 @@
 'use strict';
 
-/* Services */
+/* Services — These are single objects that are not copied */
 
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('hummedia.services', ['ngResource'], ['$provide', function($provide) {
-	
     /**
      * Allows for changing the locale and performing translations
      */
-    $provide.factory('language', ['$location','$http',function($location, $http){
+    $provide.factory('language', ['$http',function($http){
 	var defaultLang = "en"; // default
 	var language = {};
 	var translations = null; // to be loaded; a key-value object of translations
