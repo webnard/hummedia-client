@@ -1,0 +1,11 @@
+<div class="admin">
+    <ul>
+    <li>{{collection_data['dc:title']}}
+        <ul>
+            <li style="margin-left: 1em;"data-ng-repeat="video in collection_data.videos">
+                <p>{{video['ma:title']}}</p>
+            </li>
+        </ul>
+    </li>
+    </ul>
+</div>
