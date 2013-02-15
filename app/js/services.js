@@ -22,9 +22,6 @@ angular.module('hummedia.services', ['ngResource'], ['$provide', function($provi
 	    });
 	
 	Object.defineProperty(language, "list", {
-	    /**
-	     * @todo: Load this in dynamically?
-	     */
 	    value: languages,
 	    configurable: false,
 	    enumerable: true,
