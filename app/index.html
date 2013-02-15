@@ -23,7 +23,7 @@
 	    <a href="">{{"Contact" | tr}}</a>
 	    <span class="language" data-ng-controller="LanguageCtrl">
 		<label for="nav-language" class="icon-globe"></label>
-		<select id="nav-language" data-ng-model="language" data-ng-options="lang.value as lang.label for lang in languages"></select>
+		<select id="nav-language" data-ng-model="language" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
     </nav>
     <ng-view>

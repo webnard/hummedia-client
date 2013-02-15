@@ -1,6 +1,6 @@
 
 'use strict';
-function SiteCtrl($scope, $http, appConfig, language) {
+function SiteCtrl($scope, $http, appConfig) {
     function getRandomInt (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -34,4 +34,4 @@ function SiteCtrl($scope, $http, appConfig, language) {
     
 }
 // always inject this in so we can later compress this JavaScript
-SiteCtrl.$inject = ['$scope', '$http', 'appConfig', 'language'];
+SiteCtrl.$inject = ['$scope', '$http', 'appConfig'];
