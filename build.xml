@@ -1,0 +1,6 @@
+<project name="Hummedia" default="all" basedir=".">
+    <target name="test" description="Runs the E2E test-suite on different browsers">
+        <exec executable="scripts/e2e-test.sh" failonerror="true"/>
+    </target>
+    <target name="all" depends="test"/>
+</project>
