@@ -8,6 +8,15 @@ describe('hummedia app', function() {
     browser().navigateTo('/app/index.html');
   });
 
+  describe('translation', function(){
+      it('should switch to Spanish from English using the dropdown menu', function(){
+	  expect(element('#nav-search').text()).toEqual('Search');
+	  select('language').option(1);
+	  sleep(1);
+	  expect(element('#nav-search').text()).toEqual('Buscar');
+      });
+  });
+ 
   describe ('search', function() {
         beforeEach(function() {
             browser().navigateTo("#/search");
