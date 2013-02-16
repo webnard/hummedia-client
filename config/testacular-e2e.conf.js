@@ -15,7 +15,7 @@ singleRun = true;
 reporters = ['junit'];
 
 proxies = {
-  '/': 'http://localhost:8000/'
+  '/': 'http://localhost:80/'
 };
 
 junitReporter = {
