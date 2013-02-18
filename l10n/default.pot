@@ -10,6 +10,9 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
+msgid "Media for My Courses"
+msgstr ""
+
 msgid "Advanced"
 msgstr ""
 
