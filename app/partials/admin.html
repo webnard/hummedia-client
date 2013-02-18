@@ -1,7 +1,10 @@
 <div class="admin">
     <ul>
     <li data-ng-repeat="collection in collections">
-        <p>{{collection['dc:title']}}</p>
+        <p>{{collection['dc:title']}}<button style="display:inline-block;" data-ng-click="deleteCollection(collection.pid)">Delete</button></p>
     </li>
     </ul>
+    <form>
+        <input data-ng-model="newtitle" type="text" /><input type="submit" value="Add Collection" data-ng-click="newCollection()"/>
+    </form>
 </div>
