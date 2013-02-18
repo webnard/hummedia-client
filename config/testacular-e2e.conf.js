@@ -15,7 +15,7 @@ singleRun = true;
 reporters = ['junit'];
 
 proxies = {
-  '/': 'http://localhost:80/'
+  '/': 'http://hummedia.local'
 };
 
 junitReporter = {

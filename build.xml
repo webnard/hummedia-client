@@ -1,6 +1,10 @@
 <project name="Hummedia" default="all" basedir=".">
+    <property name="e2e.config" value="config/testacular-e2e.conf.js"/>
     <target name="test" description="Runs the E2E test-suite on different browsers">
-        <exec executable="scripts/e2e-test.sh" failonerror="false"/>
+        <exec executable="testacular" failonerror="false">
+            <arg value="start" />
+            <arg value="${e2e.config}" />
+        </exec>
     </target>
     <target name="all" depends="test"/>
 </project>
