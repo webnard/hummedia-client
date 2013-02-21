@@ -66,9 +66,47 @@ html {
 	text-align: center;
 }
 .admin{
-    border-radius:10px;
-    background-color: white;
-    padding: 10px;
+    padding:10px;
+    #tablewrapper{
+        background-color: white;
+        border-style: solid;
+        border-radius: 10px;
+        text-align: center;
+        td{
+            padding-left: 10px;
+            padding-top: 5px;
+            text-align: left;
+        }
+        width: 300px;
+        float: right;
+    }
+    #listwrapper{
+        width:300px;
+        border-style:solid;
+        border-radius:10px;
+        background-color:white;
+        padding: 10px;
+        a{
+            font-size: 50%;
+        }
+    }
+    .listvideo{
+        border-style: solid;
+        border-color: white;
+        border-radius: 5px;
+        background-color: white;
+        border-width: 1px;
+        padding: 2px;
+        cursor: pointer;
+        &:hover{
+            background-color: lightblue;
+            border-color: lightblue;
+        }
+        .selected{
+            background-color: lightblue;
+            border-color: lightblue;
+        }
+    }
 }
 #collection_content{
         padding: 10px;

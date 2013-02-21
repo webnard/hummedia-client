@@ -1,10 +1,21 @@
 <div class="admin">
-    <ul>
-    <li data-ng-repeat="collection in collections">
-        <p>{{collection['dc:title']}}<button style="display:inline-block;" data-ng-click="deleteCollection(collection.pid)">Delete</button></p>
-    </li>
-    </ul>
-    <form>
-        <input data-ng-model="newtitle" type="text" /><input type="submit" value="Add Collection" data-ng-click="newCollection()"/>
-    </form>
+    <div id="tablewrapper">
+        <h2>Create New Collection</h2>
+        <table>
+            <tr><td>Title:</td><td><input data-ng-model="newtitle" type="text" /></td></tr>
+            <tr><td>Description:</td><td><input data-ng-model="newdescription" type="text" /></td></tr>
+            <tr><td>Creator:</td><td><input data-ng-model="newcreator" type="text" /></td></tr>
+        </table>
+        <button data-ng-click="newCollection()">Create Collection</button>
+    </div>
+    <div id="listwrapper">
+        <ul>
+        <li class="listvideo" data-ng-repeat="collection in collections" id="collection-{{collection.pid}}"data-ng-click="delete2Collection(collection.pid)">
+            <p>{{collection['dc:title']}} 
+            <a href="#/admin/collection/{{collection.pid}}">edit</a>
+            <a href="" data-ng-click="deleteCollection(collection.pid)">delete</a></p>
+        </li>
+        </ul>
+        <button id="deletebutton" class="bwbuttondarkn" disabled="disabled">Delete</button>
+    </div>
 </div>
