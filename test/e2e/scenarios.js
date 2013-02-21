@@ -15,11 +15,11 @@ describe('hummedia app', function() {
 	  sleep(5);
 	  expect(element('#nav-search').text()).toEqual('Buscar');
       });
-  });
   
-  afterEach(function() {
-     select('language').option(0);
-  })
+      afterEach(function() {
+	 select('language').option(0);
+      });
+  });
  
   describe ('search', function() {
         beforeEach(function() {
