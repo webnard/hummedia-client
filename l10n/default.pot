@@ -19,9 +19,6 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
-msgid "Search"
-msgstr ""
-
 msgid "Go"
 msgstr ""
 
@@ -40,6 +37,6 @@ msgstr ""
 msgid "To Year"
 msgstr ""
 
-msgid "Searching…"
+msgid "Searching"
 msgstr ""
 
