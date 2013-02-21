@@ -1,10 +1,26 @@
-<project name="Hummedia" default="all" basedir=".">
+<project name="Hummedia" default="create" basedir=".">
     <property name="e2e.config" value="config/testacular-e2e.conf.js"/>
+
+    <target name="json_translations">
+        <exec executable="make" failonerror="true">
+            <arg value="--directory=l10n" />
+            <arg value="json" />
+        </exec>
+    </target>
+
+    <target name="pot_files">
+        <exec executable="make" failonerror="true">
+            <arg value="--directory=l10n" />
+            <arg value="pot" />
+        </exec>
+    </target>
+
     <target name="test" description="Runs the E2E test-suite on different browsers">
         <exec executable="testacular" failonerror="false">
             <arg value="start" />
             <arg value="${e2e.config}" />
         </exec>
     </target>
-    <target name="all" depends="test"/>
+
+    <target name="create" depends="json_translations"/>
 </project>

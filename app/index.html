@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl" ng-style="style">
+<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl" data-ng-style="style">
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/cssreset-min.css"/>
@@ -11,17 +11,20 @@
   <link rel="stylesheet" href="css/app.css"/>
   -->
   <link rel="stylesheet/less" href="css/app.less"/>
+  <link rel="stylesheet/less" href="css/font-awesome.less"/>
 </head>
 <body>
     <div id="container">
-    <nav>
-            <table id="navtable"><tr>			
-            <td style="width:5px;"></td>			
-            <td id="navtitle"><a href="#">Humanities Online Media</a></td>
-            <td class="navlink"><a href="">Login</a><a href="">Courses</a><a href="#/search">Search</a><a href="">Contact</a></td>
-            <td style="width:5px;"><td>
-            </tr></table>
-
+    <nav id="navtable">
+            <a id="navtitle" href="#">Humanities Online Media</a>
+            <a href="">{{"Login" | tr}}</a>
+	    <a href="">{{"Courses" | tr}}</a>
+	    <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
+	    <a href="">{{"Contact" | tr}}</a>
+	    <span class="language" data-ng-controller="LanguageCtrl">
+		<label for="nav-language" class="icon-globe"></label>
+		<select id="nav-language" data-ng-model="language" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
+	    </span>
     </nav>
     <ng-view>
     </ng-view>
@@ -31,6 +34,7 @@
     </footer>
 
     </div>
+
   <!-- LIBRARIES -->
   <!-- Use CDN in production -->
   <script src="js/jquery-1.9.0.min.js"></script>
@@ -49,6 +53,7 @@
   <script src="js/services.js"></script>
 
   <!-- CONTROLLERS -->
+  <script src="js/controllers/language.js"></script>
   <script src="js/controllers/search.js"></script>
   <script src="js/resources/video.js"></script>
   <script src="js/resources/collection.js"></script>
@@ -56,6 +61,5 @@
   <script src="js/directives.js"></script>
   <script src="js/controllers/collection.js"></script>
   <script src="js/controllers/site.js"></script>
-
 </body>
 </html>

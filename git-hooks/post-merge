@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Builds our project after a pull
+ant

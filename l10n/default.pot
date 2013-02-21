@@ -1,0 +1,39 @@
+msgid "Login"
+msgstr ""
+
+msgid "Courses"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Media for My Courses"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Basic"
+msgstr ""
+
+msgid "Advanced Search"
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "From Year"
+msgstr ""
+
+msgid "To Year"
+msgstr ""
+
+msgid "Searching…"
+msgstr ""
+

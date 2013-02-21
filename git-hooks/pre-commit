@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# adds any translation files that might be present to our staging area
+ant pot_files
+git add l10n/default.pot 

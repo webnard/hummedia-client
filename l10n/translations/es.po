@@ -1,0 +1,49 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Ian <beanland2@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Login"
+msgstr "Iniciar sesión"
+
+msgid "Courses"
+msgstr "Mis cursos"
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Contact"
+msgstr "Contactar"
+
+msgid "Advanced"
+msgstr "Avanzado"
+
+msgid "Basic"
+msgstr "Básico"
+
+#, fuzzy
+msgid "Advanced Search"
+msgstr "La búsqueda avanzada"
+
+msgid "Title"
+msgstr "El título"
+
+msgid "Description"
+msgstr "La descripción"
+
+msgid "From Year"
+msgstr "Desde año"
+
+msgid "To Year"
+msgstr "Hasta año"
+
+#, fuzzy
+msgid "Searching…"
+msgstr "Busca…"
+
