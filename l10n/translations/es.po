@@ -3,8 +3,9 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Ian <beanland2@gmail.com>\n"
+"Last-Translator: Derrick Craven <dcravenus@gmail.com>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,11 +22,17 @@ msgstr "Buscar"
 msgid "Contact"
 msgstr "Contactar"
 
+msgid "Media for My Courses"
+msgstr "Mis cursos"
+
 msgid "Advanced"
 msgstr "Avanzado"
 
 msgid "Basic"
 msgstr "Básico"
+
+msgid "Go"
+msgstr "Ir"
 
 #, fuzzy
 msgid "Advanced Search"
@@ -44,6 +51,6 @@ msgid "To Year"
 msgstr "Hasta año"
 
 #, fuzzy
-msgid "Searching…"
+msgid "Searching"
 msgstr "Busca…"
 
