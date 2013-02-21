@@ -12,10 +12,14 @@ describe('hummedia app', function() {
       it('should switch to Spanish from English using the dropdown menu', function(){
 	  expect(element('#nav-search').text()).toEqual('Search');
 	  select('language').option(1);
-	  sleep(1);
+	  sleep(5);
 	  expect(element('#nav-search').text()).toEqual('Buscar');
       });
   });
+  
+  afterEach(function() {
+     select('language').option(0);
+  })
  
   describe ('search', function() {
         beforeEach(function() {

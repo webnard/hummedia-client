@@ -11,8 +11,7 @@ angular.module('hummedia.services', ['ngResource'], ['$provide', function($provi
 	var language = {};
 	var translations = null; // to be loaded; a key-value object of translations
 	var loadingTranslations = false;
-	
-	var languages = $http.get(window.location.pathname + '/translations/ALL.json')
+	var languages = $http.get('translations/ALL.json')
 	    .then(function(response) {
 		var codes = [];
 		for(var i = 0; i<response.data.length; i++) {
@@ -56,7 +55,7 @@ angular.module('hummedia.services', ['ngResource'], ['$provide', function($provi
 	    if(translations === null) { // should only ever happen when we switch a language
 		
 		translations = {};
-		$http.get(window.location.pathname + '/translations/' + this.current + '.json')
+		$http.get('translations/' + this.current + '.json')
 		    .success(function(data) {
 			loadingTranslations = false;
 			translations = data;
