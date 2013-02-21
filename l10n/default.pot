@@ -19,6 +19,12 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
+msgid "Search"
+msgstr ""
+
+msgid "Go"
+msgstr ""
+
 msgid "Advanced Search"
 msgstr ""
 

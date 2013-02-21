@@ -12,8 +12,8 @@
 	    </span>
 	    <form id="search-form" data-ng-submit="refresh()">
 		<div class="searchform" data-ng-show="!isAdvanced()">
-		    <input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder="Search…" data-ng-change="change()">
-		    <input class="searchbutton" type="submit" value="Go" />
+		    <input class="searchfield" type="search" data-ng-model="query" autofocus="autofocus" placeholder='{{"Search" | tr}}…' data-ng-change="change()">
+		    <input class="searchbutton" type="submit" value='{{"Go" | tr}}' />
 		</div>
 		<fieldset id="search-advanced" data-ng-show="isAdvanced()" form="search-form">
 		    <legend>{{"Advanced Search" | tr}}</legend>
