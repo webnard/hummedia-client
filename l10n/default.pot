@@ -1,4 +1,7 @@
-msgid "Login"
+msgid "Advanced"
+msgstr ""
+
+msgid "To Year"
 msgstr ""
 
 msgid "Courses"
@@ -7,36 +10,33 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Login"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
 msgid "Contact"
 msgstr ""
 
 msgid "Media for My Courses"
 msgstr ""
 
-msgid "Advanced"
+msgid "Go"
 msgstr ""
 
 msgid "Basic"
 msgstr ""
 
-msgid "Go"
-msgstr ""
-
-msgid "Advanced Search"
-msgstr ""
-
-msgid "Title"
-msgstr ""
-
-msgid "Description"
+msgid "Searching"
 msgstr ""
 
 msgid "From Year"
 msgstr ""
 
-msgid "To Year"
+msgid "Title"
 msgstr ""
 
-msgid "Searching"
+msgid "Advanced Search"
 msgstr ""
 
