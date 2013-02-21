@@ -10,7 +10,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 msgid "Login"
-msgstr ""
+msgstr " 登录"
 
 msgid "Courses"
 msgstr ""

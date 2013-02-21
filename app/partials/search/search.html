@@ -39,7 +39,7 @@
 			    <input type="text" id="search-form-director" name="director" data-ng-model="advanced.director">
 			</li>-->
 		    </ul>
-		    <input type="submit" data-disable-when="!canSearch()" value="Go">
+		    <input type="submit" data-disable-when="!canSearch()" value='{{"Go" | tr}}'>
 		</fieldset>
 		<p data-ng-show="!isSearching && hasSearched">
 		    <ng-pluralize count="results.length" when="{'0': 'No results.',
