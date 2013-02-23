@@ -6,8 +6,15 @@
   will override those of this configuration.
 **/
 'use strict';
-angular.module('hummedia.config', []).
-  constant('appConfig', {
-      apiBase: 'https://zelda.byu.edu/api/v2/',
-      flickrKey: 'your key here'
-  });
+if(HUMMEDIA_CONFIG === undefined) {
+  var HUMMEDIA_CONFIG = angular.module('hummedia.config', [])
+}
+HUMMEDIA_CONFIG.
+  value('apiBase', 'https://zelda.byu.edu/api/v2/').
+  value('flickrKey', 'your key here').
+  factory('appConfig', ['apiBase','flickrKey', function(apiBase, flickrKey) {
+    return {
+      apiBase: apiBase,
+      flickrKey: flickrKey
+    };
+}]);

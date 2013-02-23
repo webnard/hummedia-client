@@ -1,5 +1,14 @@
 <project name="Hummedia" default="create" basedir=".">
     <property name="e2e.config" value="config/testacular-e2e.conf.js"/>
+    <condition property="local.config.missing">
+        <not>
+            <available file="app/js/config.local.js"/>
+        </not>
+    </condition>
+
+    <target name="config" if="local.config.missing">
+        <copy file="app/js/config.js" tofile="app/js/config.local.js"/> 
+    </target>
 
     <target name="json_translations">
         <exec executable="make" failonerror="true">
@@ -22,5 +31,5 @@
         </exec>
     </target>
 
-    <target name="create" depends="json_translations"/>
+    <target name="create" depends="json_translations, config"/>
 </project>
