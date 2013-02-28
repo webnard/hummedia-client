@@ -124,7 +124,7 @@ angular.module('hummedia.directives', [])
         return {
             restrict: 'A',
             scope: false,
-            template: "<section><div id='error-message'><h1>{{code}}</h1><p>{{message}}</p></div></section>",
+            template: "<section><div id='error-message'><menu><button class='error-exit icon-remove-sign'> Close</button></menu><h1>{{code}}</h1><p>{{message}}</p></div></section>",
             transclude: true,
             replace: true,
             compile: function(element, attrs, transclude) {
@@ -132,6 +132,14 @@ angular.module('hummedia.directives', [])
                 
                 return function postLink(scope, iElement, iAttrs, controller) {
                     element.hide();
+                    var close = function() {
+                        isShowing = false;
+                        $(iAttrs.blur).removeClass('blur');
+                        element.hide();
+                    };
+                    
+                    element.find('.error-exit').click(close);
+                    
                     scope.$watch(function(){return $rootScope.apiError;}, function(value) {
                         if(value === undefined || value === null || isShowing) {
                             // do nothing
