@@ -119,6 +119,7 @@ html {
     color: black;
 }
 footer{
+    z-index: 1000; /* above the error modal */
     width:100%;
     background-color: @smoke;
     color: gray;
@@ -133,21 +134,29 @@ footer{
     }
 }
 #container{
-    -webkit-transition: -webkit-filter ease-out 0.5s;
+    min-height: 100%;
+    position: absolute;
+    width: 100%;
+}
+#background {
+    z-index: -1;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background: no-repeat center center fixed;
     background-size: cover;
     background-color: @smoke;
-    min-height: 100%;
-    position: absolute;
     width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 /*************
 * Nav Elements
 *************/
-#navtable{	
+#navtable{
+        z-index: 1000; /* above the error modal */
 	background-color: @smoke;
 	position: relative;
 	top: 0px;
@@ -425,7 +434,7 @@ footer{
  * Error Pop-up
  **************/
 #error-modal {
-    z-index: 1000;
+    z-index: 500;
     position: absolute;
     top: 0;
     left: 0;
@@ -450,5 +459,6 @@ footer{
     }
     p {
         font-size: 3em;
+        vertical-align: middle;
     }
 }

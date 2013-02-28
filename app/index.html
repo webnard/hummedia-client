@@ -14,8 +14,9 @@
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
 </head>
 <body>
-    <div id='error-modal' api-error-modal blur='#container'></div>
-    <div id="container" data-ng-style="style">
+    <div id='error-modal' api-error-modal blur='#background, #view'></div>
+    <div id="background" data-ng-style="style"></div>
+    <div id="container">
     <nav id="navtable">
             <a id="navtitle" href="#">Humanities Online Media</a>
             <a href="">{{"Login" | tr}}</a>
@@ -27,8 +28,8 @@
 		<select id="nav-language" ng-model="language" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
     </nav>
-    <ng-view>
-    </ng-view>
+    <div ng-view id="view">
+    </div>
     <footer>
         <p><a target="blank" ng-href="{{img_profile}}">{{image_title}} by {{img_username}}</a></p>
         <img style="float:right;" width="20" src="img/cc.png" />

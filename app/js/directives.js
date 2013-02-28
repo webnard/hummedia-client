@@ -120,7 +120,7 @@ angular.module('hummedia.directives', [])
 	};
     })
     // displays an error modal when something bad happens.
-    .directive('apiErrorModal', ['$rootScope', '$http', '$templateCache', function($rootScope, $http, $templateCache){
+    .directive('apiErrorModal', ['$rootScope', function($rootScope){
         return {
             restrict: 'A',
             scope: false,
