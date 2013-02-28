@@ -120,15 +120,16 @@ angular.module('hummedia.directives', [])
 	};
     })
     // displays an error modal when something bad happens.
-    .directive('apiErrorModal', ['$rootScope', function($rootScope){
+    .directive('apiErrorModal', ['$rootScope', '$location', function($rootScope, $location){
         return {
             restrict: 'A',
             scope: false,
-            template: "<section><div id='error-message'><menu><button class='error-exit icon-remove-sign'> Close</button></menu><h1>{{code}}</h1><p>{{message}}</p></div></section>",
+            template: '<section><div id="error-message"><menu><button class="error-exit icon-remove-sign"> Close</button></menu><h1>{{code}}</h1><p>{{message}}</p></div></section>',
             transclude: true,
             replace: true,
             compile: function(element, attrs, transclude) {
                 var isShowing = false;
+                var startURL = null; // set to the URL of whatever page breaks
                 
                 return function postLink(scope, iElement, iAttrs, controller) {
                     element.hide();
@@ -141,6 +142,16 @@ angular.module('hummedia.directives', [])
                     
                     element.find('.error-exit').click(close);
                     
+                    // closes the modal window if we go to a different page
+                    scope.$watch(function() { return $location.absUrl()}, function(value) {
+                        if(value === startURL) {
+                            return;
+                        }
+                        startURL = null; // so if we leave and come back this still works
+                        close();
+                    });
+                    
+                    // opens the modal window when a new API error happens
                     scope.$watch(function(){return $rootScope.apiError;}, function(value) {
                         if(value === undefined || value === null || isShowing) {
                             // do nothing
@@ -158,6 +169,7 @@ angular.module('hummedia.directives', [])
                         }
                         $(iAttrs.blur).addClass('blur');
                         element.show();
+                        startURL = $location.absUrl();
                         isShowing = true;
                     });
                 };
