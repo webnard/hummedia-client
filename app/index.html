@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl" data-ng-style="style">
+<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl">
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/cssreset-min.css"/>
@@ -14,8 +14,8 @@
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
 </head>
 <body>
-    <div id='error-modal' api-error-modal></div>
-    <div id="container">
+    <div id='error-modal' api-error-modal blur='#container'></div>
+    <div id="container" data-ng-style="style">
     <nav id="navtable">
             <a id="navtitle" href="#">Humanities Online Media</a>
             <a href="">{{"Login" | tr}}</a>

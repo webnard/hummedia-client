@@ -124,7 +124,7 @@ angular.module('hummedia.directives', [])
         return {
             restrict: 'A',
             scope: false,
-            template: "<section><ng-include src='error'></ng-include></section>",
+            template: "<section><div id='error-message'><h1>{{code}}</h1><p>{{message}}</p></div></section>",
             transclude: true,
             replace: true,
             compile: function(element, attrs, transclude) {
@@ -133,20 +133,23 @@ angular.module('hummedia.directives', [])
                 return function postLink(scope, iElement, iAttrs, controller) {
                     element.hide();
                     scope.$watch(function(){return $rootScope.apiError;}, function(value) {
-                        if(value === undefined || value === null || !isShowing) {
+                        if(value === undefined || value === null || isShowing) {
                             // do nothing
+                            return;
                         }
                         scope.code = value;
                         switch(value) {
                             case 404:
-                                scope.error = 'partials/errors/404.html';
+                                scope.message = 'The resource you requested could not be found.';
                                 break;
                             case 500:
                             default:
-                                 scope.error = 'partials/errors/500.html';
+                                 scope.message = 'There was an error processing your request.';
                                  break;
                         }
+                        $(iAttrs.blur).addClass('blur');
                         element.show();
+                        isShowing = true;
                     });
                 };
             }
