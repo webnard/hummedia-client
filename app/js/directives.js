@@ -120,11 +120,16 @@ angular.module('hummedia.directives', [])
 	};
     })
     // displays an error modal when something bad happens.
-    .directive('apiErrorModal', ['$rootScope', '$location', function($rootScope, $location){
+    .directive('apiErrorModal', ['$rootScope', '$location', '$templateCache', function($rootScope, $location, $templateCache){
+        
+        // with the simplicity of these partials it doesn't make sense to create separate files for them
+        $templateCache.put('404.html', '{{"The resource you requested could not be found." | tr}}');
+        $templateCache.put('500.html', '{{"There was an error processing your request." | tr}}');
+        
         return {
             restrict: 'A',
             scope: false,
-            template: '<section><div id="error-message"><menu><button class="error-exit icon-remove-sign"> Close</button></menu><h1>{{code}}</h1><p>{{message}}</p></div></section>',
+            template: '<section><div id="error-message"><menu><button class="error-exit icon-remove-sign"> {{"Close" | tr}}</button></menu><h1>{{code}}</h1><p ng-include="page"></p></div></section>',
             transclude: true,
             replace: true,
             compile: function(element, attrs, transclude) {
@@ -160,11 +165,11 @@ angular.module('hummedia.directives', [])
                         scope.code = value;
                         switch(value) {
                             case 404:
-                                scope.message = 'The resource you requested could not be found.';
+                                scope.page = '404.html';
                                 break;
                             case 500:
                             default:
-                                 scope.message = 'There was an error processing your request.';
+                                 scope.page = '500.html';
                                  break;
                         }
                         $(iAttrs.blur).addClass('blur');

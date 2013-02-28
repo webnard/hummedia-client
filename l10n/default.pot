@@ -7,6 +7,9 @@ msgstr ""
 msgid "Courses"
 msgstr ""
 
+msgid "The resource you requested could not be found."
+msgstr ""
+
 msgid "Search"
 msgstr ""
 
@@ -19,7 +22,13 @@ msgstr ""
 msgid "Contact"
 msgstr ""
 
+msgid "There was an error processing your request."
+msgstr ""
+
 msgid "Media for My Courses"
+msgstr ""
+
+msgid "Close"
 msgstr ""
 
 msgid "Go"
