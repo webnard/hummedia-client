@@ -15,7 +15,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
       
       // Intercepts HTTP requests to display API-related errors to the user
       // see http://docs.angularjs.org/api/ng.$http
-      $httpProvider.responseInterceptors.push(['$q', 'appConfig', function($q, appConfig){
+      $httpProvider.responseInterceptors.push(['$q', 'appConfig', '$rootScope', function($q, appConfig, $rootScope){
           return function(promise) {
               return promise.then(function(response){
                   // success, do nothing
@@ -26,18 +26,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
                   if(response.config.url.indexOf(appConfig.apiBase) !== 0) {
                       return response;
                   }
-                  console.log(response);
-                  switch(response.status) {
-                      case 404:
-                          console.log("Something's missing.");
-                          break;
-                      case 401:
-                      case 403:
-                          console.log("Log in or something.");
-                          break;
-                      default:
-                          console.log("Broken!!");
-                  }
+                  $rootScope.apiError = response.status;
                   return $q.reject(response);
               });
           };

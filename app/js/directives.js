@@ -118,4 +118,37 @@ angular.module('hummedia.directives', [])
 		}
 	    });
 	};
-    });
+    })
+    // displays an error modal when something bad happens.
+    .directive('apiErrorModal', ['$rootScope', '$http', '$templateCache', function($rootScope, $http, $templateCache){
+        return {
+            restrict: 'A',
+            scope: false,
+            template: "<section><ng-include src='error'></ng-include></section>",
+            transclude: true,
+            replace: true,
+            compile: function(element, attrs, transclude) {
+                var isShowing = false;
+                
+                return function postLink(scope, iElement, iAttrs, controller) {
+                    element.hide();
+                    scope.$watch(function(){return $rootScope.apiError;}, function(value) {
+                        if(value === undefined || value === null || !isShowing) {
+                            // do nothing
+                        }
+                        scope.code = value;
+                        switch(value) {
+                            case 404:
+                                scope.error = 'partials/errors/404.html';
+                                break;
+                            case 500:
+                            default:
+                                 scope.error = 'partials/errors/500.html';
+                                 break;
+                        }
+                        element.show();
+                    });
+                };
+            }
+        };
+    }]);
