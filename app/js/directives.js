@@ -136,6 +136,7 @@ angular.module('hummedia.directives', [])
                         isShowing = false;
                         $(iAttrs.blur).removeClass('blur');
                         element.hide();
+                        $rootScope.apiError = null; // remove the error
                     };
                     
                     element.find('.error-exit').click(close);
