@@ -12,7 +12,7 @@ describe('hummedia app', function() {
       it('should switch to Spanish from English using the dropdown menu', function(){
 	  expect(element('#nav-search').text()).toEqual('Search');
 	  select('language').option(1);
-	  sleep(5);
+	  sleep(2);
 	  expect(element('#nav-search').text()).toEqual('Buscar');
       });
   
@@ -44,6 +44,20 @@ describe('hummedia app', function() {
             browser().navigateTo('#/search?query=Potato%20Casserole');
             expect(input('query').val()).toEqual('Potato Casserole');
         });
+        
+        it('should remove the search from the URL when it is removed from the input', function() {
+            browser().navigateTo('#/search?query=Potato%20Casserole');
+            input('query').enter('      ');
+            expect(browser().location().search()).toEqual({});
+        });
+        
+        /* @TODO */
+        /*it('should update the search results when we programmatically change the URL', function() {
+            expect(repeater('#search-results ul li').count()).toEqual(0);
+            browser().location().search({query: "o"});
+            sleep(2);
+            expect(repeater('#search-results ul li').count()).not().toEqual(0);
+        });*/
   });
 
   describe('advanced search', function() {

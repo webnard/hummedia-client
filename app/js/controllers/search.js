@@ -42,6 +42,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     // change the query in the text box based on the URL's parameters
     $scope.$watch(function(){return $routeParams.query}, function(val){
 	$scope.query = val;
+        $scope.refresh();
     });
 
     // watch the advanced parameters as well; trust the Video resource's whitelist
@@ -74,7 +75,15 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
 	}
 	else
 	{
-	    return !!$scope.query; // user input will always be true except when an empty string
+            // user input will always be true except when an empty string
+            if(!!$scope.query === false) {
+                $location.search("query",null);
+                return false;
+            }
+            else
+            {
+                return true;
+            }
 	}
     };
     
