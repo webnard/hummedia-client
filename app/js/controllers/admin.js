@@ -1,12 +1,13 @@
 'use strict';
 function AdminCtrl($scope, $routeParams, Collection) {
     $scope.collections = Collection.query();
-    $scope.newCollection = function(){
-        Collection.save({
-            "dc:title":$scope.newtitle,
-            "dc:description":$scope.newdescription,
-            "dc:creator":$scope.newcreator
-        });
+    $scope.newCollection = function(){        
+        if($scope.newtitle === ''){$scope.newtitle = 'New Hummedia Collection';}
+        var params = new Object();
+            params['dc:title'] = $scope.newtitle;
+            params['dc:description'] = $scope.newdescription;
+            params['dc:creator'] = $scope.newcreator;
+        Collection.save(params);
         $scope.newtitle = '';
         $scope.newdescription ='';
         $scope.newcreator='';
@@ -16,15 +17,10 @@ function AdminCtrl($scope, $routeParams, Collection) {
         Collection.delete({"identifier":pid});
         $scope.collections = Collection.query();
     };
-    $scope.delete2Collection = function(pid){
-        var entry = document.getElementById('collection-'+pid);
-        var delbutton = document.getElementById('deletebutton');
+    $scope.showCollection = function(pid){
+        var entry = document.getElementById(pid);
         $(document).ready(function() {
-            $('li').css("background-color","white");
-            //$('li').addClass("listvideo");
-            entry.style.backgroundColor="lightblue";
-            delbutton.onclick = function(){alert(pid);};
-            delbutton.disabled = false;
+            window.location.href = "#/admin/collection/"+pid;
         });
     };
 }

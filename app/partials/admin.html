@@ -1,4 +1,35 @@
 <div class="admin">
+    <div id="listwrapper">
+        <h2>My Collections</h2>
+        <ul>
+        <li class="listvideo" data-ng-repeat="collection in collections" id="{{collection.pid}}"data-ng-click="showCollection(collection.pid)">
+            <p>{{collection['dc:title']}}</p>
+        </li>
+        </ul>
+    </div>
+    <div id="admincollection" data-ng-controller="AdminCollectionCtrl">
+        <h2>Collection Info</h2>
+        <p>
+            Title:
+            <input disabled="disabled" class="collectioninfo" id="collectioninfo_title" type="text" value="{{collection_data['dc:title']}}"/>
+        </p>
+        <p>
+            Description:
+            <input disabled="disabled" class="collectioninfo" id="collectioninfo_description" type="text" value="{{collection_data['dc:description']}}"/>
+        </p>
+            <p>    
+                <button class="conditionalbutton" disabled="disabled" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> Delete</button>
+                <button id="editbutton" class="conditionalbutton" disabled="disabled" data-ng-click="editCollection()"><i class="icon-edit"></i>Edit</button>
+                <button id="savebutton" disabled="disabled"><i class="icon-save"></i> Save Changes</button>
+            </p>
+            <hr>
+            <h2>Videos</h2>
+                <ul>
+                    <li data-ng-repeat="video in collection_data.videos" data-ng-click="deleteVideo({{video.pid}})">
+                        <p class="listvideo">{{video['ma:title']}}</p>
+                    </li>
+                </ul>
+    </div>
     <div id="tablewrapper">
         <h2>Create New Collection</h2>
         <table>
@@ -7,15 +38,5 @@
             <tr><td>Creator:</td><td><input data-ng-model="newcreator" type="text" /></td></tr>
         </table>
         <button data-ng-click="newCollection()">Create Collection</button>
-    </div>
-    <div id="listwrapper">
-        <ul>
-        <li class="listvideo" data-ng-repeat="collection in collections" id="collection-{{collection.pid}}"data-ng-click="delete2Collection(collection.pid)">
-            <p>{{collection['dc:title']}} 
-            <a href="#/admin/collection/{{collection.pid}}">edit</a>
-            <a href="" data-ng-click="deleteCollection(collection.pid)">delete</a></p>
-        </li>
-        </ul>
-        <button id="deletebutton" class="bwbuttondarkn" disabled="disabled">Delete</button>
     </div>
 </div>

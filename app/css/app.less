@@ -65,9 +65,18 @@ html {
 	padding: 10px;
 	text-align: center;
 }
+.inline-block-top{
+    display: inline-block;
+    vertical-align: top;
+} 
 .admin{
     padding:10px;
+    h2{
+        text-align: center;
+        font-size: 110%;
+    }
     #tablewrapper{
+        .inline-block-top;
         background-color: white;
         border-style: solid;
         border-radius: 10px;
@@ -78,9 +87,9 @@ html {
             text-align: left;
         }
         width: 300px;
-        float: right;
     }
     #listwrapper{
+        .inline-block-top;
         width:300px;
         border-style:solid;
         border-radius:10px;
@@ -107,6 +116,27 @@ html {
             border-color: lightblue;
         }
     }
+    #admincollection{
+        .inline-block-top;
+        background-color: white;
+        border-radius: 10px;
+        border-style: solid;
+        width: 300px;
+        padding: 10px;
+    }
+    .collectioninfo{
+        &:disabled{
+            background-color: white;
+            border-style: solid;
+            border-color: white;
+            color: black;
+        }
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+}
+.depressed{
+    background-color: gray;
 }
 #collection_content{
         padding: 10px;
