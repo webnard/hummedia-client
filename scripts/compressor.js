@@ -24,7 +24,7 @@ function compressCSS(window) {
             
             // create a link tag to the new CSS
             if(newTag === null) {
-                newTag = $(this).before("<link rel='stylesheet/less' href='css/app.min.css'></link>");
+                newTag = $(this).before("<link rel='stylesheet' href='css/app.min.css'></link>");
             }
             
             $(this).remove();
@@ -41,9 +41,15 @@ function compressCSS(window) {
     });
 };
 
+function removeUnwantedScripts(window)
+{
+    window.$("script[data-remove]").remove();
+}
+
 jsdom.env(input, [jquery], function(errors, window) {
     var $ = window.$;
     var output = fs.openSync(output_file,"w");
+    removeUnwantedScripts(window);
     compressCSS(window);
     $('.jsdom').remove();
     fs.write(output,window.document.innerHTML);
