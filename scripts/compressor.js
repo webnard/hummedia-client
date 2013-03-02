@@ -1,3 +1,10 @@
+/**
+ * RUN WITH NODE.JS
+ * 
+ * Compressor to read in the index.html page and compile all scripts into a single JavaScript
+ * file. CSS/LESS files are also minified and combined into a single file.
+ */
+
 var fs = require('fs');
 
 var app_dir = __dirname + "/../app/";
@@ -21,6 +28,9 @@ function isLocal(str)
     return str.indexOf('//') <= 'https://'.length && str.indexOf('//') !== -1;
 }
 
+/**
+ * finds, combines, compresses, and replaces all LESS and CSS files into a single file
+ */
 function compressCSS(window, callback) {
     fs.unlink(minified_css + ".tmp");
     var $ = window.$;
@@ -63,7 +73,7 @@ function compressCSS(window, callback) {
 };
 
 /**
- * All scripts that can be converted to use a CDN are
+ * All script tags that can be converted to use a CDN are converted.
  */
 function cdnScripts(window)
 {
@@ -73,6 +83,13 @@ function cdnScripts(window)
     });
 }
 
+/**
+ * Combines all local JavaScript files, excluding those with the data-exclude-compress
+ * attribute, and compiles them with the Google Closure Compiler
+ * @param Object window
+ * @param function callback
+ * @returns void
+ */
 function compressJS(window, callback) {
     fs.unlink(minified_js + ".tmp");
     var $ = window.$;
@@ -115,20 +132,24 @@ function compressJS(window, callback) {
     processTop(scripts);
 };
 
+/**
+ * Removes all developmental scripts that have the data-remove attribute
+ */
 function removeUnwantedScripts(window)
 {
     window.$("script[data-remove]").remove();
 };
 
+// Start the process
 jsdom.env(input, [jquery], function(errors, window) {
     var $ = window.$;
-    var output = fs.openSync(output_file,"w");
     removeUnwantedScripts(window);
     cdnScripts(window);
     $('.jsdom').remove();
     
     compressCSS(window, function() {
         compressJS(window, function() {
+            var output = fs.openSync(output_file,"w");
             fs.write(output,window.document.innerHTML);
             fs.close(output);
         });
