@@ -123,7 +123,7 @@ function compressJS(window, callback) {
             // all CSS/LESS files processed, so now compress
             if(elements.length === 0) {
                 exec("java -jar " + closure_jar + " " + minified_js + ".tmp --js_output_file=" + minified_js, function() {
-                    //fs.unlink(minified_js + ".tmp");
+                    fs.unlink(minified_js + ".tmp");
                     callback();
                 });
             }
