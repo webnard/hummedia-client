@@ -25,6 +25,9 @@ msgstr ""
 msgid "There was an error processing your request."
 msgstr ""
 
+msgid "Invalid Request. Make sure the address you are trying to reach is correct."
+msgstr ""
+
 msgid "Media for My Courses"
 msgstr ""
 

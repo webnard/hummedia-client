@@ -123,6 +123,7 @@ angular.module('hummedia.directives', [])
     .directive('apiErrorModal', ['$rootScope', '$location', '$templateCache', function($rootScope, $location, $templateCache){
         
         // with the simplicity of these partials it doesn't make sense to create separate files for them
+        $templateCache.put('400.html', '{{"Invalid Request. Make sure the address you are trying to reach is correct." | tr}}');
         $templateCache.put('404.html', '{{"The resource you requested could not be found." | tr}}');
         $templateCache.put('500.html', '{{"There was an error processing your request." | tr}}');
         
@@ -164,6 +165,9 @@ angular.module('hummedia.directives', [])
                         }
                         scope.code = value;
                         switch(value) {
+                            case 400:
+                                scope.page = '400.html';
+                                break;
                             case 404:
                                 scope.page = '404.html';
                                 break;
