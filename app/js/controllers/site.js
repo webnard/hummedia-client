@@ -45,7 +45,7 @@ function SiteCtrl($scope, $http, appConfig) {
             defaultImage();
             throw error;
         }
-    }).error(defaultImage());
+    }).error(defaultImage);
 
     
 }
