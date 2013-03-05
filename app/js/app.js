@@ -10,4 +10,25 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
   }]).
   config(['$locationProvider', function($locationProvider) {
     //$locationProvider.html5Mode(true);
+  }]).
+  config(['$httpProvider', function($httpProvider) {
+      
+      // Intercepts HTTP requests to display API-related errors to the user
+      // see http://docs.angularjs.org/api/ng.$http
+      $httpProvider.responseInterceptors.push(['$q', 'appConfig', '$rootScope', function($q, appConfig, $rootScope){
+          return function(promise) {
+              return promise.then(function(response){
+                  // success, do nothing
+                  return response;
+              }, function(response) {
+                  // if this is a local request (i.e., not one to flickr or some other service)
+                  // then we go back to normal
+                  if(response.config.url.indexOf(appConfig.apiBase) !== 0) {
+                      return response;
+                  }
+                  $rootScope.apiError = response.status;
+                  return $q.reject(response);
+              });
+          };
+      }]);
   }]);

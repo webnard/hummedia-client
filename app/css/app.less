@@ -23,20 +23,37 @@
 .appearance(@rule) {
     -webkit-appearance: @rule;
     -moz-appearance: @rule;
+    appearance: @rule;
+}
+.transform(@rule) {
+    -webkit-transform: @rule;
+    -moz-transform: @rule;
+    transform: @rule;
+}
+.filter(@rule) {
+    -webkit-filter: @rule;
+    -moz-filter: @rule;
+    filter: @rule;
+}
+.box {
+    display: -webkit-box;
+    display: -moz-box;
+    display: box;
+}
+.box-align(@rule) {
+    -webkit-box-align: @rule;
+    -moz-box-align: @rule;
+    box-align: @rule;
 }
 /**************************
  * Main
 ***************************/
 html { 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
+
 	font-family: sans-serif;
 	overflow-x:hidden;
         font-family: 'Rambla', sans-serif;
-	background: no-repeat center center fixed;
-	background-size: cover;
-	background-color: @smoke;
+        background-color: @smoke;
 }
 #coursesbutton{
 	margin-bottom: 20px;
@@ -94,11 +111,15 @@ html {
 	background-color: rgba(255,255,255,0.75);
 	border-radius: 10px;
 }
+.blur {
+    .filter(blur(5px) grayscale(.7));
+}
 .plain_link{
     text-decoration: none;
     color: black;
 }
 footer{
+    z-index: 1000; /* above the error modal */
     width:100%;
     background-color: @smoke;
     color: gray;
@@ -117,10 +138,25 @@ footer{
     position: absolute;
     width: 100%;
 }
+#background {
+    z-index: -1;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background: no-repeat center center fixed;
+    background-size: cover;
+    background-color: @smoke;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
 /*************
 * Nav Elements
 *************/
-#navtable{	
+#navtable{
+        z-index: 1000; /* above the error modal */
 	background-color: @smoke;
 	position: relative;
 	top: 0px;
@@ -392,4 +428,48 @@ footer{
 }.bwbuttondark:active {
 	position:relative;
 	top:1px;
+}
+
+/**************
+ * Error Pop-up
+ **************/
+#error-modal {
+    z-index: 500;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    .box;
+    .box-align(center);
+}
+#error-message {
+    .ghost;
+    position: relative;
+    margin: auto;
+    display: block;
+    width: 75%;
+    border-radius: 4px;
+    box-shadow: 0px 0px 17px black;
+    menu {
+        padding-right: 5px;
+        padding-top: 5px;
+        margin-bottom: 0;
+        display: block;
+        text-align: right;
+        button {
+            cursor: pointer;
+            font-size: .8em;
+            padding: 5px;
+        }
+    }
+    h1 {
+        font-size: 7em;
+        padding: 0px 10px 10px 0px;
+        float: left;
+    }
+    p {
+        font-size: 3em;
+        vertical-align: middle;
+    }
 }

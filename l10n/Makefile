@@ -10,6 +10,8 @@ pot:
 	@perl -nE $(PERL_CMD) ../app/index.html > default.pot.tmp
 	@echo Extracting from partial files
 	@for directory in $(TO_TRANSLATE); do perl -nE $(PERL_CMD) $$directory/*.html >> default.pot.tmp; done;
+	@echo Extracting text from directives
+	@perl -nE $(PERL_CMD) ../app/js/directives.js >> default.pot.tmp
 	@awk '{a[$$2]=$$0} END {for (i in a) {print a[i]; print "msgstr \"\"\n"}}' default.pot.tmp > default.pot
 	@rm default.pot.tmp
 	@echo default.pot created!    

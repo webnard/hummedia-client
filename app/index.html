@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl" data-ng-style="style">
+<html lang="en" data-ng-app="hummedia" data-ng-controller="SiteCtrl">
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/cssreset-min.css"/>
@@ -14,7 +14,9 @@
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
 </head>
 <body>
+    <div id='error-modal' api-error-modal blur='#background, #view'></div>
     <div id="container">
+    <div id="background" data-ng-style="style"></div>
     <nav id="navtable">
             <a id="navtitle" href="#">Humanities Online Media</a>
             <a href="">{{"Login" | tr}}</a>
@@ -26,8 +28,8 @@
 		<select id="nav-language" ng-model="language" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
     </nav>
-    <ng-view>
-    </ng-view>
+    <div ng-view id="view">
+    </div>
     <footer>
         <p><a target="blank" ng-href="{{img_profile}}">{{image_title}} by {{img_username}}</a></p>
         <img style="float:right;" width="20" src="img/cc.png" />
