@@ -64,13 +64,19 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
+msgid "Searching"
+msgstr ""
+
 msgid "Drop Here!"
 msgstr ""
 
 msgid "From Year"
 msgstr ""
 
-msgid "Searching"
+msgid "Select an authentication provider below"
+msgstr ""
+
+msgid "Title"
 msgstr ""
 
 msgid "Admin"
@@ -85,12 +91,6 @@ msgstr ""
 msgid "Advanced Search"
 msgstr ""
 
-msgid "Edit"
-msgstr ""
-
 msgid "Creator"
-msgstr ""
-
-msgid "Title"
 msgstr ""
 
