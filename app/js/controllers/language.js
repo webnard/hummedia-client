@@ -11,4 +11,4 @@ function LanguageCtrl($scope, language) {
 	language.current = val;
     });
 };
-LanguageCtrl.inject = ['$scope','language'];
+LanguageCtrl.$inject = ['$scope','language'];

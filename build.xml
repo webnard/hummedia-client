@@ -31,5 +31,11 @@
         </exec>
     </target>
 
+    <target name="compress" description="Compresses and combines CSS and JavaScript and links them with index-production.html">
+        <exec executable="node" failonerror="true">
+            <arg value="scripts/compressor.js" />
+        </exec>
+    </target>
+    <target name="production" depends="compress" />
     <target name="create" depends="json_translations, config"/>
 </project>
