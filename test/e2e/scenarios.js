@@ -103,4 +103,35 @@ describe('hummedia app', function() {
 	    });
 	});
   });
+      describe('error-page', function() {
+        it('should show a 404 error when we give a non-existant collection', function() {
+            expect(element('#error-modal').css('display')).toBe('none');
+            browser().navigateTo('#/collection/51156f9da51824723bfc99f7');
+            expect(element('#error-modal').css('display')).not().toBe('none');
+            expect(element('#error-message .error-code').text()).toBe('404');
+        });
+        
+        it('should show a 400 error when we give a malformed collection', function() {
+            expect(element('#error-modal').css('display')).toBe('none');
+            browser().navigateTo('#/collection/malformed');
+            expect(element('#error-modal').css('display')).not().toBe('none');
+            expect(element('#error-message .error-code').text()).toBe('400');
+        });
+        
+        describe('closing', function() {
+            beforeEach(function(){
+                browser().navigateTo('#/collection/shouldnotwork');
+            });
+            
+            it('should be able to be closed by clicking on the close button', function(){
+                element('#error-message .error-exit').click();
+                expect(element('#error-modal').css('display')).toBe('none');
+            });
+            
+            it('should be able to be closed by navigating to another page', function(){
+                element('#navtitle').click();
+                expect(element('#error-modal').css('display')).toBe('none');
+            });
+        });
+    });
 });
