@@ -1,0 +1,8 @@
+{
+  "name": "javascript-compressor",
+  "version": "0.0.1",
+  "author": "Ian Hunter<beanland2@gmail.com",
+  "dependencies": {
+       "jsdom": "0.5.1"
+  }
+}

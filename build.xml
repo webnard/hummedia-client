@@ -31,7 +31,13 @@
         </exec>
     </target>
 
-    <target name="compress" description="Compresses and combines CSS and JavaScript and links them with index-production.html">
+    <target name="scripts" description="Builds any scripts in the scripts directory.">
+        <exec executable="npm" failonerror="true" dir="scripts">
+            <arg value="install" />
+        </exec>
+    </target>
+    
+    <target name="compress" depends="scripts" description="Compresses and combines CSS and JavaScript and links them with index-production.html">
         <exec executable="node" failonerror="true">
             <arg value="scripts/compressor.js" />
         </exec>
