@@ -1,0 +1,21 @@
+<section id="login" class="ghost">
+<h1>{{"Login" | tr}}</h1>
+<h2>{{"Select an authentication provider below" | tr}}</h2>
+
+<ul>
+    <li title="BYU NetID"><img src="img/byu.svg" width="200"></li>
+    <li title="Google+">
+      <span id="signinButton">
+        <span
+          class="g-signin"
+          data-callback="signinCallback"
+          data-clientid="CLIENT_ID"
+          data-width="wide"
+          data-cookiepolicy="single_host_origin"
+          data-requestvisibleactions="http://schemas.google.com/AddActivity"
+          data-scope="https://www.googleapis.com/auth/plus.login">
+        </span>
+      </span>
+    </li>
+</ul>
+</section>
