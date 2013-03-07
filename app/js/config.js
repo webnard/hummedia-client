@@ -6,15 +6,19 @@
   will override those of this configuration.
 **/
 'use strict';
+
 if(HUMMEDIA_CONFIG === undefined) {
-  var HUMMEDIA_CONFIG = angular.module('hummedia.config', [])
-}
-HUMMEDIA_CONFIG.
-  value('apiBase', 'https://zelda.byu.edu/api/v2/').
-  value('flickrKey', 'your key here').
+  var HUMMEDIA_CONFIG = angular.module('hummedia.config', []).
   factory('appConfig', ['apiBase','flickrKey', function(apiBase, flickrKey) {
     return {
       apiBase: apiBase,
       flickrKey: flickrKey
     };
-}]);
+  }]);
+}
+
+HUMMEDIA_CONFIG.
+  value('apiBase', 'https://zelda.byu.edu/api/v2/').
+  value('flickrKey', 'your key here').
+  value('googleAnalyticsKey', 'your key here').
+  value('debugMode', true);
