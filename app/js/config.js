@@ -9,10 +9,12 @@
 
 if(HUMMEDIA_CONFIG === undefined) {
   var HUMMEDIA_CONFIG = angular.module('hummedia.config', []).
-  factory('appConfig', ['apiBase','flickrKey', function(apiBase, flickrKey) {
+  factory('appConfig', ['apiBase','flickrKey', 'googleAnalyticsKey', 'debugMode', function(apiBase, flickrKey, googleAnalyticsKey, debugMode) {
     return {
       apiBase: apiBase,
-      flickrKey: flickrKey
+      flickrKey: flickrKey,
+      googleAnalyticsKey: googleAnalyticsKey,
+      debugMode: debugMode
     };
   }]);
 }

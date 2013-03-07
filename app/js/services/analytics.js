@@ -15,7 +15,7 @@ window.HUMMEDIA_SERVICES
         })();
         _gaq.push(['_setAccount', appConfig.googleAnalyticsKey]);
         
-        if(!appConfig.debugMode) {
+        if(appConfig.debugMode) {
             _gaq.push(['_setAllowLinker',true]);
             _gaq.push(['_setDomainName', 'none']);
         }
