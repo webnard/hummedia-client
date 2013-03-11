@@ -16,4 +16,4 @@ HUMMEDIA_DIRECTIVES
 		}
 	    });
 	};
-    })
+    });
