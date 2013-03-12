@@ -11,6 +11,19 @@
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
 </head>
 <body>
+    <!--[if lte IE 8]>
+    <script type="text/javascript"> 
+        var $buoop = {vs:{i:8,f:3.6,o:10.6,s:4,n:9}} 
+        $buoop.ol = window.onload; 
+        window.onload=function(){ 
+         try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
+         var e = document.createElement("script"); 
+         e.setAttribute("type", "text/javascript"); 
+         e.setAttribute("src", "http://browser-update.org/update.js"); 
+         document.body.appendChild(e); 
+        };
+    </script>
+    <![endif]-->
     <div id='error-modal' api-error-modal blur='#background, #view'></div>
     <div id="container">
     <div id="background" data-ng-style="style"></div>
@@ -33,6 +46,7 @@
     </footer>
 
     </div>
+  <!--[if gt IE 8]> -->
 
   <!-- LIBRARIES -->
   <script src="js/jquery-1.9.0.min.js" data-cdn="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -56,5 +70,7 @@
   <script src="js/directives.js"></script>
   <script src="js/controllers/collection.js"></script>
   <script src="js/controllers/site.js"></script>
+  
+  <!--[endif]> -->
 </body>
 </html>
