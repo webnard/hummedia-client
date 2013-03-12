@@ -7,10 +7,19 @@ describe('hummedia app', function() {
   beforeEach(function() {
     browser().navigateTo('/app/index.html');
   });
+  
+  describe('splash', function(){
+     it('should link to the copyright page for the image', function(){
+         expect(element('#footer-license').attr('href')).not().toEqual('#');
+         expect(element('#footer-license').attr('href')).not().toEqual('');
+         expect(element('#footer-license').attr('href')).not().toEqual(undefined);
+     }) 
+  });
 
   describe('translation', function(){
       it('should switch to Spanish from English using the dropdown menu', function(){
-	  expect(element('#nav-search').text()).toEqual('Search');
+	  select('language').option(0);
+          expect(element('#nav-search').text()).toEqual('Search');
 	  select('language').option(1);
 	  sleep(2);
 	  expect(element('#nav-search').text()).toEqual('Buscar');

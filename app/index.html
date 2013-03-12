@@ -41,8 +41,8 @@
     <div ng-view id="view">
     </div>
     <footer>
-        <p><a target="blank" ng-href="{{img_profile}}">{{image_title}} by {{img_username}}</a></p>
-        <img style="float:right;" width="20" src="img/cc.png" />
+        <small><a target="blank" id="footer-license" ng-href="{{copyright}}"><img width="20" src="img/cc.png" /> {{license}}</a></small>
+        <a target="blank" ng-href="{{img_profile}}">{{image_title}} by {{img_username}}</a>
     </footer>
 
     </div>

@@ -13,6 +13,8 @@ function SiteCtrl($scope, $http, appConfig) {
         $scope.image_title = "Beetle Rock Sunset #1, Sequoia National Park";
         $scope.img_profile = "http://www.flickr.com/photos/flatworldsedge/7874109806/";
         $scope.img_username = "H Matthew Howarth";
+        $scope.license = "Attribution-ShareAlike License";
+        $scope.copyright = "http:\/\/creativecommons.org\/licenses\/by-sa\/2.0\/";
     };
     
     var photo_ids = ['510175383','30950009', '2685376029', '5803011292', '7608871682', '3814815269', '202917381'];
@@ -28,12 +30,25 @@ function SiteCtrl($scope, $http, appConfig) {
             var server_id = photo.server;
             var id = photo.id;
             var secret = photo.secret;
+            
             $scope.style = {
                 "background-image": "url(http://farm"+ farm_id + ".staticflickr.com/" + server_id + "/" + id +"_" + secret + "_b.jpg)"
             };
 
             $scope.image_title = photo['title']['_content'];
             $scope.img_profile = photo['urls']['url']['0']['_content'];
+            
+            var license_request = $http.jsonp("http://api.flickr.com/services/rest/?method=flickr.photos.licenses.getInfo&api_key="+appConfig.flickrKey+"&format=json&jsoncallback=JSON_CALLBACK");
+            
+            license_request.success(function(data){
+               data.licenses.license.forEach(function(license){
+                   if(license.id === photo.license) {
+                       $scope.license = license.name;
+                       $scope.copyright = license.url;
+                   }
+               });
+            });
+            
             var owner = photo.owner;
             if(owner.hasOwnProperty('realname') && owner.realname !==''){
                     $scope.img_username = owner.realname;
