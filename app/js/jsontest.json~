@@ -1,0 +1,66 @@
+
+{"media": [ 
+{
+
+"id": "yt:eA4ZfLzy1VM",
+"name":"Bright as Yellow",
+"url": [ "http://www.youtube.com/watch?v=eA4ZfLzy1VM" ],
+
+"playSettings": { 
+"forceRestricted": "1",
+"framerate": "30" },
+"target": "main",
+"tracks": [
+{ "name": "Annotation List for 'Bright as Yellow'",
+"id": "vcp:30",
+"trackEvents" : [
+{"id": "TrackEvent0",
+"type":"modal",
+"popcornOptions": 
+{"start":"0",
+"end":""
+
+,"description":"<p>NAZTRAIN Music video by The Innocence Mission performing Bright As Yellow. (C) 1995 A&M Records</p>"
+,
+"target":"popup"}
+
+},
+{"id": "TrackEvent1",
+"type":"reference",
+"popcornOptions": 
+{"start":"5.4",
+"end":"37.4"
+
+,"item":"",
+"text":"EVENT!",
+"list":"vocabulary"
+,
+"target":"#caption"}
+
+},
+{"id": "TrackEvent2",
+"type":"reference",
+"popcornOptions": 
+{"start":"44.2",
+"end":"46.7"
+
+,"item":"",
+"text":"",
+"list":"vocabulary"
+,
+"target":"_caption"}
+
+},
+{"id": "TrackEvent3",
+"type":"skip",
+"popcornOptions": 
+{"start":"54.3",
+"end":"60.3"
+,
+"target":"main"}
+
+}]
+}
+]
+}
+]}
