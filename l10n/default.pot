@@ -10,13 +10,25 @@ msgstr ""
 msgid "The resource you requested could not be found."
 msgstr ""
 
+msgid "Create Collection"
+msgstr ""
+
+msgid "Collection Info"
+msgstr ""
+
 msgid "Search"
 msgstr ""
 
 msgid "Login"
 msgstr ""
 
+msgid "Videos"
+msgstr ""
+
 msgid "Description"
+msgstr ""
+
+msgid "My Collections"
 msgstr ""
 
 msgid "Contact"
@@ -46,9 +58,12 @@ msgstr ""
 msgid "From Year"
 msgstr ""
 
-msgid "Title"
+msgid "Advanced Search"
 msgstr ""
 
-msgid "Advanced Search"
+msgid "Creator"
+msgstr ""
+
+msgid "Title"
 msgstr ""
 
