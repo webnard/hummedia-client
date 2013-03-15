@@ -34,7 +34,7 @@
 	    <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
 	    <a href="">{{"Contact" | tr}}</a>
 	    <span class="language" data-ng-controller="LanguageCtrl">
-		<label for="nav-language" class="icon-globe"></label>
+                <label for="nav-language"><i class="icon-globe"></i> {{language | language}}</label>
 		<select id="nav-language" ng-model="language" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
     </nav>
