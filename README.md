@@ -4,12 +4,9 @@ HUMMEDIA
 Production Prep
 ------------------------
 *REQUIREMENTS*
-    * nodejs
-    * npm
-    * jsdom installed in the scripts/ directory (`npm install jsdom`)
-    * the YUI Compressor (`apt-get install yui-compressor`)
-    * Java
-    * lessc (`apt-get install lessc`)
+
+    *    nodejs
+    *    npm
 
 By adding a `data-cdn` attribute to your `<script>` tags in the index.html file, 
 by running `ant compress` each one will have its `src` attribute take the value of
