@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "author": "Ian Hunter<beanland2@gmail.com",
   "dependencies": {
-       "jsdom": "0.5.1"
+       "jsdom": "0.5.1",
+       "less": "1.3.3",
+       "yuicompressor": "2.4.7"
   }
 }

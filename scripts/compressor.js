@@ -15,6 +15,8 @@ var minified_js = app_dir + "js/app.min.js";
 var closure_jar = __dirname + '/closure-compiler/compiler.jar';
 var jquery = app_dir + "js/jquery-1.9.0.min.js";
 var jsdom = require("jsdom");
+var less = require("less");
+var yui = require("yuicompressor");
 var exec = require('child_process').exec;
 var versionstamp = (new Date()).getTime();
 
@@ -32,11 +34,13 @@ function isLocal(str)
  * finds, combines, compresses, and replaces all LESS and CSS files into a single file
  */
 function compressCSS(window, callback) {
-    fs.unlink(minified_css + ".tmp");
     var $ = window.$;
     var styles = $("link[rel='stylesheet/less'], link[rel='stylesheet']");
     var newTag = null;
+    var total_css = "";
     
+    // Compresses the topmost element on the elements array
+    // if the array is 1 or less, after the compression it calls the callback function
     var processTop = function( elements ) {
         if(elements.length === 0) {
             return;
@@ -58,15 +62,21 @@ function compressCSS(window, callback) {
         }
         $(el).remove();
 
-        exec("lessc " + app_dir + source + " >> " + minified_css + ".tmp", function(){
-            processTop(elements);
-            // all CSS/LESS files processed, so now compress
-            if(elements.length === 0) {
-                exec("yui-compressor --type=css " + minified_css + ".tmp > " + minified_css, function() {
-                    fs.unlink(minified_css + ".tmp");
-                    callback();
-                });
-            }
+        fs.readFile(app_dir + source, function(error, data) {
+            less.render(data.toString(), function(e, css) {
+                total_css += css;
+                if(elements.length === 0) {
+                    yui.compress(total_css, {type: "css"}, function(err, data) {
+                        fs.writeFile(minified_css, data);
+                        callback();
+                    });
+                }
+                else
+                {
+                    // go another round
+                    processTop(elements);
+                }
+            });
         });
     };
     processTop(styles);
