@@ -17,7 +17,6 @@ var jsdom = require("jsdom");
 var less = require("less");
 var yui = require("yuicompressor");
 var closure = require('closurecompiler');
-var exec = require('child_process').exec;
 var versionstamp = (new Date()).getTime();
 
 /**
@@ -35,51 +34,29 @@ function isRemote(str)
  */
 function compressCSS(window, callback) {
     var $ = window.$;
-    var styles = $("link[rel='stylesheet/less'], link[rel='stylesheet']");
-    var newTag = null;
+    var new_css_link_added = false;
     var total_css = "";
     
-    // Compresses the topmost element on the elements array
-    // if the array is 1 or less, after the compression it calls the callback function
-    var processTop = function( elements ) {
-        if(elements.length === 0) {
+    $("link[rel='stylesheet/less'], link[rel='stylesheet']").each(function(){
+        if(isRemote($(this).attr('href'))) {
             return;
         }
         
-        var el = elements.get(0);
-        var source = $(el).attr('href');
-        var elements = elements.slice(1, elements.length);
-        
-        // ignore non-local sources
-        if(isRemote(source)) {
-            processTop(elements);
-            return;
+        if(!new_css_link_added) {
+            new_css_link_added = true;
+            $(this).before("<link rel='stylesheet' href='css/app.min.css?"+ versionstamp + "'></link>");
         }
         
-        // create a link tag to the new CSS
-        if(newTag === null) {
-            newTag = $(el).before("<link rel='stylesheet' href='css/app.min.css?"+ versionstamp + "'></link>");
-        }
-        $(el).remove();
-
-        fs.readFile(app_dir + source, function(error, data) {
-            less.render(data.toString(), function(e, css) {
-                total_css += css;
-                if(elements.length === 0) {
-                    yui.compress(total_css, {type: "css"}, function(err, data) {
-                        fs.writeFile(minified_css, data);
-                        callback();
-                    });
-                }
-                else
-                {
-                    // go another round
-                    processTop(elements);
-                }
-            });
+        total_css += fs.readFileSync(app_dir + $(this).attr('href'));
+        $(this).remove();
+    });
+    
+    less.render(total_css, function(e, css) {
+        yui.compress(css, {type: "css"}, function(err, data) {
+            fs.writeFile(minified_css, data);
+            callback();
         });
-    };
-    processTop(styles);
+    });
 };
 
 /**
