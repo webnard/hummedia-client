@@ -28,13 +28,13 @@
     <div id="container">
     <div id="background" data-ng-style="style"></div>
     <nav id="navtable">
-            <a id="navtitle" href="#" data-analytics>Humanities Online Media</a>
-            <a href="" data-analytics>{{"Login" | tr}}</a>
-	    <a href="" data-analytics>{{"Courses" | tr}}</a>
-	    <a href="#/search" id="nav-search" data-analytics>{{"Search" | tr}}</a>
-	    <a href="" data-analytics>{{"Contact" | tr}}</a>
+            <a id="navtitle" href="#">Humanities Online Media</a>
+            <a href="">{{"Login" | tr}}</a>
+	    <a href="">{{"Courses" | tr}}</a>
+	    <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
+	    <a href="">{{"Contact" | tr}}</a>
 	    <span class="language" data-ng-controller="LanguageCtrl">
-        <label for="nav-language"><i class="icon-globe"></i> {{language | language}}</label>
+                <label for="nav-language"><i class="icon-globe"></i> {{language | language}}</label>
 		<select id="nav-language" ng-model="language" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
     </nav>
