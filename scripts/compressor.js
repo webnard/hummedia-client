@@ -12,11 +12,11 @@ var input = app_dir + "index.html";
 var output_file = app_dir + "index-production.html";
 var minified_css = app_dir + "css/app.min.css";
 var minified_js = app_dir + "js/app.min.js";
-var closure_jar = __dirname + '/closure-compiler/compiler.jar';
 var jquery = app_dir + "js/jquery-1.9.0.min.js";
 var jsdom = require("jsdom");
 var less = require("less");
 var yui = require("yuicompressor");
+var closure = require('closurecompiler');
 var exec = require('child_process').exec;
 var versionstamp = (new Date()).getTime();
 
@@ -25,7 +25,7 @@ var versionstamp = (new Date()).getTime();
  * @param string
  * @returns boolean
  */
-function isLocal(str)
+function isRemote(str)
 {
     return str.indexOf('//') <= 'https://'.length && str.indexOf('//') !== -1;
 }
@@ -51,7 +51,7 @@ function compressCSS(window, callback) {
         var elements = elements.slice(1, elements.length);
         
         // ignore non-local sources
-        if(isLocal(source)) {
+        if(isRemote(source)) {
             processTop(elements);
             return;
         }
@@ -101,45 +101,25 @@ function cdnScripts(window)
  * @returns void
  */
 function compressJS(window, callback) {
-    fs.unlink(minified_js + ".tmp");
     var $ = window.$;
-    var scripts = $("script:not([data-exclude-compress])");
-    var newTag = null;
-    
-    
-    var processTop = function( elements ) {
-        if(elements.length === 0) {
-            return;
-        }
-        
-        var el = elements.get(0);
-        var source = $(el).attr('src');
-        var elements = elements.slice(1, elements.length);
-        
-        // ignore non-local sources
-        if(isLocal(source)) {
-            processTop(elements);
-            return;
-        }
-        
-        // create a link tag to the new CSS
-        if(newTag === null) {
-            newTag = $(el).before("<script src='js/app.min.js?"+ versionstamp +"'></script>");
-        }
-        $(el).remove();
+    var toCompress = []; // an array of scripts to concatenate and compress
 
-        exec("cat " + app_dir + source + " >> " + minified_js + ".tmp", function(){
-            processTop(elements);
-            // all CSS/LESS files processed, so now compress
-            if(elements.length === 0) {
-                exec("java -jar " + closure_jar + " " + minified_js + ".tmp --js_output_file=" + minified_js, function() {
-                    fs.unlink(minified_js + ".tmp");
-                    callback();
-                });
-            }
-        });
-    };
-    processTop(scripts);
+    var $script_tags = $("script:not([data-exclude-compress])").filter(function() {
+        if(!isRemote($(this).attr('src'))) {
+            toCompress.push(app_dir + $(this).attr('src'));
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    });
+    $script_tags.first().before("<script src='js/app.min.js?"+ versionstamp +"'></script>");
+    $script_tags.remove();
+    closure.compile(toCompress,{}, function(err, output) {
+        fs.writeFile(minified_js, output);
+        callback();
+    });
 };
 
 /**
