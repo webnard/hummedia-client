@@ -30,11 +30,20 @@ function SiteCtrl($scope, $http, appConfig) {
             var server_id = photo.server;
             var id = photo.id;
             var secret = photo.secret;
+            var img_url = "http://farm"+ farm_id + ".staticflickr.com/" + server_id + "/" + id +"_" + secret + "_b.jpg";
             
-            $scope.style = {
-                "background-image": "url(http://farm"+ farm_id + ".staticflickr.com/" + server_id + "/" + id +"_" + secret + "_b.jpg)"
+            var tag = document.createElement("img");
+            tag.onload = function() {
+                setTimeout(function(){
+                    $scope.style = {
+                        "background-image": "url(" + img_url + ")",
+                        "opacity": 1
+                    };
+                    $scope.$digest();
+                }, 500);
             };
-
+            tag.src = img_url;
+            
             $scope.image_title = photo['title']['_content'];
             $scope.img_profile = photo['urls']['url']['0']['_content'];
             
