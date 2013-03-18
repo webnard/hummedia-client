@@ -15,7 +15,6 @@ var minified_js = app_dir + "js/app.min.js";
 var jquery = app_dir + "js/jquery-1.9.0.min.js";
 var jsdom = require("jsdom");
 var less = require("less");
-var yui = require("yuicompressor");
 var closure = require('closurecompiler');
 var versionstamp = (new Date()).getTime();
 
@@ -51,11 +50,9 @@ function compressCSS(window, callback) {
         $(this).remove();
     });
     
-    less.render(total_css, function(e, css) {
-        yui.compress(css, {type: "css"}, function(err, data) {
-            fs.writeFile(minified_css, data);
+    less.render(total_css, {yuicompress: true}, function(e, css) {
+            fs.writeFile(minified_css, css);
             callback();
-        });
     });
 };
 
@@ -117,7 +114,7 @@ jsdom.env(input, [jquery], function(errors, window) {
     compressCSS(window, function() {
         compressJS(window, function() {
             var output = fs.openSync(output_file,"w");
-            fs.write(output,window.document.innerHTML);
+            fs.write(output,window.document.doctype + window.document.innerHTML);
             fs.close(output);
         });
     });
