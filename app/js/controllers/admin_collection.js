@@ -19,12 +19,18 @@ function AdminCollectionCtrl($scope, Collection, $routeParams) {
             $('#savebutton').prop("disabled",!$('#savebutton').prop("disabled"));
         });
     };
-    $scope.saveChanges = function(){
+    $scope.saveChanges = function(pid){
+        var newtitle;
+        var newdescription;
+        $(document).ready(function() {
+            newtitle = $('#collectioninfo_title').prop("value");
+            newdescription = $('#collectioninfo_description').prop("value");
+        });
         var params = new Object();
-            params['dc:title'] = 'Sample Title';
-            //params['dc:description'] = $scope.newdescription;
+            params['dc:title'] = newtitle;
+            params['dc:description'] = newdescription;
             //params['dc:creator'] = $scope.newcreator;
-        Collection.update({"identifier":"51421681a51824114bf13711"}, params);
+        Collection.update({"identifier":pid}, params);
         $scope.editCollection();
     };
 }
