@@ -19,6 +19,14 @@ function AdminCollectionCtrl($scope, Collection, $routeParams) {
             $('#savebutton').prop("disabled",!$('#savebutton').prop("disabled"));
         });
     };
+    $scope.saveChanges = function(){
+        var params = new Object();
+            params['dc:title'] = 'Sample Title';
+            //params['dc:description'] = $scope.newdescription;
+            //params['dc:creator'] = $scope.newcreator;
+        Collection.update({"identifier":"51421681a51824114bf13711"}, params);
+        $scope.editCollection();
+    };
 }
 // always inject this in so we can later compress this JavaScript
 AdminCollectionCtrl.$inject = ['$scope', 'Collection', '$routeParams'];
