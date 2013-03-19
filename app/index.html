@@ -35,7 +35,7 @@
 	    <a href="">{{"Contact" | tr}}</a>
 	    <span class="language" data-ng-controller="LanguageCtrl">
                 <label for="nav-language"><i class="icon-globe"></i> {{language | language}}</label>
-		<select id="nav-language" ng-model="language" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
+		<select id="nav-language" ng-model="language" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
     </nav>
     <div ng-view id="view">
@@ -59,7 +59,20 @@
   <!-- If there is a local version of config.js, it should overwrite it here -->
   <script src="js/config.local.js"></script>
   <script src="js/app.js"></script>
+  
+  <!-- SERVICES -->
   <script src="js/services.js"></script>
+  <script src="js/services/analytics.js"></script>
+  <script src="js/services/language.js"></script>
+  
+  <!-- DIRECTIVES -->
+  <script src="js/directives.js"></script>
+  <script src="js/directives/api-error-modal.js"></script>
+  <script src="js/directives/disable-when.js"></script>
+  <script src="js/directives/pop-me-up.js"></script>
+  <script src="js/directives/scroll-top-when.js"></script>
+  <script src="js/directives/analytics.js"></script>
+  
 
   <!-- CONTROLLERS -->
   <script src="js/controllers/language.js"></script>
@@ -67,7 +80,6 @@
   <script src="js/resources/video.js"></script>
   <script src="js/resources/collection.js"></script>
   <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
   <script src="js/controllers/collection.js"></script>
   <script src="js/controllers/site.js"></script>
   

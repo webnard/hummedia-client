@@ -2,7 +2,7 @@
  * Handles searching and displaying search results to the user
  */
 'use strict';
-function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
+function SearchCtrl($scope, $routeParams, Collection, Video, $location, analytics) {
     
     var lastsearch = Date.now(); // when the last update was performed
     var timeout = 500; // milliseconds between searches
@@ -152,4 +152,4 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location) {
     };
 }
 // always inject this in so we can later compress this JavaScript
-SearchCtrl.$inject = ['$scope', '$routeParams', 'Collection', 'Video', '$location'];
+SearchCtrl.$inject = ['$scope', '$routeParams', 'Collection', 'Video', '$location', 'analytics'];
