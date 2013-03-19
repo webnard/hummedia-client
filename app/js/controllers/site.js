@@ -5,11 +5,21 @@ function SiteCtrl($scope, $http, appConfig) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     
+    var tag = document.createElement("img");
+    var img_url;
+    tag.onload = function() {
+        setTimeout(function(){
+            $scope.style = {
+                "background-image": "url(" + img_url + ")",
+                "opacity": 1
+            };
+            $scope.$digest();
+        }, 500);
+    };
+    
     // sets up a default background image if something breaks with Flickr
     var defaultImage = function() {
-        $scope.style = {
-            "background-image": "url('img/beetle-rock.jpg')"
-        };
+        img_url = tag.src = 'img/beetle-rock.jpg';
         $scope.image_title = "Beetle Rock Sunset #1, Sequoia National Park";
         $scope.img_profile = "http://www.flickr.com/photos/flatworldsedge/7874109806/";
         $scope.img_username = "H Matthew Howarth";
@@ -32,16 +42,6 @@ function SiteCtrl($scope, $http, appConfig) {
             var secret = photo.secret;
             var img_url = "http://farm"+ farm_id + ".staticflickr.com/" + server_id + "/" + id +"_" + secret + "_b.jpg";
             
-            var tag = document.createElement("img");
-            tag.onload = function() {
-                setTimeout(function(){
-                    $scope.style = {
-                        "background-image": "url(" + img_url + ")",
-                        "opacity": 1
-                    };
-                    $scope.$digest();
-                }, 500);
-            };
             tag.src = img_url;
             
             $scope.image_title = photo['title']['_content'];
