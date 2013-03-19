@@ -40,7 +40,7 @@ function SiteCtrl($scope, $http, appConfig) {
             var server_id = photo.server;
             var id = photo.id;
             var secret = photo.secret;
-            var img_url = "http://farm"+ farm_id + ".staticflickr.com/" + server_id + "/" + id +"_" + secret + "_b.jpg";
+            img_url = "http://farm"+ farm_id + ".staticflickr.com/" + server_id + "/" + id +"_" + secret + "_b.jpg";
             
             tag.src = img_url;
             
