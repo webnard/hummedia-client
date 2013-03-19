@@ -14,7 +14,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     //$locationProvider.html5Mode(true);
   }]).
   config(['$httpProvider', function($httpProvider) {
-      
+      $httpProvider.defaults.headers.patch = {"Content-Type": "application/json"};
       // Intercepts HTTP requests to display API-related errors to the user
       // see http://docs.angularjs.org/api/ng.$http
       $httpProvider.responseInterceptors.push(['$q', 'appConfig', '$rootScope', function($q, appConfig, $rootScope){
