@@ -107,14 +107,28 @@ html {
         border-width: 1px;
         padding: 2px;
         cursor: pointer;
+        button{
+            visibility: hidden;
+        }
         &:hover{
             background-color: lightblue;
             border-color: lightblue;
+            button{
+                visibility: visible;
+            }
         }
         .selected{
             background-color: lightblue;
             border-color: lightblue;
         }
+    }
+    #righttd{
+        text-align: right;
+    }
+    #listvideotable{
+        .listvideo;
+        width: 100%;
+        height: 30px;
     }
     #admincollection{
         .inline-block-top;

@@ -26,10 +26,10 @@
             <h2>{{"Videos" | tr}}</h2>
                 <ul>
                     <li data-ng-repeat="video in collection_data.videos" data-ng-click="deleteVideo({{video.pid}})">
-                        <p class="listvideo">{{video['ma:title']}}</p>
+                        <table id="listvideotable"><tr><td>{{video['ma:title']}}</td><td id="righttd"><button>Remove</button></td></table>
                     </li>
                 </ul>
-                <hr></hr>
+                <hr>
                 <p>Add Video by pid:</p>
                 <input id="addvideopid" type="text">
                 <button data-ng-click="addVideo(collection_data.pid)">Submit</button>
