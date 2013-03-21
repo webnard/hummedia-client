@@ -29,6 +29,10 @@
                         <p class="listvideo">{{video['ma:title']}}</p>
                     </li>
                 </ul>
+                <hr></hr>
+                <p>Add Video by pid:</p>
+                <input id="addvideopid" type="text">
+                <button data-ng-click="addVideo(collection_data.pid)">Submit</button>
     </div>
     <div id="tablewrapper">
         <h2>{{"Create New Collection" | tr}}</h2>

@@ -1,5 +1,5 @@
 'use strict';
-function AdminCollectionCtrl($scope, Collection, $routeParams) {
+function AdminCollectionCtrl($scope, Collection, Video, $routeParams) {
     $scope.collection_data = Collection.get({identifier:$routeParams.id});
     if($routeParams.id){
         $(document).ready(function() {
@@ -29,10 +29,20 @@ function AdminCollectionCtrl($scope, Collection, $routeParams) {
         var params = new Object();
             params['dc:title'] = newtitle;
             params['dc:description'] = newdescription;
-            //params['dc:creator'] = $scope.newcreator;
         Collection.update({"identifier":pid}, params);
         $scope.editCollection();
     };
+    $scope.addVideo = function(collectionid){
+        var pid;
+        $(document).ready(function() {
+            pid = $('#addvideopid').prop("value");
+        });
+        var params = new Object();
+            params['ma:isMemberOf'] = [
+                {"@id": collectionid}
+            ];            
+        Video.update({"identifier":pid}, params);
+    };
 }
 // always inject this in so we can later compress this JavaScript
-AdminCollectionCtrl.$inject = ['$scope', 'Collection', '$routeParams'];
+AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams'];
