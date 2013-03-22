@@ -25,8 +25,11 @@
             <hr>
             <h2>{{"Videos" | tr}}</h2>
                 <ul>
-                    <li data-ng-repeat="video in collection_data.videos" data-ng-click="deleteVideo({{video.pid}})">
-                        <table id="listvideotable"><tr><td>{{video['ma:title']}}</td><td id="righttd"><button>Remove</button></td></table>
+                    <li data-ng-repeat="video in collection_data.videos">
+                        <table id="listvideotable"><tr>
+                                <td>{{video['ma:title']}}</td>
+                                <td id="righttd"><button data-ng-click="deleteVideo(video.pid)">Remove</button></td></tr>
+                        </table>
                     </li>
                 </ul>
                 <hr>

@@ -37,11 +37,17 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams) {
         $(document).ready(function() {
             pid = $('#addvideopid').prop("value");
         });
-        var params = new Object();
-            params['ma:isMemberOf'] = [
-                {"@id": collectionid}
-            ];            
-        Video.update({"identifier":pid}, params);
+        var video_data=Video.get({identifier:pid}, function(){
+            var isMemberOfs = video_data['ma:isMemberOf'];
+            var newcollection = {"@id": collectionid};
+            isMemberOfs.push(newcollection);
+            var params = new Object();
+                params['ma:isMemberOf'] = isMemberOfs;            
+            Video.update({"identifier":pid}, params);
+        });            
+    };
+    $scope.deleteVideo = function(pid){
+        console.log(pid);
     };
 }
 // always inject this in so we can later compress this JavaScript
