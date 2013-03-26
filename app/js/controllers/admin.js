@@ -1,5 +1,5 @@
 'use strict';
-function AdminCtrl($scope, $routeParams, Collection) {
+function AdminCtrl($scope, $routeParams, Collection, $location) {
     $scope.collections = Collection.query();
     $scope.newCollection = function(){        
         if($scope.newtitle === ''){$scope.newtitle = 'New Hummedia Collection';}
@@ -18,10 +18,8 @@ function AdminCtrl($scope, $routeParams, Collection) {
         $scope.collections = Collection.query();
     };
     $scope.showCollection = function(pid){
-        $(document).ready(function() {
-            window.location.href = "#/admin/collection/"+pid;
-        });
+        $location.path("/admin/collection/" + pid);
     };
 }
 // always inject this in so we can later compress this JavaScript
-AdminCtrl.$inject = ['$scope', '$routeParams', 'Collection'];
+AdminCtrl.$inject = ['$scope', '$routeParams', 'Collection', '$location'];
