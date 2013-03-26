@@ -18,7 +18,6 @@ function AdminCtrl($scope, $routeParams, Collection) {
         $scope.collections = Collection.query();
     };
     $scope.showCollection = function(pid){
-        var entry = document.getElementById(pid);
         $(document).ready(function() {
             window.location.href = "#/admin/collection/"+pid;
         });

@@ -46,8 +46,21 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams) {
             Video.update({"identifier":pid}, params);
         });            
     };
-    $scope.deleteVideo = function(pid){
-        console.log(pid);
+    $scope.deleteVideo = function(pid, collectionid){
+        var video_data=Video.get({identifier:pid}, function(){
+            var isMemberOfs = video_data['ma:isMemberOf'];
+            var i;
+            var newisMemberOfs = new Array();
+            for(i=0; i<isMemberOfs.length; i++) {
+                console.log(isMemberOfs[i]['@id']);
+                if(collectionid!==isMemberOfs[i]['@id']){
+                    newisMemberOfs.push(isMemberOfs[i]);
+                }
+            }
+            var params = new Object();
+                params['ma:isMemberOf'] = newisMemberOfs;
+            Video.update({"identifier":pid}, params);
+        });
     };
 }
 // always inject this in so we can later compress this JavaScript
