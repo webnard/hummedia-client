@@ -8,7 +8,7 @@ files = [
 
 autoWatch = false;
 
-//browsers = ['Chrome','Firefox'];
+browsers = ['config/browserstack/browsers/safari_6_mountain_lion.sh'];
 
 singleRun = true;
 
@@ -19,6 +19,9 @@ proxies = {
 };
 
 junitReporter = {
-  outputFile: 'logs/e2e-results.xml',
+  outputFile: '/var/www/hummedia/logs/e2e-results.xml',
   suite: 'e2e'
 };
+
+port = 9876;
+captureTimeout = 180000
