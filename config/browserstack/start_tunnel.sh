@@ -7,7 +7,7 @@ fi
 . ~/.browserstack_config.sh
 
 # check each of our variables to see if they exist
-for k in AUTOMATED_TESTING_KEY OS OS_VERSION BROWSER BROWSER_VERSION USERNAME PASSWORD
+for k in AUTOMATED_TESTING_KEY
 do
     if [ -z "${!k}" ]
     then
@@ -16,10 +16,15 @@ do
     fi
 done
 
-ps aux | grep [B]rowserStackTunnel -q
-if [ $? -gt 0 ]
+#ps aux | grep [B]rowserStackTunnel -q
+#if [ $? -gt 0 ]
+
+SCREEN_NAME=IAMSOHUNGRY
+
+if [ ! -f browserstackTunnel.pid ]
     then
         #if this is not run on a detatched screen, Testacular will not be able to exit
-        screen -d -m java -jar /var/www/hummedia/config/browserstack/BrowserStackTunnel.jar $AUTOMATED_TESTING_KEY localhost,9876,0
+        screen -S $SCREEN_NAME -d -m java -jar /var/www/hummedia/config/browserstack/BrowserStackTunnel.jar $AUTOMATED_TESTING_KEY localhost,9876,0
+        echo $SCREEN_NAME > browserstackTunnel.pid
         sleep 10
 fi

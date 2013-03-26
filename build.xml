@@ -29,7 +29,9 @@
             <arg value="start" />
             <arg value="${e2e.config}" />
         </exec>
+        <exec executable="config/browserstack/kill_tunnel.sh"/>
     </target>
+
 
     <target name="scripts" description="Builds any scripts in the scripts directory.">
         <exec executable="npm" failonerror="true" dir="scripts">
