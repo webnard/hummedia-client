@@ -5,5 +5,8 @@
 #trap "{ browserstack kill all; exit 0; }" EXIT
 
 #cat
-
-/var/www/hummedia/config/browserstack/start_worker.sh $1
+OS="OS X"
+OS_VERSION="Mountain Lion"
+BROWSER=safari
+BROWSER_VERSION=6.0
+. /var/www/hummedia/config/browserstack/start_worker.sh $1

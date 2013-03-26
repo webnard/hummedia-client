@@ -1,7 +1,12 @@
 #!/bin/bash
 /var/www/hummedia/config/browserstack/start_tunnel.sh
 
-BROWSER_ID_STR=$(curl -u "USERNAME:PASSWORD" http://api.browserstack.com/3/worker --data "os=OS%20X&os_version=Mountain%20Lion&browser=safari&browser_version=6.0&url=$1")
+if [ $? -gt 0 ]
+then
+    exit $!
+fi
+
+BROWSER_ID_STR=$(curl -u "USERNAME:PASSWORD" http://api.browserstack.com/3/worker --data-urlencode "os=$OS&os_version=$OS_VERSION&browser=$BROWSER&browser_version=$BROWSE&url=$1")
 
 echo "Browser ID String $BROWSER_ID_STR" >> leggo.txt
 
