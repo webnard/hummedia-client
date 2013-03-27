@@ -1,4 +1,7 @@
+
 basePath = '../';
+
+BDIR = 'scripts/browserstack/browsers/'; // browser directory
 
 files = [
   ANGULAR_SCENARIO,
@@ -8,7 +11,11 @@ files = [
 
 autoWatch = false;
 
-browsers = ['config/browserstack/browsers/safari_6_mountain_lion.sh'];
+browsers = ['safari_6_mountain_lion.sh'];
+
+browsers = browsers.map(function(a) {
+    return BDIR + a;
+});
 
 singleRun = true;
 
