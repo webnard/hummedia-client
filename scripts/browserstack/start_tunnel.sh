@@ -25,7 +25,7 @@ DIR="$(dirname ${BASH_SOURCE[0]})"
 if [ ! -f browserstackTunnel.pid ]
     then
         #if this is not run on a detatched screen, Testacular will not be able to exit
-        screen -S $SCREEN_NAME -d -m java -jar $dir/BrowserStackTunnel.jar $AUTOMATED_TESTING_KEY localhost,9876,0
+        screen -S $SCREEN_NAME -d -m java -jar $DIR/BrowserStackTunnel.jar $AUTOMATED_TESTING_KEY localhost,9876,0
         echo $SCREEN_NAME > browserstackTunnel.pid
         sleep 10
 fi
