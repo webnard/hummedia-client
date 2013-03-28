@@ -29,7 +29,7 @@
             <arg value="start" />
             <arg value="${e2e.config}" />
         </exec>
-        <exec executable="config/browserstack/kill_tunnel.sh"/>
+        <exec executable="scripts/browserstack/kill_tunnel.sh"/>
     </target>
 
 

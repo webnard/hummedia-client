@@ -20,7 +20,7 @@ done
 #if [ $? -gt 0 ]
 
 SCREEN_NAME=IAMSOHUNGRY
-DIR="$(dirname $0)"
+DIR="$(dirname ${BASH_SOURCE[0]})"
 
 if [ ! -f browserstackTunnel.pid ]
     then

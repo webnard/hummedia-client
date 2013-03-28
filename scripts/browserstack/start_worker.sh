@@ -1,5 +1,5 @@
 #!/bin/bash
-DIR="$(dirname $0)"
+DIR="$(dirname ${BASH_SOURCE[0]})"
 . $DIR/start_tunnel.sh
 
 if [ $? -gt 0 ]
