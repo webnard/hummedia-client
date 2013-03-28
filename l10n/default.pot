@@ -10,10 +10,10 @@ msgstr ""
 msgid "The resource you requested could not be found."
 msgstr ""
 
-msgid "Create Collection"
+msgid "Collection Info"
 msgstr ""
 
-msgid "Collection Info"
+msgid "Create Collection"
 msgstr ""
 
 msgid "Search"

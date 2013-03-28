@@ -2,10 +2,20 @@
     <div id="listwrapper">
         <h2>{{"My Collections" | tr}}</h2>
         <ul>
-        <li class="listvideo" data-ng-repeat="collection in collections" id="{{collection.pid}}"data-ng-click="showCollection(collection.pid)">
+        <li class="listvideo" data-ng-repeat="collection in collections" id="{{collection.pid}}" data-ng-click="showCollection(collection.pid)">
             <p>{{collection['dc:title']}}</p>
         </li>
         </ul>
+        <hr>
+        <h2>{{"Create New Collection" | tr}} <i data-ng-click="showCreateCollection()" id="collToggle" class="icon-plus"></i></h2>
+        <div id="createcollection">
+        <table>
+            <tr><td>{{"Title" | tr}}:</td><td><input data-ng-model="newtitle" type="text" /></td></tr>
+            <tr><td>{{"Description" | tr}}:</td><td><input data-ng-model="newdescription" type="text" /></td></tr>
+            <tr><td>{{"Creator" | tr}}:</td><td><input data-ng-model="newcreator" type="text" /></td></tr>
+        </table>
+        <button data-ng-click="newCollection()">{{"Create Collection" | tr}}</button>
+        </div>
     </div>
     <div id="admincollection" data-ng-controller="AdminCollectionCtrl">
         <h2>{{"Collection Info" | tr}}</h2>
@@ -23,6 +33,7 @@
                 <button id="savebutton" disabled="disabled" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> Save Changes</button>
             </p>
             <hr>
+            <div id="droppable">
             <h2>{{"Videos" | tr}}</h2>
                 <ul>
                     <li data-ng-repeat="video in collection_data.videos">
@@ -32,18 +43,10 @@
                         </table>
                     </li>
                 </ul>
+            </div>
                 <hr>
                 <p>Add Video by pid:</p>
                 <input id="addvideopid" type="text">
                 <button data-ng-click="addVideo(collection_data.pid)">Submit</button>
-    </div>
-    <div id="tablewrapper">
-        <h2>{{"Create New Collection" | tr}}</h2>
-        <table>
-            <tr><td>{{"Title" | tr}}:</td><td><input data-ng-model="newtitle" type="text" /></td></tr>
-            <tr><td>{{"Description" | tr}}:</td><td><input data-ng-model="newdescription" type="text" /></td></tr>
-            <tr><td>{{"Creator" | tr}}:</td><td><input data-ng-model="newcreator" type="text" /></td></tr>
-        </table>
-        <button data-ng-click="newCollection()">{{"Create Collection" | tr}}</button>
     </div>
 </div>

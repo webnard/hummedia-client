@@ -20,6 +20,12 @@ function AdminCtrl($scope, $routeParams, Collection, $location) {
     $scope.showCollection = function(pid){
         $location.path("/admin/collection/" + pid);
     };
+    $scope.showCreateCollection = function(){
+        $(document).ready(function() {
+            $('#createcollection').slideToggle('slow');
+            $('#collToggle').toggleClass("icon-plus icon-minus");
+        });
+    };
 }
 // always inject this in so we can later compress this JavaScript
 AdminCtrl.$inject = ['$scope', '$routeParams', 'Collection', '$location'];

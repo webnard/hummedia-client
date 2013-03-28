@@ -75,18 +75,21 @@ html {
         text-align: center;
         font-size: 110%;
     }
-    #tablewrapper{
-        .inline-block-top;
-        background-color: white;
-        border-style: solid;
-        border-radius: 10px;
+    #createcollection{
+        display:none;
         text-align: center;
-        td{
-            padding-left: 10px;
-            padding-top: 5px;
+        table{
             text-align: left;
         }
-        width: 300px;
+        td{
+            padding: 3px;
+        }
+    }
+    #collToggle{
+        font-size: 75%;
+        float:right;
+        padding-top:6px;
+        cursor: pointer;
     }
     #listwrapper{
         .inline-block-top;
@@ -147,6 +150,12 @@ html {
         }
         text-overflow: ellipsis;
         width: 100%;
+    }
+    #dragtest{
+        width:100px;
+        height:100px;
+        background-color:lightblue;
+        border-radius: 10px;
     }
 }
 .depressed{
