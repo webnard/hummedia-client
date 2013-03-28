@@ -28,8 +28,8 @@
             <input disabled="disabled" class="collectioninfo" id="collectioninfo_description" type="text" value="{{collection_data['dc:description']}}"/>
         </p>
             <p>    
-                <button class="conditionalbutton" disabled="disabled" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> Delete</button>
-                <button id="editbutton" class="conditionalbutton" disabled="disabled" data-ng-click="editCollection()"><i class="icon-edit"></i>Edit</button>
+                <button class="conditionalbutton" data-disable-when="!id" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> Delete</button>
+                <button id="editbutton" class="conditionalbutton" data-disable-when="!id" data-ng-click="editCollection()"><i class="icon-edit"></i>Edit</button>
                 <button id="savebutton" disabled="disabled" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> Save Changes</button>
             </p>
             <hr>

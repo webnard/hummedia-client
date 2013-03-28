@@ -1,14 +1,10 @@
 'use strict';
-function AdminCollectionCtrl($scope, Collection, Video, $routeParams) {
+function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
     $scope.collection_data = Collection.get({identifier:$routeParams.id});
-    if($routeParams.id){
-        $(document).ready(function() {
-            $('.conditionalbutton').attr("disabled", false);
-        });
-    }
+    $scope.id = $routeParams.id;
     $scope.deleteCollection = function(pid){
         Collection.delete({"identifier":pid});
-        window.location.href = "#/admin";
+        $location.path("/admin");
     };
     $scope.editCollection = function(){
         $(document).ready(function() {
@@ -64,4 +60,4 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams) {
     };
 }
 // always inject this in so we can later compress this JavaScript
-AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams'];
+AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location'];
