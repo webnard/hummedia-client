@@ -38,7 +38,17 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             var params = new Object();
                 params['ma:isMemberOf'] = isMemberOfs;            
             Video.update({"identifier":videoid}, params);
-        });            
+            //Update scope
+            var vid_already_there=false;
+            for (var i = 0; i < $scope.collection_data.videos.length; i++) {
+                if($scope['collection_data']['videos'][i]['pid']===video_data.pid){
+                    vid_already_there=true;
+                };
+            }
+            if(vid_already_there===false){
+                $scope['collection_data']['videos'].push(video_data);
+            }
+        });
     };
     $scope.deleteVideo = function(pid, collectionid){
         var video_data=Video.get({identifier:pid}, function(){
