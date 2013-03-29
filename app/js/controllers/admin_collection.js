@@ -46,7 +46,6 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             var i;
             var newisMemberOfs = new Array();
             for(i=0; i<isMemberOfs.length; i++) {
-                console.log(isMemberOfs[i]['@id']);
                 if(collectionid!==isMemberOfs[i]['@id']){
                     newisMemberOfs.push(isMemberOfs[i]);
                 }
@@ -54,6 +53,13 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             var params = new Object();
                 params['ma:isMemberOf'] = newisMemberOfs;
             Video.update({"identifier":pid}, params);
+            //Remove video from scope
+            for (var i = 0; i < $scope.collection_data.videos.length; i++) {
+                if($scope['collection_data']['videos'][i]['pid']===pid){
+                    $scope['collection_data']['videos'].splice(i,1);
+                };
+            }
+            
         });
     };
     // Drag & Drop stuff
