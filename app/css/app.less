@@ -151,11 +151,25 @@ html {
         text-overflow: ellipsis;
         width: 100%;
     }
-    #dragtest{
-        width:100px;
-        height:100px;
-        background-color:lightblue;
+    #videopool{
+        .inline-block-top;
+        width: 300px;
+        background-color: white;
+        border-style: solid;
         border-radius: 10px;
+        padding: 10px;
+        
+    }
+    #dragdrop{
+        display: none;
+        height: 150px
+    }
+    .draggable{
+        cursor: move;
+    }
+    .minidraggable{
+        font-size: 75%;
+        max-width: 250px;
     }
 }
 .depressed{

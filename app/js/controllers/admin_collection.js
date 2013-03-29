@@ -28,18 +28,14 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         Collection.update({"identifier":pid}, params);
         $scope.editCollection();
     };
-    $scope.addVideo = function(collectionid){
-        var pid;
-        $(document).ready(function() {
-            pid = $('#addvideopid').prop("value");
-        });
-        var video_data=Video.get({identifier:pid}, function(){
+    $scope.addVideo = function(collectionid, videoid){
+        var video_data=Video.get({identifier:videoid}, function(){
             var isMemberOfs = video_data['ma:isMemberOf'];
             var newcollection = {"@id": collectionid};
             isMemberOfs.push(newcollection);
             var params = new Object();
                 params['ma:isMemberOf'] = isMemberOfs;            
-            Video.update({"identifier":pid}, params);
+            Video.update({"identifier":videoid}, params);
         });            
     };
     $scope.deleteVideo = function(pid, collectionid){
@@ -58,6 +54,30 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             Video.update({"identifier":pid}, params);
         });
     };
+    // Drag & Drop stuff
+    $( ".draggable" ).draggable({
+        containment: 'body', helper: 'clone',
+        drag: function(event, ui){
+            $('#droppable').css( "background-color", "lightblue");
+            $('#defaultdrop').hide();
+            $('#dragdrop').show();
+            ui.helper.addClass("minidraggable");
+        },
+        stop: function(){
+            $('#droppable').css("background-color", "white");
+            $('#dragdrop').hide();
+            $('#defaultdrop').show();
+        }
+    });
+    $("#droppable").droppable({
+        drop: function(event, ui){
+            $(document).ready(function() {
+                var id = ui['helper']['0']['firstChild']['id'];
+                $scope.addVideo($routeParams.id, id);   
+            });
+        }
+    });
+    
 }
 // always inject this in so we can later compress this JavaScript
 AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location'];

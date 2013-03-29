@@ -34,6 +34,8 @@
             </p>
             <hr>
             <div id="droppable">
+                <div id="dragdrop"><h2>Drop Here!</h2></div>
+                <div id="defaultdrop">
             <h2>{{"Videos" | tr}}</h2>
                 <ul>
                     <li data-ng-repeat="video in collection_data.videos">
@@ -43,10 +45,20 @@
                         </table>
                     </li>
                 </ul>
-            </div>
+            
                 <hr>
                 <p>Add Video by pid:</p>
                 <input id="addvideopid" type="text">
-                <button data-ng-click="addVideo(collection_data.pid)">Submit</button>
+                <button data-ng-click="addVideo(collection_data.pid, '51156f9ba51824723bfc99f7')">Submit</button>
+                </div>
+                </div>
+            </div>
+    <div id="videopool">
+        <h2>Videos to Add</h2>
+        <ul>
+            <li class="draggable"><p id="51156f9ba51824723bfc99f7">Пиковая дама</p></li>
+            <li class="draggable"><p id='51156f9ca51824723accba5a'>The Nose</p></li>
+            <li class="draggable"><p id='51156f9ea518247237a0435f'>Adieu monde ou l'histoire de Pierre et Claire</p></li>
+        </ul>
     </div>
 </div>
