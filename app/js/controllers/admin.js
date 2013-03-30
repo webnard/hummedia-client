@@ -7,11 +7,13 @@ function AdminCtrl($scope, $routeParams, Collection, $location) {
             params['dc:title'] = $scope.newtitle;
             params['dc:description'] = $scope.newdescription;
             params['dc:creator'] = $scope.newcreator;
-        Collection.save(params);
+        Collection.save(params, function(data){
+            params['pid'] = data.id;
+            $scope.collections.push(params);
+        });        
         $scope.newtitle = '';
         $scope.newdescription ='';
         $scope.newcreator='';
-        $scope.collections = Collection.query();
     };
     $scope.deleteCollection = function(pid){
         Collection.delete({"identifier":pid});
