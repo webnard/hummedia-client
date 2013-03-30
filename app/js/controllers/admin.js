@@ -15,10 +15,6 @@ function AdminCtrl($scope, $routeParams, Collection, $location) {
         $scope.newdescription ='';
         $scope.newcreator='';
     };
-    $scope.deleteCollection = function(pid){
-        Collection.delete({"identifier":pid});
-        $scope.collections = Collection.query();
-    };
     $scope.showCollection = function(pid){
         $location.path("/admin/collection/" + pid);
     };

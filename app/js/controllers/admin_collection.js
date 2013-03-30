@@ -8,10 +8,12 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         Collection.delete({"identifier":pid});
         $location.path("/admin");
     };
-    $scope.editCollection = function(){
+    $scope.editCollection = function(revert){
         $(document).ready(function() {
-            $('#collectioninfo_title').prop("value", $scope['collection_data']['dc:title']);
-            $('#collectioninfo_description').prop("value", $scope['collection_data']['dc:description']);
+            if(revert===true){
+                $('#collectioninfo_title').prop("value", $scope['collection_data']['dc:title']);
+                $('#collectioninfo_description').prop("value", $scope['collection_data']['dc:description']);
+            }
             $('.collectioninfo').prop("disabled",!$('.collectioninfo').prop("disabled"));
             $('#editbutton').toggleClass('depressed');
             $('#savebutton').prop("disabled",!$('#savebutton').prop("disabled"));
@@ -28,7 +30,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             params['dc:title'] = newtitle;
             params['dc:description'] = newdescription;
         Collection.update({"identifier":pid}, params);
-        $scope.editCollection();
+        $scope.editCollection(false);
     };
     $scope.addVideo = function(collectionid, videoid){
         var video_data=Video.get({identifier:videoid}, function(){
