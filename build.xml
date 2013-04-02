@@ -1,5 +1,5 @@
 <project name="Hummedia" default="create" basedir=".">
-    <property name="e2e.config" value="config/testacular-e2e.conf.js"/>
+    <property name="e2e.config" value="config/karma-e2e.conf.js"/>
     <condition property="local.config.missing">
         <not>
             <available file="app/js/config.local.js"/>
@@ -25,7 +25,7 @@
     </target>
 
     <target name="test" description="Runs the E2E test-suite on different browsers">
-        <exec executable="testacular" failonerror="false">
+        <exec executable="karma" failonerror="false">
             <arg value="start" />
             <arg value="${e2e.config}" />
         </exec>
