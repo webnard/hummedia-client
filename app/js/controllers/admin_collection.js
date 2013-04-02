@@ -17,6 +17,11 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             $('.collectioninfo').prop("disabled",!$('.collectioninfo').prop("disabled"));
             $('#editbutton').toggleClass('depressed');
             $('#savebutton').prop("disabled",!$('#savebutton').prop("disabled"));
+            if($scope.isEditable === true){
+                $scope.isEditable = false;
+            }else{
+                $scope.isEditable = true;
+            }
         });
     };
     $scope.saveChanges = function(pid){

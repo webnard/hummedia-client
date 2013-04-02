@@ -21,16 +21,16 @@
         <h2>{{"Collection Info" | tr}}</h2>
         <p>
             {{"Title" | tr}}:
-            <input disabled="disabled" class="collectioninfo" id="collectioninfo_title" type="text" value="{{collection_data['dc:title']}}"/>
+            <input data-disable-when="!isEditable" class="collectioninfo" id="collectioninfo_title" type="text" value="{{collection_data['dc:title']}}"/>
         </p>
         <p>
             {{"Description" | tr}}:
-            <input disabled="disabled" class="collectioninfo" id="collectioninfo_description" type="text" value="{{collection_data['dc:description']}}"/>
+            <input data-disable-when="!isEditable" class="collectioninfo" id="collectioninfo_description" type="text" value="{{collection_data['dc:description']}}"/>
         </p>
             <p>    
                 <button class="conditionalbutton" data-disable-when="!id" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> Delete</button>
                 <button id="editbutton" class="conditionalbutton" data-disable-when="!id" data-ng-click="editCollection()"><i class="icon-edit"></i>Edit</button>
-                <button id="savebutton" disabled="disabled" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> Save Changes</button>
+                <button id="savebutton" data-disable-when="!isEditable" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> Save Changes</button>
             </p>
             <hr>
             <div id="droppable">
