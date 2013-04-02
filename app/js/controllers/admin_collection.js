@@ -14,9 +14,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         $(document).ready(function() {
             $('#collectioninfo_title').prop("value", $scope['collection_data']['dc:title']);
             $('#collectioninfo_description').prop("value", $scope['collection_data']['dc:description']);
-            $('.collectioninfo').prop("disabled",!$('.collectioninfo').prop("disabled"));
             $('#editbutton').toggleClass('depressed');
-            $('#savebutton').prop("disabled",!$('#savebutton').prop("disabled"));
             if($scope.isEditable === true){
                 $scope.isEditable = false;
             }else{
