@@ -11,12 +11,12 @@ files = [
 
 autoWatch = false;
 
-//browsers = ['safari_6_mountain_lion.sh', 'safari_5.1_lion.sh', 'chrome_24_win_7.sh', 'chrome_25_win_7.sh', 'firefox_18_win_8.sh', 'firefox_19_win_7.sh', 'ie_10_win_8.sh', 'ie_9_win_7.sh'];
+browsers = ['safari_6_mountain_lion.sh', 'safari_5.1_lion.sh', 'chrome_24_win_7.sh', 'chrome_25_win_7.sh', 'firefox_18_win_8.sh', 'firefox_19_win_7.sh', 'ie_10_win_8.sh', 'ie_9_win_7.sh'];
 //browsers = ['ie_9_win_7.sh'];
 
-/*browsers = browsers.map(function(a) {
+browsers = browsers.map(function(a) {
     return BDIR + a;
-});*/
+});
 
 singleRun = true;
 
