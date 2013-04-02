@@ -1,9 +1,11 @@
 'use strict';
 function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
-    if($routeParams.id){
-        $scope.collection_data = Collection.get({identifier:$routeParams.id});
-    }
-    $scope.id = $routeParams.id;
+    $scope.$watch(function(){return $routeParams.id;}, function(){
+        $scope.id = $routeParams.id;
+        if($scope.id){
+            $scope.collection_data = Collection.get({identifier:$routeParams.id});
+        }
+    });
     $scope.deleteCollection = function(pid){
         Collection.delete({"identifier":pid});
         $location.path("/admin");

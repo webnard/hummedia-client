@@ -16,7 +16,7 @@ function AdminCtrl($scope, $routeParams, Collection, $location) {
         $scope.newcreator='';
     };
     $scope.showCollection = function(pid){
-        $location.path("/admin/collection/" + pid);
+        $location.search({'id':pid});
     };
     $scope.showCreateCollection = function(){
         $(document).ready(function() {
