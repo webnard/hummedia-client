@@ -58,6 +58,9 @@ msgstr ""
 msgid "From Year"
 msgstr ""
 
+msgid "Admin"
+msgstr ""
+
 msgid "Advanced Search"
 msgstr ""
 

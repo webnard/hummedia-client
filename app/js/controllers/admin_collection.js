@@ -8,7 +8,9 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
     });
     $scope.deleteCollection = function(pid){
         Collection.delete({"identifier":pid});
-        $location.path("/admin");
+        $scope.collection_data = '';
+        $scope.collections.pop();
+        $location.search({'id':''});
     };
     $scope.editCollection = function(){
         $(document).ready(function() {
