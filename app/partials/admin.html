@@ -28,20 +28,20 @@
             <input data-disable-when="!isEditable" class="collectioninfo" id="collectioninfo_description" type="text" value="{{collection_data['dc:description']}}"/>
         </p>
             <p>    
-                <button id="deletebutton" class="conditionalbutton" data-disable-when="!id" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> Delete</button>
-                <button id="editbutton" class="conditionalbutton" data-disable-when="!id" data-ng-click="editCollection()"><i class="icon-edit"></i>Edit</button>
-                <button id="savebutton" data-disable-when="!isEditable" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> Save Changes</button>
+                <button id="deletebutton" class="conditionalbutton" data-disable-when="!id" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> {{"Delete" | tr}}</button>
+                <button id="editbutton" class="conditionalbutton" data-disable-when="!id" data-ng-click="editCollection()"><i class="icon-edit"></i> {{"Edit" | tr}}</button>
+                <button id="savebutton" data-disable-when="!isEditable" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> {{"Save Changes" | tr}}</button>
             </p>
             <hr>
             <div id="droppable">
-                <div id="dragdrop"><h2>Drop Here!</h2></div>
+                <div id="dragdrop"><h2>{{"Drop Here!" | tr}}</h2></div>
                 <div id="defaultdrop">
             <h2>{{"Videos" | tr}}</h2>
                 <ul>
                     <li data-ng-repeat="video in collection_data.videos">
                         <table id="listvideotable"><tr>
                                 <td>{{video['ma:title']}}</td>
-                                <td id="righttd"><button data-ng-click="deleteVideo(video.pid, collection_data.pid)">Remove</button></td></tr>
+                                <td id="righttd"><button data-ng-click="deleteVideo(video.pid, collection_data.pid)">{{"Remove" | tr}}</button></td></tr>
                         </table>
                     </li>
                 </ul>
@@ -49,7 +49,7 @@
                 </div>
             </div>
     <div id="videopool">
-        <h2>Videos to Add</h2>
+        <h2>{{"Videos to Add" | tr}}</h2>
         <ul>
             <li class="draggable"><p id="51156f9ba51824723bfc99f7">Пиковая дама</p></li>
             <li class="draggable"><p id='51156f9ca51824723accba5a'>The Nose</p></li>

@@ -1,13 +1,22 @@
 msgid "Advanced"
 msgstr ""
 
+msgid "Save Changes"
+msgstr ""
+
 msgid "To Year"
+msgstr ""
+
+msgid "Remove"
 msgstr ""
 
 msgid "Courses"
 msgstr ""
 
 msgid "The resource you requested could not be found."
+msgstr ""
+
+msgid "Delete"
 msgstr ""
 
 msgid "Collection Info"
@@ -52,6 +61,9 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
+msgid "Drop Here!"
+msgstr ""
+
 msgid "Searching"
 msgstr ""
 
@@ -61,7 +73,13 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
+msgid "Videos to Add"
+msgstr ""
+
 msgid "Advanced Search"
+msgstr ""
+
+msgid "Edit"
 msgstr ""
 
 msgid "Creator"
