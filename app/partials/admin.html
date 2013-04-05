@@ -57,7 +57,7 @@
         <p data-ng-hide="searching"><ng-pluralize count="videos.length" when="{0: 'No results.', 1: 'One result.', other: '{} results.'}"></ng-pluralize></p>
         <p data-ng-show="searching">{{"Searching" | tr}}</p>
         <ul>
-            <li class="draggable" data-ng-repeat="video in videos" data-draggable><p id="{{video.identifier}}" title="{{video.description}}">{{video.title}}</p></li>
+            <li class="draggable" data-ng-repeat="video in videos" data-draggable><p id="{{video.pid}}" title="{{video['ma:description']}}">{{video['ma:title']}}</p></li>
         </ul>
     </div>
 </div>
