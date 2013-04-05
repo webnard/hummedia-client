@@ -50,14 +50,14 @@
             </div>
     <div id="videopool" data-ng-controller="VideoSearchCtrl">
         <h2>{{"Videos to Add" | tr}}</h2>
-        <form ng-submit="search()">
-            <input placeholder='{{"Video title" | tr}}' type="text" data-ng-model="query" > <input type="submit" value="Search">
+        <form data-ng-submit="search()">
+            <input placeholder='{{"Video title" | tr}}' type="search" data-ng-model="query" > <input type="submit" value="Search">
         </form>
 
-        <p data-ng-hide="searching"><ng-pluralize  count="videos.length" when="{0: 'No results.', 1: 'One result.', other: '{} results.'}"></ng-pluralize></p>
+        <p data-ng-hide="searching"><ng-pluralize count="videos.length" when="{0: 'No results.', 1: 'One result.', other: '{} results.'}"></ng-pluralize></p>
         <p data-ng-show="searching">{{"Searching" | tr}}</p>
         <ul>
-            <li class="draggable" data-ng-repeat="video in videos"><p id="{{video.identifier}}" title="{{video.description}}">{{video.title}}</p></li>
+            <li class="draggable" data-ng-repeat="video in videos" data-draggable><p id="{{video.identifier}}" title="{{video.description}}">{{video.title}}</p></li>
         </ul>
     </div>
 </div>
