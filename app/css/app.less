@@ -65,6 +65,116 @@ html {
 	padding: 10px;
 	text-align: center;
 }
+.inline-block-top{
+    display: inline-block;
+    vertical-align: top;
+} 
+.admin{
+    padding:10px;
+    h2{
+        text-align: center;
+        font-size: 110%;
+    }
+    #createcollection{
+        display:none;
+        text-align: center;
+        table{
+            text-align: left;
+        }
+        td{
+            padding: 3px;
+        }
+    }
+    #collToggle{
+        font-size: 75%;
+        float:right;
+        padding-top:6px;
+        cursor: pointer;
+    }
+    #listwrapper{
+        .inline-block-top;
+        width:300px;
+        border-style:solid;
+        border-radius:10px;
+        background-color:white;
+        padding: 10px;
+        a{
+            font-size: 50%;
+        }
+    }
+    .listvideo{
+        border-style: solid;
+        border-color: white;
+        border-radius: 5px;
+        background-color: white;
+        border-width: 1px;
+        padding: 2px;
+        cursor: pointer;
+        button{
+            visibility: hidden;
+        }
+        &:hover{
+            background-color: lightblue;
+            border-color: lightblue;
+            button{
+                visibility: visible;
+            }
+        }
+        .selected{
+            background-color: lightblue;
+            border-color: lightblue;
+        }
+    }
+    #righttd{
+        text-align: right;
+    }
+    #listvideotable{
+        .listvideo;
+        width: 100%;
+        height: 30px;
+    }
+    #admincollection{
+        .inline-block-top;
+        background-color: white;
+        border-radius: 10px;
+        border-style: solid;
+        width: 300px;
+        padding: 10px;
+    }
+    .collectioninfo{
+        &:disabled{
+            background-color: white;
+            border-style: solid;
+            border-color: white;
+            color: black;
+        }
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+    #videopool{
+        .inline-block-top;
+        width: 300px;
+        background-color: white;
+        border-style: solid;
+        border-radius: 10px;
+        padding: 10px;
+        
+    }
+    #dragdrop{
+        display: none;
+        height: 150px
+    }
+    .draggable{
+        cursor: move;
+    }
+    .minidraggable{
+        font-size: 75%;
+        max-width: 250px;
+    }
+}
+.depressed{
+    background-color: gray;
+}
 #collection_content{
         padding: 10px;
         padding-top: 40px;

@@ -6,13 +6,14 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.when('/search', {templateUrl: 'partials/search/search.html', controller: SearchCtrl, reloadOnSearch: false});
     $routeProvider.when('/', {templateUrl: 'partials/home.html'});
     $routeProvider.when('/collection/:id', {templateUrl: 'partials/collection.html', controller: CollectionCtrl});
+    $routeProvider.when('/admin', {templateUrl: 'partials/admin.html', controller: AdminCtrl, reloadOnSearch: false});
     $routeProvider.otherwise({redirectTo: '/'});
   }]).
   config(['$locationProvider', function($locationProvider) {
     //$locationProvider.html5Mode(true);
   }]).
   config(['$httpProvider', function($httpProvider) {
-      
+      $httpProvider.defaults.headers.patch = {"Content-Type": "application/json"};
       // Intercepts HTTP requests to display API-related errors to the user
       // see http://docs.angularjs.org/api/ng.$http
       $httpProvider.responseInterceptors.push(['$q', 'appConfig', '$rootScope', function($q, appConfig, $rootScope){

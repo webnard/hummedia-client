@@ -8,13 +8,13 @@ describe('hummedia app', function() {
     browser().navigateTo('../../app/index.html');
   });
   
-  describe('splash', function(){
-     it('should link to the copyright page for the image', function(){
-         expect(element('#footer-license').attr('href')).not().toEqual('#');
-         expect(element('#footer-license').attr('href')).not().toEqual('');
-         expect(element('#footer-license').attr('href')).not().toEqual(undefined);
-     }) 
-  });
+    describe('splash', function(){
+        it('should link to the copyright page for the image', function(){
+            expect(element('#footer-license').attr('href')).not().toEqual('#');
+            expect(element('#footer-license').attr('href')).not().toEqual('');
+            expect(element('#footer-license').attr('href')).not().toEqual(undefined);
+        }); 
+    });
 
   describe('translation', function(){
       it('should switch to Spanish from English using the dropdown menu', function(){
@@ -141,6 +141,30 @@ describe('hummedia app', function() {
                 element('#navtitle').click();
                 expect(element('#error-modal').css('display')).toBe('none');
             });
+        });
+    });
+describe('admin', function() {
+        beforeEach(function(){
+            browser().navigateTo('#/admin'); 
+        });
+        it('should be able to add a collection', function(){
+            element('#collToggle').click();
+            input("newtitle").enter("!!This Collection Will Be Deleted!!");
+            element('#createcollectionbutton').click();
+            sleep(.5);
+            expect(element('.listvideo:last p').html()).toBe('!!This Collection Will Be Deleted!!');
+        });
+        it('should be able to edit a collection', function(){
+            element('.listvideo:last').click();
+            element('#editbutton').click();
+            element('#collectioninfo_description').val('A test collection');
+            element('#savebutton').click();
+            expect(element('#collectioninfo_description').val()).toBe('A test collection');
+        });
+        it('should be able to delete a collection', function(){
+            element('.listvideo:last').click();
+            element('#deletebutton').click();
+            expect(element('.listvideo:last p').html()).not().toBe('!!This Collection Will Be Deleted!!');
         });
     });
 });

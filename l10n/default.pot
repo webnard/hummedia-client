@@ -1,7 +1,13 @@
 msgid "Advanced"
 msgstr ""
 
+msgid "Save Changes"
+msgstr ""
+
 msgid "To Year"
+msgstr ""
+
+msgid "Remove"
 msgstr ""
 
 msgid "Courses"
@@ -10,13 +16,31 @@ msgstr ""
 msgid "The resource you requested could not be found."
 msgstr ""
 
+msgid "Delete"
+msgstr ""
+
+msgid "Collection Info"
+msgstr ""
+
+msgid "Create Collection"
+msgstr ""
+
 msgid "Search"
 msgstr ""
 
 msgid "Login"
 msgstr ""
 
+msgid "Video title"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
 msgid "Description"
+msgstr ""
+
+msgid "My Collections"
 msgstr ""
 
 msgid "Contact"
@@ -40,15 +64,30 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
-msgid "Searching"
+msgid "Drop Here!"
 msgstr ""
 
 msgid "From Year"
 msgstr ""
 
-msgid "Title"
+msgid "Searching"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Videos to Add"
 msgstr ""
 
 msgid "Advanced Search"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Creator"
+msgstr ""
+
+msgid "Title"
 msgstr ""
 
