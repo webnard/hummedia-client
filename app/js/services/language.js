@@ -43,7 +43,7 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', function(analytics, 
         enumerable: true
     });
     language.loadLanguage = function() {
-        $.getScript("http://code.angularjs.org/1.0.3/i18n/angular-locale_" + this.current + ".js");
+        $.getScript("//code.angularjs.org/1.0.3/i18n/angular-locale_" + this.current + ".js");
     };
 
     // lazily loading translations
