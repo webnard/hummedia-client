@@ -88,20 +88,6 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         });
     };
     // Drag & Drop stuff
-    $( ".draggable" ).draggable({
-        containment: 'body', helper: 'clone',
-        drag: function(event, ui){
-            $('#droppable').css( "background-color", "lightblue");
-            $('#defaultdrop').hide();
-            $('#dragdrop').show();
-            ui.helper.addClass("minidraggable");
-        },
-        stop: function(){
-            $('#droppable').css("background-color", "white");
-            $('#dragdrop').hide();
-            $('#defaultdrop').show();
-        }
-    });
     $("#droppable").droppable({
         drop: function(event, ui){
             $(document).ready(function() {
