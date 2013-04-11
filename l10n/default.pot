@@ -67,6 +67,9 @@ msgstr ""
 msgid "Drop Here!"
 msgstr ""
 
+msgid "Logout"
+msgstr ""
+
 msgid "From Year"
 msgstr ""
 

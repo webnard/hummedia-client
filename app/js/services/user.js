@@ -31,6 +31,13 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', function($http, config)
          }
      });
      
+     Object.defineProperty(user, 'canCreate', {
+          enumerable: true,
+          get: function() {
+                return user.exists && ["faculty", "admin"].indexOf(user.data['role']) >= 0;
+          }
+     });
+     
      user.signin = function() {
          console.log("Wooo");
      };
