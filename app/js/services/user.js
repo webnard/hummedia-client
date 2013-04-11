@@ -10,7 +10,7 @@
  * Methods:
  *  {void} login -- opens a modal window prompting the user to log in
  */
-HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', function($http, config, $location) {
+HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', function($http, config, $location, $templateCache, $compile, $scope) {
     "use strict";
      
      var _exists = false;
@@ -37,6 +37,16 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', function($
                 return user.exists && ["faculty", "admin"].indexOf(user.data['role']) >= 0;
           }
      });
+     
+     user.prompt = function() {
+         if(user.exists || $("#login").length)
+             return;
+         
+         $http.get('partials/login.html', {cache:$templateCache}).success(function(data){
+             
+             $("#view").append($compile(data)($scope));
+         });
+     };
      
      user.signin = function() {
         window.location = config.apiBase + "/account/login?r=" + $location.absUrl();

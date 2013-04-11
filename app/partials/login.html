@@ -1,11 +1,11 @@
-<section id="login" class="ghost">
+<section id="login" class="ghost" data-ng-controller="LoginCtrl">
 <div id="heading">
 <h1>{{"Login" | tr}}</h1>
 <h2>{{"Select an authentication provider below" | tr}}:</h2>
 </div>
 <br />
 <ul>
-    <li title="BYU NetID" id="byubutton"><a href="https://zelda.byu.edu/api/v2/account/login?r={{url}}"><img src="img/byu.svg" width="100"></a></li>
+    <li title="BYU NetID" id="byubutton" data-ng-click="user.signin()"><img src="img/byu.svg" width="100"></li>
     <li title="Google+">
       <span id="signinButton">
         <span

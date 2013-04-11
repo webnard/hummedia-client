@@ -28,7 +28,7 @@
     <div id="background" data-ng-style="style"></div>
     <nav id="navtable" data-ng-controller="NavCtrl">
             <a id="navtitle" href="#">Humanities Online Media</a>
-            <a href="#/login" data-ng-show="!user.exists">{{"Login" | tr}}</a>
+            <a data-ng-click="user.prompt()" data-ng-show="!user.exists">{{"Login" | tr}}</a>
             <a data-ng-show="user.exists">{{user.data.fullname}}</a>
             <a data-ng-show="user.canCreate" href="#/admin">{{"Admin" | tr}}</a>
 	    <a href="">{{"Courses" | tr}}</a>

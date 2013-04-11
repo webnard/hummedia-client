@@ -1,17 +1,9 @@
 'use strict';
-function LoginCtrl($scope,$location) {
-    /**
-     * If already logged in
-     * @TODO
-     */
-    if(false) {
-        $location.path('/');
-        return;
-    }
-    $scope.url=$location.$$absUrl;
+function LoginCtrl($scope, user) {
+    $scope.user = user;
 };
 
-LoginCtrl.$inject = ['$scope','$location'];
+LoginCtrl.$inject = ['$scope', 'user'];
 
 // add Google authentication
 // see https://developers.google.com/+/web/signin/
