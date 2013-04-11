@@ -79,9 +79,6 @@ msgstr ""
 msgid "Select an authentication provider below"
 msgstr ""
 
-msgid "Select an authentication provider below"
-msgstr ""
-
 msgid "Videos to Add"
 msgstr ""
 

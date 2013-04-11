@@ -8,6 +8,7 @@ function LoginCtrl($scope,$location) {
         $location.path('/');
         return;
     }
+    $scope.url=$location.$$absUrl;
 };
 
 LoginCtrl.$inject = ['$scope','$location'];
