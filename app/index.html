@@ -38,7 +38,7 @@
                 <label for="nav-language"><i class="icon-globe"></i> {{language | language}}</label>
 		<select id="nav-language" ng-model="language" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
-            <a data-ng-show="user.exists">{{"Logout" | tr}}</a>
+            <a data-ng-click="user.logout()" data-ng-show="user.exists">{{"Logout" | tr}}</a>
     </nav>
     <div ng-view id="view">
     </div>

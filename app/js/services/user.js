@@ -10,7 +10,7 @@
  * Methods:
  *  {void} login -- opens a modal window prompting the user to log in
  */
-HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', function($http, config) {
+HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', function($http, config, $location) {
     "use strict";
      
      var _exists = false;
@@ -39,7 +39,15 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', function($http, config)
      });
      
      user.signin = function() {
-         console.log("Wooo");
+        window.location = config.apiBase + "/account/login?r=" + $location.absUrl();
+     };
+     
+     user.googleSignin = function() {
+         window.location = config.apiBase + "/account/login/google?r=" + $location.absUrl();
+     };
+     
+     user.logout = function() {
+         window.location = config.apiBase + "/account/logout?r=" + $location.absUrl();
      };
      
      // only the service should be able to update the user's information
