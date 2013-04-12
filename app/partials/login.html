@@ -6,18 +6,6 @@
 <br />
 <ul>
     <li title="BYU NetID" id="byubutton" data-ng-click="user.signin()"><img src="img/byu.svg" width="100"></li>
-    <li title="Google+">
-      <span id="signinButton">
-        <span
-          class="g-signin"
-          data-callback="signinCallback"
-          data-clientid="CLIENT_ID"
-          data-width="wide"
-          data-cookiepolicy="single_host_origin"
-          data-requestvisibleactions="http://schemas.google.com/AddActivity"
-          data-scope="https://www.googleapis.com/auth/plus.login">
-        </span>
-      </span>
-    </li>
+    <li id="googleplusbutton" data-ng-click="user.googleSignin()" title="Google+"></li>
 </ul>
 </section>

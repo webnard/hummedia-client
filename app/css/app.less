@@ -13,6 +13,12 @@
     -ie-transition: @rules;
     transition: @rules;
 }
+.background-size(@rules) {
+    -webkit-background-size: @rules;
+    -moz-background-size: @rules;
+    -o-background-size: @rules;
+    background-size: @rules;
+}
 .box-shadow(@rules) {
     -webkit-box-shadow: @rules;
     -moz-box-shadow: @rules;
@@ -255,11 +261,8 @@ footer{
 }
 #background {
     z-index: -1;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background: no-repeat center center fixed;
-    background-size: cover;
+    .background-size(cover);
     background-color: @smoke;
     width: 100%;
     height: 100%;
@@ -279,20 +282,35 @@ footer{
         font-size: 150%;
         text-shadow: 2px 2px rgba(167, 167, 167, 0.59);
     }
+    li {
+        width: 50%;
+        margin: auto;
+        cursor: pointer;
+    }
     #byubutton{
         background-color: rgba(255, 255, 255, 0.54);
         border-radius: 7px;
         padding-top: 3px;
-        width: 50%;
-        margin: auto;
         border-style: outset;
         margin-bottom: 3px;
-        cursor: pointer;
         &:hover{
             background-color: lightgray;
         }
         &:active{
             border-style: inset;
+        }
+    }
+    #googleplusbutton {
+        height: 43px;
+        width: 200px;
+        background-repeat: no-repeat;
+        background-image: url('../img/google-plus/sprite.png');
+        .background-size(100%);
+        &:hover {
+            background-position: 0 -44px;
+        }
+        &:active {
+            background-position: 0 -87px;
         }
     }
 }
