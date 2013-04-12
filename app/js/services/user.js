@@ -39,9 +39,15 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      });
      
      user.prompt = function() {
-         if(user.exists || $("#login").length)
+         if(user.exists)
              return;
          
+         if($("#login").length){
+             $('#graywall').remove();
+             $("#login").remove();
+             return;
+         }
+         $('html').css('overflow-y', 'hidden');
          $http.get('partials/login.html', {cache:$templateCache}).success(function(data){
              
              $("#view").append($compile(data)($scope));
