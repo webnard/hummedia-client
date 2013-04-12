@@ -7,7 +7,8 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         }
     });
     $scope.deleteCollection = function(pid){
-        Collection.delete({"identifier":pid});
+        // using bracket notation to enable minification with the word "delete" 
+        Collection['delete']({"identifier":pid});
         $scope.collection_data = '';
         $scope.collections.pop();
         $location.search({'id':''});

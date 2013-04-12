@@ -91,6 +91,9 @@ function compressJS(window, callback) {
     $script_tags.first().before("<script src='js/app.min.js?"+ versionstamp +"'></script>");
     $script_tags.remove();
     closure.compile(toCompress,{}, function(err, output) {
+        if(err) {
+            console.log(err);
+        }
         fs.writeFile(minified_js, output);
         callback();
     });
