@@ -42,8 +42,11 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', function(analytics, 
         configurable : false,
         enumerable: true
     });
+    /**
+     * @TODO: Load and enable localization files
+     */
     language.loadLanguage = function() {
-        $.getScript("//code.angularjs.org/1.0.3/i18n/angular-locale_" + this.current + ".js");
+        //$.getScript("//code.angularjs.org/1.0.3/i18n/angular-locale_" + this.current + ".js");
     };
 
     // lazily loading translations
