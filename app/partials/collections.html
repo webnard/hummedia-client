@@ -1,0 +1,22 @@
+<div id="collection_content">
+<div id="wrapper">
+
+<div class='collection_blocks' data-ng-repeat="collection in collections">
+
+    <div data-ng-click="hideVideos(collection['pid'])" style='cursor:pointer;'>
+        <h2>{{collection['dc:title']}}</h2>
+        <p>{{collection['dc:description']}}</p>
+    </div>
+    <div id="{{collection['pid']}}" style='display:none;'>
+        <div data-ng-repeat="video in collections_data[collection['pid']]['videos']" class="video_blocks" style="vertical-align: top;">
+            <a title="{{video['ma:description']}}" href="#/video/{{video.pid}}">
+                <img src="http://placecage.com/300/200" width="300" height="200"/>
+            </a>
+            <a title="{{video['ma:description']}}" style="text-align:center;" class="plain_link" href="#/video/{{video.pid}}">{{video['ma:title']}}</a>
+            <p style="font-size:.8em; color: rgba(0,0,0,.75);">{{video['ma:date'] | date:'longDate'}} [{{video['ma:hasLanguage'][0] | language}}]</p>
+        </div>
+    </div>
+
+</div>        
+</div>
+</div>
