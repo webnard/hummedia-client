@@ -1,5 +1,31 @@
 'use strict';
 function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
+    $scope.newCollection = function(){        
+        if($scope.newtitle === ''){$scope.newtitle = 'New Hummedia Collection';}
+        var params = new Object();
+            params['dc:title'] = $scope.newtitle;
+            params['dc:description'] = $scope.newdescription;
+            params['dc:creator'] = $scope.newcreator;
+        Collection.save(params, function(data){
+            params['pid'] = data.id;
+            $scope.collections.push(params);
+        });        
+        $scope.newtitle = '';
+        $scope.newdescription ='';
+        $scope.newcreator='';
+    };
+    
+    $scope.showCollection = function(pid){
+        $location.search({'id':pid});
+    };
+    
+    $scope.showCreateCollection = function(){
+        $('#createcollection').slideToggle('slow');
+        $('#collToggle').toggleClass("icon-plus icon-minus");
+    };
+    
+    $scope.collections = Collection.query();
+    
     $scope.$watch(function(){return $routeParams.id;}, function(){
         $scope.id = $routeParams.id;
         if($scope.id){
@@ -9,21 +35,19 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
     $scope.deleteCollection = function(pid){
         // using bracket notation to enable minification with the word "delete" 
         Collection['delete']({"identifier":pid});
-        $scope.collection_data = '';
-        $scope.collections.pop();
-        $location.search({'id':''});
+        $scope.collection_data = null;
+        $scope.collections = $scope.collections.filter(function(a){return a.pid !== pid;});
+        $location.search({});
     };
     $scope.editCollection = function(){
-        $(document).ready(function() {
-            $('#collectioninfo_title').prop("value", $scope['collection_data']['dc:title']);
-            $('#collectioninfo_description').prop("value", $scope['collection_data']['dc:description']);
-            $('#editbutton').toggleClass('depressed');
-            if($scope.isEditable === true){
-                $scope.isEditable = false;
-            }else{
-                $scope.isEditable = true;
-            }
-        });
+        $('#collectioninfo_title').prop("value", $scope['collection_data']['dc:title']);
+        $('#collectioninfo_description').prop("value", $scope['collection_data']['dc:description']);
+        $('#editbutton').toggleClass('depressed');
+        if($scope.isEditable === true){
+            $scope.isEditable = false;
+        }else{
+            $scope.isEditable = true;
+        }
     };
     $scope.saveChanges = function(pid){
         var newtitle;
