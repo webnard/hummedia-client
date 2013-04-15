@@ -1,9 +1,9 @@
 <div id="collection_content">
-<div id="wrapper">
+<div id="collections_wrapper">
 
 <div class='collection_blocks' data-ng-repeat="collection in collections">
 
-    <div data-ng-click="hideVideos(collection['pid'])" style='cursor:pointer;'>
+    <div data-ng-click="hideVideos(collection['pid'])" class="collection_header">
         <h2>{{collection['dc:title']}}</h2>
         <p>{{collection['dc:description']}}</p>
     </div>

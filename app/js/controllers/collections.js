@@ -12,7 +12,7 @@ function CollectionsCtrl($scope, $routeParams, Collection) {
     });
     
     $scope.hideVideos = function(pid){
-        $('#'+pid).toggle();
+        $('#'+pid).slideToggle('slow');
     };
 }
 // always inject this in so we can later compress this JavaScript
