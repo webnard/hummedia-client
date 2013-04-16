@@ -6,14 +6,14 @@
 <div id="collections_wrapper">
 
 <div class='collection_blocks' data-ng-repeat="collection in collections">
-    <div class='collection_toggle' id="{{collection['pid']}}" style='display:none;'>
+    <div class='collection_toggle' id="{{collection['pid']}}">
         <div>
             <h2>{{collection['dc:title']}}</h2>
             <p>{{collection['dc:description']}}</p>
         </div>
         <div data-ng-repeat="video in collections_data[collection['pid']]['videos']" class="video_blocks" style="vertical-align: top;">
             <a title="{{video['ma:description']}}" href="#/video/{{video.pid}}">
-                <img src="http://placecage.com/300/200" width="270" height="180"/>
+                <img src="http://fillmurray.com/300/200" width="270" height="180"/>
             </a>
             <a title="{{video['ma:description']}}" style="text-align:center;" class="plain_link" href="#/video/{{video.pid}}">{{video['ma:title']}}</a>
             <p style="font-size:.8em; color: rgba(0,0,0,.75);">{{video['ma:date'] | date:'longDate'}} [{{video['ma:hasLanguage'][0] | language}}]</p>
