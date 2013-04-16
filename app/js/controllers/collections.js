@@ -1,5 +1,6 @@
 'use strict';
 function CollectionsCtrl($scope, $routeParams, Collection) {
+    $('html').css("overflow-y","scroll");
     $scope.collections = Collection.query();
     
     $scope.$watch(function(){return $scope.collections.length;}, function(){
@@ -11,8 +12,11 @@ function CollectionsCtrl($scope, $routeParams, Collection) {
         }            
     });
     
-    $scope.hideVideos = function(pid){
-        $('#'+pid).slideToggle('slow');
+    $scope.showVideos = function(pid){
+        $('.collection_toggle').hide();
+        $('#'+pid).show();
+        $('#tabs p').removeClass("highlighted");
+        $('#tab-'+pid).addClass("highlighted");
     };
 }
 // always inject this in so we can later compress this JavaScript
