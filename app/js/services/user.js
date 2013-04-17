@@ -37,17 +37,23 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
                 return user.exists && ["faculty", "admin"].indexOf(user.data['role']) >= 0;
           }
      });
+
+     user.closePrompt = function() {
+         $('#graywall').remove();
+         $("#login").remove();
+         $('html').removeClass('noscroll');
+     }
      
      user.prompt = function() {
          if(user.exists)
              return;
          
-         if($("#login").length){
-             $('#graywall').remove();
-             $("#login").remove();
+         if($("#login").length) {
+             this.closePrompt();
              return;
          }
-         $('html').css('overflow-y', 'hidden');
+
+         $('html').addClass('noscroll');
          $http.get('partials/login.html', {cache:$templateCache}).success(function(data){
              
              $("#view").append($compile(data)($scope));

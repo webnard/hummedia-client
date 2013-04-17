@@ -1,99 +1,99 @@
-msgid "Advanced"
-msgstr ""
-
-msgid "Save Changes"
-msgstr ""
-
-msgid "To Year"
-msgstr ""
-
-msgid "Remove"
-msgstr ""
-
-msgid "Courses"
-msgstr ""
-
-msgid "The resource you requested could not be found."
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "Collection Info"
-msgstr ""
-
-msgid "Create Collection"
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-msgid "Login"
+msgid "Description"
 msgstr ""
 
 msgid "Video title"
 msgstr ""
 
-msgid "Videos"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "My Collections"
-msgstr ""
-
-msgid "Contact"
-msgstr ""
-
-msgid "There was an error processing your request."
-msgstr ""
-
-msgid "Invalid Request. Make sure the address you are trying to reach is correct."
-msgstr ""
-
-msgid "Media for My Courses"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "Go"
-msgstr ""
-
-msgid "Basic"
-msgstr ""
-
-msgid "Drop Here!"
+msgid "To Year"
 msgstr ""
 
 msgid "Logout"
 msgstr ""
 
+msgid "Creator"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
 msgid "From Year"
 msgstr ""
 
-msgid "Searching"
+msgid "Title"
 msgstr ""
 
-msgid "Admin"
-msgstr ""
-
-msgid "Select an authentication provider below"
+msgid "Login"
 msgstr ""
 
 msgid "Videos to Add"
 msgstr ""
 
-msgid "Advanced Search"
+msgid "There was an error processing your request."
+msgstr ""
+
+msgid "Go"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Collection Info"
+msgstr ""
+
+msgid "The resource you requested could not be found."
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Invalid Request. Make sure the address you are trying to reach is correct."
 msgstr ""
 
 msgid "Edit"
 msgstr ""
 
-msgid "Creator"
+msgid "Media for My Courses"
 msgstr ""
 
-msgid "Title"
+msgid "Searching"
+msgstr ""
+
+msgid "Drop Here!"
+msgstr ""
+
+msgid "Advanced Search"
+msgstr ""
+
+msgid "Select an authentication provider below"
+msgstr ""
+
+msgid "Create Collection"
+msgstr ""
+
+msgid "Courses"
+msgstr ""
+
+msgid "Basic"
+msgstr ""
+
+msgid "My Collections"
 msgstr ""
 
