@@ -72,16 +72,9 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      // kick things off.
      (function(){
         var statusDelay = 30*1000; // how often to poll (if websockets are unavailable) to see user's status
-        var checkingStatus = false;
         var checkStatus = function() {
-            if(checkingStatus) {
-                setTimeout(checkStatus, statusDelay);
-            }
-            
-            checkingStatus = true;
             $http.get(config.apiBase + '/account/profile')
                 .success(function(data) {
-                    checkingStatus = false;
                     _data = data;
                     if(data.username !== null) {
                         _exists = true;
