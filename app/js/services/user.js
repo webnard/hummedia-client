@@ -10,12 +10,13 @@
  * Methods:
  *  {void} login -- opens a modal window prompting the user to log in
  */
-HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', function($http, config, $location, $templateCache, $compile, $scope) {
-    "use strict";
+HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', function($http, config, $location, $templateCache, $compile, $scope, $window) {
+     "use strict";
      
      var _exists = false;
      var _data = {};
      var user = {};
+
 
      Object.defineProperty(user, 'exists', {
          enumerable: true,
@@ -61,15 +62,15 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      };
      
      user.signin = function() {
-        window.location = config.apiBase + "/account/login?r=" + $location.absUrl();
+        $window.location = config.apiBase + "/account/login?r=" + $location.absUrl();
      };
      
      user.googleSignin = function() {
-         window.location = config.apiBase + "/account/login/google?r=" + $location.absUrl();
+         $window.location = config.apiBase + "/account/login/google?r=" + $location.absUrl();
      };
      
      user.logout = function() {
-         window.location = config.apiBase + "/account/logout?r=" + $location.absUrl();
+         $window.location = config.apiBase + "/account/logout?r=" + $location.absUrl();
      };
      
      // only the service should be able to update the user's information
