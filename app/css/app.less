@@ -13,6 +13,12 @@
     -ie-transition: @rules;
     transition: @rules;
 }
+.background-size(@rules) {
+    -webkit-background-size: @rules;
+    -moz-background-size: @rules;
+    -o-background-size: @rules;
+    background-size: @rules;
+}
 .box-shadow(@rules) {
     -webkit-box-shadow: @rules;
     -moz-box-shadow: @rules;
@@ -45,15 +51,31 @@
     -moz-box-align: @rule;
     box-align: @rule;
 }
+.noscroll {
+    overflow: hidden;
+}
 /**************************
  * Main
 ***************************/
 html { 
 
-	font-family: sans-serif;
-	overflow-x:hidden;
-        font-family: 'Rambla', sans-serif;
-        background-color: @smoke;
+    font-family: sans-serif;
+    overflow-x:hidden;
+    font-family: 'Rambla', sans-serif;
+    background-color: @smoke;
+}
+a[data-ng-click], a[ng-click] {
+    text-decoration: underline;
+    color: darkblue;
+    cursor: pointer;
+}
+#graywall{
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.46);
 }
 #coursesbutton{
 	margin-bottom: 20px;
@@ -204,9 +226,14 @@ html {
 }
 #home_content{
         .ghost;
-        .content;
+        padding: 10px;
         width: 300px;
         height:120px;
+        text-align: center;
+        position: absolute;
+        top: 25%;
+        margin-left: -150px;
+        left: 50%;
 }
 .video_blocks{
     display: inline-block;
@@ -255,11 +282,8 @@ footer{
 }
 #background {
     z-index: -1;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background: no-repeat center center fixed;
-    background-size: cover;
+    .background-size(cover);
     background-color: @smoke;
     width: 100%;
     height: 100%;
@@ -268,6 +292,64 @@ footer{
     top: 0;
     opacity: 0;
     .transition(opacity 1s ease-in);
+}
+#login{
+    background-color: white;
+    border-style: solid;
+    z-index: 30;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    margin-left: -150px;
+    width: 300px;
+    padding: 10px;
+    text-align: center;
+    h1{
+        font-size: 150%;
+        text-shadow: 2px 2px rgba(167, 167, 167, 0.59);
+    }
+    li {
+        width: 50%;
+        margin: auto;
+        cursor: pointer;
+    }
+    p {
+        text-align: left;
+    }
+    #byubutton{
+        background-color: lighten(lightgray, 10%);
+        border-radius: 7px;
+        padding-top: 3px;
+        border-style: outset;
+        margin-bottom: 3px;
+        &:hover{
+            background-color: lightgray;
+        }
+        &:active{
+            border-style: inset;
+        }
+    }
+    #googleplusbutton {
+        height: 43px;
+        width: 200px;
+        background-repeat: no-repeat;
+        background-image: url('../img/google-plus/sprite.png');
+        .background-size(100%);
+        &:hover {
+            background-position: 0 -44px;
+        }
+        &:active {
+            background-position: 0 -87px;
+        }
+    }
+    #hidelogin {
+        color: red;
+        font-size: 150%;
+        cursor: pointer;
+        position: absolute;
+        left: 5px;
+        top: 5px;
+    }
 }
 /*************
 * Nav Elements
@@ -304,6 +386,9 @@ footer{
                 margin: -5px;
 	    }
 	}
+        a{
+            cursor: pointer;
+        }
 }
 #navtitle {
     float: left;

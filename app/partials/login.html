@@ -1,0 +1,16 @@
+<div id="graywall"></div>    
+<section id="login" class="ghost" data-ng-controller="LoginCtrl">
+<div id="heading">
+    <i data-ng-click="user.closePrompt()" class="icon-remove-sign" id="hidelogin"></i>
+<h1>{{"Login" | tr}}</h1>
+<h2 data-ng-hide="user.netIDRequired">{{"Select an authentication provider below" | tr}}:</h2>
+<p data-ng-show="user.netIDRequired">
+{{"You are logged in through a third-party provider. In order to view content on our site, we need to link your account to a BYU NetID. Click below to do so now." | tr}}
+</p>
+</div>
+<br />
+<ul>
+    <li title="BYU NetID" id="byubutton" data-ng-click="user.signin()"><img src="img/byu.svg" width="100"></li>
+    <li data-ng-hide="user.netIDRequired" id="googleplusbutton" data-ng-click="user.googleSignin()" title="Google+"></li>
+</ul>
+</section>

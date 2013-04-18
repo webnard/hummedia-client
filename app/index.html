@@ -26,10 +26,12 @@
     <div id='error-modal' api-error-modal blur='#background, #view'></div>
     <div id="container">
     <div id="background" data-ng-style="style"></div>
-    <nav id="navtable">
+    <nav id="navtable" data-ng-controller="NavCtrl">
             <a id="navtitle" href="#">Humanities Online Media</a>
-            <a href="#/admin">{{"Admin" | tr}}</a>
-            <a href="">{{"Login" | tr}}</a>
+            <a data-ng-click="user.prompt(true)" data-ng-show="!user.exists && !user.netIDRequired">{{"Login" | tr}}</a>
+            <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
+            <a data-ng-show="user.exists">{{user.data.fullname}}</a>
+            <a data-ng-show="user.canCreate" href="#/admin">{{"Admin" | tr}}</a>
 	    <a href="">{{"Courses" | tr}}</a>
 	    <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
 	    <a href="">{{"Contact" | tr}}</a>
@@ -37,6 +39,7 @@
                 <label for="nav-language"><i class="icon-globe"></i> {{language | language}}</label>
 		<select id="nav-language" ng-model="language" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
+            <a data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
     </nav>
     <div ng-view id="view">
     </div>
@@ -64,6 +67,7 @@
   <!-- SERVICES -->
   <script src="js/services.js"></script>
   <script src="js/services/analytics.js"></script>
+  <script src="js/services/user.js"></script>
   <script src="js/services/language.js"></script>
   
   <!-- DIRECTIVES -->
@@ -77,8 +81,10 @@
   
 
   <!-- CONTROLLERS -->
+  <script src="js/controllers/nav.js"></script>
   <script src="js/controllers/language.js"></script>
   <script src="js/controllers/search.js"></script>
+  <script src="js/controllers/login.js"></script>
   <script src="js/resources/video.js"></script>
   <script src="js/resources/collection.js"></script>
   <script src="js/filters.js"></script>
