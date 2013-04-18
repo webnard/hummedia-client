@@ -46,6 +46,9 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
+msgid "Link BYU NetID"
+msgstr ""
+
 msgid "Videos"
 msgstr ""
 
@@ -65,6 +68,9 @@ msgid "Delete"
 msgstr ""
 
 msgid "Invalid Request. Make sure the address you are trying to reach is correct."
+msgstr ""
+
+msgid "You are logged in through a third-party provider. In order to view content on our site, we need to link your account to a BYU NetID. Click below to do so now."
 msgstr ""
 
 msgid "Edit"

@@ -64,6 +64,11 @@ html {
     font-family: 'Rambla', sans-serif;
     background-color: @smoke;
 }
+a[data-ng-click], a[ng-click] {
+    text-decoration: underline;
+    color: darkblue;
+    cursor: pointer;
+}
 #graywall{
     position: absolute;
     top: 0px;
@@ -307,6 +312,9 @@ footer{
         width: 50%;
         margin: auto;
         cursor: pointer;
+    }
+    p {
+        text-align: left;
     }
     #byubutton{
         background-color: lighten(lightgray, 10%);

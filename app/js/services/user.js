@@ -7,6 +7,7 @@
  *  {Object} data -- contains information about the logged-in user, if they are logged in.
  *  {bool} exists -- whether or not the user is logged in.
  *  {bool} canCreate -- whether or not the user has the ability to create resources
+ *  {bool} netIDRequired -- Whether or not the user needs to link their account with a NetID to continue
  *  
  * Methods:
  *  {void} prompt [BOOL toggle] -- opens a modal window prompting the user to log in.
@@ -22,14 +23,22 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      "use strict";
      
      var _exists = false;
+     var _netIDRequired = false;
+     var _promptedToLink = false;
      var _data = {};
      var user = {};
-
 
      Object.defineProperty(user, 'exists', {
          enumerable: true,
          get: function() {
              return _exists;
+         }
+     });
+
+     Object.defineProperty(user, 'netIDRequired', {
+         enumerable: true,
+         get: function() {
+            return _netIDRequired;
          }
      });
      
@@ -57,14 +66,15 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
          if(user.exists)
              return;
          
-         if(toggle === true && $("#login").length) {
-             this.closePrompt();
+         if($("#login").length) {
+             if(toggle === true) {
+                this.closePrompt();
+             }
              return;
          }
 
          $('html').addClass('noscroll');
          $http.get('partials/login.html', {cache:$templateCache}).success(function(data){
-             
              $("#view").append($compile(data)($scope));
          });
      };
@@ -93,8 +103,14 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
             $http.get(config.apiBase + '/account/profile')
                 .success(function(data) {
                     _data = data;
-                    if(data.username !== null) {
+                    if(user.data.username !== null) {
                         _exists = true;
+                    }
+                    // user logged in through oAuth provider but no associated NetID available
+                    if(!_promptedToLink && user.data.oauth && user.data.username === null) {
+                        _netIDRequired = true;
+                        _promptedToLink = true;
+                        user.prompt();
                     }
                     setTimeout(checkStatus, statusDelay);
                 });

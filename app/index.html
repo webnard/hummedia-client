@@ -28,7 +28,8 @@
     <div id="background" data-ng-style="style"></div>
     <nav id="navtable" data-ng-controller="NavCtrl">
             <a id="navtitle" href="#">Humanities Online Media</a>
-            <a data-ng-click="user.prompt()" data-ng-show="!user.exists">{{"Login" | tr}}</a>
+            <a data-ng-click="user.prompt(true)" data-ng-show="!user.exists && !user.netIDRequired">{{"Login" | tr}}</a>
+            <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
             <a data-ng-show="user.exists">{{user.data.fullname}}</a>
             <a data-ng-show="user.canCreate" href="#/admin">{{"Admin" | tr}}</a>
 	    <a href="">{{"Courses" | tr}}</a>
@@ -38,7 +39,7 @@
                 <label for="nav-language"><i class="icon-globe"></i> {{language | language}}</label>
 		<select id="nav-language" ng-model="language" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
-            <a data-ng-click="user.logout()" data-ng-show="user.exists">{{"Logout" | tr}}</a>
+            <a data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
     </nav>
     <div ng-view id="view">
     </div>
