@@ -6,9 +6,17 @@
  * Properties:
  *  {Object} data -- contains information about the logged-in user, if they are logged in.
  *  {bool} exists -- whether or not the user is logged in.
+ *  {bool} canCreate -- whether or not the user has the ability to create resources
  *  
  * Methods:
- *  {void} login -- opens a modal window prompting the user to log in
+ *  {void} prompt [BOOL toggle] -- opens a modal window prompting the user to log in.
+ *                                 if toggle is set to true, this will close the window
+ *                                 if already open
+ *
+ * {void} closePrompt -- closes the prompt window if it exists
+ * {void} signin -- redirects the user to the API's sign-in page
+ * {void} googleSignin -- same as signin, but with Google
+ * {void} logout -- logs out the current user
  */
 HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', function($http, config, $location, $templateCache, $compile, $scope, $window) {
      "use strict";
@@ -45,11 +53,11 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
          $('html').removeClass('noscroll');
      }
      
-     user.prompt = function() {
+     user.prompt = function(toggle) {
          if(user.exists)
              return;
          
-         if($("#login").length) {
+         if(toggle === true && $("#login").length) {
              this.closePrompt();
              return;
          }
@@ -70,7 +78,9 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      };
      
      user.logout = function() {
-         $window.location = config.apiBase + "/account/logout?r=" + $location.absUrl();
+         $http.get(config.apiBase + "/account/logout");
+         _exists = false;
+         _data = {};
      };
      
      // only the service should be able to update the user's information
