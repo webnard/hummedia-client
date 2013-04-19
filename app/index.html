@@ -26,12 +26,13 @@
     <div id='error-modal' api-error-modal blur='#background, #view'></div>
     <div id="container">
     <div id="background" data-ng-style="style"></div>
-    <nav id="navtable" data-ng-controller="NavCtrl">
-            <a id="navtitle" href="#">Humanities Online Media</a>
-            <a data-ng-click="user.prompt(true)" data-ng-show="!user.exists && !user.netIDRequired">{{"Login" | tr}}</a>
-            <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
-            <a data-ng-show="user.exists">{{user.data.fullname}}</a>
-            <a data-ng-show="user.canCreate" href="#/admin">{{"Admin" | tr}}</a>
+    <div data-ng-controller="NavCtrl">
+    <nav id="navtable">
+        <a id="navtitle" href="#">Humanities Online Media</a>
+        <a data-ng-click="user.prompt(true)" data-ng-show="showLogin">{{"Login" | tr}}</a>
+        <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
+        <a data-ng-show="user.exists">{{user.data.fullname}}</a>
+        <a data-ng-show="user.canCreate" ng-click="toggleAdmin()">{{"Admin" | tr}}</a>
 	    <a href="#/collection">{{"Courses" | tr}}</a>
 	    <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
 	    <a href="">{{"Contact" | tr}}</a>
@@ -41,6 +42,12 @@
 	    </span>
             <a data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
     </nav>
+    <nav data-ng-show="showAdminMenu" id="nav-admin">
+       <a href="#/admin/collection">Collections</a>
+       <a href="#/admin/video">Videos</a>
+       <a href="#/admin/user">Users</a> 
+    </nav>
+    </div>
     <div ng-view id="view">
     </div>
     <footer>
@@ -93,7 +100,6 @@
   <script src="js/controllers/admin.js"></script>
   <script src="js/controllers/admin_collection.js"></script>
   <script src="js/controllers/video_search.js"></script>
-  <script src="js/controllers/collections.js"></script>
 <!--[endif]> -->
 </body>
 </html>
