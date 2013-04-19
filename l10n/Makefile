@@ -15,6 +15,8 @@ pot:
 	@for directory in $(DIRECTIVE_FILES); do perl -nE $(PERL_CMD) $$directory/*.js >> default.pot.tmp; done;
 	@awk '{a[$$2]=$$0} END {for (i in a) {print a[i]; print "msgstr \"\"\n"}}' default.pot.tmp > default.pot
 	@rm default.pot.tmp
+	# sort the text
+	@awk '{printf("%s%c",$0,(NR%3==0)?"\n":0)}' default.pot | sort | tr "\0" "\n" > default.pot
 	@echo default.pot created!    
 
 json:
