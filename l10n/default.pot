@@ -1,0 +1,105 @@
+msgid "Admin"
+msgstr ""
+
+msgid "Advanced"
+msgstr ""
+
+msgid "Advanced Search"
+msgstr ""
+
+msgid "Basic"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Collection Info"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Courses"
+msgstr ""
+
+msgid "Create Collection"
+msgstr ""
+
+msgid "Creator"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Drop Here!"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "From Year"
+msgstr ""
+
+msgid "Go"
+msgstr ""
+
+msgid "Invalid Request. Make sure the address you are trying to reach is correct."
+msgstr ""
+
+msgid "Link BYU NetID"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Media for My Courses"
+msgstr ""
+
+msgid "My Collections"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Save Changes"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Searching"
+msgstr ""
+
+msgid "Select an authentication provider below"
+msgstr ""
+
+msgid "The resource you requested could not be found."
+msgstr ""
+
+msgid "There was an error processing your request."
+msgstr ""
+
+msgid "Title"
+msgstr ""
+
+msgid "To Year"
+msgstr ""
+
+msgid "Videos"
+msgstr ""
+
+msgid "Videos to Add"
+msgstr ""
+
+msgid "Video title"
+msgstr ""
+
+msgid "You are logged in through a third-party provider. In order to view content on our site, we need to link your account to a BYU NetID. Click below to do so now."
+msgstr ""
+
