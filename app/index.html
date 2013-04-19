@@ -43,9 +43,9 @@
             <a data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
     </nav>
     <nav data-ng-show="showAdminMenu" id="nav-admin">
-       <a href="#/admin/collection">Collections</a>
-       <a href="#/admin/video">Videos</a>
-       <a href="#/admin/user">Users</a> 
+       <a href="#/admin/collection">{{"Collections" | tr}}</a>
+       <a href="#/admin/video">{{"Videos" | tr}}</a>
+       <a href="#/admin/user">{{"Users" | tr}}</a> 
     </nav>
     </div>
     <div ng-view id="view">

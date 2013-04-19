@@ -16,6 +16,9 @@ msgstr ""
 msgid "Collection Info"
 msgstr ""
 
+msgid "Collections"
+msgstr ""
+
 msgid "Contact"
 msgstr ""
 
@@ -89,6 +92,9 @@ msgid "Title"
 msgstr ""
 
 msgid "To Year"
+msgstr ""
+
+msgid "Users"
 msgstr ""
 
 msgid "Videos"
