@@ -1,0 +1,63 @@
+<div class="admin">
+    <div id="listwrapper">
+        <h2>{{"My Collections" | tr}}</h2>
+        <ul>
+        <li class="listvideo" data-ng-repeat="collection in collections" id="{{collection.pid}}" data-ng-click="showCollection(collection.pid)">
+            <p>{{collection['dc:title']}}</p>
+        </li>
+        </ul>
+        <hr>
+        <h2>{{"Create New Collection" | tr}} <i data-ng-click="showCreateCollection()" id="collToggle" class="icon-plus"></i></h2>
+        <div id="createcollection">
+        <table>
+            <tr><td>{{"Title" | tr}}:</td><td><input data-ng-model="newtitle" type="text" /></td></tr>
+            <tr><td>{{"Description" | tr}}:</td><td><input data-ng-model="newdescription" type="text" /></td></tr>
+            <tr><td>{{"Creator" | tr}}:</td><td><input data-ng-model="newcreator" type="text" /></td></tr>
+        </table>
+        <button id="createcollectionbutton" data-ng-click="newCollection()">{{"Create Collection" | tr}}</button>
+        </div>
+    </div>
+    <div id="admincollection">
+        <h2>{{"Collection Info" | tr}}</h2>
+        <p>
+            {{"Title" | tr}}:
+            <input data-disable-when="!isEditable" class="collectioninfo" id="collectioninfo_title" type="text" value="{{collection_data['dc:title']}}"/>
+        </p>
+        <p>
+            {{"Description" | tr}}:
+            <input data-disable-when="!isEditable" class="collectioninfo" id="collectioninfo_description" type="text" value="{{collection_data['dc:description']}}"/>
+        </p>
+            <p>    
+                <button id="deletebutton" class="conditionalbutton" data-disable-when="!id" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> {{"Delete" | tr}}</button>
+                <button id="editbutton" class="conditionalbutton" data-disable-when="!id" data-ng-click="editCollection()"><i class="icon-edit"></i> {{"Edit" | tr}}</button>
+                <button id="savebutton" data-disable-when="!isEditable" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> {{"Save Changes" | tr}}</button>
+            </p>
+            <hr>
+            <div id="droppable">
+                <div id="dragdrop"><h2>{{"Drop Here!" | tr}}</h2></div>
+                <div id="defaultdrop">
+            <h2>{{"Videos" | tr}}</h2>
+                <ul>
+                    <li data-ng-repeat="video in collection_data.videos">
+                        <table id="listvideotable"><tr>
+                                <td>{{video['ma:title']}}</td>
+                                <td id="righttd"><button data-ng-click="deleteVideo(video.pid, collection_data.pid)">{{"Remove" | tr}}</button></td></tr>
+                        </table>
+                    </li>
+                </ul>
+                </div>
+                </div>
+            </div>
+    <div id="videopool" data-ng-controller="VideoSearchCtrl">
+        <h2>{{"Videos to Add" | tr}}</h2>
+        <form data-ng-submit="search()">
+            <input placeholder='{{"Video title" | tr}}' type="search" data-ng-model="query" > <input type="submit" value="Search">
+        </form>
+
+        <p data-ng-hide="searching"><ng-pluralize count="videos.length" when="{0: 'No results.', 1: 'One result.', other: '{} results.'}"></ng-pluralize></p>
+        <p data-ng-show="searching">{{"Searching" | tr}}</p>
+        <ul>
+            <li class="draggable" data-ng-repeat="video in videos" data-draggable><p id="{{video.pid}}" title="{{video['ma:description']}}">{{video['ma:title']}}</p></li>
+        </ul>
+    </div>
+</div>
