@@ -7,7 +7,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.when('/', {templateUrl: 'partials/home.html'});
     $routeProvider.when('/collection/:id', {templateUrl: 'partials/collection.html', controller: CollectionCtrl});
     $routeProvider.when('/admin/collection', {templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
-    $routeProvider.when('/admin', {templateUrl: 'partials/admin.html', controller: AdminCtrl, reloadOnSearch: false});
+    $routeProvider.when('/admin/user', {templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
     $routeProvider.when('/collection', {templateUrl: 'partials/collections.html', controller: CollectionsCtrl});
     $routeProvider.otherwise({redirectTo: '/'});
   }]).

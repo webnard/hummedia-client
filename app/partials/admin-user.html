@@ -1,0 +1,18 @@
+<section class="admin">
+    <div id="listwrapper">
+        <h2>Users</h2>
+        <ul>
+            <li data-ng-repeat="u in users" data-ng-click="user = 5">{{u.fullname}}</li>
+        </ul>
+    </div>
+</section>
+<section class="admin" data-ng-show="!!user">
+    <h2>Modify {{user.fullname}}</h2>
+    <form>
+        <label for="firstname">First name:</label><input id="firstname" data-ng-model="user.firstname"><br>
+        <label for="lastname">Last name:</label><input id="lastname" data-ng-model="user.lastname"><br>
+        <label for="permissions">Permissions:<select id="permissions"></select><br>
+        <label for="preferredlang">Preferred Language:<select id="preferredlang"></select><br>
+        <label for="email">Email Address:<input id="email" data-ng-model="user.email"><br>
+    </form>
+</section>
