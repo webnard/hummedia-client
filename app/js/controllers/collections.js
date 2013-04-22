@@ -1,6 +1,5 @@
 'use strict';
 function CollectionsCtrl($scope, $routeParams, Collection) {
-    $('html').css("overflow-y","scroll");
     $scope.collections = Collection.query();
     
     $scope.$watch(function(){return $scope.collections.length;}, function(){
