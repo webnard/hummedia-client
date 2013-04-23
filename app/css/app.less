@@ -128,7 +128,7 @@ a[data-ng-click], a[ng-click] {
             font-size: 50%;
         }
     }
-    .listvideo{
+    .selectable{
         border-style: solid;
         border-color: white;
         border-radius: 5px;
@@ -155,18 +155,11 @@ a[data-ng-click], a[ng-click] {
         text-align: right;
     }
     #listvideotable{
-        .listvideo;
+        .selectable;
         width: 100%;
         height: 30px;
     }
-    #admincollection{
-        .inline-block-top;
-        background-color: white;
-        border-radius: 10px;
-        border-style: solid;
-        width: 300px;
-        padding: 10px;
-    }
+    
     .collectioninfo{
         &:disabled{
             background-color: white;
@@ -197,6 +190,33 @@ a[data-ng-click], a[ng-click] {
         font-size: 75%;
         max-width: 250px;
     }
+}
+.admin-editor{
+    .inline-block-top;
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
+    width: 300px;
+    padding: 10px;
+    label {
+        float: left;
+        clear: left;
+    }
+    input, select {
+        float: right;
+        clear: right;
+        min-width: 100px;
+    }
+    label, input {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .form-table {
+        overflow: hidden;
+    }
+}
+#admin-user-select{
+    .inline-block-top;
 }
 .depressed{
     background-color: gray;

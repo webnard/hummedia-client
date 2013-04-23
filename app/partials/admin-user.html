@@ -1,18 +1,22 @@
-<section class="admin">
+<section class="admin" id="admin-user-select">
     <div id="listwrapper">
         <h2>Users</h2>
         <ul>
-            <li data-ng-repeat="u in users" data-ng-click="user = 5">{{u.fullname}}</li>
+            <li class="selectable" data-ng-repeat="u in users" data-ng-click="setUser(u)">{{u.fullname}}</li>
         </ul>
     </div>
 </section>
-<section class="admin" data-ng-show="!!user">
+<section class="admin admin-editor" data-ng-show="!!user">
     <h2>Modify {{user.fullname}}</h2>
     <form>
+        <div class="form-table">
         <label for="firstname">First name:</label><input id="firstname" data-ng-model="user.firstname"><br>
         <label for="lastname">Last name:</label><input id="lastname" data-ng-model="user.lastname"><br>
-        <label for="permissions">Permissions:<select id="permissions"></select><br>
-        <label for="preferredlang">Preferred Language:<select id="preferredlang"></select><br>
-        <label for="email">Email Address:<input id="email" data-ng-model="user.email"><br>
+        <label for="permissions">Permissions:</label><select id="permissions"></select><br>
+        <label for="preferredlang">Preferred Language:</label><select id="preferredlang"></select><br>
+        <label for="email">Email Address:</label><input id="email" data-ng-model="user.email"><br>
+        </div>
+        <button id="admin-user-cancel" class="icon-cancel">Cancel</button>
+        <button id="admin-user-save" class="icon-save">Update</button>
     </form>
 </section>
