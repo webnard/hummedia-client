@@ -34,7 +34,11 @@ function AdminUserCtrl($scope, account, language) {
     }
 
     $scope.update = function() {
-        $scope.user.$update();
+        $scope.user.isSaving = true;
+        var u = $scope.user;
+        $scope.user.$update(function(){
+            u.isSaving = false;
+        });
     }
 };
 AdminUserCtrl.$inject = ['$scope','Account', 'language'];

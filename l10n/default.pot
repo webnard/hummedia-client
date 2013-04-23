@@ -94,6 +94,9 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
+msgid "Saving…"
+msgstr ""
+
 msgid "Search"
 msgstr ""
 
