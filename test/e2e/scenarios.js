@@ -166,5 +166,26 @@ describe('admin', function() {
             element('#deletebutton').click();
             expect(element('.listvideo:last p').html()).not().toBe('!!This Collection Will Be Deleted!!');
         });
+        it('should remove the appropriate collection from the list when clicked', function(){
+            element('#collToggle').click();
+            input("newtitle").enter("!!Third to Last!!");
+            element('#createcollectionbutton').click();
+            element('#collToggle').click();
+            input("newtitle").enter("!!Second to Last!!");
+            element('#createcollectionbutton').click();
+            element('#collToggle').click();
+            input("newtitle").enter("!!Last!!");
+            element('#createcollectionbutton').click();
+            element('.listvideo:nth-last-child(2)').click();
+            element('#deletebutton').click();
+            expect(element('.listvideo:last p').html()).toBe('!!Last!!');
+            expect(element('.listvideo:nth-last-child(2) p').html()).toBe('!!Third to Last!!');
+            
+            // delete last two
+            element('.listvideo:last').click();
+            element('#deletebutton').click();
+            element('.listvideo:last').click();
+            element('#deletebutton').click();
+        });
     });
 });

@@ -54,6 +54,10 @@
 .noscroll {
     overflow: hidden;
 }
+.heading {
+    font-size: 150%;
+    text-shadow: 2px 2px rgba(167, 167, 167, 0.59);
+}
 /**************************
  * Main
 ***************************/
@@ -90,9 +94,10 @@ a[data-ng-click], a[ng-click] {
 .inline-block-top{
     display: inline-block;
     vertical-align: top;
-} 
+}
 .admin{
     padding:10px;
+    .inline-block-top;
     h2{
         text-align: center;
         font-size: 110%;
@@ -124,7 +129,7 @@ a[data-ng-click], a[ng-click] {
             font-size: 50%;
         }
     }
-    .listvideo{
+    .selectable{
         border-style: solid;
         border-color: white;
         border-radius: 5px;
@@ -142,7 +147,7 @@ a[data-ng-click], a[ng-click] {
                 visibility: visible;
             }
         }
-        .selected{
+        .selected, &.selected{
             background-color: lightblue;
             border-color: lightblue;
         }
@@ -151,18 +156,11 @@ a[data-ng-click], a[ng-click] {
         text-align: right;
     }
     #listvideotable{
-        .listvideo;
+        .selectable;
         width: 100%;
         height: 30px;
     }
-    #admincollection{
-        .inline-block-top;
-        background-color: white;
-        border-radius: 10px;
-        border-style: solid;
-        width: 300px;
-        padding: 10px;
-    }
+    
     .collectioninfo{
         &:disabled{
             background-color: white;
@@ -193,6 +191,44 @@ a[data-ng-click], a[ng-click] {
         font-size: 75%;
         max-width: 250px;
     }
+}
+.admin-editor{
+    .inline-block-top;
+    background-color: white;
+    border-radius: 10px;
+    border-style: solid;
+    width: 300px;
+    padding: 10px;
+    label {
+        float: left;
+        clear: left;
+    }
+    .form-table {
+        overflow: hidden;
+        input, select {
+            float: right;
+            clear: right;
+            min-width: 100px;
+        }
+        label, input {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        padding: 10px 0;
+    }
+    .control-buttons {
+        overflow: hidden;
+        text-align: center;
+        button:last-child {
+            float:right;
+        }
+        button:first-child {
+            float: left;
+        }
+    }
+}
+#admin-user-select{
+    .inline-block-top;
 }
 .depressed{
     background-color: gray;
@@ -342,8 +378,7 @@ footer{
     padding: 10px;
     text-align: center;
     h1{
-        font-size: 150%;
-        text-shadow: 2px 2px rgba(167, 167, 167, 0.59);
+        .heading;
     }
     li {
         width: 50%;
@@ -391,7 +426,7 @@ footer{
 /*************
 * Nav Elements
 *************/
-#navtable{
+#navtable, #nav-admin{
         z-index: 1000; /* above the error modal */
 	background-color: @smoke;
 	position: relative;
@@ -429,6 +464,10 @@ footer{
 }
 #navtitle {
     float: left;
+}
+#nav-admin {
+    border-top: gray dashed 1px;
+    text-align: left;
 }
 
 /**************************

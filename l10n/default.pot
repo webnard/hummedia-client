@@ -10,10 +10,16 @@ msgstr ""
 msgid "Basic"
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Close"
 msgstr ""
 
 msgid "Collection Info"
+msgstr ""
+
+msgid "Collections"
 msgstr ""
 
 msgid "Contact"
@@ -40,6 +46,12 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
+msgid "Email:"
+msgstr ""
+
+msgid "First Name:"
+msgstr ""
+
 msgid "From Year"
 msgstr ""
 
@@ -47,6 +59,9 @@ msgid "Go"
 msgstr ""
 
 msgid "Invalid Request. Make sure the address you are trying to reach is correct."
+msgstr ""
+
+msgid "Last Name:"
 msgstr ""
 
 msgid "Link BYU NetID"
@@ -61,13 +76,25 @@ msgstr ""
 msgid "Media for My Courses"
 msgstr ""
 
+msgid "Modify"
+msgstr ""
+
 msgid "My Collections"
+msgstr ""
+
+msgid "Preferred Language:"
 msgstr ""
 
 msgid "Remove"
 msgstr ""
 
+msgid "Role:"
+msgstr ""
+
 msgid "Save Changes"
+msgstr ""
+
+msgid "Saving…"
 msgstr ""
 
 msgid "Search"
@@ -77,6 +104,9 @@ msgid "Searching"
 msgstr ""
 
 msgid "Select an authentication provider below"
+msgstr ""
+
+msgid "Superuser:"
 msgstr ""
 
 msgid "The resource you requested could not be found."
@@ -89,6 +119,9 @@ msgid "Title"
 msgstr ""
 
 msgid "To Year"
+msgstr ""
+
+msgid "Users"
 msgstr ""
 
 msgid "Videos"

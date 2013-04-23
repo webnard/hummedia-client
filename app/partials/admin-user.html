@@ -1,0 +1,28 @@
+<section class="admin" id="admin-user-select">
+    <div id="listwrapper">
+        <h2>{{"Users" | tr}}</h2>
+        <ul>
+            <li class="selectable" data-ng-repeat="u in users" data-ng-class="{selected: u._id == user._id}" data-ng-click="setUser(u)">{{u.fullname}}</li>
+        </ul>
+    </div>
+</section>
+<section class="admin" data-ng-show="!!user">
+    <div class="admin-editor">
+        <h2>{{"Modify" | tr}} {{user.fullname}}</h2>
+        <form>
+            <div class="form-table">
+                <label for="firstname">{{"First Name:" | tr}}</label><input id="firstname" data-ng-model="user.firstname">
+                <label for="lastname">{{"Last Name:" | tr}}</label><input id="lastname" data-ng-model="user.lastname">
+                <label for="superuser">{{"Superuser:" | tr}}</label><input type="checkbox" data-ng-model="user.superuser">
+                <label for="role">{{"Role:" | tr}}</label><select id="role" data-ng-options="value for value in roles" data-ng-model="user.role"></select>
+                <label for="preferredlang">{{"Preferred Language:" | tr}}</label><select id="preferredlang" data-ng-options="lang.value as lang.label | language for lang in languages" data-ng-model="user.preferredLanguage"></select>
+                <label for="email">{{"Email:" | tr}}</label><input type="email" id="email" data-ng-model="user.email">
+            </div>
+            <div class="control-buttons">
+                <button id="admin-user-cancel" data-disable-when="user.isSaving" data-ng-click="cancel()" class="icon-cancel"> {{"Cancel" | tr}}</button>
+                <button id="admin-user-delete" data-disable-when="user.isSaving" data-ng-click="delete(user)" class="icon-trash"> {{"Delete" | tr}}</button>
+                <button id="admin-user-save" data-disable-when="user.isSaving" data-ng-click="update()"class="icon-save"> <span data-ng-switch="user.isSaving"><span data-ng-switch-default>{{"Save Changes" | tr}}</span><span data-ng-switch-when="true">{{"Saving…" | tr}}</span></span></button>
+            </div>
+        </form>
+    </div>
+</section>

@@ -17,7 +17,8 @@
  * {void} closePrompt -- closes the prompt window if it exists
  * {void} signin -- redirects the user to the API's sign-in page
  * {void} googleSignin -- same as signin, but with Google
- * {void} logout -- logs out the current user
+ * {http promise} logout -- logs out the current user
+ * {http promise} checkStatus -- forces a refresh of the user's data
  */
 HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', function($http, config, $location, $templateCache, $compile, $scope, $window) {
      "use strict";
@@ -52,7 +53,7 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      Object.defineProperty(user, 'canCreate', {
           enumerable: true,
           get: function() {
-                return user.exists && ["faculty", "admin"].indexOf(user.data['role']) >= 0;
+                return user.exists && (user.data.role == "faculty" || user.data.superuser);
           }
      });
 
@@ -88,9 +89,27 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      };
      
      user.logout = function() {
-         $http.get(config.apiBase + "/account/logout");
+         var promise = $http.get(config.apiBase + "/account/logout");
          _exists = false;
          _data = {};
+         return promise;
+     };
+
+     user.checkStatus = function() {
+        var promise = $http.get(config.apiBase + '/account/profile');
+        promise.success(function(data) {
+                _data = data;
+                if(user.data.username !== null) {
+                    _exists = true;
+                }
+                // user logged in through oAuth provider but no associated NetID available
+                if(!_promptedToLink && user.data.oauth && user.data.username === null) {
+                    _netIDRequired = true;
+                    _promptedToLink = true;
+                    user.prompt();
+                }
+        });
+        return promise;
      };
      
      // only the service should be able to update the user's information
@@ -99,23 +118,9 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      // kick things off.
      (function(){
         var statusDelay = 30*1000; // how often to poll (if websockets are unavailable) to see user's status
-        var checkStatus = function() {
-            $http.get(config.apiBase + '/account/profile')
-                .success(function(data) {
-                    _data = data;
-                    if(user.data.username !== null) {
-                        _exists = true;
-                    }
-                    // user logged in through oAuth provider but no associated NetID available
-                    if(!_promptedToLink && user.data.oauth && user.data.username === null) {
-                        _netIDRequired = true;
-                        _promptedToLink = true;
-                        user.prompt();
-                    }
-                    setTimeout(checkStatus, statusDelay);
-                });
-        };
-        checkStatus();
+        user.checkStatus(function(){
+            setTimeout(user.checkStatus, statusDelay);
+        });
      })();
      
      return user;
