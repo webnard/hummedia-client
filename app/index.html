@@ -40,7 +40,8 @@
                 <label for="nav-language"><i class="icon-globe"></i> {{language | language}}</label>
 		<select id="nav-language" ng-model="language" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
 	    </span>
-            <a data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
+        <a data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
+        <a href="#/developer" data-ng-show="debug">Developer</a>
     </nav>
     <nav data-ng-show="showAdminMenu" id="nav-admin">
        <a href="#/admin/collection">{{"Collections" | tr}}</a>
@@ -76,6 +77,7 @@
   <script src="js/services/analytics.js"></script>
   <script src="js/services/user.js"></script>
   <script src="js/services/language.js"></script>
+  <script src="js/services/developer.js" data-remove="true"></script>
   
   <!-- DIRECTIVES -->
   <script src="js/directives.js"></script>
@@ -103,6 +105,7 @@
   <script src="js/controllers/admin_collection.js"></script>
   <script src="js/controllers/admin_user.js"></script>
   <script src="js/controllers/video_search.js"></script>
+  <script src="js/controllers/developer.js" data-remove="true"></script>
 <!--[endif]> -->
 </body>
 </html>
