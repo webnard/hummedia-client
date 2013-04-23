@@ -97,6 +97,7 @@ a[data-ng-click], a[ng-click] {
 }
 .admin{
     padding:10px;
+    .inline-block-top;
     h2{
         text-align: center;
         font-size: 110%;
@@ -202,17 +203,28 @@ a[data-ng-click], a[ng-click] {
         float: left;
         clear: left;
     }
-    input, select {
-        float: right;
-        clear: right;
-        min-width: 100px;
-    }
-    label, input {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
     .form-table {
         overflow: hidden;
+        input, select {
+            float: right;
+            clear: right;
+            min-width: 100px;
+        }
+        label, input {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        padding: 10px 0;
+    }
+    .control-buttons {
+        overflow: hidden;
+        text-align: center;
+        button:last-child {
+            float:right;
+        }
+        button:first-child {
+            float: left;
+        }
     }
 }
 #admin-user-select{
