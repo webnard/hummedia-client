@@ -1,11 +1,11 @@
 <div id="collections_content">
 
 <div id="tabs">
-    <p data-ng-repeat="collection in collections" data-ng-click="showVideos(collection['pid'])" id="tab-{{collection['pid']}}">{{collection['dc:title']}}</p>
+    <p data-ng-repeat="tabcollection in collections" data-ng-click="showVideos(tabcollection['pid'])" data-ng-class="{highlighted: collection.pid==tabcollection.pid}" id="tab-{{tabcollection['pid']}}">{{tabcollection['dc:title']}}</p>
 </div>    
 <div id="collections_wrapper">
 
-<div class='collection_blocks' data-ng-repeat="collection in collections">
+<div class='collection_blocks'>
     <div class='collection_toggle' id="{{collection['pid']}}">
         <div>
             <h2>{{collection['dc:title']}}</h2>
