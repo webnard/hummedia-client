@@ -8,7 +8,6 @@ function CollectionsCtrl($scope, $routeParams, Collection) {
     $scope.$watch(function(){return $scope.collections.length;}, function(){
         $scope.collection = $scope.collections[0];        
         $scope.collections_data=[];
-            $('#tabs p:first-child').addClass("highlighted");
         for(var i=0; i<$scope.collections.length; i++){
             var pid = $scope.collections[i]['pid'];
             var item = Collection.get({identifier:pid});
