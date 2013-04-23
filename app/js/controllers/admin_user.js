@@ -1,6 +1,7 @@
 function AdminUserCtrl($scope, account, language) {
     "use strict";
     
+    $scope.roles = account.availableRoles;
     $scope.languages = language.list;
     $scope.users =  account.search();
     $scope.user = null;

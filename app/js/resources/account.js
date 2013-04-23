@@ -7,5 +7,6 @@ angular.module('hummedia.services').
             search: {method: 'GET', isArray: true},
             update: {method: 'PATCH', isArray: false}
         });
+        resource.availableRoles = ['faculty','student'];
         return resource;
     }]);

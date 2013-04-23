@@ -53,7 +53,7 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      Object.defineProperty(user, 'canCreate', {
           enumerable: true,
           get: function() {
-                return user.exists && ["faculty", "admin"].indexOf(user.data['role']) >= 0;
+                return user.exists && (user.data.role == "faculty" || user.data.superuser);
           }
      });
 
