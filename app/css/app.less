@@ -216,6 +216,12 @@ a[data-ng-click], a[ng-click] {
             padding: 5px;
             border-width: 1px;
         }
+        .collection_header{
+            cursor: pointer;
+            background-color: lightgray;
+            margin: 5px;
+            border-radius: 5px;
+        }
 }
 #wrapper{
         background-color: white;
@@ -223,6 +229,37 @@ a[data-ng-click], a[ng-click] {
         margin: auto;
         padding-top: 10px;
         border-radius: 10px;
+}
+#collections_wrapper{
+    #wrapper;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    width: 70%;
+    display: inline-block;
+    vertical-align: top;
+}
+#collections_content{
+    #collection_content;
+    padding-left:0px;
+    padding-right:0px;
+}
+#tabs{
+    display: inline-block;
+    width: 27%;
+    text-align: left;
+    font-size: 125%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, .75);
+    p{
+        border-radius: 5px;
+        padding-left: 2px;
+    }
+    .highlighted{
+        background-color: rgba(255, 255, 255, 1);
+    }
+    cursor: pointer;
+    
 }
 #home_content{
         .ghost;
