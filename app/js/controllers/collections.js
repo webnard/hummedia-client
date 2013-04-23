@@ -1,6 +1,10 @@
 'use strict';
 function CollectionsCtrl($scope, $routeParams, Collection) {
-    $scope.collections = Collection.query();
+    $scope.collections = Collection.query(function(){
+        if(!$scope.collections.length){
+            $scope.message = 'There are no collections to display.';
+        }
+    });
     $scope.$watch(function(){return $scope.collections.length;}, function(){
         $scope.collection = $scope.collections[0];        
         $scope.collections_data=[];
