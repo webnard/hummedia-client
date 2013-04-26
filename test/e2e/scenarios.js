@@ -145,47 +145,69 @@ describe('hummedia app', function() {
     });
 describe('admin', function() {
         beforeEach(function(){
-            browser().navigateTo('#/admin'); 
+            browser().navigateTo("#/developer");
+            element("#developer button:first").click(); // should be the superuser account
+            sleep(.1);
+            browser().navigateTo("#/admin/collection");
         });
-        it('should be able to add a collection', function(){
-            element('#collToggle').click();
-            input("newtitle").enter("!!This Collection Will Be Deleted!!");
-            element('#createcollectionbutton').click();
-            sleep(.5);
-            expect(element('.listvideo:last p').html()).toBe('!!This Collection Will Be Deleted!!');
+        afterEach(function() {
+            element("#logout-link").click(); // logs out the user
+            sleep(.1);
         });
-        it('should be able to edit a collection', function(){
-            element('.listvideo:last').click();
-            element('#editbutton').click();
-            element('#collectioninfo_description').val('A test collection');
-            element('#savebutton').click();
-            expect(element('#collectioninfo_description').val()).toBe('A test collection');
-        });
-        it('should be able to delete a collection', function(){
-            element('.listvideo:last').click();
-            element('#deletebutton').click();
-            expect(element('.listvideo:last p').html()).not().toBe('!!This Collection Will Be Deleted!!');
-        });
-        it('should remove the appropriate collection from the list when clicked', function(){
-            element('#collToggle').click();
-            input("newtitle").enter("!!Third to Last!!");
-            element('#createcollectionbutton').click();
-            element('#collToggle').click();
-            input("newtitle").enter("!!Second to Last!!");
-            element('#createcollectionbutton').click();
-            element('#collToggle').click();
-            input("newtitle").enter("!!Last!!");
-            element('#createcollectionbutton').click();
-            element('.listvideo:nth-last-child(2)').click();
-            element('#deletebutton').click();
-            expect(element('.listvideo:last p').html()).toBe('!!Last!!');
-            expect(element('.listvideo:nth-last-child(2) p').html()).toBe('!!Third to Last!!');
-            
-            // delete last two
-            element('.listvideo:last').click();
-            element('#deletebutton').click();
-            element('.listvideo:last').click();
-            element('#deletebutton').click();
+        describe('collections', function() {
+            it('should be able to add a collection', function(){
+                element('#collToggle').click();
+                input("newtitle").enter("!!This Collection Will Be Deleted!!");
+                element('#createcollectionbutton').click();
+                sleep(.5);
+                expect(element('.listvideo:last p').html()).toBe('!!This Collection Will Be Deleted!!');
+            });
+            it('should be able to edit a collection', function(){
+                // don't delete the wrong one
+                expect(element('.listvideo:last p').html()).toBe('!!This Collection Will Be Deleted!!');
+                element('.listvideo:last').click();
+                element('#editbutton').click();
+                element('#collectioninfo_description').val('A test collection');
+                element('#savebutton').click();
+                expect(element('#collectioninfo_description').val()).toBe('A test collection');
+            });
+            it('should be able to delete a collection', function(){
+                // don't edit the wrong one
+                expect(element('.listvideo:last p').html()).toBe('!!This Collection Will Be Deleted!!');
+                element('.listvideo:last').click();
+                element('#deletebutton').click();
+                expect(element('.listvideo:last p').html()).not().toBe('!!This Collection Will Be Deleted!!');
+            });
+            it('should remove the appropriate collection from the list when clicked', function(){
+                
+                // create a few collections
+                element('#collToggle').click();
+                input("newtitle").enter("!!Third to Last!!");
+                element('#createcollectionbutton').click();
+                input("newtitle").enter("!!Second to Last!!");
+                element('#createcollectionbutton').click();
+                input("newtitle").enter("!!Last!!");
+                element('#createcollectionbutton').click();
+                
+                // make sure they're in the right place
+                expect(element('.listvideo:last p').html()).toBe('!!Last!!');
+                expect(element('.listvideo:nth-last-child(2) p').html()).toBe('!!Second to Last!!');
+                expect(element('.listvideo:nth-last-child(3) p').html()).toBe('!!Third to Last!!');
+                
+                // delete a few
+                element('.listvideo:nth-last-child(2)').click();
+                sleep(.5);
+                element('#deletebutton').click();
+                sleep(.5);
+                expect(element('.listvideo:last p').html()).toBe('!!Last!!');
+                expect(element('.listvideo:nth-last-child(2) p').html()).toBe('!!Third to Last!!');
+                
+                // delete last two
+                element('.listvideo:last').click();
+                element('#deletebutton').click();
+                element('.listvideo:last').click();
+                element('#deletebutton').click();
+            });
         });
     });
 });
