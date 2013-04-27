@@ -29,7 +29,7 @@
     <div data-ng-controller="NavCtrl">
     <nav id="navtable">
         <a id="navtitle" href="#">Humanities Online Media</a>
-        <a data-ng-click="user.prompt(true)" data-ng-show="showLogin">{{"Login" | tr}}</a>
+        <a data-ng-click="user.prompt(true)" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>
         <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
         <a data-ng-show="user.exists">{{user.data.fullname}}</a>
         <a data-ng-show="user.canCreate" ng-click="toggleAdmin()">{{"Admin" | tr}}</a>
