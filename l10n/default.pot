@@ -31,6 +31,9 @@ msgstr ""
 msgid "Create Collection"
 msgstr ""
 
+msgid "Create New Collection"
+msgstr ""
+
 msgid "Creator"
 msgstr ""
 
