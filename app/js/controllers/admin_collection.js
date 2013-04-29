@@ -7,7 +7,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             params['dc:description'] = $scope.newdescription;
             params['dc:creator'] = $scope.newcreator;
         Collection.save(params, function(data){
-            params['pid'] = data.id;
+            params['pid'] = data.pid;
             $scope.collections.push(params);
         });        
         $scope.newtitle = '';
