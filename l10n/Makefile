@@ -7,14 +7,14 @@ JSON_DIR = "../app/translations/"
 all: pot json
 
 pot:
-	@rm default.pot
+	@rm -f default.pot
 	@echo Pulling phrases from index.html
 	@perl -nE $(PERL_CMD) ../app/index.html > default.pot.tmp
 	@echo Extracting from partial files
 	@for directory in $(PARTIAL_FILES); do perl -nE $(PERL_CMD) $$directory/*.html >> default.pot.tmp; done;
 	@echo Extracting from directive files
 	@for directory in $(DIRECTIVE_FILES); do perl -nE $(PERL_CMD) $$directory/*.js >> default.pot.tmp; done;
-	@awk '{a[$$2]=$$0} END {for (i in a) {print a[i]; print "msgstr \"\"\n"}}' default.pot.tmp > default.pot.tmp2
+	@awk '{a[$$2]=$$0} END {for (i in a) {gsub(/\\'\''/,"'\''",a[i]); print a[i]; print "msgstr \"\"\n"}}' default.pot.tmp > default.pot.tmp2
 	@rm default.pot.tmp
 	@awk '{printf("%s%c",$$0,(NR%3==0)?"\n":0)}' default.pot.tmp2 | sort | tr "\0" "\n" >> default.pot
 	@rm default.pot.tmp2
