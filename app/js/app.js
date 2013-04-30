@@ -3,13 +3,13 @@
 // Declare app level module which depends on filters, and services
 angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.services', 'hummedia.directives', 'ngLocale']).
   config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/search', {templateUrl: 'partials/search/search.html', controller: SearchCtrl, reloadOnSearch: false});
-    $routeProvider.when('/', {templateUrl: 'partials/home.html'});
-    $routeProvider.when('/collection/:id', {templateUrl: 'partials/collection.html', controller: CollectionCtrl});
-    $routeProvider.when('/admin/collection', {templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
-    $routeProvider.when('/admin/user', {templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
-    $routeProvider.when('/collection', {templateUrl: 'partials/collections.html', controller: CollectionsCtrl});
-    $routeProvider.when('/developer', {templateUrl: 'partials/developer.html'});
+    $routeProvider.when('/search', {title: "Search", templateUrl: 'partials/search/search.html', controller: SearchCtrl, reloadOnSearch: false});
+    $routeProvider.when('/', {title: "Humanities Online Media", templateUrl: 'partials/home.html'});
+    $routeProvider.when('/collection/:id', {title: "Collection", templateUrl: 'partials/collection.html', controller: CollectionCtrl});
+    $routeProvider.when('/admin/collection', {title: "Admin | Collections", templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
+    $routeProvider.when('/admin/user', {title: "Admin | Users", templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
+    $routeProvider.when('/collection', {title: "Collections", templateUrl: 'partials/collections.html', controller: CollectionsCtrl});
+    $routeProvider.when('/developer', {title: "Developer", templateUrl: 'partials/developer.html'});
     $routeProvider.otherwise({redirectTo: '/'});
   }]).
   config(['$locationProvider', function($locationProvider) {
@@ -35,4 +35,12 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
               });
           };
       }]);
+  }]).
+  /*!
+    partially adapted from jkoreska @ http://stackoverflow.com/a/13407227/390977
+  */
+  run(['$route', '$rootScope', function($routeProvider, $rootScope) {
+      $rootScope.$on('$routeChangeSuccess', function(ev, current, previous) {
+            $rootScope.title = current.$$route.title;
+      });
   }]);
