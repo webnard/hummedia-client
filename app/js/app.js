@@ -39,31 +39,47 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
   /*!
     document title modification partially from jkoreska @ http://stackoverflow.com/a/13407227/390977
   */
-  run(['$location', '$rootScope','user', function($location, $rootScope, user) {
+  run(['$location', '$rootScope', 'user', '$window', function($location, $rootScope, user, $window) {
       // updates page title on URL change
       $rootScope.$on('$routeChangeSuccess', function(ev, current, previous) {
-            $rootScope.title = current.$$route.title;
+          // so crawlers can view cached pages and see our titles
+          if(!current.$$route)
+              return;
+          $rootScope.title = current.$$route.title;
       });
 
       // require login for specific pages
       $rootScope.$on('$routeChangeStart', function(ev, current, previous) {
-            if(!user.exists && current.$$route.login) {
-                $location.path("/");
-                setTimeout(function() {
-                    user.prompt();
-                },1); // make sure this happens AFTER the route is updated
-            }
-            else if(!user.isAdmin && current.$$route.admin) {
-                $location.path("/");
-                setTimeout(function(){
-                    if(!user.exists) {
-                        user.prompt();
-                    }
-                    else
-                    {
-                        alert("You are not authorized to view that page.");
-                    }
-                },1);
-            }
+          if(!current.$$route)
+              return;
+
+          // 0 -- able to view page.
+          // 1 -- login required, not found
+          // 2 -- admin status required, not held
+          var denied = function() {
+              if(current.$$route.login && !user.exists)
+                  return 1;
+              if(current.$$route.admin && !user.canCreate)
+                  return 2;
+              return 0;
+          }
+
+          if(denied()) {
+              user.checkStatus().then(function() {
+                   var denyStatus = denied();
+                   if(!denyStatus)
+                       return;
+
+                   var oldPath = $window.location.toString();
+                   $location.path("/");
+
+                   setTimeout(function(){
+                       if(!user.exists)
+                          user.prompt(false, oldPath);
+                       else if(denyStatus == 2 && !user.canCreate)
+                          alert("You are not authorized to view that page.");
+                   },1); // has to happen after path change
+              });
+          }
       });
   }]);
