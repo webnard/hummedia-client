@@ -23,11 +23,14 @@
 HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', function($http, config, $location, $templateCache, $compile, $scope, $window) {
      "use strict";
      
-     var _exists = false;
-     var _netIDRequired = false;
-     var _promptedToLink = false;
-     var _data = {};
-     var user = {};
+     var _exists = false,
+         _netIDRequired = false,
+         _promptedToLink = false,
+         _data = {},
+         _httpConfig = {
+            withCredentials: true
+         },
+         user = {};
 
      Object.defineProperty(user, 'exists', {
          enumerable: true,
@@ -89,14 +92,14 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      };
      
      user.logout = function() {
-         var promise = $http.get(config.apiBase + "/account/logout");
+         var promise = $http.get(config.apiBase + "/account/logout", _httpConfig);
          _exists = false;
          _data = {};
          return promise;
      };
 
      user.checkStatus = function() {
-        var promise = $http.get(config.apiBase + '/account/profile');
+        var promise = $http.get(config.apiBase + '/account/profile', _httpConfig);
         promise.success(function(data) {
                 _data = data;
                 if(user.data.username !== null) {
