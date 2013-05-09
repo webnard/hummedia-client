@@ -32,9 +32,16 @@ angular.module('hummedia.services').
                     internal backend work for Popcorn to process a JSON object directly
                 */
                 var annotationUrl = annotation[0].resource + "?client=popcorn";
+                //var annotationUrl = "../app/js/jsonTest.js";
                 var pop;
+                
+                console.log("URL:" + annotationUrl);
                 Popcorn.loadVCP("#popcorn-player", annotationUrl, function() {
+                    //console.log("Pop.width:" +  pop.width);
                     pop = this;
+                    //console.log(pop);
+                    pop.video.width=600;
+                    pop.video.height=400;
                 });
             });
             
