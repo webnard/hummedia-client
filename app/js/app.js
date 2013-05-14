@@ -63,19 +63,24 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
                   return 2;
               return 0;
           }
+          
 
           if(denied()) {
+              var redirect = $window.location.toString();
+              var oldPath = $location.path();
+              $location.path("/");
+
               user.checkStatus().then(function() {
                    var denyStatus = denied();
-                   if(!denyStatus)
+                   if(!denyStatus) {
+                       $location.path(oldPath);
                        return;
+                   }
 
-                   var oldPath = $window.location.toString();
-                   $location.path("/");
 
                    setTimeout(function(){
                        if(!user.exists)
-                          user.prompt(false, oldPath);
+                          user.prompt(false, redirect);
                        else if(denyStatus == 2 && !user.canCreate)
                           alert("You are not authorized to view that page.");
                    },1); // has to happen after path change
