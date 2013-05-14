@@ -143,6 +143,36 @@ describe('hummedia app', function() {
             });
         });
     });
+
+describe('auth', function() {
+    beforeEach(function(){
+        element("#logout-link").click();
+    });
+    afterEach(function(){
+        element("#logout-link").click();
+    });
+    it("should display the login box when the login button is clicked", function(){
+        element("#login-link").click();
+        sleep(1);
+        expect(element("#login").css("display")).toBe("block");
+    });
+    it("should hide the login button when logged in", function() {
+        expect(element("#login-link:visible").count()).toBe(1);
+        browser().navigateTo("#/developer");
+        element("#developer button:first").click(); // should be the superuser account
+        sleep(.1);
+        expect(element("#login-link:visible").count()).toBe(0);
+    });
+    it("should take the user to the home page when the user logs out", function() {
+        browser().navigateTo("#/developer");
+        element("#developer button:first").click(); // should be the superuser account
+        sleep(.1);
+        browser().navigateTo("#/search");
+        element("#logout-link").click();
+        expect(browser().location().path()).toEqual("/");
+    });
+});
+
 describe('admin', function() {
         beforeEach(function(){
             browser().navigateTo("#/developer");

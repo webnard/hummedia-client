@@ -95,6 +95,10 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
          var promise = $http.get(config.apiBase + "/account/logout", _httpConfig);
          _exists = false;
          _data = {};
+         
+         // go to homepage
+         $location.path("/");
+         $location.search({});
          return promise;
      };
 

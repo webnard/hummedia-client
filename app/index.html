@@ -29,7 +29,7 @@
     <div data-ng-controller="NavCtrl">
     <nav id="navtable">
         <a id="navtitle" href="#">Humanities Online Media</a>
-        <a data-ng-click="user.prompt(true)" data-ng-show="showLogin">{{"Login" | tr}}</a>
+        <a data-ng-click="user.prompt(true)" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>
         <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
         <a data-ng-show="user.exists">{{user.data.fullname}}</a>
         <a data-ng-show="user.canCreate" ng-click="toggleAdmin()">{{"Admin" | tr}}</a>
@@ -43,7 +43,7 @@
         <a id="logout-link" data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
         <a href="#/developer" data-ng-show="debug">Developer</a>
     </nav>
-    <nav data-ng-show="showAdminMenu" id="nav-admin">
+    <nav data-ng-show="showAdminMenu && user.canCreate" id="nav-admin">
        <a href="#/admin/collection">{{"Collections" | tr}}</a>
        <a href="#/admin/video">{{"Videos" | tr}}</a>
        <a href="#/admin/user">{{"Users" | tr}}</a> 
@@ -87,6 +87,7 @@
   <script src="js/directives/scroll-top-when.js"></script>
   <script src="js/directives/analytics.js"></script>
   <script src="js/directives/draggable.js"></script>
+  <script src="js/directives/repaint.js"></script>
  
   <!-- RESOURCES --> 
   <script src="js/resources/video.js"></script>
