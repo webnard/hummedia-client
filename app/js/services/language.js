@@ -15,6 +15,17 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', function(analytics, 
             return codes;
         });
 
+    // Tells us if the language code exists
+    // requires that the languages already be loaded
+    var languageExists = function( code ) {
+        for(var i = 0; i < languages.$$v.length; i++) {
+            if(languages.$$v[i][code]) {
+                return true;
+            }
+        }
+        return false;
+    };
+
     Object.defineProperty(language, "list", {
         value: languages,
         configurable: false,
@@ -26,18 +37,27 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', function(analytics, 
             return window.localStorage['language'] || defaultLang;
         },
         set : function(str) {
-            // we need to refresh, but we don't want this to infinitely loop
-            if(str === this.current) {
+            // don't set if there's nothing to change
+            if(str === this.current || !str) {
                 return;
             }
-            analytics.event('Language','Switch',str);
-            translations = null; // reset
-            window.localStorage['language'] = str;
-            /**
-             * @todo: Figure out how to reload the angular localization files
-             * and get them to work when switching languages. Right now simply calling loadLanguage won't work
-             */
-            //window.location.reload();
+
+            languages.then(function() { // some defensive maneuvering to help us not set a language when we don't know if it exists or not yet
+                
+                // and don't change it if the language doesn't exist
+                if(!languageExists(str)) {
+                    return;
+                }
+
+                analytics.event('Language','Switch',str);
+                translations = null; // reset
+                window.localStorage['language'] = str;
+                /**
+                 * @todo: Figure out how to reload the angular localization files
+                 * and get them to work when switching languages. Right now simply calling loadLanguage won't work
+                 */
+                //window.location.reload();
+            });
         },
         configurable : false,
         enumerable: true

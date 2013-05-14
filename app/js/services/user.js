@@ -21,7 +21,7 @@
  * {http promise} logout -- logs out the current user
  * {$q promise} checkStatus -- forces a refresh of the user's data
  */
-HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', '$q', function($http, config, $location, $templateCache, $compile, $scope, $window, $q) {
+HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', '$q', 'language', function($http, config, $location, $templateCache, $compile, $scope, $window, $q, Language) {
      "use strict";
      
      var _exists = false,
