@@ -136,6 +136,9 @@ msgstr ""
 msgid "Video title"
 msgstr ""
 
-msgid "You don\'t have permission to do that."
+msgid "You are logged in through a third-party provider. In order to view content on our site, we need to link your account to a BYU NetID. Click below to do so now."
+msgstr ""
+
+msgid "You don't have permission to do that."
 msgstr ""
 
