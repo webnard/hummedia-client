@@ -10,17 +10,18 @@
  *  {bool} netIDRequired -- Whether or not the user needs to link their account with a NetID to continue
  *  
  * Methods:
- *  {void} prompt [BOOL toggle] -- opens a modal window prompting the user to log in.
+ *  {void} prompt [BOOL toggle, STRING returnPath] -- opens a modal window prompting the user to log in.
  *                                 if toggle is set to true, this will close the window
- *                                 if already open
+ *                                 if already open. returnPath tells the server where to return to after logging in
+ *                                 If returnPath is falsy, defaults to current URL
  *
  * {void} closePrompt -- closes the prompt window if it exists
  * {void} signin -- redirects the user to the API's sign-in page
  * {void} googleSignin -- same as signin, but with Google
  * {http promise} logout -- logs out the current user
- * {http promise} checkStatus -- forces a refresh of the user's data
+ * {$q promise} checkStatus -- forces a refresh of the user's data
  */
-HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', function($http, config, $location, $templateCache, $compile, $scope, $window) {
+HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', '$q', function($http, config, $location, $templateCache, $compile, $scope, $window, $q) {
      "use strict";
      
      var _exists = false,
@@ -30,6 +31,7 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
          _httpConfig = {
             withCredentials: true
          },
+         _returnPath = null, // where the user will go after a login
          user = {};
 
      Object.defineProperty(user, 'exists', {
@@ -66,7 +68,9 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
          $('html').removeClass('noscroll');
      }
      
-     user.prompt = function(toggle) {
+     user.prompt = function(toggle, returnPath) {
+         _returnPath = returnPath;
+
          if(user.exists)
              return;
          
@@ -84,7 +88,8 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      };
      
      user.signin = function() {
-        $window.location = config.apiBase + "/account/login?r=" + $location.absUrl();
+        var returnTo = _returnPath ? _returnPath : $location.absUrl();
+        $window.location = config.apiBase + "/account/login?r=" + returnTo; 
      };
      
      user.googleSignin = function() {
@@ -103,20 +108,26 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      };
 
      user.checkStatus = function() {
-        var promise = $http.get(config.apiBase + '/account/profile', _httpConfig);
-        promise.success(function(data) {
-                _data = data;
-                if(user.data.username !== null) {
-                    _exists = true;
-                }
-                // user logged in through oAuth provider but no associated NetID available
-                if(!_promptedToLink && user.data.oauth && user.data.username === null) {
-                    _netIDRequired = true;
-                    _promptedToLink = true;
-                    user.prompt();
-                }
+        var deferred = $q.defer();
+
+        $http.get(config.apiBase + '/account/profile')
+        .success(function(data) {
+             _data = data;
+             if(user.data.username !== null) {
+                 _exists = true;
+             }
+             // user logged in through oAuth provider but no associated NetID available
+             if(!_promptedToLink && user.data.oauth && user.data.username === null) {
+                 _netIDRequired = true;
+                 _promptedToLink = true;
+                 user.prompt();
+             }
+             deferred.resolve();
+        })
+        .error(function() {
+              deferred.reject();
         });
-        return promise;
+        return deferred.promise;
      };
      
      // only the service should be able to update the user's information
