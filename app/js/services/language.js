@@ -19,7 +19,7 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', function(analytics, 
     // requires that the languages already be loaded
     var languageExists = function( code ) {
         for(var i = 0; i < languages.$$v.length; i++) {
-            if(languages.$$v[i][code]) {
+            if(languages.$$v[i]['label'] === code) {
                 return true;
             }
         }
@@ -71,9 +71,12 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', function(analytics, 
 
     // lazily loading translations
     language.translate = function(str) {
-        if(translations === null) { // should only ever happen when we switch a language
+        // default language should be the same language as the string we're translating
+        if(this.current === defaultLang) {
+            return str;
+        }
+        else if(translations === null) { // should only ever happen when we switch a language
 
-            translations = {};
             $http.get('translations/' + this.current + '.json')
                 .success(function(data) {
                     loadingTranslations = false;
