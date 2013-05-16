@@ -1,7 +1,7 @@
 /**
  * Allows for changing the locale and performing translations
  */
-HUMMEDIA_SERVICES.factory('language', ['analytics','$http', function(analytics, $http) {
+HUMMEDIA_SERVICES.factory('language', ['analytics','$http', 'user', function(analytics, $http, user) {
     var defaultLang = "en"; // default
     var language = {};
     var translations = null; // to be loaded; a key-value object of translations
@@ -25,6 +25,10 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', function(analytics, 
         }
         return false;
     };
+
+    user.checkStatus().then(function(){
+        language.current = user.data.preferredLanguage;
+    });
 
     Object.defineProperty(language, "list", {
         value: languages,
