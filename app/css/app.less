@@ -125,6 +125,12 @@ a[data-ng-click], a[ng-click] {
         border-radius:10px;
         background-color:white;
         padding: 10px;
+        max-height: 400px;
+        overflow-y: scroll;
+        .filter {
+            margin-bottom: 15px;
+            margin-top: 19px;
+        }
         a{
             font-size: 50%;
         }
@@ -197,7 +203,7 @@ a[data-ng-click], a[ng-click] {
     background-color: white;
     border-radius: 10px;
     border-style: solid;
-    width: 300px;
+    min-width: 300px;
     padding: 10px;
     label {
         float: left;
@@ -209,6 +215,12 @@ a[data-ng-click], a[ng-click] {
             float: right;
             clear: right;
             min-width: 100px;
+        }
+        textarea {
+            display: block;
+            clear: both;
+            width: 90%;
+            height: 8em;
         }
         label, input {
             margin-top: 10px;

@@ -2,7 +2,7 @@
 
 angular.module('hummedia.services').
     factory('Video', ['$resource', 'appConfig', function($resource, config, $q){
-        var resource = $resource(config.apiBase + '/video/:identifier', {identifier: '@identifier'},
+        var resource = $resource(config.apiBase + '/video/:pid', {pid: '@pid'},
         {
             search: {method: 'GET', isArray: true, params: {searchtype: 'keyword', q: '@q'}},
 	    advancedSearch: {method: 'GET', isArray: true},

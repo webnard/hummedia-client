@@ -40,6 +40,9 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
+msgid "Description:"
+msgstr ""
+
 msgid "Description"
 msgstr ""
 
@@ -118,6 +121,9 @@ msgstr ""
 msgid "There was an error processing your request."
 msgstr ""
 
+msgid "Title:"
+msgstr ""
+
 msgid "Title"
 msgstr ""
 
@@ -134,6 +140,9 @@ msgid "Videos to Add"
 msgstr ""
 
 msgid "Video title"
+msgstr ""
+
+msgid "Year:"
 msgstr ""
 
 msgid "You are logged in through a third-party provider. In order to view content on our site, we need to link your account to a BYU NetID. Click below to do so now."
