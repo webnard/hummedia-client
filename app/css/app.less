@@ -787,5 +787,12 @@ footer{
         border-width: 1px;
         border-color: gray;
         padding:2px;
+        &:-webkit-full-screen{
+            border-style: none;
+            max-height:100%;
+        }
+        &:-moz-full-screen{
+            border-style:none;
+        }
     }
 }
