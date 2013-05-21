@@ -58,4 +58,4 @@ function AdminVideoCtrl($scope, Video, language, $routeParams, $location) {
         });
     }
 };
-AdminUserCtrl.$inject = ['$scope','Video', 'language', '$routeParams', '$location'];
+AdminVideoCtrl.$inject = ['$scope','Video', 'language', '$routeParams', '$location'];
