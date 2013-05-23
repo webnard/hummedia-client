@@ -1,19 +1,29 @@
 <div id="video_content">
-    <div id="wrapper">
+<div id="wrapper">
+    <div id="player-column">
         <div id="player-header">
             <h2>{{video['ma:title']}}</h2>
-            <p class='date'>{{video['ma:date']}}</p>
-                <ul class="language-list">
-                    <li data-ng-repeat="lg in video['ma:hasLanguage']">{{lg | language}}</li>
-                </ul>
+            <p>{{video['ma:date'] | date:'longDate'}} [{{video['ma:hasLanguage'][0] | language}}]</p>
         </div>
-        <div data-ng-show="video['url'].length" id="popcorn-player"></div>
-        <p data-ng-show="!video['url'].length" id="error">
-            <strong>We were unable to find the video you requested.</strong>
-        </p>
+        <div id="popcorn-player"></div>
         <div id="player-footer">
             <p>{{video['ma:description']}}</p>
+            <p id="caption"></p>
         </div>
+        <div id="popup"></div>
+    </div>
+    <div id="_caption"></div>
+    <div id="vocabulary"></div>
+    
+    <div style="position:absolute; top:100px; left:100px; min-width:100px; min-height:100px; background-color:pink;">
+        <ul>
+            <li data-ng-repeat="annotation in annotations">
+                <label>
+                    <input data-ng-model="annotation.enabledState" type="checkbox" name="annotations" class="annotationCheckbox" />
+                    {{annotation['dc:title']}}{{annotation['pid']}}
+                </label>
+            </li>
+        </ul>
     </div>
 </div>        
 </div>
