@@ -6,7 +6,7 @@
     </div>
     <div data-ng-repeat="video in collection_data.videos" class="video_blocks" style="vertical-align: top;"><a title="{{video['ma:description']}}" href="#/video/{{video.pid}}">
             <div id="video-wrapper"><div id="video-clipper">
-                <img data-ng-src="{{video['ma:image'][0]['poster']}}" src='' width="300" height="200" onerror="this.src='http://placekitten.com/300/200'"/>
+                <img data-ng-src="{{video.currentImage}}" src='' width="300" height="200" onerror="this.src='http://placekitten.com/300/200'"/>
             </div></div>
         </a>
         <a title="{{video['ma:description']}}" style="text-align:center;" class="plain_link" href="#/video/{{video.pid}}">{{video['ma:title']}}</a>
