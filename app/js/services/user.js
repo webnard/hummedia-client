@@ -110,7 +110,7 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      user.checkStatus = function() {
         var deferred = $q.defer();
 
-        $http.get(config.apiBase + '/account/profile')
+        $http.get(config.apiBase + '/account/profile', _httpConfig)
         .success(function(data) {
              _data = data;
              if(user.data.username !== null) {
