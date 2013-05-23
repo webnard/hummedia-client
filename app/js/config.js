@@ -9,7 +9,7 @@
 
 if(HUMMEDIA_CONFIG === undefined) {
   var HUMMEDIA_CONFIG = angular.module('hummedia.config', []).
-  factory('appConfig', ['apiBase','flickrKey', 'googleAnalyticsKey', 'debugMode', 'youtubeKey', function(apiBase, flickrKey, googleAnalyticsKey, youtubeKey, debugMode) {
+  factory('appConfig', ['apiBase','flickrKey', 'googleAnalyticsKey', 'debugMode', 'youtubeKey', function(apiBase, flickrKey, googleAnalyticsKey, debugMode, youtubeKey) {
     return {
       apiBase: apiBase,
       flickrKey: flickrKey,

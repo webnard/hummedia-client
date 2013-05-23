@@ -1,0 +1,18 @@
+<section id="admin-create-video-step-1">
+<h1>Step 1</h1>
+<h2>Find a Video</h2>
+
+<form ng-submit="search()">
+    <label for="admin-youtube-search">Search for a YouTube video:</label>
+    <input id="admin-youtube-search" type="search" data-ng-model="query">
+    <input type="submit" value="Search">
+</form>
+
+<ul id="admin-select-video" data-ng-show="videos.items.length">
+    <li data-ng-repeat="video in videos.items">
+        <img data-ng-src="{{video.snippet.thumbnails.medium.url}}" src="" title="{{video.snippet.description}}">
+        <div class="title">{{video.snippet.title}}</div>
+        <div class="add"><button>Watch on YouTube</button><button>Use this video</button></div>
+    </li>
+</ul>
+</section>
