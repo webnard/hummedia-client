@@ -11,7 +11,8 @@ window.HUMMEDIA_SERVICES
                     $http.get(config.apiBase + "/account/login/authUser", {
                         headers: {
                             Authorization: levels[parseInt(level)]    
-                        }
+                        },
+                        withCredentials: true
                     }).success(function(){
                         user.checkStatus();
                     });
