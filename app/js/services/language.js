@@ -42,7 +42,7 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', 'user', function(ana
         },
         set : function(str) {
             // don't set if there's nothing to change
-            if(str === this.current || !str) {
+            if(typeof str != "string" || str === this.current || !str) {
                 return;
             }
 
