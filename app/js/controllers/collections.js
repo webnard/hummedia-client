@@ -1,6 +1,6 @@
 'use strict';
 function CollectionsCtrl($scope, $routeParams, Collection) {
-    
+        
     function loadPosterImage(collection, video){
         var image = document.createElement("img");
         image.src = collection.videos[video]['ma:image'][0]['poster'];
@@ -8,6 +8,13 @@ function CollectionsCtrl($scope, $routeParams, Collection) {
             collection.videos[video].currentImage = collection.videos[video]['ma:image'][0]['poster'];
             $scope.$digest();
         };     
+    };   
+ 
+    function setCurrentImage(collection, video){
+        collection.videos[video].currentImage = collection.videos[video]['ma:image'][0]['thumb'];
+        setTimeout(function(){
+            loadPosterImage(collection, video);
+        },1000);
     };
     
     $scope.collections = Collection.query(function(){
@@ -24,13 +31,7 @@ function CollectionsCtrl($scope, $routeParams, Collection) {
                 var pid = $scope.collections[coll]['pid'];
                 var item = Collection.get({identifier:pid}, function(){
                     for(var vid=0; vid<item.videos.length; vid++){
-                        (function(){
-                            var i = vid;
-                            item.videos[i].currentImage = item.videos[i]['ma:image'][0]['thumb'];
-                            setTimeout(function(){
-                                loadPosterImage(item, i);   
-                            },1000);
-                        })();
+                        setCurrentImage(item, vid);
                     }      
                 });
                 $scope['collections_data'][pid] = item;
