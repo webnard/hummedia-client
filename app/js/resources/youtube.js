@@ -21,5 +21,9 @@ angular.module('hummedia.services').
             return $http.jsonp(api + "search?&q=" + query, config);
         };
         
+        resource.watch = function(id) {
+            window.open("http://www.youtube.com/watch?v=" + id);
+        };
+        
         return resource;
     }]);

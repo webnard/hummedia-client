@@ -778,3 +778,59 @@ footer{
         vertical-align: middle;
     }
 }
+
+/************************
+ * YOUTUBE VIDEO CREATION
+ ************************/
+[id|=admin-create-video] {
+    h1 {
+        font-size: 2em;
+        font-weight: bold;
+        background-color: white;
+    }
+    h2 {
+        font-weight: bold;
+        font-size: 1.5em;
+        background-color: white;
+    }
+    form {
+        background-color: white;
+    }
+}
+#admin-select-video {
+    text-align: center;
+    width: 80%;
+    min-width: 500px;
+    color: black;
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    li {
+        position: relative;
+        .add {
+            opacity: 0;
+            .transition(opacity .3s linear);
+            top: 0;
+            left: 0;
+            display: block;
+            position: absolute;
+        }
+        &:hover .add {
+            opacity: 1;
+        }
+        img {
+            padding: 3px;
+            border: #aaa solid 1px;
+        }
+        .title {
+            text-align: left;
+        }
+        display: inline-block;
+        width: 400px;
+        vertical-align: top;
+        text-align: left;
+        margin-bottom: 15px;
+    }
+}
