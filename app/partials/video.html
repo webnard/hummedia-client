@@ -1,0 +1,12 @@
+<div id="video_content">
+    <div id="wrapper">
+        <div id="player-header">
+            <h2>{{video['ma:title']}}</h2>
+            <p>{{video['ma:date'] | date:'longDate'}} [{{video['ma:hasLanguage'][0] | language}}]</p>
+        </div>
+        <div id="popcorn-player"></div>
+        <div id="player-footer">
+            <p>{{video['ma:description']}}</p>
+        </div>
+    </div>
+</div>

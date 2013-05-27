@@ -766,3 +766,43 @@ footer{
         vertical-align: middle;
     }
 }
+
+
+/**************
+ * Video Player
+ **************/
+#video_content{
+    margin-top:10px;
+    text-align: center;
+    h2{
+        font-size: 150%;
+    }
+    p{
+        padding: 10px;
+    }
+    #popcorn-player{
+        height:450px;
+    }
+    video{
+        margin:auto;
+        max-height:400px;
+        border-style: solid;
+        border-width: 1px;
+        border-color: gray;
+        padding:2px;
+        &:-webkit-full-screen{
+            border-style: none;
+            max-height:100%;
+        }
+        &:-moz-full-screen{
+            border-style:none;
+        }
+        &:-ms-full-screen{
+            border-style: none;
+            max-height:100%;
+        }
+    }
+    #player-footer{
+        margin-bottom: 30px;
+    }
+}

@@ -6,6 +6,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.when('/search', {title: "Hummedia | Search", templateUrl: 'partials/search/search.html', controller: SearchCtrl, reloadOnSearch: false});
     $routeProvider.when('/', {title: "Hummedia", templateUrl: 'partials/home.html'});
     $routeProvider.when('/collection/:id', {title: "Hummedia | Collection", templateUrl: 'partials/collection.html', controller: CollectionCtrl});
+    $routeProvider.when('/video/:id', {title: "Hummedia | Video", templateUrl: 'partials/video.html', controller: VideoCtrl});    
     $routeProvider.when('/admin/collection', {title: "Hummedia | Collections", admin: true, templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/user', {title: "Hummedia | Users", admin: true, templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
     $routeProvider.when('/collection', {title: "Hummedia | Collections", templateUrl: 'partials/collections.html', controller: CollectionsCtrl});
