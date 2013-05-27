@@ -7,6 +7,8 @@
         <ul>
             <li class="selectable" data-ng-repeat="v in videos | filter: {'ma:title': title_filter}" data-ng-class="{selected: v.pid == video.pid}" data-ng-click="setVideo(v)">{{v["ma:title"]}}</li>
         </ul>
+        <hr>
+        <a href='#/admin/video/create'><h2 class="ng-binding">Add Video <i id="collToggle" class="icon-plus"></i></h2></a>
     </div>
 </section>
 <section class="admin" data-ng-show="!!video">
