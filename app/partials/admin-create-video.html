@@ -26,6 +26,13 @@
         <div><label for="input-yt-title">Title:</label><input id="input-yt-title" ng-model="data['ma:title']" /></div>
         <div><label for="input-yt-date">Date:</label><input name="input-yt-date" ng-model="data['ma:date']" /></div>
         <div><label for="input-yt-description">Description:</label><textarea id="input-yt-description" ng-model="data['ma:description']"></textarea></div>
+        <div>
+             <label for="input-yt-rights">Availability:</label>
+             <select id="input-yt-rights" ng-model="data['dc:coverage']">
+                <option value="private" selected>Private</option>
+                <option value="public">Public</option>
+             </select>
+        </div>
         <div><input type="submit" value="Save" disable-when="isSaving"/></div>
     </form>
 </div>

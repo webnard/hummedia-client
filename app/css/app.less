@@ -793,6 +793,9 @@ footer{
         font-size: 1.5em;
         background-color: white;
     }
+    h3 {
+        background-color: white;
+    }
     form {
         background-color: white;
     }
@@ -828,9 +831,30 @@ footer{
             text-align: left;
         }
         display: inline-block;
-        width: 400px;
+        width: 334px;
         vertical-align: top;
         text-align: left;
         margin-bottom: 15px;
     }
+}
+#admin-configure-yt {
+    overflow: hidden;
+    width: 350px;
+    padding: 15px;
+    &> div {
+        overflow: hidden;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    label {
+        font-weight: bold;
+        float: left;
+        clear: left;
+    }
+    input, textarea {
+        width: 200px;
+        float: right;
+        clear: right;
+    }
+    margin-top: 50px;
 }

@@ -5,7 +5,10 @@ function AdminCreateVideo($scope, Youtube, Video, $routeParams, $location) {
     $scope.video = null;
     $scope.isSaving = false;
     
-    $scope.data = {};
+    // any defaults are put in here
+    $scope.data = {
+        "dc:coverage": "private"
+    };
     
     $scope.search = function(query) {
         if(query === undefined) {
@@ -68,7 +71,7 @@ function AdminCreateVideo($scope, Youtube, Video, $routeParams, $location) {
     $scope.save = function() {
         $scope.isSaving = true;
         Video.save($scope.data, function(data) {
-            
+           $location.path('/video/', data.pid); 
         });
     };
     
