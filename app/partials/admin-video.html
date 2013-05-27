@@ -16,9 +16,7 @@
         <h2>{{"Modify" | tr}} {{video["ma:title"]}}</h2>
         <form>
             <div class="form-table">
-                <label for="title">{{"Title:" | tr}}</label><input id="title" data-ng-model="video['ma:title']">
-                <label for="year">{{"Year:" | tr}}</label><input id="year" type="year" data-ng-model="video['ma:date']">
-                <label for="description">{{"Description:" | tr}}</label><textarea data-ng-model="video['ma:description']"></textarea>
+                <div resource-form="video" resource-model="video"></div>
             </div>
             <div class="control-buttons">
                 <button id="admin-video-cancel" data-disable-when="video.isSaving" data-ng-click="cancel()" class="icon-cancel"> {{"Cancel" | tr}}</button>
