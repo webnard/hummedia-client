@@ -7,7 +7,8 @@ function AdminCreateVideo($scope, Youtube, Video, $routeParams, $location) {
     
     // any defaults are put in here
     $scope.data = {
-        "dc:coverage": "private"
+        "dc:coverage": "private",
+        "ma:hasLanguage": []
     };
     
     $scope.search = function(query) {
