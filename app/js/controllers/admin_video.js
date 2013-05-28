@@ -40,7 +40,7 @@ function AdminVideoCtrl($scope, Video, language, $routeParams, $location) {
         $scope.id = $routeParams.id;
         if($scope.id){
             if($scope.video === null || $scope.video.pid !== val) {
-                $scope.video = Video.get({pid:$routeParams.id}, function(){}, function(){
+                $scope.video = Video.get({identifier:$routeParams.id}, function(){}, function(){
                     // error
                     $scope.video = null;
                     copy = null;
