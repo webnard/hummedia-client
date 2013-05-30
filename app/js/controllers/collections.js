@@ -1,5 +1,5 @@
 'use strict';
-function CollectionsCtrl($scope, $routeParams, Collection) {
+function CollectionsCtrl($scope, Collection) {
         
     function loadPosterImage(collection, video){
         var image = document.createElement("img");
@@ -48,4 +48,4 @@ function CollectionsCtrl($scope, $routeParams, Collection) {
     };
 }
 // always inject this in so we can later compress this JavaScript
-CollectionCtrl.$inject = ['$scope', '$routeParams', 'Collection'];
+CollectionsCtrl.$inject = ['$scope', 'Collection'];
