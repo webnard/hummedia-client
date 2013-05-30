@@ -8,9 +8,11 @@ function AdminVideoCtrl($scope, Video, language, $routeParams, $location) {
     var copy = null; // used for updating the user list while removing $scope.user
 
     $scope.setVideo = function(video) {
-        copy = video;
-        $scope.video = video;
-        $location.search({id: video.pid});
+        var newVideo = Video.get({identifier: video.pid}, function() {
+            copy = newVideo;
+            $scope.video = newVideo;
+            $location.search({id: newVideo.pid});
+        })
     };
 
     $scope.cancel = function() {
@@ -28,8 +30,8 @@ function AdminVideoCtrl($scope, Video, language, $routeParams, $location) {
         copy = null;
         $location.search({});
         $scope.videos.forEach(function(u, index) {
-            if(video === u) {
-                video.$delete(function() {
+            if(video.pid === u.pid) {
+                video.$delete({identifier: video.pid}, function() {
                     $scope.videos.splice(index,1);
                 });
             }
