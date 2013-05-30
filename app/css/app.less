@@ -125,8 +125,15 @@ a[data-ng-click], a[ng-click] {
         border-radius:10px;
         background-color:white;
         padding: 10px;
-        a{
-            font-size: 50%;
+        max-height: 400px;
+        overflow-y: scroll;
+        .filter {
+            margin-bottom: 15px;
+            margin-top: 19px;
+        }
+        a {
+            text-decoration: none;
+            color: #000;
         }
     }
     .selectable{
@@ -197,18 +204,28 @@ a[data-ng-click], a[ng-click] {
     background-color: white;
     border-radius: 10px;
     border-style: solid;
-    width: 300px;
+    min-width: 300px;
     padding: 10px;
     label {
         float: left;
         clear: left;
     }
     .form-table {
+        .field-row {
+            overflow: hidden;
+            padding-top: 5px;
+        }
         overflow: hidden;
         input, select {
             float: right;
             clear: right;
             min-width: 100px;
+        }
+        textarea {
+            display: block;
+            clear: both;
+            width: 90%;
+            height: 8em;
         }
         label, input {
             margin-top: 10px;
@@ -767,7 +784,6 @@ footer{
     }
 }
 
-
 /**************
  * Video Player
  **************/
@@ -805,4 +821,111 @@ footer{
     #player-footer{
         margin-bottom: 30px;
     }
+}
+
+/************************
+ * YOUTUBE VIDEO CREATION
+ ************************/
+[id|=admin-create-video] {
+    h1 {
+        font-size: 2em;
+        font-weight: bold;
+        background-color: white;
+    }
+    h2 {
+        font-weight: bold;
+        font-size: 1.5em;
+        background-color: white;
+    }
+    h3 {
+        background-color: white;
+    }
+    form {
+        background-color: white;
+    }
+}
+#admin-select-video {
+    text-align: center;
+    width: 80%;
+    min-width: 500px;
+    color: black;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    li {
+        position: relative;
+        .add {
+            opacity: 0;
+            .transition(opacity .3s linear);
+            top: 0;
+            left: 0;
+            display: block;
+            position: absolute;
+        }
+        &:hover .add {
+            opacity: 1;
+        }
+        img {
+            padding: 3px;
+            border: #aaa solid 1px;
+        }
+        .title {
+            text-align: left;
+        }
+        display: inline-block;
+        width: 334px;
+        vertical-align: top;
+        text-align: left;
+        margin-bottom: 15px;
+    }
+}
+#admin-configure-yt {
+    overflow: hidden;
+    width: 350px;
+    padding: 15px;
+    div:not([resource-form]) {
+        overflow: hidden;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    label {
+        font-weight: bold;
+        float: left;
+        clear: left;
+    }
+    input{
+        width: 200px;
+        float: right;
+        clear: right;
+    }
+    textarea{
+        width: 345px;
+        height: 200px;
+    }
+    margin-top: 50px;
+}
+#step1 {
+        width: 80%;
+        margin: auto;
+        border-style: solid;
+        border-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        margin-top: 5px;
+}
+#step2 {
+        width: 50%;
+        margin: auto;
+        border-style: solid;
+        border-color: rgb(255, 255, 255);
+        border-radius: 5px;
+        margin-top: 5px;
+}
+#admin-configure-yt{
+        margin:auto;
+        margin-top:10px;
+        border-radius: 10px;
 }

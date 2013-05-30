@@ -9,6 +9,8 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.when('/video/:id', {title: "Hummedia | Video", templateUrl: 'partials/video.html', controller: VideoCtrl});    
     $routeProvider.when('/admin/collection', {title: "Hummedia | Collections", admin: true, templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/user', {title: "Hummedia | Users", admin: true, templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
+    $routeProvider.when('/admin/video', {title: "Hummedia | Videos", admin: true, templateUrl: 'partials/admin-video.html', controller: AdminVideoCtrl, reloadOnSearch: false});
+    $routeProvider.when('/admin/video/create', {title: "Hummedia | Create Video", admin: true, templateUrl: 'partials/admin-create-video.html', controller: AdminCreateVideo, reloadOnSearch: false});
     $routeProvider.when('/collection', {title: "Hummedia | Collections", templateUrl: 'partials/collections.html', controller: CollectionsCtrl});
     $routeProvider.when('/developer', {title: "Hummedia | Developer", templateUrl: 'partials/developer.html'});
     $routeProvider.otherwise({redirectTo: '/'});

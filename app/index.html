@@ -37,8 +37,8 @@
 	    <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
 	    <a href="">{{"Contact" | tr}}</a>
 	    <span class="language" data-ng-controller="LanguageCtrl">
-                <label for="nav-language"><i class="icon-globe"></i> {{language.current | language}}</label>
-		<select id="nav-language" ng-model="language.current" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown" data-ng-options="lang.value as lang.label | language for lang in languages"></select>
+            <label for="nav-language" id="nav-language-label"><i class="icon-globe"></i> {{language.current | language}}</label>
+            <div id="nav-language" lang-exists select-language lang-callback="flash" ng-model="language.current" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown"></div>
 	    </span>
         <a id="logout-link" data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
         <a href="#/developer" data-ng-show="debug">Developer</a>
@@ -89,6 +89,7 @@
   <script src="js/services/analytics.js"></script>
   <script src="js/services/user.js"></script>
   <script src="js/services/language.js"></script>
+  <script src="js/services/select-language-helper.js"></script>
   <script src="js/services/developer.js" data-remove="true"></script>
   
   <!-- DIRECTIVES -->
@@ -100,11 +101,15 @@
   <script src="js/directives/analytics.js"></script>
   <script src="js/directives/draggable.js"></script>
   <script src="js/directives/repaint.js"></script>
+  <script src="js/directives/select-language.js"></script>
+  <script src="js/directives/select-language-multi.js"></script>
+  <script src="js/directives/resource-form.js"></script>
  
   <!-- RESOURCES --> 
   <script src="js/resources/video.js"></script>
   <script src="js/resources/collection.js"></script>
   <script src="js/resources/account.js"></script>
+  <script src="js/resources/youtube.js"></script>
 
   <!-- CONTROLLERS -->
   <script src="js/controllers/nav.js"></script>
@@ -117,6 +122,8 @@
   <script src="js/controllers/site.js"></script>
   <script src="js/controllers/admin_collection.js"></script>
   <script src="js/controllers/admin_user.js"></script>
+  <script src="js/controllers/admin_video.js"></script>
+  <script src="js/controllers/admin_create_video.js"></script>
   <script src="js/controllers/video_search.js"></script>
   <script src="js/controllers/video.js"></script>
   <script src="js/controllers/developer.js" data-remove="true"></script>
