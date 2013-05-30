@@ -61,7 +61,7 @@
 				<time datetime="{{result['ma:date']}}" data-ng-switch-when="true">{{result["ma:date"] | date:'longDate'}}</time>
                 <time datetime="{{result['ma:date']}}" data-ng-switch-when="false">{{result["ma:date"]}}</time>
 			</ng-switch>
-			<ul class="languages">
+			<ul class="language-list">
 			    <li data-ng-repeat="lg in result['ma:hasLanguage']">{{lg | language}}</li>
 			</ul>
 		    </div>

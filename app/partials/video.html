@@ -2,7 +2,10 @@
     <div id="wrapper">
         <div id="player-header">
             <h2>{{video['ma:title']}}</h2>
-            <p>{{video['ma:date'] | date:'longDate'}} [{{video['ma:hasLanguage'][0] | language}}]</p>
+            <p class='date'>{{video['ma:date']}}</p>
+                <ul class="language-list">
+                    <li data-ng-repeat="lg in video['ma:hasLanguage']">{{lg | language}}</li>
+                </ul>
         </div>
         <div data-ng-show="video['url'].length" id="popcorn-player"></div>
         <p data-ng-show="!video['url'].length" id="error">

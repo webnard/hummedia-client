@@ -346,6 +346,11 @@ strong {
     max-height: 200px;
     overflow: hidden;
 }
+#player-header {
+    .language-list, .date {
+        display: inline;
+    }
+}
 .ghost{
 	background-color: rgba(255,255,255,0.75);
 	border-radius: 10px;
@@ -356,6 +361,24 @@ strong {
 .plain_link{
     text-decoration: none;
     color: black;
+}
+/**
+ * @todo: Maybe show these details by default on mobile devices?
+**/
+.language-list {
+    display: inline-block;
+    li {
+    display: inline;
+    &:not(:last-child):after {
+        content: ', ';
+    }
+    &:first-child:before {
+        content: '[';
+    }
+    &:last-child:after {
+        content: ']';
+    }
+    }
 }
 footer{
     z-index: 1000; /* above the error modal */
@@ -616,24 +639,6 @@ footer{
 	padding: 10px;
 	min-height: 75px;
 	
-	/**
-	 * @todo: Maybe show these details by default on mobile devices?
-	**/
-	.languages {
-	    display: inline-block;
-	    li {
-		display: inline;
-		&:not(:last-child):after {
-		    content: ', ';
-		}
-		&:first-child:before {
-		    content: '[';
-		}
-		&:last-child:after {
-		    content: ']';
-		}
-	    }
-	}
 	.details {
 	    font-size: 0.8em;
 	    text-align: left;
