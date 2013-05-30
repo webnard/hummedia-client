@@ -19,7 +19,13 @@ function AdminCreateVideo($scope, Youtube, Video, $routeParams, $location) {
     };
 
     $scope.$watch(function(){return $routeParams.id}, function(id) {
-        loadVideo(id);
+        if(id !== null) {
+            loadVideo(id);
+        }
+        else
+        {
+            $scope.reset();
+        }
     });
     
     $scope.$watch(function(){return $routeParams.q}, function(query) {
@@ -60,7 +66,7 @@ function AdminCreateVideo($scope, Youtube, Video, $routeParams, $location) {
         $location.search({id: video.id.videoId});
     };
     
-    $scope.reset = function(video) {
+    $scope.reset = function() {
         $scope.video = null;
         $location.search(null);
     };
