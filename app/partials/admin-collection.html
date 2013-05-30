@@ -1,11 +1,13 @@
 <div class="admin">
     <div id="listwrapper">
-        <h2>{{"My Collections" | tr}}</h2>
-        <ul>
-        <li class="selectable listvideo" data-ng-repeat="collection in collections" id="{{collection.pid}}" data-ng-click="showCollection(collection.pid)">
-            <p>{{collection['dc:title']}}</p>
-        </li>
-        </ul>
+        <div id="list_scrolling_block">
+            <h2>{{"My Collections" | tr}}</h2>
+            <ul>
+            <li class="selectable listvideo" data-ng-repeat="collection in collections" id="{{collection.pid}}" data-ng-click="showCollection(collection.pid)">
+                <p>{{collection['dc:title']}}</p>
+            </li>
+            </ul>
+        </div>
         <hr>
         <h2>{{"Create New Collection" | tr}} <i data-ng-click="showCreateCollection()" id="collToggle" class="icon-plus"></i></h2>
         <div id="createcollection">
