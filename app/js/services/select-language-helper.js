@@ -1,6 +1,6 @@
 /**
  * Used in the selectLanguage and selectLanguageMulti directives.
- * Couldn't find an way to easily combine the two, as each had slightly different templates
+ * Couldn't find an way to easily combine the two, as each had slightly different templates.
  * 
  * @author Ian Hunter
  * @see selectLanguage and selectLanguageMulti directives
@@ -18,9 +18,7 @@ HUMMEDIA_SERVICES.
         }
         
         var linkFn = function(scope, iElement, iAttrs, controller) {
-            var model = iAttrs['selectLanguage'] ? iAttrs['selectLanguage'] : 'language';
-            scope.__language = scope[model];
-            
+
             if(iAttrs.hasOwnProperty('langExists')) {
                 scope.__languages = language.list;
             }
@@ -29,14 +27,11 @@ HUMMEDIA_SERVICES.
                 scope.__languages = languages;
             }
             
-            // these two watches keep our temporary variable and the model in sync
-            scope.$watch(model, function() {
-                scope.__language = scope.$eval(model);
-            });
+            var callback = iAttrs['langCallback'];
             
-            scope.$watch('__language', function() {
-                scope.$eval(model + " = __language");
-            });
+            if(callback && typeof scope[callback] === "function") {
+                scope[callback]();
+            }
         };
         
         return {
