@@ -125,8 +125,6 @@ a[data-ng-click], a[ng-click] {
         border-radius:10px;
         background-color:white;
         padding: 10px;
-        max-height: 400px;
-        overflow-y: scroll;
         .filter {
             margin-bottom: 15px;
             margin-top: 19px;
@@ -135,6 +133,10 @@ a[data-ng-click], a[ng-click] {
             text-decoration: none;
             color: #000;
         }
+    }
+    #list_scrolling_block{
+        max-height: 400px;
+        overflow-y: auto;   
     }
     .selectable{
         border-style: solid;
@@ -928,4 +930,9 @@ footer{
         margin:auto;
         margin-top:10px;
         border-radius: 10px;
+}
+#admin-video-add-button{
+    .bwbuttondark;
+    display: block;
+    text-align: center;
 }
