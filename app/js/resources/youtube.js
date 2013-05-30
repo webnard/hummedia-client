@@ -6,7 +6,7 @@ angular.module('hummedia.services').
         var callback = "&callback=JSON_CALLBACK";
         var _params = {
             callback: "JSON_CALLBACK",
-            key: cfg.youtubeKey,
+            key: cfg.youtubeKey
         };
         
         var resource = {};
