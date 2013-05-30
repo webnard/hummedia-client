@@ -38,7 +38,7 @@
 	    <a href="">{{"Contact" | tr}}</a>
 	    <span class="language" data-ng-controller="LanguageCtrl">
             <label for="nav-language"><i class="icon-globe"></i> {{language.current | language}}</label>
-            <div id="nav-language" lang-exists select-language="language.current" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown"></div>
+            <div id="nav-language" lang-exists select-language ng-model="language.current" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown"></div>
 	    </span>
         <a id="logout-link" data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
         <a href="#/developer" data-ng-show="debug">Developer</a>

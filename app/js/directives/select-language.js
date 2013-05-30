@@ -1,7 +1,5 @@
 /**
  * Populates a language selection dropdown menu.
- * The value of the select-language attribute should be the ng-model value you want to bind to.
- * Defaults to language.
  * 
  * @author Ian Hunter
  * @see selectLanguageMulti and selectLanguageHelper
@@ -16,7 +14,7 @@ HUMMEDIA_DIRECTIVES.
         return {
             link: SLH.linkFn,
             scope: false,
-            template: '<select ng-model="__language" data-ng-options="lang.value as lang.label | language for lang in __languages"></select>',
+            template: '<select data-ng-options="lang.value as lang.label | language for lang in __languages"></select>',
             replace: true
         };
     }]);
