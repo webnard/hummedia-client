@@ -58,7 +58,7 @@
 	    <li class="result" data-ng-repeat="result in results"><a data-ng-href="#/{{result.type}}/{{result.pid}}">
 		    <div class="details">
 			<ng-switch on="result.date.length == 10">
-				<time datetime="{{result['ma:date']}}" data-ng-switch-when="true">{{result["ma:date"] | date:'longDate'}}</time>
+				<time datetime="{{result['ma:date']}}" data-ng-switch-when="true">{{result["ma:date"]}}</time>
                 <time datetime="{{result['ma:date']}}" data-ng-switch-when="false">{{result["ma:date"]}}</time>
 			</ng-switch>
 			<ul class="languages">

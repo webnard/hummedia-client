@@ -2,7 +2,7 @@
     <div id="wrapper">
         <div id="player-header">
             <h2>{{video['ma:title']}}</h2>
-            <p>{{video['ma:date'] | date:'longDate'}} [{{video['ma:hasLanguage'][0] | language}}]</p>
+            <p>{{video['ma:date']}} [{{video['ma:hasLanguage'][0] | language}}]</p>
         </div>
         <div data-ng-show="video['url'].length" id="popcorn-player"></div>
         <p data-ng-show="!video['url'].length" id="error">
