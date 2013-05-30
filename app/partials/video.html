@@ -4,7 +4,10 @@
             <h2>{{video['ma:title']}}</h2>
             <p>{{video['ma:date'] | date:'longDate'}} [{{video['ma:hasLanguage'][0] | language}}]</p>
         </div>
-        <div id="popcorn-player"></div>
+        <div data-ng-show="video['url'].length" id="popcorn-player"></div>
+        <p data-ng-show="!video['url'].length" id="error">
+            <strong>We were unable to find the video you requested.</strong>
+        </p>
         <div id="player-footer">
             <p>{{video['ma:description']}}</p>
         </div>
