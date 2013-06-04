@@ -118,6 +118,9 @@ msgstr ""
 msgid "Superuser:"
 msgstr ""
 
+msgid "The item you select below will determine how subtitles, audio tracks, and other annotations and modifications are made to your video. If you have been assigned to watch this video for a class, select the option most relevant to your class."
+msgstr ""
+
 msgid "The resource you requested could not be found."
 msgstr ""
 
