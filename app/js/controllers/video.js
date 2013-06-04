@@ -24,33 +24,39 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
             });
         });
         annotation_ids[annotation.pid] = ids;
-        annotation.enabledState = true;
-
     }
     
     $scope.toggleAnnotation = function(annotation) {
-        if(!annotation.enabledState) {
+        if(annotation.enabled) {
             disableAnnotation(annotation);
+            annotation.enabled=false;
         }
         else
         {
             enableAnnotation(annotation);
+            annotation.enabled=true;
         }
-    };
+    };        
     
     $scope.video = Video.get({identifier:$routeParams.id}, function loadPopcorn(){
+        
+        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
+        var annotation_id = $routeParams.annotation;
+        
         pop = Popcorn.smart("popcorn-player", $scope.video.url);
         $scope.annotations = Annotation.query({"dc:relation":$scope.video.pid, "client":"popcorn"}, function loadEachAnnotation(){
+            console.log($scope.annotations);
             $scope.annotations.forEach(function(data, idx){
-                data.pid = idx; // @TODO -- reflect actual PID
-                data.enabledState = true;
-                
-                /**
-                 * @todo - is this better with an ng-click? then we don't have a bunch of watches
-                 */
-                $scope.$watch(function() { return data.enabledState; }, function() {
-                    $scope.toggleAnnotation(data);
-                });
+                if(data.media[0].tracks[0].id===required_annotation){
+                    $scope.annotations.required = data;
+                    enableAnnotation(data);
+                }
+                if(data.media[0].tracks[0].id===annotation_id){
+                    $scope.annotations.optional = data;
+                    enableAnnotation(data);
+                    data.enabled=true;
+                }                
+
             });
             pop.play();
         });
