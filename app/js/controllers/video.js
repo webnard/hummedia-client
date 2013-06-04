@@ -45,7 +45,6 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
         
         pop = Popcorn.smart("popcorn-player", $scope.video.url);
         $scope.annotations = Annotation.query({"dc:relation":$scope.video.pid, "client":"popcorn"}, function loadEachAnnotation(){
-            console.log($scope.annotations);
             $scope.annotations.forEach(function(data, idx){
                 if(data.media[0].tracks[0].id===required_annotation){
                     $scope.annotations.required = data;
