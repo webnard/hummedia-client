@@ -1,0 +1,16 @@
+<section id='select-course' class='ghost'>
+    <div data-ng-show="!loading">
+        <h1>{{"Which annotation experience do you prefer?" | tr}}</h1>
+        <h2>You are watching <cite>{{video['ma:title']}}</cite></h2>
+        <ul>
+            <li><a href='#/video/{{video.pid}}'>{{"None" | tr}}</a></li>
+            <li data-ng-repeat='collection in collections'>
+                <span data-ng-hide="collection['dc:title']">{{"Loading..." | tr }}</span>
+                <a data-ng-show="collection['dc:title']" href='#/video/{{video.pid}}?collection={{collection.pid}}'>{{collection['dc:title']}}</a>
+            </li>
+        </ul>
+    </div>
+    <div data-ng-show="loading">
+        <h1>{{"Loading..." | tr}}</h1>
+    </div>
+</section>
