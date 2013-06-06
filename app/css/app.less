@@ -73,6 +73,9 @@ a[data-ng-click], a[ng-click] {
     color: darkblue;
     cursor: pointer;
 }
+cite {
+    font-style: italic;
+}
 strong {
     font-weight: bold;
 }
@@ -277,19 +280,6 @@ strong {
             background-color: lightgray;
             margin: 5px;
             border-radius: 5px;
-        }
-}
-#video_content{
-        padding: 10px;
-        padding-top: 40px;
-        margin-bottom: 25px;
-        text-align: center;
-        width: 100%;
-        h2{
-            font-size: 150%;
-        }
-        p{
-            padding: 10px;
         }
 }
 #wrapper{
@@ -1070,4 +1060,40 @@ footer{
     text-align:center;
     margin-bottom: 10px;
     font-size:150%;
+}
+/***************************
+ * SELECT AN ANNOTATION SET!
+****************************/
+#select-course {
+    padding: 2%;
+    margin: 2%;
+    h1, h2 {
+        font-weight: bold;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    
+    ul {
+        li {
+            margin-top: 10px;
+            font-size: 1.2em;
+            width: 40%;
+            min-height: 5%;
+            display: block;
+            text-align: center;
+            border: solid black 1px;
+            &:hover {
+                border-color: white;
+            }
+            a, span {
+                display: block;
+                width: auto;
+                padding: 15px;
+            }
+        }
+    }
 }
