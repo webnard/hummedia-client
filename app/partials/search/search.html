@@ -55,7 +55,7 @@
     </div>
     <section id="search-results">
 	<ul>
-	    <li class="result" data-ng-repeat="result in results"><a data-ng-href="#/{{result.type}}/{{result.pid}}">
+	    <li class="result" data-ng-repeat="result in results"><a data-ng-href="{{getUrl(result)}}">
 		    <div class="details">
 			<ng-switch on="result.date.length == 10">
 				<time datetime="{{result['ma:date']}}" data-ng-switch-when="true">{{result["ma:date"]}}</time>
