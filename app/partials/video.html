@@ -8,9 +8,9 @@
         </div>
         <div id="popcorn-player"></div>
         <div id="player-footer">
-                <div data-ng-show="annotations.optional" >
+                <div data-ng-show="has_optional_annotations" >
                     <label>Show Annotations </label>
-                    <input type="checkbox" data-ng-click="toggleAnnotation(annotations.optional)" checked="checked">
+                    <input type="checkbox" data-ng-click="toggleAnnotations()" checked="checked">
                 </div>
             <p>{{video['ma:description']}}</p>
             <p id="caption"></p>
