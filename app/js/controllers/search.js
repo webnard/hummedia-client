@@ -16,6 +16,14 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location, analytic
     $scope.advanced = {};
     $scope.isAdvanced = function(){return !!$location.search().advanced;};
     
+    // if the video has collections, prompt the user to select one
+    // otherwise, take them to select appropriate annotations
+    $scope.getUrl = function(video) {
+        return video['ma:isMemberOf'].length ? 
+            '#/select-course/' + video.pid :
+            '#/video/' + video.pid;
+    };
+    
     // initialize advanced properties
     if($scope.isAdvanced) {
 	angular.forEach($location.search(), function(val,key){
