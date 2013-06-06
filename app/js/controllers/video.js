@@ -71,14 +71,16 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
         var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
         pop = Popcorn.smart("popcorn-player", $scope.video.url);
         
-        if($routeParams.collection === undefined) {
-            // play video and leave. there are no annotations
-            pop.play();
+        if($routeParams.collection === undefined && !required_annotation) {
+            // we're done here. there are no videos.
             return;
         }
         
-        $scope.annotations = Annotation.query({"dc:relation":$scope.video.pid, "client":"popcorn"}, function loadEachAnnotation(){
-            $scope.annotations.forEach(function(data){
+        
+        // helper function for after we call methods on the Annotation resource
+        var _loadEachAnnotation = function(){
+            // helper function for the helper function ;)
+            var loadAnnotation = function(data){
                 if(data.media[0].tracks[0].id===required_annotation){
                     data.required = true;
                 }
@@ -87,9 +89,29 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
                     $scope.has_optional_annotations = true;
                 }
                 enableAnnotation(data);
-            });
-            pop.play();
-        });
+            };
+            
+            if($scope.annotations instanceof Array) {
+                $scope.annotations.forEach(loadAnnotation);
+            }
+            else
+            {
+                loadAnnotation($scope.annotation);
+            }
+        };
+        
+        if($routeParams.collection) {
+            // we need to load an array of annotations
+            var params = {"dc:relation":$scope.video.pid, "collection":$routeParams.collection, "client":"popcorn"};
+            $scope.annotations = Annotation.query(params, _loadEachAnnotation);
+        }
+        else
+        {
+            // there is only one required annotation; load it
+            $scope.annotations = Annotation.get({identifier: required_annotation}, _loadEachAnnotation);
+        }
+        
+        
     });
 }
 // always inject this in so we can later compress this JavaScript
