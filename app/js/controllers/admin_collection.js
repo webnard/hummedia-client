@@ -29,7 +29,10 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
     $scope.$watch(function(){return $routeParams.id;}, function(){
         $scope.id = $routeParams.id;
         if($scope.id){
-            $scope.collection_data = Collection.get({identifier:$routeParams.id});
+            $scope.collection_data = Collection.get({identifier:$routeParams.id}, function(){
+                $('#mce_6').hide();
+                tinyMCE.activeEditor.setContent($scope.collection_data['dc:description']);
+            });
         }
     });
     $scope.deleteCollection = function(pid){
@@ -43,18 +46,33 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         $('#collectioninfo_title').prop("value", $scope['collection_data']['dc:title']);
         $('#collectioninfo_description').prop("value", $scope['collection_data']['dc:description']);
         $('#editbutton').toggleClass('depressed');
+        $('#mce_6').toggle();
         if($scope.isEditable === true){
+            $('#inputId').attr('readonly', true);
             $scope.isEditable = false;
+            $('#description-cover').show();
         }else{
+            $('#inputId').attr('readonly', false);
             $scope.isEditable = true;
+            $('#description-cover').hide();
         }
     };
+    
+    $scope.startTinyMCE = function(){
+        tinymce.init({
+            selector: "#editable-description",
+            plugins: "link",
+            toolbar: "bold italic | link image",
+            menubar: false
+        });
+    };
+    
     $scope.saveChanges = function(pid){
         var newtitle;
         var newdescription;
         $(document).ready(function() {
             newtitle = $('#collectioninfo_title').prop("value");
-            newdescription = $('#collectioninfo_description').prop("value");
+            newdescription = tinyMCE.activeEditor.getContent();
         });
         var params = new Object();
             params['dc:title'] = newtitle;
