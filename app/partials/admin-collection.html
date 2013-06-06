@@ -48,11 +48,10 @@
         <h2>{{"Collection Info" | tr}}</h2>
         <p>
             {{"Title" | tr}}:
-            <input data-disable-when="!isEditable" class="collectioninfo" id="collectioninfo_title" type="text" value="{{collection_data['dc:title']}}"/>
+            <input data-disable-when="!isEditable" class="collectioninfo" id="collectioninfo_title" type="text" ng-model="collection_data['dc:title']"/>
         </p>
         <p>
             {{"Description" | tr}}:
-            <input data-disable-when="!isEditable" class="collectioninfo" id="collectioninfo_description" type="text" value="{{collection_data['dc:description']}}"/>
         </p>
         <div id='editable-description-wrapper'>
                 <textarea id="editable-description">{{collection_data['dc:description']}}</textarea>
