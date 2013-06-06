@@ -817,38 +817,143 @@ footer{
 #video_content{
     margin-top:10px;
     text-align: center;
-    h2{
-        font-size: 150%;
-    }
-    p{
-        padding: 10px;
-    }
-    #popcorn-player{
-        height:450px;
-    }
-    video{
-        margin:auto;
-        max-height:400px;
-        border-style: solid;
-        border-width: 1px;
-        border-color: gray;
-        padding:2px;
-        &:-webkit-full-screen{
-            border-style: none;
-            max-height:100%;
+    #wrapper{
+        h2{
+            font-size: 150%;
         }
-        &:-moz-full-screen{
-            border-style:none;
+        p{
+            padding: 10px;
         }
-        &:-ms-full-screen{
-            border-style: none;
-            max-height:100%;
+        #popcorn-player{
+            height:450px;
         }
-    }
-    #player-footer{
-        margin-bottom: 30px;
+        video{
+            margin:auto;
+            max-height:400px;
+            border-style: solid;
+            border-width: 1px;
+            border-color: gray;
+            padding:2px;
+            &:-webkit-full-screen{
+                border-style: none;
+                max-height:100%;
+            }
+            &:-moz-full-screen{
+                border-style:none;
+            }
+            &:-ms-full-screen{
+                border-style: none;
+                max-height:100%;
+            }
+        }
+        #player-footer{
+            margin-bottom: 30px;
+            position:relative;
+            padding-top:10px;
+        }
     }
 }
+
+
+
+    #toggle{
+        position:absolute; 
+        float:left; 
+        background-color:#7F7F7F;
+        z-index:2000;
+        padding:2px;
+        padding-left:4px;
+        border-radius: 0 10px 0 0;
+    }
+    #toggle, #toggle label, #toggle label input{
+        cursor:pointer;
+    }
+    #toggle:hover{
+        background-color:#666666;
+    }
+    #descriptionWrapper{
+        position:relative; 
+        width:600px;
+    }
+    #descriptionTab{
+        background-color:#777777; 
+        width:100px; 
+        float:right; 
+        height:20px;
+        margin-right:0px;
+        border-radius: 10px 0 0 0;
+        padding:2px;
+        cursor:default;
+    }
+    #desciptionSplitter{
+        background-color:#777777;
+        width:600px;
+        height:1px;
+        clear:both;
+    }
+    #description{
+        background-color:#777777; 
+        width:580px; 
+        padding:10px; 
+        clear:both; 
+        display:none;
+    }
+    #description:hover{
+        display:block;
+    }
+    #descriptionTab:hover + #description{
+        display:block;
+    }
+    #descriptionSplitter:hover + #description{
+        display:block;
+    }
+    #_caption{
+        clear:both;
+    }
+
+
+
+
+
+
+
+
+
+#player-column{
+    width:600px; 
+    margin-left:auto; 
+    margin-right:auto; 
+    padding-bottom:1px;
+    border-radius: 10px 10px 10px 10px;
+}
+#player-header{
+    border-radius:10px 10px 0px 0px; 
+    background-color:#010001;
+    h2{
+        color:#777777;
+    }
+    p{
+        color:#777777;
+        font-size:.8em;
+    }
+}
+#popcorn-player{
+    height:400px; 
+    width:600px; 
+    margin-left:auto; 
+    margin-right:auto;
+    background-color:#010001;
+}
+#player-footer{
+    border-radius:0px 0px 10px 10px; 
+    background-color:#1b1b1b;
+    p{
+        text-align:left;
+        color:#777777;
+    }
+}
+/*OLD CSS, DELETE BETWEEN HERE AND YOUTUBE VIDEO CREATION*/
+
 
 /************************
  * YOUTUBE VIDEO CREATION

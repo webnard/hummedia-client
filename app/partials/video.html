@@ -1,6 +1,6 @@
 <div id="video_content">
     
-    <button data-ng-click="toggleAnnotation(annotations.optional)">TOGGLE THE ANNOTATIONS!!</button>    
+        
     
 <div id="wrapper">
     <div id="player-column">
@@ -10,15 +10,26 @@
         </div>
         <div id="popcorn-player"></div>
         <div id="player-footer">
-            <p>{{video['ma:description']}}</p>
-            <p id="caption"></p>
+            
+            
+            <div id="toggle">
+                <label><input type="checkbox" data-ng-click="toggleAnnotation(annotations.optional)"/>&nbsp;Annotations&nbsp;</label>
+            </div>
+			
+            <div id="descriptionWrapper">
+                <div id="descriptionTab">Description</div>
+                <div id="description">DESCRIPTION: {{video['ma:description']}}</div>
+                <div id="desciptionSplitter"></div>
+            </div>
+
+            <p id="_caption">CAPTIONHOLDER</p>
+            <p></p>
         </div>
         <div id="popup"></div>
     </div>
-    <div id="_caption"></div>
     <div id="vocabulary"></div>
     
-    <div style="position:absolute; top:100px; left:100px; min-width:100px; min-height:100px; background-color:pink;">
+    <!--<div style="position:absolute; top:100px; left:100px; min-width:100px; min-height:100px; background-color:pink;">
         <ul>
             <li data-ng-repeat="annotation in annotations">
                 <label>
@@ -27,6 +38,6 @@
                 </label>
             </li>
         </ul>
-    </div>
+    </div>-->
 </div>        
 </div>
