@@ -55,7 +55,7 @@ function AdminVideoCtrl($scope, Video, language, $routeParams, $location) {
     $scope.update = function() {
         $scope.video.isSaving = true;
         var u = $scope.video;
-        $scope.video.$update(function(){
+        $scope.video.$update({identifier: $scope.video.pid}, function(){
             u.isSaving = false;
         });
     }
