@@ -845,17 +845,23 @@ footer{
 
 
 
-    #toggle{
-        position:absolute; 
-        float:left; 
+    #toggle {
+        position:absolute;
+        left: 0;
         background-color:#7F7F7F;
         z-index:2000;
         padding:2px;
-        padding-left:4px;
+        padding-left: 4px;
+        padding-right: 4px;
         border-radius: 0 10px 0 0;
+        input {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
     }
-    #toggle, #toggle label, #toggle label input{
-        cursor:pointer;
+    #toggle, #toggle input {
+        cursor: pointer;
     }
     #toggle:hover{
         background-color:#666666;
