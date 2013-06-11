@@ -34,10 +34,6 @@
 			    <label for="search-form-yearto">{{"To Year" | tr}}</label>
 			    <input type="number" placeholder="{{maxYear}}" id="search-form-yearto" name="yearto" ng-model="advanced.yearto" min="1878" max="{{maxYear}}">
 			</li>
-			<!--<li>
-			    <label for="search-form-director">Director</label>
-			    <input type="text" id="search-form-director" name="director" ng-model="advanced.director">
-			</li>-->
 		    </ul>
 		    <input type="submit" data-disable-when="!canSearch()" value='{{"Go" | tr}}'>
 		</fieldset>
@@ -54,20 +50,20 @@
 	</div>
     </div>
     <section id="search-results">
-	<ul>
-	    <li class="result" data-ng-repeat="result in results"><a data-ng-href="{{getUrl(result)}}">
-		    <div class="details">
-			<ng-switch on="result.date.length == 10">
-				<time datetime="{{result['ma:date']}}" data-ng-switch-when="true">{{result["ma:date"]}}</time>
+    <ul>
+        <li class="result" data-ng-repeat="result in results"><a data-ng-href="{{getUrl(result)}}">
+            <div class="details">
+            <ng-switch on="result.date.length == 10">
+                <time datetime="{{result['ma:date']}}" data-ng-switch-when="true">{{result["ma:date"]}}</time>
                 <time datetime="{{result['ma:date']}}" data-ng-switch-when="false">{{result["ma:date"]}}</time>
-			</ng-switch>
-			<ul class="language-list">
-			    <li data-ng-repeat="lg in result['ma:hasLanguage']">{{lg | language}}</li>
-			</ul>
-		    </div>
-		    <h1>{{result['ma:title']}}</h1>
-		    <p class="description">{{result['ma:description']}}</p>
-	    </a></li>
-	</ul>
+            </ng-switch>
+            <ul class="language-list">
+                <li data-ng-repeat="lg in result['ma:hasLanguage']">{{lg | language}}</li>
+            </ul>
+            </div>
+            <h1>{{result['ma:title']}}</h1>
+            <p class="description" ng-bind-html="result['ma:description']"></p>
+        </a></li>
+    </ul>
     </section>
 </section>
