@@ -842,18 +842,11 @@ footer{
         }
     }
 }
-
-
-
     #toggle {
+        color: darkgray;
         position:absolute;
         left: 0;
-        background-color:#7F7F7F;
-        z-index:2000;
-        padding:2px;
         padding-left: 4px;
-        padding-right: 4px;
-        border-radius: 0 10px 0 0;
         input {
             display: inline-block;
             vertical-align: middle;
@@ -863,13 +856,6 @@ footer{
     #toggle, #toggle input {
         cursor: pointer;
     }
-    #toggle:hover{
-        background-color:#666666;
-    }
-    #descriptionWrapper{
-        position:relative; 
-        width:600px;
-    }
     #descriptionTab{
         background-color:#777777; 
         width:100px; 
@@ -878,7 +864,7 @@ footer{
         margin-right:0px;
         border-radius: 10px 0 0 0;
         padding:2px;
-        cursor:default;
+        cursor:pointer;
     }
     #descriptionSplitter{
         background-color:#777777;
@@ -893,25 +879,9 @@ footer{
         clear:both; 
         display:none;
     }
-    #description:hover{
-        display:block;
-    }
-    #descriptionTab:hover + #description{
-        display:block;
-    }
-    #descriptionSplitter:hover + #description{
-        display:block;
-    }
     #_caption{
         clear:both;
     }
-
-
-
-
-
-
-
     #vocabulary{
         color:#777777;
     }
