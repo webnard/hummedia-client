@@ -1,5 +1,8 @@
 'use strict';
 function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
+    
+    $('html').css('overflow-y', 'scroll');
+    
     var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
         pop, // the Popcorn object, initialized under Video.get below
         annotations_enabled = true;
@@ -65,6 +68,12 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
             }
         });
     };        
+    
+    $scope.toggleDescription = function() {
+        $('#description').slideToggle();
+        $('#description-toggle-icon').toggleClass('icon-minus');
+        $('#description-toggle-icon').toggleClass('icon-plus');
+    };
     
     $scope.video = Video.get({identifier:$routeParams.id}, function loadPopcorn(){
         
