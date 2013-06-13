@@ -1,5 +1,5 @@
 'use strict';
-function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
+function VideoCtrl($scope, $routeParams, Video, Annotation) {
     var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
         pop, // the Popcorn object, initialized under Video.get below
         annotations_enabled = true;
@@ -37,11 +37,13 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
         if(!pop instanceof Popcorn) {
             throw new Error("Popcorn player does not exist yet");
         }
+        var index = annotation.media[0].id;
         
-        // if this annotation is already enabled, leave
-        if(annotation_ids[annotation.pid] !== undefined) {
-            return;
+        if(annotation_ids[index] !== undefined) {
+            throw new Error("Cannot enable the same annotation more than once.");
         }
+        
+        
         var ids = [];
         annotation.media[0].tracks.forEach(function(element){
             element.trackEvents.forEach(function(element){
@@ -49,11 +51,15 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
                 ids.push(pop.getLastTrackEventId());
             });
         });
-        annotation_ids[annotation.pid] = ids;
+        annotation_ids[index] = ids;
     }
     
     $scope.toggleAnnotations = function() {
         $scope.annotations.forEach(function(a) {
+            if(a.required) {
+                return; // this can't be toggled; it should always be on
+            }
+            
             if(annotations_enabled) {
                 annotations_enabled = false;
                 disableAnnotation(a);
@@ -72,22 +78,25 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
         pop = Popcorn.smart("popcorn-player", $scope.video.url);
         
         if($routeParams.collection === undefined && !required_annotation) {
-            // we're done here. there are no videos.
+            // we're done here. there are no annotations.
             return;
         }
         
-        
-        // helper function for after we call methods on the Annotation resource
+        /**
+         * callback function for after we call methods on the Annotation resource
+         * enables each individual annotation
+         */
         var _loadEachAnnotation = function(){
             // helper function for the helper function ;)
-            var loadAnnotation = function(data){
-                if(data.media[0].tracks[0].id===required_annotation){
+            var loadAnnotation = function(data) {
+                if(data.media[0].tracks[0].required) {
                     data.required = true;
                 }
                 else
                 {
                     $scope.has_optional_annotations = true;
                 }
+                
                 enableAnnotation(data);
             };
             
@@ -115,4 +124,4 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
     });
 }
 // always inject this in so we can later compress this JavaScript
-VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'Collection'];
+VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation'];
