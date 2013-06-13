@@ -1,8 +1,13 @@
 'use strict';
+<<<<<<< HEAD
+function VideoCtrl($scope, $routeParams, Video, Annotation, Collection) {
+    
+    $('html').css('overflow-y', 'scroll');
+    
+=======
 function VideoCtrl($scope, $routeParams, Video, Annotation) {
-	$('html').css('overflow-y', 'scroll');    
-
-	var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
+>>>>>>> d396d400d456a250024a13a6541b0b961d42e99c
+    var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
         pop, // the Popcorn object, initialized under Video.get below
         annotations_enabled = true;
         
