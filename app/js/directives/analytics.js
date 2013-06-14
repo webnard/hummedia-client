@@ -11,7 +11,6 @@ HUMMEDIA_DIRECTIVES
                         
                         angular.forEach(required_attrs, function(a) {
                             if(!iAttrs[a]) {
-                                console.log(iAttrs);
                                 throw "Missing attribute or value for '" + a + "'";
                             }
                         });
@@ -20,7 +19,6 @@ HUMMEDIA_DIRECTIVES
                          * @todo: Keep this in here?
                          */
                         if(!iAttrs.analytics) {
-                            console.warn("Analytics event added without events to ", element);
                             return;
                         }
                         var events = iAttrs.analytics.split(/,\s*/);
