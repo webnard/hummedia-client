@@ -39,7 +39,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
         if(!pop instanceof Popcorn) {
             throw new Error("Popcorn player does not exist yet");
         }
-        var index = annotation.media[0].id;
+        var index = annotation.pid;
         
         if(annotation_ids[index] !== undefined) {
             throw new Error("Cannot enable the same annotation more than once.");
@@ -97,6 +97,8 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
         var _loadEachAnnotation = function(){
             // helper function for the helper function ;)
             var loadAnnotation = function(data) {
+                data.pid = data.media[0].tracks[0].id; // @todo -- ought to be more accessible from the API
+                
                 if(data.media[0].tracks[0].required) {
                     data.required = true;
                 }
