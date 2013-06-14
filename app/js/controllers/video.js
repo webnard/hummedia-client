@@ -1,5 +1,5 @@
 'use strict';
-function VideoCtrl($scope, $routeParams, Video, Annotation) {
+function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
 	$('html').css('overflow-y', 'scroll');    
 
 	var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
@@ -49,6 +49,11 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
         var ids = [];
         annotation.media[0].tracks.forEach(function(element){
             element.trackEvents.forEach(function(element){
+                if(typeof pop[element.type] !== 'function') {
+                    if(appConfig.debugMode) {
+                        throw "Popcorn plugin type '" + element.type + "' does not exist";
+                    }
+                }
                 pop[element.type](element.popcornOptions);
                 ids.push(pop.getLastTrackEventId());
             });
@@ -134,4 +139,4 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
     });
 }
 // always inject this in so we can later compress this JavaScript
-VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation'];
+VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'appConfig'];
