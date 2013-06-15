@@ -1,5 +1,5 @@
 'use strict';
-function VideoCtrl($scope, $routeParams, Video, Annotation) {
+function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
 	$('html').css('overflow-y', 'scroll');    
 
 	var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
@@ -39,7 +39,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
         if(!pop instanceof Popcorn) {
             throw new Error("Popcorn player does not exist yet");
         }
-        var index = annotation.media[0].id;
+        var index = annotation.pid;
         
         if(annotation_ids[index] !== undefined) {
             throw new Error("Cannot enable the same annotation more than once.");
@@ -49,6 +49,11 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
         var ids = [];
         annotation.media[0].tracks.forEach(function(element){
             element.trackEvents.forEach(function(element){
+                if(typeof pop[element.type] !== 'function') {
+                    if(appConfig.debugMode) {
+                        throw "Popcorn plugin type '" + element.type + "' does not exist";
+                    }
+                }
                 pop[element.type](element.popcornOptions);
                 ids.push(pop.getLastTrackEventId());
             });
@@ -97,6 +102,8 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
         var _loadEachAnnotation = function(){
             // helper function for the helper function ;)
             var loadAnnotation = function(data) {
+                data.pid = data.media[0].tracks[0].id; // @todo -- ought to be more accessible from the API
+                
                 if(data.media[0].tracks[0].required) {
                     data.required = true;
                 }
@@ -132,4 +139,4 @@ function VideoCtrl($scope, $routeParams, Video, Annotation) {
     });
 }
 // always inject this in so we can later compress this JavaScript
-VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation'];
+VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'appConfig'];

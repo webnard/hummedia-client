@@ -139,7 +139,7 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location, analytic
 	$scope.results = method(obj, function(){
 	    $scope.isSearching = false;
 	    angular.forEach($scope.results, function(result) {
-		result.type = 'video';
+            result.type = 'video';
 	    });
 	});
     };
