@@ -1,6 +1,6 @@
 <div id="video_content">
     
-<div id="video_wrapper">
+<div id="video-wrapper">
     <div id="player-header">
         <div>
             <p>{{video['ma:title']}}</p> <span style="font-size:80%;">{{video['ma:date']}}
@@ -12,6 +12,8 @@
         <div id="description" data-ng-bind-html="video['ma:description']"></div>
     </div>
     <div id="popcorn-player"></div>
+    <label id="toggle" data-ng-show="has_optional_annotations"><input type="checkbox" checked="checked" data-ng-click="toggleAnnotations()"/>&nbsp;Annotations&nbsp;</label>
+
 </div>
     
 <div id="annotations_wrapper">
@@ -20,13 +22,7 @@
 <div id="wrapper">
     <div id="player-column">
 
-        <div id="player-footer">
-            
-            <label id="toggle" data-ng-show="has_optional_annotations"><input type="checkbox" checked="checked" data-ng-click="toggleAnnotations()"/>&nbsp;Annotations&nbsp;</label>
-		
-            <p id="_caption"></p>
-            <div id="vocabulary"></div>
-        </div>
+
         <div id="popup"></div>
     </div>
 
