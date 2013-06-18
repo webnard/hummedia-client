@@ -9,7 +9,7 @@
     <div class='collection_toggle' id="{{collection['pid']}}">
         <div>
             <h2>{{collection['dc:title']}}</h2>
-            <p>{{collection['dc:description']}}</p>
+            <p data-ng-bind-html="collection['dc:description']"></p>
         </div>
         <div data-ng-repeat="video in collections_data[collection['pid']]['videos']" class="video_blocks" style="vertical-align: top;">
             <a title="{{video['ma:description']}}" href="#/video/{{video.pid}}?collection={{collection.pid}}">
