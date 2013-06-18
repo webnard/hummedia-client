@@ -342,19 +342,6 @@ strong {
     display: inline-block;
     }
 }
-#video-wrapper{
-    border-style: solid;
-    border-color: rgb(170, 170, 170);
-    padding: 3px;
-    border-width: 1px;
-    width: 300px;
-    max-height: 200px;
-}
-#video-clipper{
-    width: 300px;
-    max-height: 200px;
-    overflow: hidden;
-}
 #player-header {
     .language-list, .date {
         display: inline;
@@ -811,9 +798,27 @@ footer{
  * Video Player
  **************/
 #video_content{
-    margin-top:10px;
-    text-align: center;
-    margin-bottom:25px;
+    background: black;
+    color: darkgray;
+    #video-wrapper{
+        width: 50%;
+    }
+    #player-header{
+        padding-left: 10px;
+        padding-top: 10px;
+    }
+    #popcorn-player{
+        iframe, video{
+            min-height: 200px;
+            height: 60%;
+            width: 50%;
+        }
+        height: 60%;
+    }
+
+
+
+
     #wrapper{
         background: none;
         h2{
@@ -821,9 +826,6 @@ footer{
         }
         p{
             padding: 10px;
-        }
-        #popcorn-player{
-            height:450px;
         }
         video{
             margin:auto;
@@ -865,28 +867,7 @@ footer{
     #toggle, #toggle input {
         cursor: pointer;
     }
-    #descriptionTab{
-        color: darkgray;
-        i{
-            font-size: 80%;
-        }
-        cursor:pointer;
-        text-align: right;
-        padding-right: 5px;
-    }
-    #descriptionSplitter{
-        background-color:#777777;
-        width:600px;
-        height:1px;
-        clear:both;
-    }
-    #description{
-        color:darkgray;
-        width:580px; 
-        padding:10px; 
-        clear:both; 
-        display:none;
-    }
+
     #_caption{
         clear:both;
     }
@@ -900,23 +881,6 @@ footer{
     margin-right:auto; 
     padding-bottom:1px;
     border-radius: 10px 10px 10px 10px;
-}
-#player-header{
-    border-radius:10px 10px 0px 0px; 
-    background-color:#010001;
-    color:#777777;
-    padding: 0.5em;
-    p, ul {
-        display: inline;
-        font-size:.8em;
-    }
-}
-#popcorn-player{
-    height:400px; 
-    width:600px; 
-    margin-left:auto; 
-    margin-right:auto;
-    background-color:#010001;
 }
 #player-footer{
     border-radius:0px 0px 10px 10px; 
