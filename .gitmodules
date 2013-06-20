@@ -4,3 +4,6 @@
 [submodule "app/lib/hummedia-popcorn-plugins"]
 	path = app/lib/hummedia-popcorn-plugins
 	url = git@bitbucket.org:htrscdev/popcorn-plugins.git
+[submodule "app/butter"]
+	path = app/butter
+	url = git@github.com:mozilla/butter.git
