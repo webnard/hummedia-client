@@ -1,7 +1,6 @@
 'use strict';
 function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
-	$('html').css('overflow-y', 'scroll');    
-
+    
 	var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
         pop, // the Popcorn object, initialized under Video.get below
         annotations_enabled = true;
