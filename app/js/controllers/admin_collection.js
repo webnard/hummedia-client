@@ -1,14 +1,5 @@
 'use strict';
-function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
-    $scope.startTinyMCE = function(){
-        tinymce.init({
-            selector: "#editable-description",
-            plugins: "link",
-            toolbar: "bold italic | link image",
-            menubar: false
-        });
-    };
-    
+function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {    
     $scope.newCollection = function(){        
         if($scope.newtitle === ''){$scope.newtitle = 'New Hummedia Collection';}
         var params = new Object();
