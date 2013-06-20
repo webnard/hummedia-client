@@ -1,5 +1,14 @@
 'use strict';
 function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
+    $scope.startTinyMCE = function(){
+        tinymce.init({
+            selector: "#editable-description",
+            plugins: "link",
+            toolbar: "bold italic | link image",
+            menubar: false
+        });
+    };
+    
     $scope.newCollection = function(){        
         if($scope.newtitle === ''){$scope.newtitle = 'New Hummedia Collection';}
         var params = new Object();
@@ -30,8 +39,13 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         $scope.id = $routeParams.id;
         if($scope.id){
             $scope.collection_data = Collection.get({identifier:$routeParams.id}, function(){
+                $scope.startTinyMCE();
                 $('#mce_6').hide();
-                tinyMCE.activeEditor.setContent($scope.collection_data['dc:description']);
+                if(!$scope.collection_data['dc:description']){
+                    tinyMCE.activeEditor.setContent("");
+                }else{
+                    tinyMCE.activeEditor.setContent($scope.collection_data['dc:description']);
+                }
             });
         }
     });
