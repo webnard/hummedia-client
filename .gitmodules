@@ -6,4 +6,4 @@
 	url = git@bitbucket.org:htrscdev/popcorn-plugins.git
 [submodule "app/butter"]
 	path = app/butter
-	url = git@github.com:mozilla/butter.git
+	url = git@bitbucket.org:htrscdev/jsvideo-authoring.git
