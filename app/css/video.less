@@ -1,0 +1,88 @@
+//Styles specific to this page
+html.video-page{
+    height: 100%;
+    background-color: black;
+    body{
+        height: inherit;
+    }
+    #container{
+        height: inherit;
+    }
+    #view{
+        height: inherit;
+    }
+    #background{
+        display: none;
+    }
+    footer{
+        display: none;
+    }
+}
+
+#video-content{
+    height: inherit;
+    color: darkgray;
+    hr{
+        border-color: darkgray;
+        border-style: dashed;
+    }
+    #toggle {
+        color: darkgray;
+        position:absolute;
+        left: 0;
+        padding-left: 4px;
+        input {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+    }
+    #toggle, #toggle input {
+        cursor: pointer;
+    }
+}
+
+//Video Wrapper (Left side)
+#video-wrapper{
+    height: inherit;
+    width: 50%;
+}
+#player-header{
+    max-height: 25%;
+    overflow: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+#video{
+    height: 60%;
+    padding-left: 10px;
+    video{
+        max-width: 100%;
+        max-height: 100%;
+    }
+    iframe{
+        height: 60%;
+    }
+}
+#below-video{
+}
+
+//Annotations Wrapper (Right side)
+#annotations-wrapper{
+    width: 50%;
+    position: absolute;
+    right: 0px;
+}
+#target-1{
+    padding-left: 1%;
+}
+#target-2{
+    width: 49%;
+    padding-left: 1%;
+}
+#target-3{
+    position:absolute;
+    right: 0px;
+    width: 49%;
+    padding-left: 1%;
+}

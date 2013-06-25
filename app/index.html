@@ -26,7 +26,7 @@
     <div id='error-modal' api-error-modal blur='#background, #view'></div>
     <div id="container">
     <div id="background" data-ng-style="style"></div>
-    <div data-ng-controller="NavCtrl">
+    <div data-ng-controller="NavCtrl" id="nav-wrapper">
     <nav id="navtable">
         <a id="navtitle" href="#">Humanities Online Media</a>
         <a data-ng-click="user.prompt(true)" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>

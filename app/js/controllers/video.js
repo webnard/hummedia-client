@@ -1,12 +1,34 @@
 'use strict';
 function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
-	$('html').css('overflow-y', 'scroll');    
-
+    
 	var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
         pop, // the Popcorn object, initialized under Video.get below
         annotations_enabled = true;
         
     $scope.has_optional_annotations = false;
+
+  //Code to style the page correctly
+  //
+    function resizeView(){
+        var new_height = $(window).height()-$('#nav-wrapper').height();
+        $('#view').css("height", new_height);
+        $('#annotations_wrapper').css('top', $('#nav-wrapper').height());
+    }
+
+    //Initialize resized view
+    resizeView();
+    window.addEventListener("resize", resizeView);
+    
+    //Add page-specific styles
+    $('html').addClass('video-page');
+    
+    //Event handler for leaving the page
+    $("#video-wrapper").on("remove", function () {
+        window.removeEventListener("resize", resizeView);
+        $('#view').css('height','');
+        $('html').removeClass('video-page');
+    });
+  /////////////////////////////////////////////
     
     /**
      * Turns off an annotation, if annotation.required exists
@@ -88,7 +110,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
     $scope.video = Video.get({identifier:$routeParams.id}, function loadPopcorn(){
         
         var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
-        pop = Popcorn.smart("popcorn-player", $scope.video.url);
+        pop = Popcorn.smart("video", $scope.video.url);
         
         if($routeParams.collection === undefined && !required_annotation) {
             // we're done here. there are no annotations.
