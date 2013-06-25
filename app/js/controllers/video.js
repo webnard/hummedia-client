@@ -25,7 +25,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
     //Event handler for leaving the page
     $("#video-wrapper").on("remove", function () {
         window.removeEventListener("resize", resizeView);
-        $('#view').removeAttr('style');
+        $('#view').css('height','');
         $('html').removeClass('video-page');
     });
   /////////////////////////////////////////////
