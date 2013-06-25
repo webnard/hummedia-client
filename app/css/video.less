@@ -20,35 +20,12 @@ html.video-page{
 }
 
 #video_content{
-    #wrapper{
-        background: none;
-        h2{
-            font-size: 150%;
-        }
-        p{
-            padding: 10px;
-        }
-        video{
-            margin:auto;
-            max-width:600px;
-            &:-webkit-full-screen{
-                border-style: none;
-                max-height:100%;
-            }
-            &:-moz-full-screen{
-                border-style:none;
-            }
-            &:-ms-full-screen{
-                border-style: none;
-                max-height:100%;
-            }
-        }
-    }
+    height: inherit;
+    color: darkgray;
     hr{
         border-color: darkgray;
         border-style: dashed;
     }
-}
     #toggle {
         color: darkgray;
         position:absolute;
@@ -63,24 +40,6 @@ html.video-page{
     #toggle, #toggle input {
         cursor: pointer;
     }
-
-#player-column{
-    width:600px; 
-    margin-left:auto; 
-    margin-right:auto; 
-    padding-bottom:1px;
-    border-radius: 10px 10px 10px 10px;
-}
-#player-footer{
-    border-radius:0px 0px 10px 10px; 
-    background-color:#1b1b1b;
-    p{
-        text-align:left;
-    }
-}
-#video_content{
-    height: inherit;
-    color: darkgray;
 }
 
 //Video Wrapper (Left side)
@@ -100,6 +59,9 @@ html.video-page{
     video{
         max-width: 100%;
         max-height: 100%;
+    }
+    iframe{
+        height: 60%;
     }
 }
 #below-video{
