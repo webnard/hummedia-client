@@ -6,6 +6,29 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
         annotations_enabled = true;
         
     $scope.has_optional_annotations = false;
+
+  //Code to style the page correctly
+  //
+    function resizeView(){
+        var new_height = $(window).height()-$('#nav-wrapper').height();
+        $('#view').css("height", new_height);
+        $('#annotations_wrapper').css('top', $('#nav-wrapper').height());
+    }
+
+    //Initialize resized view
+    resizeView();
+    window.addEventListener("resize", resizeView);
+    
+    //Add page-specific styles
+    $('html').addClass('video-page');
+    
+    //Event handler for leaving the page
+    $("#video-wrapper").on("remove", function () {
+        window.removeEventListener("resize", resizeView);
+        $('#view').removeAttr('style');
+        $('html').removeClass('video-page');
+    });
+  /////////////////////////////////////////////
     
     /**
      * Turns off an annotation, if annotation.required exists
