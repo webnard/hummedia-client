@@ -110,7 +110,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
     $scope.video = Video.get({identifier:$routeParams.id}, function loadPopcorn(){
         
         var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
-        pop = Popcorn.smart("popcorn-player", $scope.video.url);
+        pop = Popcorn.smart("video", $scope.video.url);
         
         if($routeParams.collection === undefined && !required_annotation) {
             // we're done here. there are no annotations.
