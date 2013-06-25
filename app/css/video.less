@@ -1,22 +1,125 @@
-html{
+//Styles specific to this page
+html.video-page{
     height: 100%;
+    background-color: black;
+    body{
+        height: inherit;
+    }
+    #container{
+        height: inherit;
+    }
+    #view{
+        height: inherit;
+    }
+    #background{
+        display: none;
+    }
+    footer{
+        display: none;
+    }
 }
-body{
-    height: inherit;
+
+#video_content{
+    #wrapper{
+        background: none;
+        h2{
+            font-size: 150%;
+        }
+        p{
+            padding: 10px;
+        }
+        video{
+            margin:auto;
+            max-width:600px;
+            &:-webkit-full-screen{
+                border-style: none;
+                max-height:100%;
+            }
+            &:-moz-full-screen{
+                border-style:none;
+            }
+            &:-ms-full-screen{
+                border-style: none;
+                max-height:100%;
+            }
+        }
+        #player-footer{
+            margin-bottom: 30px;
+            position:relative;
+            padding-top:10px;
+        }
+    }
+    hr{
+        border-color: darkgray;
+        border-style: dashed;
+    }
 }
-#container{
-    height: inherit;
+    #toggle {
+        color: darkgray;
+        position:absolute;
+        left: 0;
+        padding-left: 4px;
+        input {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 4px;
+        }
+    }
+    #toggle, #toggle input {
+        cursor: pointer;
+    }
+
+    #_caption{
+        clear:both;
+    }
+    #vocabulary{
+        color:#777777;
+    }
+
+#player-column{
+    width:600px; 
+    margin-left:auto; 
+    margin-right:auto; 
+    padding-bottom:1px;
+    border-radius: 10px 10px 10px 10px;
 }
-#view{
-    height: inherit;
+#player-footer{
+    border-radius:0px 0px 10px 10px; 
+    background-color:#1b1b1b;
+    p{
+        text-align:left;
+    }
 }
 #video_content{
     height: inherit;
+    color: darkgray;
 }
+
+//Video Wrapper (Left side)
 #video-wrapper{
     height: inherit;
+    width: 50%;
 }
 #player-header{
     max-height: 25%;
     overflow: auto;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+#popcorn-player{
+    height: 60%;
+    padding-left: 10px;
+    video{
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+#below-video{
+}
+
+//Annotations Wrapper (Right side)
+#annotations_wrapper{
+    width: 50%;
+    position: absolute;
+    right: 0px;
 }
