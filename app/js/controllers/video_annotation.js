@@ -21,7 +21,7 @@ function VideoAnnotationCtrl($scope, Video, $routeParams) {
         $('html').removeClass('video-page');
     });
     $scope.video = Video.get({identifier:$routeParams.id}, function(){
-        Popcorn.smart("video", $scope.video.url);
+//        Popcorn.smart("video", $scope.video.url);
         ( function( Butter, EditorHelper ) {
             Butter.init({
               config: {dirs: {css: "clam"}},
@@ -30,7 +30,6 @@ function VideoAnnotationCtrl($scope, Video, $routeParams) {
 
                 butter.listen( "mediaready", function mediaReady() {
                   butter.unlisten( "mediaready", mediaReady );
-                  document.querySelector( ".loading-message" ).classList.remove( "show-global" );
                 });
               }
             });
