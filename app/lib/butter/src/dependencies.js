@@ -6,7 +6,6 @@ define([ "loaders/js-loader", "loaders/css-loader", "loaders/load-group" ],
   function( JSLoader, CSSLoader, LoadGroup ) {
 
   return function( config ) {
-
     var _configDirs = config.value( "dirs" );
 
     var _loaders = {

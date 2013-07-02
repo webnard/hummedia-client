@@ -21,9 +21,10 @@ function VideoAnnotationCtrl($scope, Video, $routeParams) {
         $('html').removeClass('video-page');
     });
     $scope.video = Video.get({identifier:$routeParams.id}, function(){
+        Popcorn.smart("video", $scope.video.url);
         ( function( Butter, EditorHelper ) {
             Butter.init({
-              config: {},
+              config: {dirs: {css: "clam"}},
               ready: function( butter ) {
                 EditorHelper.init( butter );
 
