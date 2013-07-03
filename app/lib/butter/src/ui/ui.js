@@ -113,8 +113,8 @@ define( [ "core/eventmanager", "./toggler",
           function firstRunInit() {
             butter.unlisten( "mediaready", firstRunInit );
 
-            // Open the media-editor editor right after butter is finished starting up
-            butter.editor.openEditor( "media-editor" );
+            // Open the plugin-editor editor right after butter is finished starting up
+            butter.editor.openEditor( "plugin-list" );
           }
 
           butter.listen( "mediaready", firstRunInit );
