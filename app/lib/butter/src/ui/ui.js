@@ -3,11 +3,11 @@
  * obtain one at https://raw.github.com/mozilla/butter/master/LICENSE */
 
 define( [ "core/eventmanager", "./toggler",
-          "./header", "./unload-dialog", "crashreporter",
+          "./unload-dialog", "crashreporter",
           "first-run", "./tray", "editor/ui-kit",
           "core/trackevent", "dialog/dialog",
           "util/dragndrop" ],
-  function( EventManager, Toggler, Header,
+  function( EventManager, Toggler, 
             UnloadDialog, CrashReporter,
             FirstRun, Tray, UIKitDummy,
             TrackEvent, Dialog,
@@ -47,7 +47,6 @@ define( [ "core/eventmanager", "./toggler",
     this.contentStateLocked = false;
 
     this.tray = new Tray();
-    this.header = new Header( butter, _uiConfig );
 
     // Filled in by the editor module
     this.editor = null;
@@ -62,7 +61,6 @@ define( [ "core/eventmanager", "./toggler",
       if ( _uiOptions.onLeaveDialog ) {
         _unloadDialog = new UnloadDialog( butter );
       }
-      document.body.classList.add( "butter-header-spacing" );
       document.body.classList.add( "butter-tray-spacing" );
     }
 
@@ -130,7 +128,6 @@ define( [ "core/eventmanager", "./toggler",
         loadUI();
 
         _this.tray.attachToDOM();
-        _this.header.attachToDOM();
       }
       else {
         onReady();
