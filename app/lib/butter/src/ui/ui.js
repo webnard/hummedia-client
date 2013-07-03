@@ -4,12 +4,12 @@
 
 define( [ "core/eventmanager", "./toggler",
           "./unload-dialog", "crashreporter",
-          "first-run", "./tray", "editor/ui-kit",
+          "./tray", "editor/ui-kit",
           "core/trackevent", "dialog/dialog",
           "util/dragndrop" ],
   function( EventManager, Toggler, 
             UnloadDialog, CrashReporter,
-            FirstRun, Tray, UIKitDummy,
+            Tray, UIKitDummy,
             TrackEvent, Dialog,
             DragNDrop ){
 
@@ -115,7 +115,6 @@ define( [ "core/eventmanager", "./toggler",
 
             // Open the media-editor editor right after butter is finished starting up
             butter.editor.openEditor( "media-editor" );
-            FirstRun.init();
           }
 
           butter.listen( "mediaready", firstRunInit );
