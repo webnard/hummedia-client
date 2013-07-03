@@ -54,12 +54,6 @@ define( [ "util/xhr" ], function( xhr ) {
     // Check to see if we're already logged in
     butter.listen( "ready", function onMediaReady() {
       butter.unlisten( "ready", onMediaReady );
-
-      whoami( function( response ) {
-        if ( !response.error ) {
-          butter.dispatch( "autologinsucceeded", response );
-        }
-      });
     });
 
     this.email = function() {
