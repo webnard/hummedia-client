@@ -48,7 +48,7 @@ define( [ "util/dragndrop", "util/lang", "editor/editor", "text!layouts/plugin-l
         }
       });
 
-      function onClick() {
+      function onClick(event) {
         var trackEvent;
 
         if ( butter.currentMedia.ready ) {
@@ -57,6 +57,7 @@ define( [ "util/dragndrop", "util/lang", "editor/editor", "text!layouts/plugin-l
           });
           butter.editor.editTrackEvent( trackEvent );
         }
+        event.preventDefault();
       }
 
       element.addEventListener( "click", onClick, false );
