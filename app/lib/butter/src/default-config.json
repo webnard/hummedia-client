@@ -1,6 +1,6 @@
 {
   "name": "default-config",
-  "baseDir": "../",
+  "baseDir": "lib/butter/",
   "crashReporter": true,
   "cssRenderClientSide": false,
   "snapshotHTMLOnReady": false,
@@ -23,46 +23,46 @@
     "plugins": [
       {
         "type": "text",
-        "icon": "{{baseDir}}templates/assets/plugins/text/text-icon.png"
+        "icon": "{{baseDir}}assets/plugins/text/text-icon.png"
       },
       {
         "type": "popup",
-        "icon": "{{baseDir}}templates/assets/plugins/popup/popup-icon.png"
+        "icon": "{{baseDir}}assets/plugins/popup/popup-icon.png"
       },
       {
         "type": "googlemap",
-        "icon": "{{baseDir}}resources/icons/map.png"
+        "icon": "{{baseDir}}css/resources/icons/map.png"
       },
       {
         "type": "twitter",
-        "icon": "{{baseDir}}templates/assets/plugins/twitter/twitter-icon.png"
+        "icon": "{{baseDir}}assets/plugins/twitter/twitter-icon.png"
       },
       {
         "type": "image",
-        "icon": "{{baseDir}}templates/assets/plugins/image/image-icon.png"
+        "icon": "{{baseDir}}assets/plugins/image/image-icon.png"
       },
       {
         "type": "loopPlugin",
         "displayName": "loop",
-        "icon": "{{baseDir}}templates/assets/plugins/loopPlugin/loop-icon.png"
+        "icon": "{{baseDir}}assets/plugins/loopPlugin/loop-icon.png"
       },
       {
         "type": "skip",
-        "icon": "{{baseDir}}templates/assets/plugins/skip/skip-icon.png"
+        "icon": "{{baseDir}}assets/plugins/skip/skip-icon.png"
       },
       {
         "type": "pausePlugin",
         "displayName": "Pause",
-        "icon": "{{baseDir}}templates/assets/plugins/pausePlugin/pause-icon.png"
+        "icon": "{{baseDir}}assets/plugins/pausePlugin/pause-icon.png"
       },
       {
         "type": "wikipedia",
-        "icon": "{{baseDir}}templates/assets/plugins/wikipedia/wikipedia-icon.png"
+        "icon": "{{baseDir}}assets/plugins/wikipedia/wikipedia-icon.png"
       },
       {
         "type": "sequencer",
         "hidden": true,
-        "icon": "{{baseDir}}resources/icons/media.png"
+        "icon": "{{baseDir}}css/resources/icons/media.png"
       }
     ]
   },
