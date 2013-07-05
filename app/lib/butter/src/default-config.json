@@ -29,6 +29,11 @@
         "type": "pausePlugin",
         "displayName": "Pause",
         "icon": "{{baseDir}}assets/plugins/pausePlugin/pause-icon.png"
+      },
+      {
+          "type": "mutePlugin",
+          "displayName": "Mute",
+          "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/mutePlugin/mute.png"
       }
     ]
   },
