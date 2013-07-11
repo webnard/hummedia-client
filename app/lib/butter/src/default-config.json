@@ -1,0 +1,48 @@
+{
+  "name": "default-config",
+  "baseDir": "lib/butter/",
+  "crashReporter": true,
+  "cssRenderClientSide": false,
+  "snapshotHTMLOnReady": false,
+  "scrapePage": true,
+  "backupInterval": 0,
+  "title": "Popcorn Maker",
+  "ui": {
+    "enabled": true,
+    "onLeaveDialog": true,
+    "trackEventHighlight": "click"
+  },
+  "makeVideoURLsUnique": true,
+  "mediaDefaults": {
+    "frameAnimation": true
+  },
+  "trackEvent": {
+    "defaultDuration": 5
+  },
+  "plugin": {
+    "plugins": [
+      {
+        "type": "skip",
+        "icon": "{{baseDir}}assets/plugins/skip/skip-icon.png"
+      },
+      {
+        "type": "pausePlugin",
+        "displayName": "Pause",
+        "icon": "{{baseDir}}assets/plugins/pausePlugin/pause-icon.png"
+      },
+      {
+          "type": "mutePlugin",
+          "displayName": "Mute",
+          "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/mutePlugin/mute.png"
+      }
+    ]
+  },
+  "dirs": {
+    "css": "{{baseDir}}css/",
+    "resources": "{{baseDir}}resources/"
+  },
+  "icons": {
+    "default": "popcorn-icon.png",
+    "image": "image-icon.png"
+  }
+}

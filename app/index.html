@@ -6,8 +6,13 @@
   <link href='//fonts.googleapis.com/css?family=Rambla' rel='stylesheet' type='text/css'>
   <title data-ng-bind="title">Hummedia</title>
   <link rel="stylesheet" href="css/cssreset-min.css"/>
+  <link rel="stylesheet/less" href="css/admin-collection.less"/>
+  <link rel="stylesheet/less" href="css/video.less"/>
   <link rel="stylesheet/less" href="css/app.less"/>
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
+  <!-- Temporarily removed
+  <link rel="stylesheet/less" href="lib/butter/css/editor/edit-annotations.less" data-admin>
+  -->
 </head>
 <body>
     <!--[if lte IE 8]>
@@ -66,18 +71,24 @@
   <script src="lib/angular/angular.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
   <script src="lib/angular/angular-resource.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js"></script>
   <script src="js/custom-sanitize.js"></script>
-  <script type="text/javascript" src="js/tinymce/tinymce.min.js"></script>
+  <script type="text/javascript" src="js/tinymce/tinymce.min.js" data-cdn="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
   
   <!-- POPCORN -->
   <script src="lib/popcorn-js/popcorn.js"></script>
-  <script src="lib/popcorn-js/modules/parser/popcorn.parser.js"></script>
-  <script src="lib/popcorn-js/modules/player/popcorn.player.js"></script>
-  <script src="lib/popcorn-js/modules/locale/popcorn.locale.js"></script>
-  <script src="lib/popcorn-js/players/youtube/popcorn.youtube.js"></script>
+  <script src="lib/popcorn-js/modules/parser/popcorn.parser.js" ></script>
+  <script src="lib/popcorn-js/modules/player/popcorn.player.js" ></script>
+  <script src="lib/popcorn-js/modules/locale/popcorn.locale.js" ></script>
+  <script src="lib/popcorn-js/players/youtube/popcorn.youtube.js" ></script>
   <script src="lib/hummedia-popcorn-plugins/audio/popcorn.audio.js"></script>
   <script src="lib/hummedia-popcorn-plugins/modal/popcorn.modal.js"></script>
   <script src="lib/hummedia-popcorn-plugins/reference/popcorn.reference.js"></script>
-  <script src="lib/hummedia-popcorn-plugins/skip/popcorn.skip.js"></script>
+  <script src="lib/hummedia-popcorn-plugins/youtube/popcorn.youtube.js"></script>
+  <script src="lib/hummedia-popcorn-plugins/freebase/popcorn.freebase.js"></script>
+  <script src="lib/hummedia-popcorn-plugins/comment/popcorn.comment.js"></script>
+  <script src="lib/hummedia-popcorn-plugins/interaction/popcorn.interaction.js"></script>
+  <script src="lib/butter/assets/plugins/skip/popcorn.skip.js"></script>
+  <script src="lib/butter/assets/plugins/pausePlugin/popcorn.pausePlugin.js"></script>
+  <script src="lib/hummedia-popcorn-plugins/mutePlugin/popcorn.mutePlugin.js"></script>
   
   <!-- APP FILES -->
   <script src="js/config.js"></script>
@@ -128,7 +139,26 @@
   <script src="js/controllers/admin_create_video.js"></script>
   <script src="js/controllers/video_search.js"></script>
   <script src="js/controllers/video.js"></script>
+  <script src="js/controllers/video_annotation.js"></script>
   <script src="js/controllers/developer.js" data-remove="true"></script>
+  
+  <!--POPCORN MAKER-->
+<!--  <script data-admin>
+      var require = {
+          baseUrl: 'lib/butter/src'
+      };
+  </script>
+  <script src="lib/require/require.js" data-admin></script>
+  <script src="lib/butter/src/butter.js" data-admin></script>
+  <script src="lib/butter/assets/editors/editorhelper.js" data-admin></script>
+  <script src="lib/butter/assets/editors/wikipedia.js" data-admin></script>
+  <script src="lib/butter/assets/editors/popup/popup.js" data-admin></script>
+  <script src="lib/butter/assets/editors/image/image.js" data-admin></script>
+  <script src="lib/butter/assets/editors/text/text.js" data-admin></script>
+  <script src="lib/butter/assets/editors/googlemap.js" data-admin></script>
+  <script src="lib/butter/assets/editors/twitter/twitter.js" data-admin></script>
+  <script src="lib/butter/assets/editors/sequencer/sequencer.js" data-admin></script>
+  -->
 <!--[endif]> -->
 </body>
 </html>

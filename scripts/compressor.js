@@ -64,6 +64,7 @@ function cdnScripts(window)
     var $ = window.$;
     window.$('script[data-cdn]').each(function(){
         $(this).attr('src',$(this).attr('data-cdn')).removeAttr('data-cdn');
+        $(this).appendTo("head");
     });
 }
 
