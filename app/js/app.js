@@ -14,6 +14,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.when('/collection', {title: "Hummedia | Collections", templateUrl: 'partials/collections.html', controller: CollectionsCtrl});
     $routeProvider.when('/select-course/:video', {title: "Hummedia | Select Course", templateUrl: 'partials/select-course.html', controller: SelectCourseCtrl});
     $routeProvider.when('/developer', {title: "Hummedia | Developer", templateUrl: 'partials/developer.html'});
+    $routeProvider.when('/about', {title: "Hummedia | About", templateUrl: 'partials/about.html'});
     $routeProvider.otherwise({redirectTo: '/'});
   }]).
   config(['$locationProvider', function($locationProvider) {

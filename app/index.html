@@ -38,7 +38,7 @@
         <a data-ng-show="user.canCreate" ng-click="toggleAdmin()">{{"Admin" | tr}}</a>
 	    <a href="#/collection">{{"Courses" | tr}}</a>
 	    <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
-	    <a href="">{{"Contact" | tr}}</a>
+	    <a href="#/about">{{"About" | tr}}</a>
 	    <span class="language" data-ng-controller="LanguageCtrl">
             <label for="nav-language" id="nav-language-label"><i class="icon-globe"></i> {{language.current | language}}</label>
             <div id="nav-language" lang-exists select-language lang-callback="flash" ng-model="language.current" analytics="click, change" analytics-category="Language" analytics-label="header-dropdown"></div>
@@ -54,11 +54,6 @@
     </div>
     <div ng-view id="view">
     </div>
-    <footer>
-        <small><a target="blank" id="footer-license" ng-href="{{copyright}}"><img width="20" src="img/cc.png" /> {{license}}</a></small>
-        <a target="blank" ng-href="{{img_profile}}">{{image_title}} by {{img_username}}</a>
-    </footer>
-
     </div>
   <!--[if gt IE 8]> -->
 
