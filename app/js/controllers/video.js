@@ -67,10 +67,16 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
             throw new Error("Cannot enable the same annotation more than once.");
         }
         
-        
         var ids = [];
         annotation.media[0].tracks.forEach(function(element){
             element.trackEvents.forEach(function(element){
+
+                switch(element.type) {
+                    case 'youtube-search':
+                    case 'freebase-search':
+                        element.popcornOptions.key = appConfig.youtubeKey;
+                        break;
+                }
 
                 /** @TODO: if the end field is absent, it probably should be fixed in the database **/
                 if(isNaN(parseFloat(element.popcornOptions.end) || element.popcornOptions.start > element.popcornOptions.end)) {
