@@ -79,7 +79,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
                 }
 
                 /** @TODO: if the end field is absent, it probably should be fixed in the database **/
-                if(isNaN(parseFloat(element.popcornOptions.end) || element.popcornOptions.start > element.popcornOptions.end)) {
+                if(isNaN(parseFloat(element.popcornOptions.end)) || element.popcornOptions.start >= element.popcornOptions.end) {
                     element.popcornOptions.end = element.popcornOptions.start + 1;
                 }
 
@@ -121,14 +121,32 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
     
     $scope.video = Video.get({identifier:$routeParams.id}, function loadPopcorn(){
         
-        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
         pop = Popcorn.smart("video", $scope.video.url);
+        
+        var resource = $scope.video['ma:hasRelatedResource'];
+        if(resource && resource.length) {
+            /** @TODO: Allow for multiple subtitles **/
+            var url = resource[0]['@id'];
+            var type = resource[0]['type'];
+
+            switch(type) {
+                case 'vtt':
+                    pop.parseVTT(url);
+                    break;
+                case 'srt':
+                    pop.parseSRT(url);
+                    break;
+                default:
+                    throw new Error("Parser for " + type + " not implemented.");
+            }
+        }
         
         if($routeParams.collection === undefined && !required_annotation) {
             // we're done here. there are no annotations.
             return;
         }
         
+        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
         /**
          * callback function for after we call methods on the Annotation resource
          * enables each individual annotation
