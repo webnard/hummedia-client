@@ -10,9 +10,7 @@
   <link rel="stylesheet/less" href="css/video.less"/>
   <link rel="stylesheet/less" href="css/app.less"/>
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
-  <!-- Temporarily removed
-  <link rel="stylesheet/less" href="lib/butter/css/editor/edit-annotations.less" data-admin>
-  -->
+  <link rel="stylesheet/less" href="lib/butter/css/editor/edit-annotations.less" data-admin data-exclude-compress>
 </head>
 <body>
     <!--[if lte IE 8]>
@@ -82,12 +80,12 @@
   <script src="lib/hummedia-popcorn-plugins/audio/popcorn.audio.js"></script>
   <script src="lib/hummedia-popcorn-plugins/modal/popcorn.modal.js"></script>
   <script src="lib/hummedia-popcorn-plugins/reference/popcorn.reference.js"></script>
-  <script src="lib/hummedia-popcorn-plugins/youtube/popcorn.youtube.js"></script>
-  <script src="lib/hummedia-popcorn-plugins/freebase/popcorn.freebase.js"></script>
+  <script src="lib/hummedia-popcorn-plugins/youtube-search/popcorn.youtube-search.js"></script>
+  <script src="lib/hummedia-popcorn-plugins/freebase/popcorn.freebase-search.js"></script>
   <script src="lib/hummedia-popcorn-plugins/comment/popcorn.comment.js"></script>
   <script src="lib/hummedia-popcorn-plugins/interaction/popcorn.interaction.js"></script>
-  <script src="lib/butter/assets/plugins/skip/popcorn.skip.js"></script>
   <script src="lib/butter/assets/plugins/pausePlugin/popcorn.pausePlugin.js"></script>
+  <script src="lib/butter/assets/plugins/skip/popcorn.skip.js"></script>
   <script src="lib/hummedia-popcorn-plugins/mutePlugin/popcorn.mutePlugin.js"></script>
   
   <!-- APP FILES -->
@@ -143,22 +141,21 @@
   <script src="js/controllers/developer.js" data-remove="true"></script>
   
   <!--POPCORN MAKER-->
-<!--  <script data-admin>
+  <script data-admin>
       var require = {
           baseUrl: 'lib/butter/src'
       };
   </script>
-  <script src="lib/require/require.js" data-admin></script>
-  <script src="lib/butter/src/butter.js" data-admin></script>
-  <script src="lib/butter/assets/editors/editorhelper.js" data-admin></script>
-  <script src="lib/butter/assets/editors/wikipedia.js" data-admin></script>
-  <script src="lib/butter/assets/editors/popup/popup.js" data-admin></script>
-  <script src="lib/butter/assets/editors/image/image.js" data-admin></script>
-  <script src="lib/butter/assets/editors/text/text.js" data-admin></script>
-  <script src="lib/butter/assets/editors/googlemap.js" data-admin></script>
-  <script src="lib/butter/assets/editors/twitter/twitter.js" data-admin></script>
-  <script src="lib/butter/assets/editors/sequencer/sequencer.js" data-admin></script>
-  -->
+  <script src="lib/require/require.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/src/butter.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/assets/editors/editorhelper.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/assets/editors/wikipedia.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/assets/editors/popup/popup.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/assets/editors/image/image.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/assets/editors/text/text.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/assets/editors/googlemap.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/assets/editors/twitter/twitter.js" data-admin data-exclude-compress></script>
+  <script src="lib/butter/assets/editors/sequencer/sequencer.js" data-admin data-exclude-compress></script>
 <!--[endif]> -->
 </body>
 </html>
