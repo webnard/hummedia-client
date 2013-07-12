@@ -36,7 +36,7 @@ function compressCSS(window, callback) {
     var new_css_link_added = false;
     var total_css = "";
     
-    $("link[rel='stylesheet/less'], link[rel='stylesheet']").each(function(){
+    $("link[rel='stylesheet/less'], link[rel='stylesheet']").not("[data-exclude-compress]").each(function(){
         if(isRemote($(this).attr('href'))) {
             return;
         }
@@ -64,7 +64,6 @@ function cdnScripts(window)
     var $ = window.$;
     window.$('script[data-cdn]').each(function(){
         $(this).attr('src',$(this).attr('data-cdn')).removeAttr('data-cdn');
-        $(this).appendTo("head");
     });
 }
 
@@ -80,6 +79,9 @@ function compressJS(window, callback) {
     var toCompress = []; // an array of scripts to concatenate and compress
 
     var $script_tags = $("script:not([data-exclude-compress])").filter(function() {
+        if(!$(this).attr('src')) {
+            return;
+        }
         if(!isRemote($(this).attr('src'))) {
             toCompress.push(app_dir + $(this).attr('src'));
             return true;
