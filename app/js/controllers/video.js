@@ -71,25 +71,10 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
         var ids = [];
         annotation.media[0].tracks.forEach(function(element){
             element.trackEvents.forEach(function(element){
-                switch(element.type) {
-                    /** @TODO: this check should be replaced by using these values by default on the API **/
-                    case 'link':
-                        element.type = element.popcornOptions.service;
-                        element.popcornOptions.key = appConfig.youtubeKey; /**@TODO: should this be replaced by a generic 'googleKey'? **/
-                        break;
-                    
-                    /** @TODO: these need to be altered in the database **/
-                    case 'pause':
-                        element.type = 'pausePlugin';
-                        break;
-                    case 'mute':
-                        element.type = 'mutePlugin';
-                        break;
-                }
 
                 /** @TODO: if the end field is absent, it probably should be fixed in the database **/
-                if(isNaN(parseFloat(element.popcornOptions.end))) {
-                    element.popcornOptions.end = 0;
+                if(isNaN(parseFloat(element.popcornOptions.end) || element.popcornOptions.start > element.popcornOptions.end)) {
+                    element.popcornOptions.end = element.popcornOptions.start + 1;
                 }
 
                 if(typeof pop[element.type] !== 'function') {
