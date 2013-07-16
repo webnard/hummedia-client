@@ -2,9 +2,9 @@
  * If a copy of the MIT license was not distributed with this file, you can
  * obtain one at https://raw.github.com/mozilla/butter/master/LICENSE */
 
-define( [ "text!./default.html", "editor/editor", "util/lang" ],
-  function( LAYOUT_SRC, Editor, LangUtils ) {
-
+define( [ "text!./default.html", "editor/editor", "util/lang", "text!default-config.json"  ],
+  function( LAYOUT_SRC, Editor, LangUtils, CONFIG ) {
+  
   /**
    * Class: DefaultEditor
    *
@@ -15,6 +15,45 @@ define( [ "text!./default.html", "editor/editor", "util/lang" ],
    * @param {TrackEvent} TrackEvent: The TrackEvent to edit
    */
   function DefaultEditor( rootElement, butter, compiledLayout, events ) {
+
+    var getTargets = (function( ) {
+        var pluginConfig = JSON.parse(CONFIG).plugin.plugins;
+        var pluginTargets = {};
+
+        return function(type) {
+            if(pluginTargets[type] !== undefined) {
+                return pluginTargets[type];
+            }
+                    
+            for(var i = 0; i<pluginConfig.length; i++) {
+                var p = pluginConfig[i];
+                if(p.type === type) {
+                    if(!(p.targets instanceof Array)) {
+                        pluginTargets[type] = false;
+                        return false;
+                    }
+
+                    for(var j = 0; j<p.targets.length; j++) {
+                        for(var k = 0; k<butter.targets.length; k++) {
+                            if(butter.targets[k].element.id === p.targets[j]) {
+                                if(!(pluginTargets[type] instanceof Array)) {
+                                    pluginTargets[type] = [];
+                                }
+                                pluginTargets[type].push(butter.targets[k]);
+                                break;
+                            }
+                        }
+                    }
+                    if(!(pluginTargets[type] instanceof Array)) { // the type was found, but not a single target
+                        pluginTargets[type] = false;
+                    }
+                    return pluginTargets[type];
+                }
+            }
+            pluginTargets[type] = false; // no match found
+            return pluginTargets[type];
+        }
+    })();
 
     var _this = this;
 
@@ -67,8 +106,14 @@ define( [ "text!./default.html", "editor/editor", "util/lang" ],
         ignoreManifestKeys: [ "target", "start", "end" ]
       });
 
-      if ( trackEvent.manifest.options.target && !trackEvent.manifest.options.target.hidden ) {
-        targetList = _this.createTargetsList( _targets );
+      if ( (trackEvent.manifest.options.target && !trackEvent.manifest.options.target.hidden) || getTargets(trackEvent.type) !== false ) {
+        var whitelist = getTargets(trackEvent.type);
+        if(whitelist !== false) {
+            targetList = _this.createTargetsList(whitelist);
+        } else {
+            targetList = _this.createTargetsList( _targets );
+        }
+
         selectElement = targetList.querySelector( "select" );
         // Attach the onchange handler to trackEvent is updated when <select> is changed
         _this.attachSelectChangeHandler( selectElement, trackEvent, "target" );

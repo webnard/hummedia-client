@@ -26,14 +26,36 @@
         "icon": "{{baseDir}}assets/plugins/skip/skip-icon.png"
       },
       {
+          "type": "mutePlugin",
+          "displayName": "Mute",
+          "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/mutePlugin/mute.png"
+      },
+      {
+        "type": "youtube-search",
+        "displayName": "YouTube",
+        "targets": ["target-4"]
+      },
+      {
+        "type": "freebase-search",
+        "displayName": "Freebase",
+        "targets": ["target-4"]
+      },
+      {
         "type": "pausePlugin",
         "displayName": "Pause",
         "icon": "{{baseDir}}assets/plugins/pausePlugin/pause-icon.png"
       },
       {
-          "type": "mutePlugin",
-          "displayName": "Mute",
-          "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/mutePlugin/mute.png"
+          "type": "comment",
+          "displayName": "Comment",
+          "icon": "{{baseDir}}assets/plugins/popup/popup-icon.png",
+          "targets": ["target-1"]
+      },
+      {
+          "type": "reference",
+          "displayName": "Reference",
+          "icon": "{{baseDir}}assets/plugins/text/text-icon.png",
+          "targets": ["target-2"]
       }
     ]
   },
