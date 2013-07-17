@@ -15,46 +15,6 @@ define( [ "text!./default.html", "editor/editor", "util/lang", "text!default-con
    * @param {TrackEvent} TrackEvent: The TrackEvent to edit
    */
   function DefaultEditor( rootElement, butter, compiledLayout, events ) {
-
-    var getTargets = (function( ) {
-        var pluginConfig = JSON.parse(CONFIG).plugin.plugins;
-        var pluginTargets = {};
-
-        return function(type) {
-            if(pluginTargets[type] !== undefined) {
-                return pluginTargets[type];
-            }
-                    
-            for(var i = 0; i<pluginConfig.length; i++) {
-                var p = pluginConfig[i];
-                if(p.type === type) {
-                    if(!(p.targets instanceof Array)) {
-                        pluginTargets[type] = false;
-                        return false;
-                    }
-
-                    for(var j = 0; j<p.targets.length; j++) {
-                        for(var k = 0; k<butter.targets.length; k++) {
-                            if(butter.targets[k].element.id === p.targets[j]) {
-                                if(!(pluginTargets[type] instanceof Array)) {
-                                    pluginTargets[type] = [];
-                                }
-                                pluginTargets[type].push(butter.targets[k]);
-                                break;
-                            }
-                        }
-                    }
-                    if(!(pluginTargets[type] instanceof Array)) { // the type was found, but not a single target
-                        pluginTargets[type] = false;
-                    }
-                    return pluginTargets[type];
-                }
-            }
-            pluginTargets[type] = false; // no match found
-            return pluginTargets[type];
-        }
-    })();
-
     var _this = this;
 
     events = events || {};
@@ -106,10 +66,11 @@ define( [ "text!./default.html", "editor/editor", "util/lang", "text!default-con
         ignoreManifestKeys: [ "target", "start", "end" ]
       });
 
-      if ( (trackEvent.manifest.options.target && !trackEvent.manifest.options.target.hidden) || getTargets(trackEvent.type) !== false ) {
-        var whitelist = getTargets(trackEvent.type);
+      if ( (trackEvent.manifest.options.target && !trackEvent.manifest.options.target.hidden) || butter.getTargets(trackEvent.type) !== false ) {
+        var whitelist = butter.getTargets(trackEvent.type);
         if(whitelist !== false) {
             targetList = _this.createTargetsList(whitelist);
+            trackEvent.popcornOptions.target = whitelist[0].element.id;
         } else {
             targetList = _this.createTargetsList( _targets );
         }

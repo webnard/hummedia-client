@@ -211,7 +211,7 @@ window.Butter = {
 
         popcornOptions.start = start;
         popcornOptions.end = end;
-        popcornOptions.target = _defaultTarget.elementID;
+        popcornOptions.target = _this.getDefaultTarget(type).elementID;
 
         if ( position ) {
           relativePosition = getRelativePosition( position, type );
@@ -319,6 +319,63 @@ window.Butter = {
           sortSelectedEvents();
         }
       }
+
+      /**
+       * @param type the type of plugin you want targets for
+       */
+      _this.getTargets = (function( ) {
+        var pluginConfig = JSON.parse(DEFAULT_CONFIG_JSON).plugin.plugins;
+        var pluginTargets = {};
+
+        return function(type) {
+            if(pluginTargets[type] !== undefined) {
+                return pluginTargets[type];
+            }
+                    
+            for(var i = 0; i<pluginConfig.length; i++) {
+                var p = pluginConfig[i];
+                if(p.type === type) {
+                    if(!(p.targets instanceof Array)) {
+                        pluginTargets[type] = false;
+                        return false;
+                    }
+
+                    for(var j = 0; j<p.targets.length; j++) {
+                        for(var k = 0; k<_this.targets.length; k++) {
+                            if(_this.targets[k].element.id === p.targets[j]) {
+                                if(!(pluginTargets[type] instanceof Array)) {
+                                    pluginTargets[type] = [];
+                                }
+                                pluginTargets[type].push(_this.targets[k]);
+                                break;
+                            }
+                        }
+                    }
+                    if(!(pluginTargets[type] instanceof Array)) { // the type was found, but not a single target
+                        pluginTargets[type] = false;
+                    }
+                    return pluginTargets[type];
+                }
+            }
+            pluginTargets[type] = false; // no match found
+            return pluginTargets[type];
+        }
+      })();
+
+      /**
+       * Returns a default target for the given plugin type
+       */
+      _this.getDefaultTarget = function( type ) {
+          var whitelist = _this.getTargets( type );
+
+          if(whitelist !== false) {
+              return whitelist[0];
+          }
+          else
+          {
+              return _defaultTarget;
+          }
+      };
 
       _this.deselectAllTrackEvents = function() {
         // selectedEvents' length will change as each trackevent's selected property
