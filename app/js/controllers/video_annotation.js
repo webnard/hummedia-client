@@ -32,6 +32,8 @@ function VideoAnnotationCtrl($scope, Video, $routeParams, appConfig) {
 
                 butter.listen( "mediaready", function mediaReady() {
                   butter.unlisten( "mediaready", mediaReady );
+                  /** @TODO: load up any related annotations and add them **/ 
+                  //butter.generateSafeTrackEvent('imagePlugin', {start: 4, end: 10, src: 'http://fillmurray.com/100/100'});
                 });
               }
             });
