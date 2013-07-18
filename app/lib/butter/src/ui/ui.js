@@ -96,13 +96,8 @@ define( [ "core/eventmanager", "./toggler",
     };
 
     this.load = function( onReady ) {
-      var loadOptions = {
-        type: "css",
-        url: BUTTER_CSS_FILE
-      };
 
       function loadUI() {
-        butter.loader.load( [ loadOptions ], function() {
           // icon preloading needs css to be loaded first
 
           _this.loadIcons( _uiConfig.value( "plugin" ).plugins );
@@ -120,7 +115,6 @@ define( [ "core/eventmanager", "./toggler",
           butter.listen( "mediaready", firstRunInit );
 
           onReady();
-        });
       }
 
       if ( _uiOptions.enabled ) {
