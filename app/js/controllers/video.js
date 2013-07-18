@@ -74,7 +74,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
                 switch(element.type) {
                     case 'youtube-search':
                     case 'freebase-search':
-                        element.popcornOptions.key = appConfig.youtubeKey;
+                        element.popcornOptions.key = appConfig.googleKey;
                         break;
                 }
 

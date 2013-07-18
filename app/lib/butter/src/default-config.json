@@ -46,16 +46,25 @@
         "icon": "{{baseDir}}assets/plugins/pausePlugin/pause-icon.png"
       },
       {
-          "type": "comment",
-          "displayName": "Comment",
-          "icon": "{{baseDir}}assets/plugins/popup/popup-icon.png",
-          "targets": ["target-1"]
+        "type": "comment",
+        "displayName": "Comment",
+        "icon": "{{baseDir}}assets/plugins/popup/popup-icon.png",
+        "targets": ["target-1"]
       },
       {
-          "type": "reference",
-          "displayName": "Reference",
-          "icon": "{{baseDir}}assets/plugins/text/text-icon.png",
-          "targets": ["target-2"]
+        "type": "reference",
+        "displayName": "Reference",
+        "icon": "{{baseDir}}assets/plugins/text/text-icon.png",
+        "targets": ["target-2"]
+      },
+      {
+        "type": "interaction",
+        "displayName": "Interaction",
+        "targets": ["target-2"]
+      },
+      {
+        "type": "modal",
+        "displayName": "Modal"
       }
     ]
   },
