@@ -63,6 +63,12 @@
         "targets": ["target-2"]
       },
       {
+        "type": "imagePlugin",
+        "displayName": "Image",
+        "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/imagePlugin/image.svg",
+        "targets": ["target-1", "target-2"]
+      },
+      {
         "type": "modal",
         "displayName": "Modal"
       }
