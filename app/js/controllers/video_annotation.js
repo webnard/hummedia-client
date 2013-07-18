@@ -1,4 +1,4 @@
-function VideoAnnotationCtrl($scope, Video, $routeParams) {
+function VideoAnnotationCtrl($scope, Video, $routeParams, appConfig) {
   //Code to style the page correctly
   //
     function resizeView(){
@@ -24,7 +24,9 @@ function VideoAnnotationCtrl($scope, Video, $routeParams) {
 //        Popcorn.smart("video", $scope.video.url);
         ( function( Butter, EditorHelper ) {
             Butter.init({
-              config: {dirs: {css: "clam"}},
+              config: {
+                  googleKey: appConfig.googleKey
+              },
               ready: function( butter ) {
                 EditorHelper.init( butter );
 
@@ -37,4 +39,4 @@ function VideoAnnotationCtrl($scope, Video, $routeParams) {
     });
   /////////////////////////////////////////////
 };
-VideoAnnotationCtrl.$inject = ['$scope', 'Video', '$routeParams'];
+VideoAnnotationCtrl.$inject = ['$scope', 'Video', '$routeParams', 'appConfig'];

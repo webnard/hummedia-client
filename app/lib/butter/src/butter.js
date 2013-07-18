@@ -117,6 +117,7 @@ window.Butter = {
           _sortedSelectedEvents = [],
           _defaultPopcornScripts = {},
           _defaultPopcornCallbacks = {},
+          _pluginsByType = {},
           _defaultTrackeventDuration;
 
       // We use the default configuration in src/default-config.json as
@@ -212,6 +213,10 @@ window.Butter = {
         popcornOptions.start = start;
         popcornOptions.end = end;
         popcornOptions.target = _this.getDefaultTarget(type).elementID;
+
+        if(_this.googleKeyField(type)) {
+            popcornOptions[_this.googleKeyField(type)] = _this.config.value('googleKey');
+        }
 
         if ( position ) {
           relativePosition = getRelativePosition( position, type );
@@ -320,44 +325,48 @@ window.Butter = {
         }
       }
 
+      _this.googleKeyField = function googleKeyField( type ) {
+          if(_pluginsByType[type] && _pluginsByType[type]['googleKeyProperty']) {
+              return _pluginsByType[type]['googleKeyProperty'];
+          }
+          return false;
+      };
+
       /**
        * @param type the type of plugin you want targets for
        */
       _this.getTargets = (function( ) {
-        var pluginConfig = JSON.parse(DEFAULT_CONFIG_JSON).plugin.plugins;
         var pluginTargets = {};
 
         return function(type) {
+            var pluginConfig = _config.value("plugin").plugins;
             if(pluginTargets[type] !== undefined) {
                 return pluginTargets[type];
             }
-                    
-            for(var i = 0; i<pluginConfig.length; i++) {
-                var p = pluginConfig[i];
-                if(p.type === type) {
-                    if(!(p.targets instanceof Array)) {
-                        pluginTargets[type] = false;
-                        return false;
-                    }
+            var p = _pluginsByType[type];        
+            if(!p) {
+                pluginTargets[type] = false;
+                return false;
+            }
+            if(!(p.targets instanceof Array)) {
+                pluginTargets[type] = false;
+                return false;
+            }
 
-                    for(var j = 0; j<p.targets.length; j++) {
-                        for(var k = 0; k<_this.targets.length; k++) {
-                            if(_this.targets[k].element.id === p.targets[j]) {
-                                if(!(pluginTargets[type] instanceof Array)) {
-                                    pluginTargets[type] = [];
-                                }
-                                pluginTargets[type].push(_this.targets[k]);
-                                break;
-                            }
+            for(var j = 0; j<p.targets.length; j++) {
+                for(var k = 0; k<_this.targets.length; k++) {
+                    if(_this.targets[k].element.id === p.targets[j]) {
+                        if(!(pluginTargets[type] instanceof Array)) {
+                            pluginTargets[type] = [];
                         }
+                        pluginTargets[type].push(_this.targets[k]);
+                        break;
                     }
-                    if(!(pluginTargets[type] instanceof Array)) { // the type was found, but not a single target
-                        pluginTargets[type] = false;
-                    }
-                    return pluginTargets[type];
                 }
             }
-            pluginTargets[type] = false; // no match found
+            if(!(pluginTargets[type] instanceof Array)) { // the type was found, but not a single target
+                pluginTargets[type] = false;
+            }
             return pluginTargets[type];
         }
       })();
@@ -940,6 +949,12 @@ window.Butter = {
 
         _config = _defaultConfig;
         _defaultTrackeventDuration = _config.value( "trackEvent" ).defaultDuration;
+
+        // establish plugin values by keys for easier lookup
+        var pluginList = _config.value('plugin').plugins;
+        for(var i = 0; i<pluginList.length; i++) {
+            _pluginsByType[pluginList[i].type] = pluginList[i];
+        }
 
         //prepare modules first
         var moduleCollection = new Modules( Butter, _this, _config ),

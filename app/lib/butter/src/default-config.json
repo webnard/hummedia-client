@@ -33,12 +33,14 @@
       {
         "type": "youtube-search",
         "displayName": "YouTube",
-        "targets": ["target-4"]
+        "targets": ["target-4"],
+        "googleKeyProperty": "key"
       },
       {
         "type": "freebase-search",
         "displayName": "Freebase",
-        "targets": ["target-4"]
+        "targets": ["target-4"],
+        "googleKeyProperty": "key"
       },
       {
         "type": "pausePlugin",
