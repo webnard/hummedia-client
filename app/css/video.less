@@ -14,6 +14,12 @@ html.video-page{
     #background{
         display: none;
     }
+    [id|=target] dfn {
+        color:#F0E68C;
+        font-style:italic;
+        display: block;
+        margin-bottom: 1.5em;
+    }
     footer{
         display: none;
     }
@@ -92,6 +98,9 @@ html.video-page{
     display: inline-block;
     vertical-align: top;
 }
+#annotations-wrapper a{
+    color:#CD332D;
+}
 [id|=target]{
     img{
         max-width: 100%;
@@ -109,15 +118,59 @@ html.video-page{
     width: 49%;
     padding-left: 1%;
 }
+#target-2 div{
+    padding-top:5%;
+}
 #target-3{
     display: inline-block;
     vertical-align: top;
     width: 48%;
     padding-left: 1%;
 }
-
+#target-4{
+    padding-top:5%;
+}
 ////Popcorn Plugins
 .popcorn-plugin-youtube li{
     display: inline-block;
     vertical-align: top;
+}
+.freebase-note, .youtube-note {
+    position:relative;
+    width:100%;
+    border-radius:5px 0 5px 5px;
+    padding:5px 8px;
+    color:#fff;
+    background:#ff8331;
+    overflow:hidden;
+}
+.youtube-note{
+    background:#CD332D;
+}
+.freebase-note:before, .youtube-note:before{
+   content:"";
+   position:absolute;
+   top:0;
+   right:0;
+   border-style:solid;
+   background:#ff6600;
+   box-shadow:0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+   border-width:8px;
+   border-color:#000 #000 transparent transparent;
+   border-radius:0 0 0 5px;
+}
+.youtube-note:before{
+   background:#6E0610;
+}
+.freebase-note h3, .youtube-note h3{
+   width:100%;
+   background-color:#E8EBEE;
+   color: black;
+}
+.youtube-note h3 img{
+   height:54px;
+   vertical-align:middle;
+}
+.youtube-note ul img{
+   margin-right:5px;
 }
