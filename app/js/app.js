@@ -5,8 +5,16 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/search', {title: "Hummedia | Search", templateUrl: 'partials/search/search.html', controller: SearchCtrl, reloadOnSearch: false});
     $routeProvider.when('/', {title: "Hummedia", templateUrl: 'partials/home.html'});
-    $routeProvider.when('/video/:id', {title: "Hummedia | Video", templateUrl: 'partials/video.html', controller: VideoCtrl});    
-    $routeProvider.when('/video/annotate/:id', {title: "Hummedia | Annotate", templateUrl: 'partials/video.html', controller: VideoAnnotationCtrl});    
+    $routeProvider.when('/video/:id', {title: "Hummedia | Video", templateUrl: 'partials/video.html', controller: VideoCtrl,
+        resolve: {
+            ANNOTATION_MODE: function(){ return false; }
+        }
+    });    
+    $routeProvider.when('/video/annotate/:id', {title: "Hummedia | Annotate", templateUrl: 'partials/video.html', controller: VideoCtrl,
+        resolve: {
+            ANNOTATION_MODE: function() { return true; }
+        }
+    });    
     $routeProvider.when('/admin/collection', {title: "Hummedia | Collections", admin: true, templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/user', {title: "Hummedia | Users", admin: true, templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/video', {title: "Hummedia | Videos", admin: true, templateUrl: 'partials/admin-video.html', controller: AdminVideoCtrl, reloadOnSearch: false});
