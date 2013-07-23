@@ -1,11 +1,7 @@
 'use strict';
 function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATION_MODE) {
 
-    /**
-     *  Initializes page for annotating the video
-     */
-    function annotator_init() {
-        ( function( Butter, EditorHelper ) {
+    function butter_with_plugins() {
             Butter.init({
               config: {
                   googleKey: appConfig.googleKey
@@ -15,12 +11,67 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
 
                 butter.listen( "mediaready", function mediaReady() {
                   butter.unlisten( "mediaready", mediaReady );
-                  /** @TODO: load up any related annotations and add them **/ 
-                  //butter.generateSafeTrackEvent('imagePlugin', {start: 4, end: 10, src: 'http://fillmurray.com/100/100'});
+                  if($scope.annotations) {
+                      loadEachAnnotation(butter);
+                  }
                 });
               }
             });
-        }( window.Butter, window.EditorHelper ) );
+    }
+
+    /**
+     *  Initializes page for annotating the video
+     */
+    function annotator_init() {
+        // load the annotations
+        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
+        
+        if($routeParams.collection === undefined && !required_annotation) {
+            butter_with_plugins();
+            return;
+        }
+        
+        if($routeParams.collection) {
+            // we need to load an array of annotations
+            var params = {"dc:relation":$scope.video.pid, "collection":$routeParams.collection, "client":"popcorn"};
+            $scope.annotations = Annotation.query(params, butter_with_plugins);
+        }
+        else
+        {
+            // there is only one required annotation; load it
+            $scope.annotations = Annotation.get({identifier: required_annotation}, butter_with_plugins);
+        }
+    };
+    
+    /**
+     * callback function for after we call methods on the Annotation resource
+     * enables each individual annotation
+     */
+    function loadEachAnnotation(butter){
+        // helper function for the helper function ;)
+        var loadAnnotation = function(data, butter) {
+            data.pid = data.media[0].tracks[0].id; // @todo -- ought to be more accessible from the API
+            
+            if(data.media[0].tracks[0].required) {
+                data.required = true;
+            }
+            else
+            {
+                $scope.has_optional_annotations = true;
+            }
+            
+            enableAnnotation(data, butter);
+        };
+        
+        if($scope.annotations instanceof Array) {
+            $scope.annotations.forEach(function(annotation) {
+                loadAnnotation(annotation, butter);   
+            });
+        }
+        else
+        {
+            loadAnnotation($scope.annotation, butter);
+        }
     };
 
     /**
@@ -47,50 +98,23 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
             }
         }
         
+        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
+        
         if($routeParams.collection === undefined && !required_annotation) {
             // we're done here. there are no annotations.
             return;
         }
         
-        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
-        /**
-         * callback function for after we call methods on the Annotation resource
-         * enables each individual annotation
-         */
-        var _loadEachAnnotation = function(){
-            // helper function for the helper function ;)
-            var loadAnnotation = function(data) {
-                data.pid = data.media[0].tracks[0].id; // @todo -- ought to be more accessible from the API
-                
-                if(data.media[0].tracks[0].required) {
-                    data.required = true;
-                }
-                else
-                {
-                    $scope.has_optional_annotations = true;
-                }
-                
-                enableAnnotation(data);
-            };
-            
-            if($scope.annotations instanceof Array) {
-                $scope.annotations.forEach(loadAnnotation);
-            }
-            else
-            {
-                loadAnnotation($scope.annotation);
-            }
-        };
         
         if($routeParams.collection) {
             // we need to load an array of annotations
             var params = {"dc:relation":$scope.video.pid, "collection":$routeParams.collection, "client":"popcorn"};
-            $scope.annotations = Annotation.query(params, _loadEachAnnotation);
+            $scope.annotations = Annotation.query(params, function(){loadEachAnnotation();});
         }
         else
         {
             // there is only one required annotation; load it
-            $scope.annotations = Annotation.get({identifier: required_annotation}, _loadEachAnnotation);
+            $scope.annotations = Annotation.get({identifier: required_annotation}, function(){loadEachAnnotation()});
         }
     }
     
@@ -149,8 +173,29 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         });
         delete annotation_ids[index];
     };
+
+    function cleanAnnotationForPopcorn(annotation) {
+        // these come back as strings, and our manipulation is with numbers
+        annotation.popcornOptions.start = parseFloat(annotation.popcornOptions.start);
+        annotation.popcornOptions.end = parseFloat(annotation.popcornOptions.end);
+
+        switch(annotation.type) {
+            case 'youtube-search':
+            case 'freebase-search':
+                annotation.popcornOptions.key = appConfig.googleKey;
+                break;
+        }
+
+        /** @TODO: if the end field is absent, it probably should be fixed in the database **/
+        if(isNaN(annotation.popcornOptions.end) || annotation.popcornOptions.start >= annotation.popcornOptions.end) {
+            annotation.popcornOptions.end = annotation.popcornOptions.start + 1;
+        }
+    }
     
-    function enableAnnotation(annotation) {
+    /**
+     * If butter is passed in, attaches the annotation to that instance
+     */
+    function enableAnnotation(annotation, butter) {
         if(!pop instanceof Popcorn) {
             throw new Error("Popcorn player does not exist yet");
         }
@@ -164,25 +209,21 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         annotation.media[0].tracks.forEach(function(element){
             element.trackEvents.forEach(function(element){
 
-                switch(element.type) {
-                    case 'youtube-search':
-                    case 'freebase-search':
-                        element.popcornOptions.key = appConfig.googleKey;
-                        break;
-                }
+                cleanAnnotationForPopcorn(element);
 
-                /** @TODO: if the end field is absent, it probably should be fixed in the database **/
-                if(isNaN(parseFloat(element.popcornOptions.end)) || element.popcornOptions.start >= element.popcornOptions.end) {
-                    element.popcornOptions.end = element.popcornOptions.start + 1;
+                if(butter) {
+                    butter.generateSafeTrackEvent(element.type, element.popcornOptions);
                 }
-
-                if(typeof pop[element.type] !== 'function') {
-                    if(appConfig.debugMode) {
-                        throw "Popcorn plugin type '" + element.type + "' does not exist";
+                else
+                {
+                    if(typeof pop[element.type] !== 'function') {
+                        if(appConfig.debugMode) {
+                            throw "Popcorn plugin type '" + element.type + "' does not exist";
+                        }
                     }
+                    pop[element.type](element.popcornOptions);
+                    ids.push(pop.getLastTrackEventId());
                 }
-                pop[element.type](element.popcornOptions);
-                ids.push(pop.getLastTrackEventId());
             });
         });
         annotation_ids[index] = ids;
@@ -213,7 +254,6 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
     };
     
     $scope.video = Video.get({identifier:$routeParams.id}, function loadPopcorn(){
-
         if(ANNOTATION_MODE) {
             annotator_init();
         }
@@ -221,9 +261,6 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         {
             viewer_init();
         }
-        
-        
-        
     });
 }
 // always inject this in so we can later compress this JavaScript
