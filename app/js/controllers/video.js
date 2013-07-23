@@ -7,6 +7,15 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
          *        also provide a deinit method (maybe?) to destruct everything when we leave the page
          */
         require(['butter'], function() {
+            // this is a fix for destroying the Butter-specific DOM infestation
+            var promptOff = $scope.$on('$locationChangeStart', function promptBeforeRedirecting(ev, newUrl, oldUrl) {
+                ev.preventDefault();
+                if(confirm("Are you sure you want to navigate away from this page? Your unsaved work will be lost.")) {
+                    promptOff();
+                    window.location = newUrl;
+                    window.location.reload();
+                }
+            });
             Butter.init({
               config: {
                   googleKey: appConfig.googleKey
