@@ -113,6 +113,12 @@
   position: absolute;
   overflow: hidden;
 
+  &.required {
+    cursor: default;
+    opacity: .5;
+    background-color: rgb( 200, 200, 200 );
+  }
+
   &[selected="true"] {
     border-color: @green;
     box-shadow: 1px 5px 2px -3px rgba( 0, 0, 0, 0.2 );
@@ -161,7 +167,7 @@
       top: 2px;
     }
   }
- .left-handle {
+  &:not(.required) .left-handle {
     left: 10px;
     cursor: w-resize;
     cursor: ew-resize;
@@ -170,7 +176,7 @@
       left: 2px;
     }
   }
-  .right-handle {
+  &:not(.required) .right-handle {
     right: 10px;
     cursor: e-resize;
     cursor: ew-resize;
@@ -180,8 +186,8 @@
     }
   }
 
-  &:hover,
-  &.butter-resizable {
+  &:hover:not(.required),
+  &.butter-resizable:not(.required) {
     .handle {
       opacity: 0.7;
     }
