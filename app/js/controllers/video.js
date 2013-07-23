@@ -2,6 +2,11 @@
 function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATION_MODE) {
 
     function butter_with_plugins() {
+        /**
+         * @TODO: Perhaps move Butter into a service so we don't have to set this up ourselves like this
+         *        also provide a deinit method (maybe?) to destruct everything when we leave the page
+         */
+        require(['butter'], function() {
             Butter.init({
               config: {
                   googleKey: appConfig.googleKey
@@ -17,6 +22,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
                 });
               }
             });
+        });
     }
 
     /**
