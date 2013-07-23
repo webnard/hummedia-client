@@ -26,10 +26,15 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
         _resizing = false,
         _padding = 0,
         _elementText,
+        _required = inputOptions.__humrequired,
         _ghost,
         _onDrag,
         _onResize,
         _this = this;
+
+    if( _required ) {
+        _element.classList.add('required');
+    }
 
     EventManager.extend( _this );
 
@@ -280,7 +285,7 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
       }
     });
 
-    _element.className = "butter-track-event";
+    _element.classList.add("butter-track-event");
     if ( _icon ) {
       _element.querySelector( ".butter-track-event-icon" ).style.backgroundImage = "url( "+ _icon.src + ")";
     }

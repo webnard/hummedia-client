@@ -227,6 +227,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
                 cleanAnnotationForPopcorn(element);
 
                 if(butter) {
+                    element.popcornOptions.__humrequired = annotation.required; // allows butter to hide the track event if needed
                     butter.generateSafeTrackEvent(element.type, element.popcornOptions);
                 }
                 else

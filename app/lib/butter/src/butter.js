@@ -214,7 +214,7 @@ window.Butter = {
         popcornOptions.end = end;
         popcornOptions.target = _this.getDefaultTarget(type).elementID;
 
-        if(_this.googleKeyField(type)) {
+        if(_this.googleKeyField(type) && !popcornOptions[_this.googleKeyField(type)]) {
             popcornOptions[_this.googleKeyField(type)] = _this.config.value('googleKey');
         }
 
