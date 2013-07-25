@@ -221,6 +221,12 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
           if( _parent ){
 
             if( _parent.element && _parent.element.parentNode && _parent.element.parentNode.parentNode ){
+              _element.setAttribute( "data-butter-trackevent-id", _trackEvent.id );
+
+              // no dragging for required elements
+              if( _element.classList.contains('required') ) {
+                  return;
+              }
 
               // Capture the element's computed style on initialization
               var elementStyle = getComputedStyle( _element ),
@@ -275,7 +281,6 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
               });
 
               _element.setAttribute( "data-butter-draggable-type", "trackevent" );
-              _element.setAttribute( "data-butter-trackevent-id", _trackEvent.id );
 
             }
 
