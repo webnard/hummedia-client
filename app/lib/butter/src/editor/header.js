@@ -6,16 +6,22 @@ define([ "ui/widget/tooltip" ], function( Tooltip ) {
 
   return function( editorAreaDOMRoot, editorModule ) {
     var _popcornButton = editorAreaDOMRoot.querySelector( ".butter-editor-header-popcorn" );
+    var _projectButton = editorAreaDOMRoot.querySelector( ".butter-editor-header-share" );
 
     var _focusMap = {
-      "plugin-list": _popcornButton
+      "plugin-list": _popcornButton,
+      "project-editor": _projectButton
     };
 
     var _currentFocus;
 
     function openPluginList() {
       editorModule.openEditor( "plugin-list" );
-    }
+    }  
+    
+    function openProjectEditor() {
+      editorModule.openEditor( "project-editor" );
+    }  
 
     this.setFocus = function( editorName ) {
       var focusCandidate = _focusMap[ editorName ];
@@ -38,9 +44,17 @@ define([ "ui/widget/tooltip" ], function( Tooltip ) {
     });
 
     this.views = {
-      unSaved: function() {
-      },
       saved: function() {
+        _projectButton.classList.add( "butter-editor-btn-disabled" );
+        _projectButton.removeEventListener( "click", openProjectEditor, false );
+        // If the project editor is open, open the media editor instead.
+        if ( _currentFocus === _projectButton ) {
+            editorModule.openEditor( "plugin-editor" );
+        }
+      },
+      unSaved: function() {
+        _projectButton.classList.remove( "butter-editor-btn-disabled" );
+        _projectButton.addEventListener( "click", openProjectEditor, false );
       },
       enablePlugins: function() {
         _popcornButton.classList.remove( "butter-editor-btn-disabled" );
