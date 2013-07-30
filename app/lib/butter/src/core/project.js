@@ -348,8 +348,7 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
       // Save to local storage first in case network is down.
       backupData();
 
-      // Save to db, then publish
-      butter.cornfield.save( _id, projectData, function( e ) {
+      function success() {
         if ( e.error === "okay" ) {
           // Since we've now fully saved, blow away autosave backup
           _isDirty = false;
@@ -363,24 +362,22 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer" ],
             _id = e.projectId;
           }
 
-          // Now Publish and get URLs for embed
-          butter.cornfield.publish( _id, function( e ) {
-            if ( e.error === "okay" ) {
-              // Save + Publish is OK
-              _isPublished = true;
-              _publishUrl = e.publishUrl;
-              _iframeUrl = e.iframeUrl;
-            }
+          // Let consumers know that the project is now saved;
+          _this.dispatch( "projectsaved" );
 
-            // Let consumers know that the project is now saved;
-            _this.dispatch( "projectsaved" );
-
-            callback( e );
-          });
+          callback( e );
         } else {
           callback( e );
         }
-      });
+
+      }
+
+      function failure() {
+          alert("Hey!");
+      }
+
+      // save to db
+      butter.annotationResource.save({dog: "woof"}, projectData, success, failure);
     };
   }
 

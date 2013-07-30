@@ -16,9 +16,14 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
                     window.location.reload();
                 }
             });
+
+            var butterAnnotation = new Annotation({video: $scope.video.pid, collection: $routeParams.collection});
             Butter.init({
               config: {
-                  googleKey: appConfig.googleKey
+                  googleKey: appConfig.googleKey,
+                  annotationResource: Annotation,
+                  collection: $routeParams.collection,
+                  video: $scope.video.pid
               },
               ready: function( butter ) {
                 EditorHelper.init( butter );

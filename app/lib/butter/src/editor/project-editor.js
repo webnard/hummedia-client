@@ -10,58 +10,13 @@ define([ "editor/editor", "editor/base-editor",
 
   Editor.register( "project-editor", LAYOUT_SRC, function( rootElement, butter ) {
     var _rootElement = rootElement,
-        _socialMedia = new SocialMedia(),
-        _projectURL = _rootElement.querySelector( ".butter-project-url" ),
-        _authorInput = _rootElement.querySelector( ".butter-project-author" ),
-        _descriptionInput = _rootElement.querySelector( ".butter-project-description" ),
-        _projectEmbedURL = _rootElement.querySelector( ".butter-project-embed-url" ),
-        _embedSize = _rootElement.querySelector( ".butter-embed-size" ),
-        _previewBtn = _rootElement.querySelector( ".butter-preview-link" ),
-        _viewSourceBtn = _rootElement.querySelector( ".butter-view-source-btn" ),
-        _shareTwitter = _rootElement.querySelector( ".butter-share-twitter" ),
-        _shareGoogle = _rootElement.querySelector( ".butter-share-google" ),
-        _embedDimensions = _embedSize.value.split( "x" ),
-        _embedWidth = _embedDimensions[ 0 ],
-        _embedHeight = _embedDimensions[ 1 ],
         _projectTabs = _rootElement.querySelectorAll( ".project-tab" ),
+        _saveButton  = _rootElement.querySelector("#butter-save-changes"),
         _this = this,
         _numProjectTabs = _projectTabs.length,
-        _descriptionToolTip,
-        _descriptionTimeout,
         _project,
         _projectTab,
         _idx;
-
-    _authorInput.value = butter.project.author ? butter.project.author : "";
-    _descriptionInput.value = butter.project.description ? butter.project.description : "";
-
-    ToolTip.create({
-      name: "description-tooltip",
-      element: _descriptionInput.parentNode,
-      message: "Your description will show up when shared on social media!",
-      top: "100%",
-      left: "50%",
-      error: true,
-      hidden: true,
-      hover: false
-    });
-
-    _descriptionToolTip = ToolTip.get( "description-tooltip" );
-
-    function checkDescription() {
-      if ( _descriptionInput.value ) {
-        if ( _descriptionTimeout ) {
-          clearTimeout( _descriptionTimeout );
-          _descriptionToolTip.hidden = true;
-        }
-        return;
-      }
-      _descriptionToolTip.hidden = false;
-
-      _descriptionTimeout = setTimeout(function() {
-        _descriptionToolTip.hidden = true;
-      }, 5000 );
-    }
 
     function onProjectTabClick( e ) {
       var target = e.target,
@@ -80,8 +35,6 @@ define([ "editor/editor", "editor/base-editor",
         }
 
       }
-
-      _this.scrollbar.update();
     }
 
     for ( _idx = 0; _idx < _numProjectTabs; _idx++ ) {
@@ -93,13 +46,6 @@ define([ "editor/editor", "editor/base-editor",
       _projectEmbedURL.value = "<iframe src='" + url + "' width='" + _embedWidth + "' height='" + _embedHeight + "'" +
       " frameborder='0' mozallowfullscreen webkitallowfullscreen allowfullscreen></iframe>";
     }
-
-    _embedSize.addEventListener( "change", function() {
-      _embedDimensions = _embedSize.value.split( "x" );
-      _embedWidth = _embedDimensions[ 0 ];
-      _embedHeight = _embedDimensions[ 1 ];
-      updateEmbed( butter.project.iframeUrl );
-    }, false );
 
     function applyInputListeners( element, key ) {
       var ignoreBlur = false,
@@ -127,48 +73,18 @@ define([ "editor/editor", "editor/base-editor",
       }, false );
     }
 
-    applyInputListeners( _authorInput, "author" );
-
-    applyInputListeners( _descriptionInput, "description" );
-    _descriptionInput.addEventListener( "keyup", checkDescription, false );
-
-    TextboxWrapper.applyTo( _projectURL, { readOnly: true } );
-    TextboxWrapper.applyTo( _projectEmbedURL, { readOnly: true } );
-    TextboxWrapper.applyTo( _authorInput );
-    TextboxWrapper.applyTo( _descriptionInput );
 
     butter.listen( "projectsaved", function onProjectSaved() {
-      _projectURL.value = _project.publishUrl;
-      _previewBtn.href = _project.previewUrl;
-      _viewSourceBtn.href = "view-source:" + _project.iframeUrl;
-      updateEmbed( _project.iframeUrl );
+        // @TODO
     });
 
     Editor.BaseEditor.extend( this, butter, rootElement, {
       open: function() {
         _project = butter.project;
 
-        _projectURL.value = _project.publishUrl;
-        _previewBtn.href = _project.previewUrl;
-        _viewSourceBtn.href = "view-source:" + _project.iframeUrl;
-        updateEmbed( _project.iframeUrl );
-
-        _previewBtn.onclick = function() {
-          return true;
+        _saveButton.onclick = function() {
+            _project.save();
         };
-        _viewSourceBtn.onclick = function() {
-          return true;
-        };
-
-        // Ensure Share buttons have loaded
-        if ( !_shareTwitter.childNodes.length ) {
-          _socialMedia.hotLoad( _shareTwitter, _socialMedia.twitter, _project.publishUrl );
-        }
-        if ( !_shareGoogle.childNodes.length ) {
-          _socialMedia.hotLoad( _shareGoogle, _socialMedia.google, _project.publishUrl );
-        }
-
-        _this.scrollbar.update();
 
       },
       close: function() {
