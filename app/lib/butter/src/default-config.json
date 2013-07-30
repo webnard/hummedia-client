@@ -32,15 +32,16 @@
       },
       {
         "type": "youtube-search",
-        "displayName": "YouTube",
+        "displayName": "YouTube Search",
         "targets": ["target-4"],
         "googleKeyProperty": "key"
       },
       {
         "type": "freebase-search",
-        "displayName": "Freebase",
+        "displayName": "Freebase Search",
         "targets": ["target-4"],
-        "googleKeyProperty": "key"
+        "googleKeyProperty": "key",
+        "icon": "lib/hummedia-popcorn-plugins/freebase-search/freebase_logo.png"
       },
       {
         "type": "pausePlugin",
@@ -67,7 +68,7 @@
       {
         "type": "imagePlugin",
         "displayName": "Image",
-        "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/imagePlugin/image.svg",
+        "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/imagePlugin/image.png",
         "targets": ["target-1", "target-2"]
       },
       {
