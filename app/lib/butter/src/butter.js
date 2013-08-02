@@ -643,12 +643,6 @@ window.Butter = {
             return _defaultTarget;
           }
         },
-        annotationResource: {
-            enumerable: true,
-            get: function(){
-                return _config.value('annotationResource');
-            }
-        },
         config: {
           enumerable: true,
           get: function(){

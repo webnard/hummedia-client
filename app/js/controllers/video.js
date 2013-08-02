@@ -1,13 +1,19 @@
 'use strict';
 function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATION_MODE) {
 
-    function butter_with_plugins() {
+    /**
+     * Starts up Butter and enables the plugins found in $scope.annotations.
+     * @param annotationID - If set, when saving non-required annotations, butter will save them under this ID
+     * @param requiredAnnotationID - If set, when saving required annotations, butter will save them under this ID
+     */
+    function butter_with_plugins(annotationID, requiredAnnotationID) {
+
         /**
          * @TODO: Perhaps move Butter into a service so we don't have to set this up ourselves like this
          *        also provide a deinit method (maybe?) to destruct everything when we leave the page
          */
         require(['butter'], function() {
-            // this is a fix for destroying the Butter-specific DOM infestation
+            // this is a fix that destroys the Butter-specific DOM infestation
             var promptOff = $scope.$on('$locationChangeStart', function promptBeforeRedirecting(ev, newUrl, oldUrl) {
                 ev.preventDefault();
                 if(confirm("Are you sure you want to navigate away from this page? Your unsaved work will be lost.")) {
@@ -17,16 +23,19 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
                 }
             });
 
-            var butterAnnotation = new Annotation({video: $scope.video.pid, collection: $routeParams.collection});
             Butter.init({
               config: {
                   googleKey: appConfig.googleKey,
-                  annotationResource: Annotation,
+                  annotationUrl: appConfig.apiBase + '/annotation',
                   collection: $routeParams.collection,
-                  video: $scope.video.pid
+                  video: $scope.video.pid,
+                  annotationID: annotationID,
+                  requiredAnnotationID: requiredAnnotationID 
               },
               ready: function( butter ) {
                 EditorHelper.init( butter );
+
+                $scope.butter = butter;
 
                 butter.listen( "mediaready", function mediaReady() {
                   butter.unlisten( "mediaready", mediaReady );
@@ -44,7 +53,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
      */
     function annotator_init() {
         // load the annotations
-        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
+        var required_annotation = $scope.video['ma:isMemberOf'][0].restrictor;
         
         if($routeParams.collection === undefined && !required_annotation) {
             butter_with_plugins();
@@ -54,12 +63,25 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         if($routeParams.collection) {
             // we need to load an array of annotations
             var params = {"dc:relation":$scope.video.pid, "collection":$routeParams.collection, "client":"popcorn"};
-            $scope.annotations = Annotation.query(params, butter_with_plugins);
+            $scope.annotations = Annotation.query(params, function(){
+                var annotation_id = null;
+                for(var i = 0; i<$scope.annotations.length; i++) {
+                    // @TODO: ought to just be on $scope.annotations[i].pid
+                    var id = $scope.annotations[i].media[0].tracks[0].id;
+                    if(id != required_annotation) {
+                        annotation_id = id;
+                        break;
+                    }
+                }
+                butter_with_plugins(annotation_id, required_annotation);
+            });
         }
         else
         {
             // there is only one required annotation; load it
-            $scope.annotations = Annotation.get({identifier: required_annotation}, butter_with_plugins);
+            $scope.annotations = Annotation.get({identifier: required_annotation}, function(){
+                butter_with_plugins(null, required_annotation)
+            });
         }
     };
     
@@ -232,7 +254,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
                 cleanAnnotationForPopcorn(element);
 
                 if(butter) {
-                    element.popcornOptions.__humrequired = annotation.required; // allows butter to hide the track event if needed
+                    element.popcornOptions.__humrequired = annotation.required || false; // allows butter to hide the track event if needed
                     butter.generateSafeTrackEvent(element.type, element.popcornOptions);
                 }
                 else
