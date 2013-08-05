@@ -9,7 +9,7 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
 
   var TRACKEVENT_MIN_WIDTH = 50;
 
-  return function( trackEvent, type, inputOptions ){
+  return function( trackEvent, type, inputOptions, isAdmin ){
 
     var _element = LangUtils.domFragment( TRACKEVENT_LAYOUT, ".butter-track-event" ),
         _type = type,
@@ -18,6 +18,7 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
         _end = inputOptions.end || _start + 1,
         _parent,
         _handles,
+        _isAdmin = !!isAdmin,
         _typeElement = _element.querySelector( ".title" ),
         _draggable,
         _resizable,
@@ -34,6 +35,9 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
 
     if( _required ) {
         _element.classList.add('required');
+        if(_isAdmin) {
+            _element.classList.add('admin');
+        }
     }
 
     EventManager.extend( _this );
@@ -224,7 +228,7 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
               _element.setAttribute( "data-butter-trackevent-id", _trackEvent.id );
 
               // no dragging for required elements
-              if( _element.classList.contains('required') ) {
+              if( _element.classList.contains('required') && !_isAdmin ) {
                   return;
               }
 

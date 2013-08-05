@@ -62,6 +62,13 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
                 return user.exists && (user.data.role == "faculty" || user.data.superuser);
           }
      });
+     
+     Object.defineProperty(user, 'isSuperuser', {
+          enumerable: true,
+          get: function() {
+                return !!user.data.superuser;
+          }
+     });
 
      user.closePrompt = function() {
          $('#graywall').remove();

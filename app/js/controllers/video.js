@@ -1,5 +1,5 @@
 'use strict';
-function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATION_MODE) {
+function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATION_MODE, user) {
 
     /**
      * Starts up Butter and enables the plugins found in $scope.annotations.
@@ -30,7 +30,8 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
                   collection: $routeParams.collection,
                   video: $scope.video.pid,
                   annotationID: annotationID,
-                  requiredAnnotationID: requiredAnnotationID 
+                  requiredAnnotationID: requiredAnnotationID,
+                  admin: user.isSuperuser
               },
               ready: function( butter ) {
                 EditorHelper.init( butter );
@@ -307,4 +308,4 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
     });
 }
 // always inject this in so we can later compress this JavaScript
-VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'appConfig', 'ANNOTATION_MODE'];
+VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'appConfig', 'ANNOTATION_MODE', 'user'];

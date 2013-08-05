@@ -114,10 +114,12 @@
   overflow: hidden;
 
   &.required {
-    cursor: default;
-    opacity: .5;
-    background-color: rgb( 200, 200, 200 );
     border-color: red;
+    &:not(.admin) {
+        cursor: default;
+        opacity: .5;
+        background-color: rgb( 200, 200, 200 );
+    }
   }
 
   &[selected="true"] {
@@ -168,22 +170,26 @@
       top: 2px;
     }
   }
-  &:not(.required) .left-handle {
-    left: 10px;
-    cursor: w-resize;
-    cursor: ew-resize;
-    &:after {
-      background-position: -240px -96px;
-      left: 2px;
+  &:not(.required), &.required.admin {
+    .left-handle {
+        left: 10px;
+        cursor: w-resize;
+        cursor: ew-resize;
+        &:after {
+          background-position: -240px -96px;
+          left: 2px;
+        }
     }
   }
-  &:not(.required) .right-handle {
-    right: 10px;
-    cursor: e-resize;
-    cursor: ew-resize;
-    &:after {
-      background-position: -264px -96px;
-      right: 2px;
+  &:not(.required), &.required.admin {
+    .right-handle {
+        right: 10px;
+        cursor: e-resize;
+        cursor: ew-resize;
+        &:after {
+          background-position: -264px -96px;
+          right: 2px;
+        }
     }
   }
 

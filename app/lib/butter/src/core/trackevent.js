@@ -47,11 +47,12 @@ define( [ "./logger", "./eventmanager", "./observer",
         _logger = new Logger( _id ),
         _track = null,
         _type = options.type + "",
+        _isAdmin = !!options.isAdmin,
         _popcornOptions = options.popcornOptions || {
           start: 0,
           end: 1
         },
-        _view = new TrackEventView( this, _type, _popcornOptions ),
+        _view = new TrackEventView( this, _type, _popcornOptions, _isAdmin ),
         _popcornWrapper = null,
         _selected = false;
 
