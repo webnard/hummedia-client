@@ -42,6 +42,7 @@ define( [ "text!./default.html", "editor/editor", "util/lang", "text!default-con
       _trackEvent = trackEvent;
 
       optionsContainer.appendChild( _this.createStartEndInputs( trackEvent, _this.updateTrackEventSafe ) );
+      optionsContainer.appendChild( _this.createRequiredCheckbox( trackEvent, _this.updateTrackEventSafe ) );
 
       _this.createPropertiesFromManifest({
         trackEvent: trackEvent,
@@ -82,6 +83,10 @@ define( [ "text!./default.html", "editor/editor", "util/lang", "text!default-con
       }
 
       _this.updatePropertiesFromManifest( trackEvent, null, true );
+      var required = _this.rootElement.querySelector('input[type=checkbox][data-manifest-key="__humrequired"]');
+      if(required && trackEvent.popcornOptions.__humrequired) {
+          required.checked = true;
+      }
 
       // Catch the end of a transition for when the error message box opens/closes
       if ( _this.scrollbar ) {

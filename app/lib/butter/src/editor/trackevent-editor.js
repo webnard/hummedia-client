@@ -595,6 +595,15 @@ define([ "util/lang", "util/keys", "util/time", "./base-editor", "ui/widget/tool
       }
     };
 
+    extendObject.createRequiredCheckbox = function (trackEvent, callback ) {
+      var editorElement = __defaultLayouts.querySelector( ".required" ).cloneNode( true ),
+          checkbox = editorElement.querySelector( "input[type=checkbox]" );
+
+      extendObject.attachCheckboxChangeHandler( checkbox, trackEvent, checkbox.getAttribute('data-manifest-key'));
+      
+      return editorElement;
+    };
+
     extendObject.createStartEndInputs = function( trackEvent, callback ) {
       var editorElement = __defaultLayouts.querySelector( ".start-end" ).cloneNode( true ),
           start = editorElement.querySelector( "input[data-manifest-key='start']" ),
