@@ -32,12 +32,13 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
         _onDrag,
         _onResize,
         _this = this;
+    
+    if( _isAdmin ) {
+        _element.classList.add('admin');
+    }
 
     if( _required ) {
         _element.classList.add('required');
-        if(_isAdmin) {
-            _element.classList.add('admin');
-        }
     }
 
     EventManager.extend( _this );

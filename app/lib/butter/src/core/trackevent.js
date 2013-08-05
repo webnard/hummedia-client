@@ -155,6 +155,14 @@ define( [ "./logger", "./eventmanager", "./observer",
           required = _popcornOptions.__humrequired;
       }
 
+      if(required) {
+          _view.element.classList.add('required');
+      }
+      else
+      {
+          _view.element.classList.remove('required');
+      }
+
       if ( isNaN( newStart ) ) {
         if ( updateOptions.hasOwnProperty( "start" ) ) {
           throw new TrackEventUpdateException( "invalid-start-time", "[start] is an invalid value." );

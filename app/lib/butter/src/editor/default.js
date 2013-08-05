@@ -42,7 +42,10 @@ define( [ "text!./default.html", "editor/editor", "util/lang", "text!default-con
       _trackEvent = trackEvent;
 
       optionsContainer.appendChild( _this.createStartEndInputs( trackEvent, _this.updateTrackEventSafe ) );
-      optionsContainer.appendChild( _this.createRequiredCheckbox( trackEvent, _this.updateTrackEventSafe ) );
+
+      if(butter.config.value('admin')) {
+          optionsContainer.appendChild( _this.createRequiredCheckbox( trackEvent, _this.updateTrackEventSafe ) );
+      }
 
       _this.createPropertiesFromManifest({
         trackEvent: trackEvent,
