@@ -215,7 +215,9 @@ define( [ "./eventmanager", "./trackevent", "./views/track-view", "util/sanitize
         if ( typeof content !== "string" ) {
           return;
         }
-        trackEvent.popcornOptions[optionName] = Sanitizer.reconstituteHTML(content);
+        /** @TODO: This was taken out because we actually ALLOW certain types of HTML
+                   (<p> tags, for example). We should still sanitize, but we need to have a whitelist **/
+        //trackEvent.popcornOptions[optionName] = Sanitizer.reconstituteHTML(content);
       });
     },
 
