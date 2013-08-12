@@ -357,9 +357,6 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
           _this.dispatch( "projectsaved" );
       }
 
-      function failure() {
-          alert("Hey!");
-      }
 
       // remove track events whose popcornOptions object contains a key equaling the value passed in
       function stripEventsByOption(data, key, value) {
@@ -397,6 +394,10 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
 
       // strip required fields from the nonrequired object
       stripEventsByOption(nonrequired, '__humrequired', true);
+      
+      function failure(xhr) {
+          alert("There was an error saving your project. The web server returned: " + xhr['status']);
+      }
 
       /**@TODO: Should use Annotation Resource object if possible **/
 

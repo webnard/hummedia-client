@@ -20,6 +20,13 @@
           return;
         }
 
+        if(this.status != 200) {
+            if(!options.error) {
+                return;
+            }
+            options.error( this, "error");
+        }
+
         // If this is a fire-and-forget request
         if ( !options.success ) {
           return;
@@ -64,7 +71,7 @@
         success: success
       });
     },
-    post: function( url, data, success ) {
+    post: function( url, data, success, error ) {
       if ( typeof data === "function" ) {
         success = data;
         data = null;
@@ -77,7 +84,8 @@
           "x-csrf-token": __csrfToken
         },
         data: data,
-        success: success
+        success: success,
+        error: error
       });
     }
   };
