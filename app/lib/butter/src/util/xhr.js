@@ -80,20 +80,26 @@
       xhrModule.ajax({
         method: "POST",
         url: url,
-        header: {
-          "x-csrf-token": __csrfToken
-        },
+        data: data,
+        success: success,
+        error: error
+      });
+    },
+    patch: function( url, data, success, error ) {
+      if ( typeof data === "function" ) {
+        success = data;
+        data = null;
+      }
+
+      xhrModule.ajax({
+        method: "PATCH",
+        url: url,
         data: data,
         success: success,
         error: error
       });
     }
   };
-
-  // Get the CSRF token from the server so we can send POST requests
-//  xhrModule.get( "/api/whoami", function( response ) {
-//    __csrfToken = response.csrf;
-//  });
 
   define([], function() {
     return xhrModule;

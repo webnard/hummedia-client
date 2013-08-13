@@ -405,25 +405,29 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
       var reqUrl = baseUrl;
       if(butter.config.value('requiredAnnotationID')) {
           reqUrl +=  '/' + butter.config.value('requiredAnnotationID') + '?';
+          reqUrl += '&client=popcorn';
+          xhr.patch( reqUrl, required, projectSaved, failure);
       }
       else
       {
           reqUrl +=  '?video=' + butter.config.value('video');
+          reqUrl += '&client=popcorn';
+          xhr.post( reqUrl, required, projectSaved, failure);
       }
-      reqUrl += '&client=popcorn';
-      xhr.post( reqUrl, required, projectSaved, failure);
       
       // then save all other annotations
       var defUrl = baseUrl;
       if(butter.config.value('annotationID')) {
           defUrl +=  '/' + butter.config.value('annotationID') + '?';
+          defUrl += '&client=popcorn';
+          xhr.patch( defUrl, nonrequired, projectSaved, failure); 
       }
       else
       {
           defUrl +=  '?video=' + butter.config.value('video') + '&collection=' + butter.config.value('collection') + '?';
+          defUrl += '&client=popcorn';
+          xhr.post( defUrl, nonrequired, projectSaved, failure); 
       }
-      defUrl += '&client=popcorn';
-      xhr.post( defUrl, nonrequired, projectSaved, failure); 
     };
   }
 
