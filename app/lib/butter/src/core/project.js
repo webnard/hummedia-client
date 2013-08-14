@@ -117,10 +117,15 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
           if ( !_dataObject || _isDirty ) {
             var exportJSONMedia = [];
             for ( var i = 0; i < butter.media.length; ++i ) {
-              exportJSONMedia.push( butter.media[ i ].json );
+              var json = butter.media[ i ].json;
+
+              // The backend requires this to be an array
+              if( !(json.url instanceof Array) ) {
+                json.url = [json.url];
+              }
+              exportJSONMedia.push( json );
             }
             _dataObject = {
-              targets: butter.serializeTargets(),
               media: exportJSONMedia
             };
           }
@@ -377,7 +382,11 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
       // so we can know when both the required and the non-required annotations have been saved
       var count = 0;
       function projectSaved() {
-          if(++count == 2) {
+          count++;
+
+          // how many saves do we need before this is complete? If admin, we have to save required as well
+          required = butter.config.value('admin') ? 2 : 1;
+          if(count == required) {
               success();
           }
       }
@@ -402,30 +411,29 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
       /**@TODO: Should use Annotation Resource object if possible **/
 
       // first save required annotations
-      var reqUrl = baseUrl;
-      if(butter.config.value('requiredAnnotationID')) {
-          reqUrl +=  '/' + butter.config.value('requiredAnnotationID') + '?';
-          reqUrl += '&client=popcorn';
-          xhr.patch( reqUrl, required, projectSaved, failure);
-      }
-      else
-      {
-          reqUrl +=  '?video=' + butter.config.value('video');
-          reqUrl += '&client=popcorn';
-          xhr.post( reqUrl, required, projectSaved, failure);
+      if(butter.config.value('admin')) { // only admins can save required annotations
+          var reqUrl = baseUrl;
+          if(butter.config.value('requiredAnnotationID')) {
+              reqUrl +=  '/' + butter.config.value('requiredAnnotationID') + '?client=popcorn';
+              xhr.patch( reqUrl, required, projectSaved, failure);
+          }
+          else
+          {
+              reqUrl +=  '?client=popcorn&video=' + butter.config.value('video');
+              reqUrl += '&client=popcorn';
+              xhr.post( reqUrl, required, projectSaved, failure);
+          }
       }
       
       // then save all other annotations
       var defUrl = baseUrl;
       if(butter.config.value('annotationID')) {
-          defUrl +=  '/' + butter.config.value('annotationID') + '?';
-          defUrl += '&client=popcorn';
+          defUrl +=  '/' + butter.config.value('annotationID') + '?client=popcorn';
           xhr.patch( defUrl, nonrequired, projectSaved, failure); 
       }
       else
       {
-          defUrl +=  '?video=' + butter.config.value('video') + '&collection=' + butter.config.value('collection') + '?';
-          defUrl += '&client=popcorn';
+          defUrl +=  '?video=' + butter.config.value('video') + '&collection=' + butter.config.value('collection') + '?client=popcorn';
           xhr.post( defUrl, nonrequired, projectSaved, failure); 
       }
     };
