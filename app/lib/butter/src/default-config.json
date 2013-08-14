@@ -1,7 +1,7 @@
 {
   "name": "default-config",
   "baseDir": "lib/butter/",
-  "crashReporter": true,
+  "crashReporter": false,
   "cssRenderClientSide": false,
   "snapshotHTMLOnReady": false,
   "scrapePage": true,
