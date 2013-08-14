@@ -54,7 +54,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
      */
     function annotator_init() {
         // load the annotations
-        var required_annotation = $scope.video['ma:isMemberOf'][0].restrictor;
+        var required_annotation = $scope.video['ma:hasPolicy'][0];
         
         if($routeParams.collection === undefined && !required_annotation) {
             butter_with_plugins();
@@ -141,7 +141,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
             }
         }
         
-        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
+        var required_annotation = $scope.video['ma:hasPolicy'][0];
         
         if($routeParams.collection === undefined && !required_annotation) {
             // we're done here. there are no annotations.
