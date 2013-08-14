@@ -420,8 +420,7 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
           }
           else
           {
-              reqUrl +=  '?client=popcorn&video=' + butter.config.value('video');
-              reqUrl += '&client=popcorn';
+              reqUrl +=  '?client=popcorn';
               xhr.post( reqUrl, required, projectSaved, failure);
           }
       }
@@ -434,7 +433,7 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
       }
       else
       {
-          defUrl +=  '?video=' + butter.config.value('video') + '&collection=' + butter.config.value('collection') + '?client=popcorn';
+          defUrl +=  '?collection=' + butter.config.value('collection') + '&client=popcorn';
           xhr.post( defUrl, nonrequired, projectSaved, failure); 
       }
     };
