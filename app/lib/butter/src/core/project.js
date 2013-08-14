@@ -118,6 +118,7 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
             var exportJSONMedia = [];
             for ( var i = 0; i < butter.media.length; ++i ) {
               var json = butter.media[ i ].json;
+              json.id = butter.config.value( "video" ); // so the server can reference the video accurately
 
               // The backend requires this to be an array
               if( !(json.url instanceof Array) ) {
