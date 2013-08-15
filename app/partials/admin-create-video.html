@@ -27,7 +27,7 @@
     </div>
     <form id='admin-configure-yt' ng-submit="save()">
         <div resource-form="video" resource-model="data"></div>
-        <div><input type="submit" value="Save" disable-when="isSaving"/></div>
+        <div><input type="submit" value="Save" ng-readonly="isSaving"/></div>
     </form>
 </div>
 </section>
