@@ -1,5 +1,165 @@
 'use strict';
-function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
+function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATION_MODE, user) {
+
+    /**
+     * Starts up Butter and enables the plugins found in $scope.annotations.
+     * @param annotationID - If set, when saving non-required annotations, butter will save them under this ID
+     * @param requiredAnnotationID - If set, when saving required annotations, butter will save them under this ID
+     */
+    function butter_with_plugins(annotationID, requiredAnnotationID) {
+
+        /**
+         * @TODO: Perhaps move Butter into a service so we don't have to set this up ourselves like this
+         *        also provide a deinit method (maybe?) to destruct everything when we leave the page
+         */
+        require(['butter'], function() {
+            // this is a fix that destroys the Butter-specific DOM infestation
+            var promptOff = $scope.$on('$locationChangeStart', function promptBeforeRedirecting(ev, newUrl, oldUrl) {
+                ev.preventDefault();
+                if(confirm("Are you sure you want to navigate away from this page? Your unsaved work will be lost.")) {
+                    promptOff();
+                    window.location = newUrl;
+                    window.location.reload();
+                }
+            });
+
+            Butter.init({
+              config: {
+                  googleKey: appConfig.googleKey,
+                  annotationUrl: appConfig.apiBase + '/annotation',
+                  collection: $routeParams.collection,
+                  video: $scope.video.pid,
+                  annotationID: annotationID,
+                  requiredAnnotationID: requiredAnnotationID,
+                  admin: user.isSuperuser
+              },
+              ready: function( butter ) {
+                EditorHelper.init( butter );
+
+                $scope.butter = butter;
+
+                butter.listen( "mediaready", function mediaReady() {
+                  butter.unlisten( "mediaready", mediaReady );
+                  if($scope.annotations) {
+                      loadEachAnnotation(butter);
+                  }
+                });
+              }
+            });
+        });
+    }
+
+    /**
+     *  Initializes page for annotating the video
+     */
+    function annotator_init() {
+        // load the annotations
+        var required_annotation = $scope.video['ma:hasPolicy'][0];
+        
+        if($routeParams.collection === undefined && !required_annotation) {
+            butter_with_plugins();
+            return;
+        }
+        
+        if($routeParams.collection) {
+            // we need to load an array of annotations
+            var params = {"dc:relation":$scope.video.pid, "collection":$routeParams.collection, "client":"popcorn"};
+            $scope.annotations = Annotation.query(params, function(){
+                var annotation_id = null;
+                for(var i = 0; i<$scope.annotations.length; i++) {
+                    // @TODO: ought to just be on $scope.annotations[i].pid
+                    var id = $scope.annotations[i].media[0].tracks[0].id;
+                    if(id != required_annotation) {
+                        annotation_id = id;
+                        break;
+                    }
+                }
+                butter_with_plugins(annotation_id, required_annotation);
+            });
+        }
+        else
+        {
+            // there is only one required annotation; load it
+            $scope.annotations = Annotation.get({identifier: required_annotation}, function(){
+                butter_with_plugins(null, required_annotation)
+            });
+        }
+    };
+    
+    /**
+     * callback function for after we call methods on the Annotation resource
+     * enables each individual annotation
+     */
+    function loadEachAnnotation(butter){
+        // helper function for the helper function ;)
+        var loadAnnotation = function(data, butter) {
+            data.pid = data.media[0].tracks[0].id; // @todo -- ought to be more accessible from the API
+            
+            if(data.media[0].tracks[0].required) {
+                data.required = true;
+            }
+            else
+            {
+                $scope.has_optional_annotations = true;
+            }
+            
+            enableAnnotation(data, butter);
+        };
+        
+        if($scope.annotations instanceof Array) {
+            $scope.annotations.forEach(function(annotation) {
+                loadAnnotation(annotation, butter);   
+            });
+        }
+        else
+        {
+            loadAnnotation($scope.annotation, butter);
+        }
+    };
+
+    /**
+     * Initializes page for viewing video
+     */
+    function viewer_init() {
+        pop = Popcorn.smart("video", $scope.video.url);
+        
+        var resource = $scope.video['ma:hasRelatedResource'];
+        if(resource && resource.length) {
+            /** @TODO: Allow for multiple subtitles **/
+            var url = resource[0]['@id'];
+            var type = resource[0]['type'];
+
+            switch(type) {
+                case 'vtt':
+                    pop.parseVTT(url);
+                    break;
+                case 'srt':
+                    pop.parseSRT(url);
+                    break;
+                default:
+                    throw new Error("Parser for " + type + " not implemented.");
+            }
+        }
+        
+        var required_annotation = $scope.video['ma:hasPolicy'][0];
+        
+        if($routeParams.collection === undefined && !required_annotation) {
+            // we're done here. there are no annotations.
+            return;
+        }
+        
+        
+        if($routeParams.collection) {
+            // we need to load an array of annotations
+            var params = {"dc:relation":$scope.video.pid, "collection":$routeParams.collection, "client":"popcorn"};
+            $scope.annotations = Annotation.query(params, function(){loadEachAnnotation();});
+        }
+        else
+        {
+            // there is only one required annotation; load it
+            $scope.annotations = Annotation.get({identifier: required_annotation}, function(){loadEachAnnotation()});
+        }
+    }
     
 	var annotation_ids = {}, // PID-keyed arrays of track event IDs, as specified by Popcorn
         pop, // the Popcorn object, initialized under Video.get below
@@ -56,8 +216,29 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
         });
         delete annotation_ids[index];
     };
+
+    function cleanAnnotationForPopcorn(annotation) {
+        // these come back as strings, and our manipulation is with numbers
+        annotation.popcornOptions.start = parseFloat(annotation.popcornOptions.start);
+        annotation.popcornOptions.end = parseFloat(annotation.popcornOptions.end);
+
+        switch(annotation.type) {
+            case 'youtube-search':
+            case 'freebase-search':
+                annotation.popcornOptions.key = appConfig.googleKey;
+                break;
+        }
+
+        /** @TODO: if the end field is absent, it probably should be fixed in the database **/
+        if(isNaN(annotation.popcornOptions.end) || annotation.popcornOptions.start >= annotation.popcornOptions.end) {
+            annotation.popcornOptions.end = annotation.popcornOptions.start + 1;
+        }
+    }
     
-    function enableAnnotation(annotation) {
+    /**
+     * If butter is passed in, attaches the annotation to that instance
+     */
+    function enableAnnotation(annotation, butter) {
         if(!pop instanceof Popcorn) {
             throw new Error("Popcorn player does not exist yet");
         }
@@ -71,25 +252,22 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
         annotation.media[0].tracks.forEach(function(element){
             element.trackEvents.forEach(function(element){
 
-                switch(element.type) {
-                    case 'youtube-search':
-                    case 'freebase-search':
-                        element.popcornOptions.key = appConfig.youtubeKey;
-                        break;
-                }
+                cleanAnnotationForPopcorn(element);
 
-                /** @TODO: if the end field is absent, it probably should be fixed in the database **/
-                if(isNaN(parseFloat(element.popcornOptions.end)) || element.popcornOptions.start >= element.popcornOptions.end) {
-                    element.popcornOptions.end = element.popcornOptions.start + 1;
+                if(butter) {
+                    element.popcornOptions.__humrequired = annotation.required || false; // allows butter to hide the track event if needed
+                    butter.generateSafeTrackEvent(element.type, element.popcornOptions);
                 }
-
-                if(typeof pop[element.type] !== 'function') {
-                    if(appConfig.debugMode) {
-                        throw "Popcorn plugin type '" + element.type + "' does not exist";
+                else
+                {
+                    if(typeof pop[element.type] !== 'function') {
+                        if(appConfig.debugMode) {
+                            throw "Popcorn plugin type '" + element.type + "' does not exist";
+                        }
                     }
+                    pop[element.type](element.popcornOptions);
+                    ids.push(pop.getLastTrackEventId());
                 }
-                pop[element.type](element.popcornOptions);
-                ids.push(pop.getLastTrackEventId());
             });
         });
         annotation_ids[index] = ids;
@@ -120,75 +298,14 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig) {
     };
     
     $scope.video = Video.get({identifier:$routeParams.id}, function loadPopcorn(){
-        
-        pop = Popcorn.smart("video", $scope.video.url);
-        
-        var resource = $scope.video['ma:hasRelatedResource'];
-        if(resource && resource.length) {
-            /** @TODO: Allow for multiple subtitles **/
-            var url = resource[0]['@id'];
-            var type = resource[0]['type'];
-
-            switch(type) {
-                case 'vtt':
-                    pop.parseVTT(url);
-                    break;
-                case 'srt':
-                    pop.parseSRT(url);
-                    break;
-                default:
-                    throw new Error("Parser for " + type + " not implemented.");
-            }
-        }
-        
-        if($routeParams.collection === undefined && !required_annotation) {
-            // we're done here. there are no annotations.
-            return;
-        }
-        
-        var required_annotation = $scope.video['ma:isMemberOf'].restrictor;
-        /**
-         * callback function for after we call methods on the Annotation resource
-         * enables each individual annotation
-         */
-        var _loadEachAnnotation = function(){
-            // helper function for the helper function ;)
-            var loadAnnotation = function(data) {
-                data.pid = data.media[0].tracks[0].id; // @todo -- ought to be more accessible from the API
-                
-                if(data.media[0].tracks[0].required) {
-                    data.required = true;
-                }
-                else
-                {
-                    $scope.has_optional_annotations = true;
-                }
-                
-                enableAnnotation(data);
-            };
-            
-            if($scope.annotations instanceof Array) {
-                $scope.annotations.forEach(loadAnnotation);
-            }
-            else
-            {
-                loadAnnotation($scope.annotation);
-            }
-        };
-        
-        if($routeParams.collection) {
-            // we need to load an array of annotations
-            var params = {"dc:relation":$scope.video.pid, "collection":$routeParams.collection, "client":"popcorn"};
-            $scope.annotations = Annotation.query(params, _loadEachAnnotation);
+        if(ANNOTATION_MODE) {
+            annotator_init();
         }
         else
         {
-            // there is only one required annotation; load it
-            $scope.annotations = Annotation.get({identifier: required_annotation}, _loadEachAnnotation);
+            viewer_init();
         }
-        
-        
     });
 }
 // always inject this in so we can later compress this JavaScript
-VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'appConfig'];
+VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'appConfig', 'ANNOTATION_MODE', 'user'];

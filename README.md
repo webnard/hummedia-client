@@ -1,6 +1,11 @@
 HUMMEDIA
 =========
 
+Adding Plugins
+-----------------------
+We are using the (Popcorn Plugins submodule)[https://bitbucket.org/htrscdev/popcorn-plugins] to store our plugins. To load additional plugins,
+include them on both the `index.html` file as well as the Butter configuration file under `app/lib/butter/src/default-config.json`
+
 Production Prep
 ------------------------
 *REQUIREMENTS*

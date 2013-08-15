@@ -113,8 +113,22 @@
   position: absolute;
   overflow: hidden;
 
+  &.required {
+    border-color: red;
+    &:not(.admin) {
+        cursor: default;
+        opacity: .5;
+        background-color: rgb( 200, 200, 200 );
+    }
+  }
+
   &[selected="true"] {
-    border-color: @green;
+    &:not(.required) {
+        border-color: @green;
+    }
+    &.required {
+        box-shadow: 0px 0px 10px rgba(255,0,0,1);
+    }
     box-shadow: 1px 5px 2px -3px rgba( 0, 0, 0, 0.2 );
   }
 
@@ -161,27 +175,31 @@
       top: 2px;
     }
   }
- .left-handle {
-    left: 10px;
-    cursor: w-resize;
-    cursor: ew-resize;
-    &:after {
-      background-position: -240px -96px;
-      left: 2px;
+  &:not(.required), &.required.admin {
+    .left-handle {
+        left: 10px;
+        cursor: w-resize;
+        cursor: ew-resize;
+        &:after {
+          background-position: -240px -96px;
+          left: 2px;
+        }
     }
   }
-  .right-handle {
-    right: 10px;
-    cursor: e-resize;
-    cursor: ew-resize;
-    &:after {
-      background-position: -264px -96px;
-      right: 2px;
+  &:not(.required), &.required.admin {
+    .right-handle {
+        right: 10px;
+        cursor: e-resize;
+        cursor: ew-resize;
+        &:after {
+          background-position: -264px -96px;
+          right: 2px;
+        }
     }
   }
 
-  &:hover,
-  &.butter-resizable {
+  &:hover:not(.required),
+  &.butter-resizable:not(.required) {
     .handle {
       opacity: 0.7;
     }

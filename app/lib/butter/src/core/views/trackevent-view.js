@@ -9,7 +9,7 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
 
   var TRACKEVENT_MIN_WIDTH = 50;
 
-  return function( trackEvent, type, inputOptions ){
+  return function( trackEvent, type, inputOptions, isAdmin ){
 
     var _element = LangUtils.domFragment( TRACKEVENT_LAYOUT, ".butter-track-event" ),
         _type = type,
@@ -18,6 +18,7 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
         _end = inputOptions.end || _start + 1,
         _parent,
         _handles,
+        _isAdmin = !!isAdmin,
         _typeElement = _element.querySelector( ".title" ),
         _draggable,
         _resizable,
@@ -26,10 +27,19 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
         _resizing = false,
         _padding = 0,
         _elementText,
+        _required = inputOptions.__humrequired,
         _ghost,
         _onDrag,
         _onResize,
         _this = this;
+    
+    if( _isAdmin ) {
+        _element.classList.add('admin');
+    }
+
+    if( _required ) {
+        _element.classList.add('required');
+    }
 
     EventManager.extend( _this );
 
@@ -216,6 +226,12 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
           if( _parent ){
 
             if( _parent.element && _parent.element.parentNode && _parent.element.parentNode.parentNode ){
+              _element.setAttribute( "data-butter-trackevent-id", _trackEvent.id );
+
+              // no dragging for required elements
+              if( _element.classList.contains('required') && !_isAdmin ) {
+                  return;
+              }
 
               // Capture the element's computed style on initialization
               var elementStyle = getComputedStyle( _element ),
@@ -270,7 +286,6 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
               });
 
               _element.setAttribute( "data-butter-draggable-type", "trackevent" );
-              _element.setAttribute( "data-butter-trackevent-id", _trackEvent.id );
 
             }
 
@@ -280,7 +295,7 @@ define( [ "core/logger", "core/eventmanager", "util/dragndrop",
       }
     });
 
-    _element.className = "butter-track-event";
+    _element.classList.add("butter-track-event");
     if ( _icon ) {
       _element.querySelector( ".butter-track-event-icon" ).style.backgroundImage = "url( "+ _icon.src + ")";
     }

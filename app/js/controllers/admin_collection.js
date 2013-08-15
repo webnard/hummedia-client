@@ -40,6 +40,10 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             });
         }
     });
+    $scope.annotate = function(pid, collection_pid) {
+        $location.path('/video/annotate/' + pid).search({'collection': collection_pid});
+    }
+
     $scope.deleteCollection = function(pid){
         // using bracket notation to enable minification with the word "delete" 
         Collection['delete']({"identifier":pid});

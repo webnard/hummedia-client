@@ -46,7 +46,7 @@
                     <li data-ng-repeat="video in collection_data.videos">
                         <table id="listvideotable"><tr>
                                 <td>{{video['ma:title']}}</td>
-                                <td id="righttd"><button data-ng-click="deleteVideo(video.pid, collection_data.pid)">{{"Remove" | tr}}</button></td></tr>
+                                <td id="righttd"><button data-ng-click="annotate(video.pid, collection_data.pid)">{{"Annotate" | tr}}</button><button data-ng-click="deleteVideo(video.pid, collection_data.pid)">{{"Remove" | tr}}</button></td></tr>
                         </table>
                     </li>
                 </ul>

@@ -2,9 +2,9 @@
  * If a copy of the MIT license was not distributed with this file, you can
  * obtain one at https://raw.github.com/mozilla/butter/master/LICENSE */
 
-define( [ "text!./default.html", "editor/editor", "util/lang" ],
-  function( LAYOUT_SRC, Editor, LangUtils ) {
-
+define( [ "text!./default.html", "editor/editor", "util/lang", "text!default-config.json"  ],
+  function( LAYOUT_SRC, Editor, LangUtils, CONFIG ) {
+  
   /**
    * Class: DefaultEditor
    *
@@ -15,7 +15,6 @@ define( [ "text!./default.html", "editor/editor", "util/lang" ],
    * @param {TrackEvent} TrackEvent: The TrackEvent to edit
    */
   function DefaultEditor( rootElement, butter, compiledLayout, events ) {
-
     var _this = this;
 
     events = events || {};
@@ -44,6 +43,10 @@ define( [ "text!./default.html", "editor/editor", "util/lang" ],
 
       optionsContainer.appendChild( _this.createStartEndInputs( trackEvent, _this.updateTrackEventSafe ) );
 
+      if(butter.config.value('admin')) {
+          optionsContainer.appendChild( _this.createRequiredCheckbox( trackEvent, _this.updateTrackEventSafe ) );
+      }
+
       _this.createPropertiesFromManifest({
         trackEvent: trackEvent,
         callback: function( elementType, element, trackEvent, name ) {
@@ -67,8 +70,15 @@ define( [ "text!./default.html", "editor/editor", "util/lang" ],
         ignoreManifestKeys: [ "target", "start", "end" ]
       });
 
-      if ( trackEvent.manifest.options.target && !trackEvent.manifest.options.target.hidden ) {
-        targetList = _this.createTargetsList( _targets );
+      if ( (trackEvent.manifest.options.target && !trackEvent.manifest.options.target.hidden) || butter.getTargets(trackEvent.type) !== false ) {
+        var whitelist = butter.getTargets(trackEvent.type);
+        if(whitelist !== false) {
+            targetList = _this.createTargetsList(whitelist);
+            trackEvent.popcornOptions.target = whitelist[0].element.id;
+        } else {
+            targetList = _this.createTargetsList( _targets );
+        }
+
         selectElement = targetList.querySelector( "select" );
         // Attach the onchange handler to trackEvent is updated when <select> is changed
         _this.attachSelectChangeHandler( selectElement, trackEvent, "target" );
@@ -76,6 +86,10 @@ define( [ "text!./default.html", "editor/editor", "util/lang" ],
       }
 
       _this.updatePropertiesFromManifest( trackEvent, null, true );
+      var required = _this.rootElement.querySelector('input[type=checkbox][data-manifest-key="__humrequired"]');
+      if(required && trackEvent.popcornOptions.__humrequired) {
+          required.checked = true;
+      }
 
       // Catch the end of a transition for when the error message box opens/closes
       if ( _this.scrollbar ) {

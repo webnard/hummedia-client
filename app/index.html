@@ -10,7 +10,8 @@
   <link rel="stylesheet/less" href="css/video.less"/>
   <link rel="stylesheet/less" href="css/app.less"/>
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
-  <link rel="stylesheet/less" href="lib/butter/css/editor/edit-annotations.less" data-admin data-exclude-compress>
+  <!-- @TODO: Can require.js selectively load a minified version of this as well? -->
+  <link rel="stylesheet/less" href="lib/butter/css/editor/edit-annotations.less" data-exclude-compress>
 </head>
 <body>
     <!--[if lte IE 8]>
@@ -63,16 +64,26 @@
   <!--[if gt IE 8]> -->
 
   <!-- LIBRARIES -->
+  <script src="lib/require/require.js" data-cdn="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.8/require.min.js"></script>
+  <script>
+      require.config({
+          baseUrl: 'lib/butter/src',
+          paths: {
+              "editors": '../assets/editors/'
+          }
+      });
+  </script>
   <script src="lib/jquery-2.0.0.js" data-cdn="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-  <script src="lib/less/less-1.3.3.min.js" data-remove="true"></script>
+  <script src="lib/less/less-1.3.3.min.js" data-exclude-compress></script> <!--@TODO: this should be removed in production -->
   <script src="lib/angular/angular.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
   <script src="lib/angular/angular-resource.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js"></script>
   <script src="js/custom-sanitize.js"></script>
+  <!-- @TODO: Should be loaded via require js -->
   <script type="text/javascript" src="js/tinymce/tinymce.min.js" data-cdn="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
   
   <!-- POPCORN -->
-  <script src="lib/popcorn-js/popcorn.js"></script>
+  <script src="lib/popcorn-956693f8/popcorn.js"></script>
   <script src="lib/popcorn-js/modules/parser/popcorn.parser.js" ></script>
   <script src="lib/popcorn-js/parsers/parserVTT/popcorn.parserVTT.js" ></script>
   <script src="lib/popcorn-js/parsers/parserSRT/popcorn.parserSRT.js" ></script>
@@ -87,10 +98,11 @@
   <script src="lib/hummedia-popcorn-plugins/freebase-search/popcorn.freebase-search.js"></script>
   <script src="lib/hummedia-popcorn-plugins/comment/popcorn.comment.js"></script>
   <script src="lib/hummedia-popcorn-plugins/interaction/popcorn.interaction.js"></script>
+  <script src="lib/hummedia-popcorn-plugins/skip/popcorn.skip.js"></script>
   <script src="lib/butter/assets/plugins/pausePlugin/popcorn.pausePlugin.js"></script>
-  <script src="lib/butter/assets/plugins/skip/popcorn.skip.js"></script>
   <script src="lib/hummedia-popcorn-plugins/mutePlugin/popcorn.mutePlugin.js"></script>
-  
+  <script src="lib/hummedia-popcorn-plugins/imagePlugin/popcorn.imagePlugin.js"></script>  
+
   <!-- APP FILES -->
   <script src="js/config.js"></script>
   <!-- If there is a local version of config.js, it should overwrite it here -->
@@ -140,25 +152,7 @@
   <script src="js/controllers/admin_create_video.js"></script>
   <script src="js/controllers/video_search.js"></script>
   <script src="js/controllers/video.js"></script>
-  <script src="js/controllers/video_annotation.js"></script>
   <script src="js/controllers/developer.js" data-remove="true"></script>
-  
-  <!--POPCORN MAKER-->
-  <script data-admin>
-      var require = {
-          baseUrl: 'lib/butter/src'
-      };
-  </script>
-  <script src="lib/require/require.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/src/butter.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/assets/editors/editorhelper.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/assets/editors/wikipedia.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/assets/editors/popup/popup.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/assets/editors/image/image.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/assets/editors/text/text.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/assets/editors/googlemap.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/assets/editors/twitter/twitter.js" data-admin data-exclude-compress></script>
-  <script src="lib/butter/assets/editors/sequencer/sequencer.js" data-admin data-exclude-compress></script>
 <!--[endif]> -->
 </body>
 </html>

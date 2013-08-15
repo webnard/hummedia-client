@@ -47,11 +47,12 @@ define( [ "./logger", "./eventmanager", "./observer",
         _logger = new Logger( _id ),
         _track = null,
         _type = options.type + "",
+        _isAdmin = !!options.isAdmin,
         _popcornOptions = options.popcornOptions || {
           start: 0,
           end: 1
         },
-        _view = new TrackEventView( this, _type, _popcornOptions ),
+        _view = new TrackEventView( this, _type, _popcornOptions, _isAdmin ),
         _popcornWrapper = null,
         _selected = false;
 
@@ -134,6 +135,7 @@ define( [ "./logger", "./eventmanager", "./observer",
 
       var newStart,
           newEnd,
+          required,
           manifestOptions,
           media,
           preventUpdate = true,
@@ -147,6 +149,19 @@ define( [ "./logger", "./eventmanager", "./observer",
 
       newStart = updateOptions.start;
       newEnd = updateOptions.end;
+      required = updateOptions.__humrequired;
+
+      if( typeof required == "undefined" ) {
+          required = _popcornOptions.__humrequired;
+      }
+
+      if(required) {
+          _view.element.classList.add('required');
+      }
+      else
+      {
+          _view.element.classList.remove('required');
+      }
 
       if ( isNaN( newStart ) ) {
         if ( updateOptions.hasOwnProperty( "start" ) ) {
@@ -224,6 +239,7 @@ define( [ "./logger", "./eventmanager", "./observer",
 
       _popcornOptions.start = newStart;
       _popcornOptions.end = newEnd;
+      _popcornOptions.__humrequired = !!required;
 
       // if PopcornWrapper exists, it means we're connected properly to a Popcorn instance,
       // and can update the corresponding Popcorn trackevent for this object

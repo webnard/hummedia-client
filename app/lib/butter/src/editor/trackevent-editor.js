@@ -180,7 +180,7 @@ define([ "util/lang", "util/keys", "util/time", "./base-editor", "ui/widget/tool
           optionElement;
 
       // Create one <option> per target
-      for ( var i = 1; i < targets.length; ++i ) {
+      for ( var i = 0; i < targets.length; ++i ) {
         optionElement = document.createElement( "option" );
         optionElement.value = targets[ i ].element.id;
         optionElement.innerHTML = targets[ i ].element.id;
@@ -593,6 +593,15 @@ define([ "util/lang", "util/keys", "util/time", "./base-editor", "ui/widget/tool
           hover: false
         });
       }
+    };
+
+    extendObject.createRequiredCheckbox = function (trackEvent, callback ) {
+      var editorElement = __defaultLayouts.querySelector( ".required" ).cloneNode( true ),
+          checkbox = editorElement.querySelector( "input[type=checkbox]" );
+
+      extendObject.attachCheckboxChangeHandler( checkbox, trackEvent, checkbox.getAttribute('data-manifest-key'));
+      
+      return editorElement;
     };
 
     extendObject.createStartEndInputs = function( trackEvent, callback ) {

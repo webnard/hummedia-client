@@ -31,6 +31,7 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
          _httpConfig = {
             withCredentials: true
          },
+         api = config.apiBase.replace(/\\:/,':'), // this has to deal with ports differently than resources do
          _returnPath = null, // where the user will go after a login
          user = {};
 
@@ -61,6 +62,13 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
                 return user.exists && (user.data.role == "faculty" || user.data.superuser);
           }
      });
+     
+     Object.defineProperty(user, 'isSuperuser', {
+          enumerable: true,
+          get: function() {
+                return !!user.data.superuser;
+          }
+     });
 
      user.closePrompt = function() {
          $('#graywall').remove();
@@ -89,15 +97,15 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      
      user.signin = function() {
         var returnTo = _returnPath ? _returnPath : $location.absUrl();
-        $window.location = config.apiBase + "/account/login?r=" + returnTo; 
+        $window.location = api + "/account/login?r=" + returnTo; 
      };
      
      user.googleSignin = function() {
-         $window.location = config.apiBase + "/account/login/google?r=" + $location.absUrl();
+         $window.location = api + "/account/login/google?r=" + $location.absUrl();
      };
      
      user.logout = function() {
-         var promise = $http.get(config.apiBase + "/account/logout", _httpConfig);
+         var promise = $http.get(api + "/account/logout", _httpConfig);
          _exists = false;
          _data = {};
          
@@ -110,7 +118,7 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
      user.checkStatus = function() {
         var deferred = $q.defer();
 
-        $http.get(config.apiBase + '/account/profile', _httpConfig)
+        $http.get(api + '/account/profile', _httpConfig)
         .success(function(data) {
              _data = data;
              if(user.data.username !== null) {

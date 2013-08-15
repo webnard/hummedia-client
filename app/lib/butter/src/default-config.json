@@ -1,7 +1,7 @@
 {
   "name": "default-config",
   "baseDir": "lib/butter/",
-  "crashReporter": true,
+  "crashReporter": false,
   "cssRenderClientSide": false,
   "snapshotHTMLOnReady": false,
   "scrapePage": true,
@@ -26,14 +26,54 @@
         "icon": "{{baseDir}}assets/plugins/skip/skip-icon.png"
       },
       {
+          "type": "mutePlugin",
+          "displayName": "Mute",
+          "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/mutePlugin/mute.png"
+      },
+      {
+        "type": "youtube-search",
+        "displayName": "YouTube Search",
+        "targets": ["target-4"],
+        "googleKeyProperty": "key"
+      },
+      {
+        "type": "freebase-search",
+        "displayName": "Freebase Search",
+        "targets": ["target-4"],
+        "googleKeyProperty": "key",
+        "icon": "lib/hummedia-popcorn-plugins/freebase-search/freebase_logo.png"
+      },
+      {
         "type": "pausePlugin",
         "displayName": "Pause",
         "icon": "{{baseDir}}assets/plugins/pausePlugin/pause-icon.png"
       },
       {
-          "type": "mutePlugin",
-          "displayName": "Mute",
-          "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/mutePlugin/mute.png"
+        "type": "comment",
+        "displayName": "Comment",
+        "icon": "{{baseDir}}assets/plugins/popup/popup-icon.png",
+        "targets": ["target-1"]
+      },
+      {
+        "type": "reference",
+        "displayName": "Reference",
+        "icon": "{{baseDir}}assets/plugins/text/text-icon.png",
+        "targets": ["target-2"]
+      },
+      {
+        "type": "interaction",
+        "displayName": "Interaction",
+        "targets": ["target-2"]
+      },
+      {
+        "type": "imagePlugin",
+        "displayName": "Image",
+        "icon": "{{baseDir}}/../../hummedia-popcorn-plugins/imagePlugin/image.png",
+        "targets": ["target-1", "target-2"]
+      },
+      {
+        "type": "modal",
+        "displayName": "Modal"
       }
     ]
   },

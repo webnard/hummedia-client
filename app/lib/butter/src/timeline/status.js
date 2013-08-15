@@ -12,9 +12,23 @@ define( [ "util/time" ], function( util ){
     function update() {
       if( _state ){
         _button.removeAttribute( "data-state" );
+        
+        //Set the play button icon to play
+        var icons = _button.getElementsByClassName('icon-pause');
+        for(var i=0; i<icons.length; i++){
+            icons[i].classList.add('icon-play');
+            icons[i].classList.remove('icon-pause');
+        }
       }
       else {
         _button.setAttribute( "data-state", true );
+        
+        //Set the play button icon to pause
+        var icons = _button.getElementsByClassName('icon-play');
+        for(var i=0; i<icons.length; i++){
+            icons[i].classList.add('icon-pause');
+            icons[i].classList.remove('icon-play');
+        }
       }
     }
 

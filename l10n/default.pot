@@ -7,6 +7,9 @@ msgstr ""
 msgid "Advanced Search"
 msgstr ""
 
+msgid "Annotate"
+msgstr ""
+
 msgid "Basic"
 msgstr ""
 
