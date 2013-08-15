@@ -52,6 +52,7 @@ window.Butter = {
 
   define( "butter-main",
           [
+            "less",
             "core/eventmanager", "core/logger", "core/config", "core/track",
             "core/target", "core/media",
             "./modules", "./dependencies", "./dialogs",
@@ -62,6 +63,7 @@ window.Butter = {
             "../external/ua-parser/ua-parser"
           ],
           function(
+            Less,
             EventManager, Logger, Config, Track,
             Target, Media,
             Modules, Dependencies, Dialogs,
@@ -72,6 +74,16 @@ window.Butter = {
             UAParser
           ){
 
+    // enable the CSS
+    /* @TODO: the path for this should be configurable */
+    var style = document.createElement('link');
+    style.rel = 'stylesheet/less';
+    style.href = 'lib/butter/css/editor/edit-annotations.less';
+    document.body.appendChild(style);
+    Less.sheets.push(style);
+    Less.refresh();
+
+    
     var __guid = 0;
 
     var Butter = {};

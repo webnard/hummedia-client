@@ -10,8 +10,6 @@
   <link rel="stylesheet/less" href="css/video.less"/>
   <link rel="stylesheet/less" href="css/app.less"/>
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
-  <!-- @TODO: Can require.js selectively load a minified version of this as well? -->
-  <link rel="stylesheet/less" href="lib/butter/css/editor/edit-annotations.less" data-exclude-compress>
 </head>
 <body>
     <!--[if lte IE 8]>
@@ -64,13 +62,17 @@
               "tinymce": [
                   "//tinymce.cachefly.net/4.0/tinymce.min",
                   "js/tinymce/tinymce.min"
-              ] 
+              ],
+              "less": [
+                 "//raw.github.com/less/less.js/master/dist/less-1.3.3.min.js",
+                 "../../less/less-1.3.3.min"
+              ]
           }
       });
   </script>
   <script src="lib/jquery-2.0.0.js" data-cdn="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-  <script src="lib/less/less-1.3.3.min.js" data-exclude-compress></script> <!--@TODO: this should be removed in production -->
+  <script src="lib/less/less-1.3.3.min.js" data-remove></script>
   <script src="lib/angular/angular.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
   <script src="lib/angular/angular-resource.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js"></script>
   <script src="js/custom-sanitize.js"></script>
