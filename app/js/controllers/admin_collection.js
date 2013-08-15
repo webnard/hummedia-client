@@ -1,5 +1,12 @@
 'use strict';
-function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {    
+function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
+    
+    $scope.tinymceOptions = {
+        plugins: "link",
+        toolbar: "bold italic | link image",
+        menubar: false
+    }
+
     $scope.newCollection = function(){        
         if($scope.newtitle === ''){$scope.newtitle = 'New Hummedia Collection';}
         var params = new Object();
@@ -29,15 +36,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
     $scope.$watch(function(){return $routeParams.id;}, function(){
         $scope.id = $routeParams.id;
         if($scope.id){
-            $scope.collection_data = Collection.get({identifier:$routeParams.id}, function(){
-                $scope.startTinyMCE();
-                $('#mce_6').hide();
-                if(!$scope.collection_data['dc:description']){
-                    tinyMCE.activeEditor.setContent("");
-                }else{
-                    tinyMCE.activeEditor.setContent($scope.collection_data['dc:description']);
-                }
-            });
+            $scope.collection_data = Collection.get({identifier:$routeParams.id});
         }
     });
     $scope.annotate = function(pid, collection_pid) {
@@ -67,25 +66,13 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         }
     };
     
-    $scope.startTinyMCE = function(){
-        tinymce.init({
-            selector: "#editable-description",
-            plugins: "link",
-            toolbar: "bold italic | link image",
-            menubar: false
-        });
-    };
-    
     $scope.saveChanges = function(pid){
-        var newtitle;
-        var newdescription;
-        $(document).ready(function() {
-            newtitle = $('#collectioninfo_title').prop("value");
-            newdescription = tinyMCE.activeEditor.getContent();
-        });
+        var newtitle = $('#collectioninfo_title').prop("value"),
+            newdescription = $scope['collection_data']['dc:description'];
         var params = new Object();
             params['dc:title'] = newtitle;
             params['dc:description'] = newdescription;
+        
         Collection.update({"identifier":pid}, params);
         for(var i=0; i<$scope.collections.length; i++) {
                 if(pid===$scope.collections[i]['pid']){
@@ -94,7 +81,6 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
                 }
         }
         $scope['collection_data']['dc:title'] = newtitle;
-        $scope['collection_data']['dc:description'] = newdescription;
         $scope.editCollection();
     };
     $scope.addVideo = function(collectionid, videoid){
@@ -148,7 +134,6 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             });
         }
     });
-    
 }
 // always inject this in so we can later compress this JavaScript
 AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location'];

@@ -69,7 +69,11 @@
       require.config({
           baseUrl: 'lib/butter/src',
           paths: {
-              "editors": '../assets/editors/'
+              "editors": '../assets/editors/',
+              "tinymce": [
+                  "//tinymce.cachefly.net/4.0/tinymce.min",
+                  "js/tinymce/tinymce.min"
+              ] 
           }
       });
   </script>
@@ -79,8 +83,6 @@
   <script src="lib/angular/angular.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
   <script src="lib/angular/angular-resource.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-resource.min.js"></script>
   <script src="js/custom-sanitize.js"></script>
-  <!-- @TODO: Should be loaded via require js -->
-  <script type="text/javascript" src="js/tinymce/tinymce.min.js" data-cdn="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
   
   <!-- POPCORN -->
   <script src="lib/popcorn-956693f8/popcorn.js"></script>
@@ -129,6 +131,7 @@
   <script src="js/directives/select-language.js"></script>
   <script src="js/directives/select-language-multi.js"></script>
   <script src="js/directives/resource-form.js"></script>
+  <script src="lib/angular-ui/tinymce.js"></script>
  
   <!-- RESOURCES --> 
   <script src="js/resources/video.js"></script>
