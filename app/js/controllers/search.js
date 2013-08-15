@@ -145,19 +145,6 @@ function SearchCtrl($scope, $routeParams, Collection, Video, $location, analytic
     };
     // kick things off if there are already queries in the URL
     $scope.refresh();
-    
-    // For fun and excitement, update the URL as the user types their search
-    $scope.change = function() {
-	if(Date.now() - lastsearch > timeout && !timer) {
-	    $scope.refresh(); // auto load data
-	}
-	else
-	{
-	    clearTimeout(timer);
-	    timer = null;
-	    timer = setTimeout(function(){$scope.refresh()}, timeout);
-	}
-    };
 }
 // always inject this in so we can later compress this JavaScript
 SearchCtrl.$inject = ['$scope', '$routeParams', 'Collection', 'Video', '$location', 'analytics'];

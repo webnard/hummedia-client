@@ -1,3 +1,6 @@
+msgid "About"
+msgstr ""
+
 msgid "Admin"
 msgstr ""
 
@@ -23,9 +26,6 @@ msgid "Collection Info"
 msgstr ""
 
 msgid "Collections"
-msgstr ""
-
-msgid "Contact"
 msgstr ""
 
 msgid "Courses"
