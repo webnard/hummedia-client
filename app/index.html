@@ -6,6 +6,11 @@
   <link href='//fonts.googleapis.com/css?family=Rambla' rel='stylesheet' type='text/css'>
   <title data-ng-bind="title">Hummedia</title>
   <link rel="stylesheet" href="css/cssreset-min.css"/>
+  <style>
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+          display: none !important;
+      }
+  </style>
   <link rel="stylesheet/less" href="css/admin-collection.less"/>
   <link rel="stylesheet/less" href="css/video.less"/>
   <link rel="stylesheet/less" href="css/app.less"/>
@@ -29,7 +34,7 @@
     <div id="container">
     <div id="background" data-ng-style="style"></div>
     <div data-ng-controller="NavCtrl" id="nav-wrapper">
-    <nav id="navtable">
+    <nav id="navtable" data-ng-cloak>
         <a id="navtitle" href="#">Humanities Online Media</a>
         <a data-ng-click="user.prompt(true)" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>
         <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
@@ -41,7 +46,7 @@
         <a id="logout-link" data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
         <a href="#/developer" data-ng-show="debug">Developer</a>
     </nav>
-    <nav data-ng-show="showAdminMenu && user.canCreate" id="nav-admin">
+    <nav data-ng-show="showAdminMenu && user.canCreate" id="nav-admin" data-ng-cloak>
        <a href="#/admin/collection">{{"Collections" | tr}}</a>
        <a href="#/admin/video">{{"Videos" | tr}}</a>
        <a href="#/admin/user">{{"Users" | tr}}</a> 
