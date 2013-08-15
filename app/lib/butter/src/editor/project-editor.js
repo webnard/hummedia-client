@@ -75,7 +75,7 @@ define([ "editor/editor", "editor/base-editor",
 
 
     butter.listen( "projectsaved", function onProjectSaved() {
-        // @TODO
+        alert("Project saved.");
     });
 
     Editor.BaseEditor.extend( this, butter, rootElement, {
