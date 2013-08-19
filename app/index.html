@@ -67,6 +67,15 @@
               "tinymce": [
                   "../../tinymce/tinymce.min"
               ] 
+          },
+          shim: {
+              "tinymce": {
+                  "exports": "tinymce",
+                  "init": function() {
+                      this.tinymce.DOM.events.domLoaded = true;
+                      return this.tinymce;
+                  }
+              }
           }
       });
   </script>
