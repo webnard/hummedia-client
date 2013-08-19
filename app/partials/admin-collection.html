@@ -14,7 +14,14 @@
         <table>
             <tr><td>{{"Title" | tr}}:</td><td><input data-ng-model="newtitle" type="text" /></td></tr>
             <tr><td>{{"Description" | tr}}:</td><td><input data-ng-model="newdescription" type="text" /></td></tr>
-            <tr><td>{{"Creator" | tr}}:</td><td><input data-ng-model="newcreator" type="text" /></td></tr>
+            <tr>
+                <td>{{"Semester" | tr}}:</td>
+                <td>
+                    <select>
+                        <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
+                    </select>
+                </td>
+            </tr>
         </table>
         <button id="createcollectionbutton" data-ng-click="newCollection()">{{"Create Collection" | tr}}</button>
         </div>
