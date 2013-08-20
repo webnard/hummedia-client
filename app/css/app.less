@@ -549,8 +549,7 @@ footer{
 	z-index: 2;
 	padding: 0;
 	max-height: @max-search-height;
-	position: fixed;
-	width: inherit;
+	width: 100%;
 	min-width:400px;
 	text-align: left;
 	.transition(margin-top linear 0.1s);
@@ -629,7 +628,7 @@ footer{
 }
 #search-results {
     width: 100%;
-    padding-top: (@max-search-height + @content-top + 25px);
+    padding-top: 25px;
     margin-bottom: 50px;
     .result {
         margin: auto;
