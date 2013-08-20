@@ -3,6 +3,19 @@
 ***************/
 @smoke: rgba(50,50,50,1);
 
+/**************
+ * Animations
+***************/
+.warn-show {
+    .transition(opacity linear 1s);
+}
+.warn-show {
+    opacity: 0;
+}
+.warn-show.warn-show-active {
+    opacity: 1;
+}
+
 /*************************
  * "Functions"
 **************************/
@@ -963,5 +976,35 @@ footer{
     a{
         color: black;
         text-decoration: none;
+    }
+}
+
+/**************************
+ * Login warning
+***************************/
+#warn-login {
+    display: none;
+    font-weight: bold;
+    background-color: red;
+    color: rgb(255,255,50);
+    box-shadow: 0px 2px 10px 3px black;
+    text-align: center;
+    padding: 2px;
+    
+    &.active {
+        display: block;
+    }
+
+    a, i {
+        color: white;
+        cursor: pointer;
+    }
+    i {
+        float: left;
+        font-size: 1.1em;
+        text-shadow: 0 0 1px black;
+        &:hover {
+            text-shadow: 0 0 0;
+        }
     }
 }

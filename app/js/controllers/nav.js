@@ -11,5 +11,8 @@ function NavCtrl($scope, user, config) {
     $scope.toggleAdmin = function() {
         $scope.showAdminMenu = !$scope.showAdminMenu;
     };
+
+    $scope.hasCheckedUser = false;
+    user.checkStatus().then(function(){ $scope.hasCheckedUser = true; });
 };
 NavCtrl.$inject = ['$scope','user','appConfig'];

@@ -34,23 +34,24 @@
     <div id="container">
     <div id="background" data-ng-style="style"></div>
     <div data-ng-controller="NavCtrl" id="nav-wrapper">
-    <nav id="navtable" data-ng-cloak>
-        <a id="navtitle" href="#">Humanities Online Media</a>
-        <a data-ng-click="user.prompt(true)" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>
-        <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
-        <a data-ng-show="user.exists">{{user.data.fullname}}</a>
-        <a data-ng-show="user.canCreate" ng-click="toggleAdmin()">{{"Admin" | tr}}</a>
-	    <a href="#/collection">{{"Courses" | tr}}</a>
-	    <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
-	    <a href="#/about">{{"About" | tr}}</a>
-        <a id="logout-link" data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
-        <a href="#/developer" data-ng-show="debug">Developer</a>
-    </nav>
-    <nav data-ng-show="showAdminMenu && user.canCreate" id="nav-admin" data-ng-cloak>
-       <a href="#/admin/collection">{{"Collections" | tr}}</a>
-       <a href="#/admin/video">{{"Videos" | tr}}</a>
-       <a href="#/admin/user">{{"Users" | tr}}</a> 
-    </nav>
+        <nav id="navtable" data-ng-cloak>
+            <a id="navtitle" href="#">Humanities Online Media</a>
+            <a data-ng-click="user.prompt(true)" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>
+            <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired">{{"Link BYU NetID" | tr}}</a>
+            <a data-ng-show="user.exists">{{user.data.fullname}}</a>
+            <a data-ng-show="user.canCreate" ng-click="toggleAdmin()">{{"Admin" | tr}}</a>
+            <a href="#/collection">{{"Courses" | tr}}</a>
+            <a href="#/search" id="nav-search">{{"Search" | tr}}</a>
+            <a href="#/about">{{"About" | tr}}</a>
+            <a id="logout-link" data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired">{{"Logout" | tr}}</a>
+            <a href="#/developer" data-ng-show="debug">Developer</a>
+        </nav>
+        <nav data-ng-show="showAdminMenu && user.canCreate" id="nav-admin" data-ng-cloak>
+           <a href="#/admin/collection">{{"Collections" | tr}}</a>
+           <a href="#/admin/video">{{"Videos" | tr}}</a>
+           <a href="#/admin/user">{{"Users" | tr}}</a> 
+        </nav>
+        <div id="warn-login" data-ng-class="!user.exists && hasCheckedUser ? 'active' : ''" data-ng-show="!user.exists && hasCheckedUser && !warningDismissed" data-ng-cloak data-ng-animate="'warn'"><i class="icon-remove-sign" ng-click="warningDismissed = true"></i>You are not logged in. You may not be able to view all of your courses' material until you <a data-ng-click="user.prompt(true)">login</a>.</div>
     </div>
     <div ng-view id="view">
     </div>
