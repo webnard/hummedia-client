@@ -1,7 +1,9 @@
 'use strict';
 function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
     
-    //Faculty Authorization      
+    //Faculty Authorization
+    $scope.faculty_checkbox = false;
+    
     var getSemesterObject = function(month, year){
         var int;
         var name;
@@ -67,8 +69,13 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         return semesters;
     }
             
-    $scope.semesters = $scope.getSemesterArray();
+    $scope.semesters = $scope.getSemesterArray();    
     
+    //Set the semester to the current semester after all the others load
+    setTimeout(function(){
+        $('#semester_select').val($scope.semesters[0].int);
+    }, 0);
+        
     $scope.tinymceOptions = {
         plugins: "link",
         toolbar: "bold italic | link image",
@@ -80,12 +87,15 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         var params = new Object();
             params['dc:title'] = $scope.newtitle;
             params['dc:description'] = $scope.newdescription;
+            params['faculty_authorized'] = $scope.authorization_checkbox;
+            params['semester'] = $scope.semester_select;
         Collection.save(params, function(data){
             params['pid'] = data.pid;
             $scope.collections.push(params);
         });        
         $scope.newtitle = '';
         $scope.newdescription ='';
+        $scope.authorization_checkbox = false;
     };
     
     $scope.showCollection = function(pid){
