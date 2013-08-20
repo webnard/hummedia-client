@@ -14,6 +14,7 @@
   var xhrModule = {
     ajax: function( options ) {
       var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
       xhr.open( options.method, options.url, true );
       xhr.onreadystatechange = function() {
         if ( this.readyState !== 4 ) {
