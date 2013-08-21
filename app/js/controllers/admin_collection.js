@@ -73,7 +73,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
     
     //Set the semester to the current semester after all the others load
     setTimeout(function(){
-        $('#semester_select').val($scope.semesters[0].int);
+        $('#create_semester_select').val($scope.semesters[0].int);
     }, 0);
         
     $scope.tinymceOptions = {
@@ -87,15 +87,15 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         var params = new Object();
             params['dc:title'] = $scope.newtitle;
             params['dc:description'] = $scope.newdescription;
-            params['faculty_authorized'] = $scope.authorization_checkbox;
-            params['semester'] = $scope.semester_select;
+            params['faculty_authorized'] = $scope.create_authorization_checkbox;
+            params['semester'] = $scope.create_semester_select;
         Collection.save(params, function(data){
             params['pid'] = data.pid;
             $scope.collections.push(params);
         });        
         $scope.newtitle = '';
         $scope.newdescription ='';
-        $scope.authorization_checkbox = false;
+        $scope.create_authorization_checkbox = false;
     };
     
     $scope.showCollection = function(pid){
@@ -113,6 +113,10 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         $scope.id = $routeParams.id;
         if($scope.id){
             $scope.collection_data = Collection.get({identifier:$routeParams.id});
+            
+            //Set faculty authorization stuff
+            //$('#edit_semester_select').val($scope.collection_data.semester);        
+            //$scope.edit_authorization_checkbox = $scope.collection_data.faculty_authorized;
         }
     });
     $scope.annotate = function(pid, collection_pid) {

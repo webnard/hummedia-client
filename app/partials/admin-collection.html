@@ -16,15 +16,15 @@
             <tr>
                 <td>{{"Semester" | tr}}:</td>
                 <td>
-                    <select id="semester_select" data-ng-model='semester_select' data-ng-show="semesters.length">
+                    <select id="create_semester_select" data-ng-model='create_semester_select' data-ng-show="semesters.length">
                         <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
                     </select>
                 </td>
             </tr>
         </table>
         <hr>
-        <p>Check the box below to allow students to access your collection for the chosen semester.</p><br />
-        <input data-ng-model='authorization_checkbox' type='checkbox'> Authorize Collection<br />
+        <p>I certify that these videos are required assignments for this class.</p><br />
+        <input data-ng-model='create_authorization_checkbox' type='checkbox'> Authorize Collection<br />
         <hr>
         <button id="createcollectionbutton" data-ng-click="newCollection()">{{"Create Collection" | tr}}</button>
         </div>
@@ -53,13 +53,13 @@
             <tr>
                 <td>{{"Semester" | tr}}:</td>
                 <td>
-                    <select id="semester_select" data-ng-model='semester_select' data-ng-show="semesters.length">
+                    <select id="edit_semester_select" data-ng-model='edit_semester_select' data-ng-show="semesters.length">
                         <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
                     </select>
                 </td>
             </tr>
             </table>
-            <input data-ng-model='authorization_checkbox' type='checkbox'> Authorize Collection<br />
+            <input data-ng-model="collection_data['faculty_authorized']" type='checkbox'> Authorize Collection<br />
             <hr>
             
             <div id="droppable">
