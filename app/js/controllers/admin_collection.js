@@ -1,6 +1,81 @@
 'use strict';
 function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
     
+    //Faculty Authorization
+    $scope.faculty_checkbox = false;
+    
+    var getSemesterObject = function(month, year){
+        var int;
+        var name;
+        
+        if(month>=1 && month<=4){
+            int = year*10+1;
+            name = "Winter " + year;
+        }else if(month>=5 && month<=6){
+            int = year*10+3;
+            name = "Spring " + year;
+        }else if(month>=7 && month<=8){
+            int = year*10+4;
+            name = "Summer " + year;
+        }else if(month>=9 && month<=12){
+            int = year*10+5;
+            name = "Fall " + year;
+        }
+        return {int: int, name: name};
+    };
+    
+    var getNextTerm = function(semester){//Takes a semester object and returns a semester object for the next term
+        var int;
+        var name;
+        
+        //Turn the semester int into a string
+        var i = semester.int + "";
+        //Get the last digit of the semester int
+        var term = i.substring(i.length-1);
+        term = parseInt(term);
+        //Get the first digits for the yar
+        var year = (semester.int-term)/10;        
+        
+        var new_term = term+1;
+        
+        if(new_term==2){
+            int = semester.int+2;
+            name = "Spring " + year;
+        }else if(new_term==4){
+            int = semester.int+1;
+            name = "Summer " + year;
+        }else if(new_term==5){
+            int = semester.int+1;
+            name = "Fall " + year;
+        }else if(new_term==6){
+            int = (year+1)*10 + 1;
+            name = "Winter " + (year+1);
+        }
+        return {int: int, name: name};
+    };
+    
+    $scope.getSemesterArray = function(){//returns an array of 4 semester objects starting from the current term
+        var d = new Date();
+        var year = d.getFullYear();
+        var month = d.getMonth();
+        
+        var semesters = [];        
+        var semester = getSemesterObject(month, year);
+        
+        for(var i=0; i<4; i++){
+            semesters.push(semester);
+            semester=getNextTerm(semester);
+        }
+        return semesters;
+    }
+            
+    $scope.semesters = $scope.getSemesterArray();    
+    
+    //Set the semester to the current semester after all the others load
+    setTimeout(function(){
+        $('#create_semester_select').val($scope.semesters[0].int);
+    }, 0);
+        
     $scope.tinymceOptions = {
         plugins: "link",
         toolbar: "bold italic | link image",
@@ -12,14 +87,15 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         var params = new Object();
             params['dc:title'] = $scope.newtitle;
             params['dc:description'] = $scope.newdescription;
-            params['dc:creator'] = $scope.newcreator;
+            params['faculty_authorized'] = $scope.create_authorization_checkbox;
+            params['semester'] = $scope.create_semester_select;
         Collection.save(params, function(data){
             params['pid'] = data.pid;
             $scope.collections.push(params);
         });        
         $scope.newtitle = '';
         $scope.newdescription ='';
-        $scope.newcreator='';
+        $scope.create_authorization_checkbox = false;
     };
     
     $scope.showCollection = function(pid){
@@ -37,6 +113,10 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         $scope.id = $routeParams.id;
         if($scope.id){
             $scope.collection_data = Collection.get({identifier:$routeParams.id});
+            
+            //Set faculty authorization stuff
+            //$('#edit_semester_select').val($scope.collection_data.semester);        
+            //$scope.edit_authorization_checkbox = $scope.collection_data.faculty_authorized;
         }
     });
     $scope.annotate = function(pid, collection_pid) {
