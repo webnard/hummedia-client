@@ -29,7 +29,7 @@
         <button id="createcollectionbutton" data-ng-click="newCollection()">{{"Create Collection" | tr}}</button>
         </div>
     </div>
-    <div id="admincollection" class="admin-editor">
+    <div data-ng-show="collection_data" id="admincollection" class="admin-editor">
         <h2>{{"Collection Info" | tr}}</h2>
         <p>
             {{"Title" | tr}}:
@@ -77,7 +77,7 @@
                 </div>
                 </div>
             </div>
-    <div id="videopool" data-ng-controller="VideoSearchCtrl">
+    <div data-ng-show="collection_data" id="videopool" data-ng-controller="VideoSearchCtrl">
         <h2>{{"Videos to Add" | tr}}</h2>
         <form data-ng-submit="search()">
             <input placeholder='{{"Video title" | tr}}' type="search" data-ng-model="query" > <input type="submit" value="Search">
