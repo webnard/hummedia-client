@@ -34,6 +34,10 @@
 			    <label for="search-form-yearto">{{"To Year" | tr}}</label>
 			    <input type="number" placeholder="{{maxYear}}" id="search-form-yearto" name="yearto" ng-model="advanced.yearto" min="1878" max="{{maxYear}}">
 			</li>
+			<li>
+			    <label for="search-form-language">{{"Language" | tr}}</label>
+			    <div select-language ng-model="advanced['ma:hasLanguage']" name="language" id="search-form-language">
+			</li>
 		    </ul>
 		    <input type="submit" data-ng-readonly="!canSearch()" value='{{"Go" | tr}}'>
 		</fieldset>
