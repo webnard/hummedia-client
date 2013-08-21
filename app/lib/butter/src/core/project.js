@@ -2,8 +2,8 @@
  * If a copy of the MIT license was not distributed with this file, you can
  * obtain one at https://raw.github.com/mozilla/butter/master/LICENSE */
 
-define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
-        function( EventManager, Media, Sanitizer, xhr ) {
+define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr", "core/config" ],
+        function( EventManager, Media, Sanitizer, xhr, Config ) {
 
   var __butterStorage = window.localStorage;
 
@@ -421,7 +421,11 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
           else
           {
               reqUrl +=  '?client=popcorn';
-              xhr.post( reqUrl, required, projectSaved, failure);
+              xhr.post( reqUrl, nonrequired, function(data) {
+                  var updatedConfig = Config.parse(JSON.stringify({requiredAnnotationID: data.media[0].tracks[0].id}));
+                  butter.config.override(updatedConfig);
+                  projectSaved(data);
+              }, failure); 
           }
       }
       
@@ -434,7 +438,11 @@ define( [ "core/eventmanager", "core/media", "util/sanitizer", "util/xhr" ],
       else
       {
           defUrl +=  '?collection=' + butter.config.value('collection') + '&client=popcorn';
-          xhr.post( defUrl, nonrequired, projectSaved, failure); 
+          xhr.post( defUrl, nonrequired, function(data) {
+              var updatedConfig = Config.parse(JSON.stringify({annotationID: data.media[0].tracks[0].id}));
+              butter.config.override(updatedConfig);
+              projectSaved(data);
+          }, failure); 
       }
     };
   }
