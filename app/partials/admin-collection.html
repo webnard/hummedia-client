@@ -13,9 +13,19 @@
         <div id="createcollection">
         <table>
             <tr><td>{{"Title" | tr}}:</td><td><input data-ng-model="newtitle" type="text" /></td></tr>
-            <tr><td>{{"Description" | tr}}:</td><td><input data-ng-model="newdescription" type="text" /></td></tr>
-            <tr><td>{{"Creator" | tr}}:</td><td><input data-ng-model="newcreator" type="text" /></td></tr>
+            <tr>
+                <td>{{"Semester" | tr}}:</td>
+                <td>
+                    <select id="create_semester_select" data-ng-model='create_semester_select' data-ng-show="semesters.length">
+                        <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
+                    </select>
+                </td>
+            </tr>
         </table>
+        <hr>
+        <p>I certify that these videos are required assignments for this class.</p><br />
+        <input data-ng-model='create_authorization_checkbox' type='checkbox'> Authorize Collection<br />
+        <hr>
         <button id="createcollectionbutton" data-ng-click="newCollection()">{{"Create Collection" | tr}}</button>
         </div>
     </div>
@@ -38,6 +48,20 @@
                 <button id="savebutton" data-ng-readonly="!isEditable" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> {{"Save Changes" | tr}}</button>
             </p>
             <hr>
+            
+            <table>
+            <tr>
+                <td>{{"Semester" | tr}}:</td>
+                <td>
+                    <select id="edit_semester_select" data-ng-model='edit_semester_select' data-ng-show="semesters.length">
+                        <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
+                    </select>
+                </td>
+            </tr>
+            </table>
+            <input data-ng-model="collection_data['faculty_authorized']" type='checkbox'> Authorize Collection<br />
+            <hr>
+            
             <div id="droppable">
                 <div id="dragdrop"><h2>{{"Drop Here!" | tr}}</h2></div>
                 <div id="defaultdrop">

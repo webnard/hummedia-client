@@ -37,9 +37,6 @@ msgstr ""
 msgid "Create New Collection"
 msgstr ""
 
-msgid "Creator"
-msgstr ""
-
 msgid "Delete"
 msgstr ""
 
@@ -116,6 +113,9 @@ msgid "Searching"
 msgstr ""
 
 msgid "Select an authentication provider below"
+msgstr ""
+
+msgid "Semester"
 msgstr ""
 
 msgid "Superuser:"
