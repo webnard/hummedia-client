@@ -12,7 +12,12 @@
         <h2>{{"Create New Collection" | tr}} <i data-ng-click="showCreateCollection()" id="collToggle" class="icon-plus"></i></h2>
         <div id="createcollection">
         <table>
-            <tr><td>{{"Title" | tr}}:</td><td><input data-ng-model="newtitle" type="text" /></td></tr>
+            <tr>
+                <td>{{"Course Name" | tr}}:</td><td><input type="text" placeholder="ENG101R"/></td>
+            </tr>
+            <tr>
+                <td>{{"Section Number" | tr}}:</td><td><input type="text" placeholder="4"/></td>
+            </tr>
             <tr>
                 <td>{{"Semester" | tr}}:</td>
                 <td>

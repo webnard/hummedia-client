@@ -28,6 +28,9 @@ msgstr ""
 msgid "Collections"
 msgstr ""
 
+msgid "Course Name"
+msgstr ""
+
 msgid "Courses"
 msgstr ""
 
@@ -110,6 +113,9 @@ msgid "Search"
 msgstr ""
 
 msgid "Searching"
+msgstr ""
+
+msgid "Section Number"
 msgstr ""
 
 msgid "Select an authentication provider below"
