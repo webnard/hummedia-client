@@ -191,14 +191,10 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
   /////////////////////////////////////////////
     
     /**
-     * Turns off an annotation, if annotation.required exists
+     * Turns off an annotation
      * @param {Annotation} annotation
      */
     function disableAnnotation(annotation) {
-        if(annotation.required) {
-            throw new Error("Cannot disable a required annotation");
-        }
-        
         var index = annotation.pid;
         
         // make sure it's ready / exists
@@ -289,7 +285,13 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
                 enableAnnotation(a);
             }
         });
-    };        
+    };
+    
+    $scope.$on('$locationChangeStart', function disableAllAnnotations() {
+        $scope.annotations.forEach(function(a) {
+            disableAnnotation(a);
+        });
+    });
     
     $scope.toggleDescription = function() {
         $('#description').slideToggle();
