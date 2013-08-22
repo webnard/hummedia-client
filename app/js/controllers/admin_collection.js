@@ -134,7 +134,6 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         $('#collectioninfo_title').prop("value", $scope['collection_data']['dc:title']);
         $('#collectioninfo_description').prop("value", $scope['collection_data']['dc:description']);
         $('#editbutton').toggleClass('depressed');
-        $('#mce_6').toggle();
         if($scope.isEditable === true){
             $('#inputId').attr('readonly', true);
             $scope.isEditable = false;
