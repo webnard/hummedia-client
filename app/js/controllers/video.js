@@ -54,7 +54,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
      */
     function annotator_init() {
         // load the annotations
-        var required_annotation = $scope.video['ma:hasPolicy'][0];
+        var required_annotation = ($scope.video['ma:hasPolicy'] ? $scope.video['ma:hasPolicy'][0] : false);
         
         if($routeParams.collection === undefined && !required_annotation) {
             butter_with_plugins();
