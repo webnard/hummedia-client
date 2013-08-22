@@ -10,6 +10,9 @@ msgstr ""
 msgid "Advanced Search"
 msgstr ""
 
+msgid "Annotate"
+msgstr ""
+
 msgid "Basic"
 msgstr ""
 
@@ -82,6 +85,9 @@ msgstr ""
 msgid "Preferred Language:"
 msgstr ""
 
+msgid "Remove"
+msgstr ""
+
 msgid "Role:"
 msgstr ""
 
@@ -125,12 +131,6 @@ msgid "Users"
 msgstr ""
 
 msgid "Videos"
-msgstr ""
-
-msgid "Videos to Add"
-msgstr ""
-
-msgid "Video title"
 msgstr ""
 
 msgid "Which annotation experience do you prefer?"
