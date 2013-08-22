@@ -1,6 +1,24 @@
 'use strict';
 function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
     
+    $scope.toggleCreateCollection = function(){
+        $scope.createMode = true;
+        $scope.collection_data = undefined;
+        $location.search({'create':'true'});
+    }
+    
+    $scope.inCreateOrEditMode = function(){
+        if($scope.collection_data || $scope.createMode){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    $scope.toggleTitleAndDescription = function(){
+        $('#title_and_description_panel').slideToggle('slow');
+        $('#collToggle').toggleClass("icon-plus icon-minus");
+    }
+    
     //Faculty Authorization
     $scope.faculty_checkbox = false;
     
@@ -100,11 +118,6 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
     
     $scope.showCollection = function(pid){
         $location.search({'id':pid});
-    };
-    
-    $scope.showCreateCollection = function(){
-        $('#createcollection').slideToggle('slow');
-        $('#collToggle').toggleClass("icon-plus icon-minus");
     };
     
     $scope.collections = Collection.query();

@@ -10,9 +10,6 @@ msgstr ""
 msgid "Advanced Search"
 msgstr ""
 
-msgid "Annotate"
-msgstr ""
-
 msgid "Basic"
 msgstr ""
 
@@ -25,34 +22,16 @@ msgstr ""
 msgid "Collection Info"
 msgstr ""
 
-msgid "Collection Name"
-msgstr ""
-
 msgid "Collections"
 msgstr ""
 
-msgid "Course Name"
-msgstr ""
-
 msgid "Courses"
-msgstr ""
-
-msgid "Create Collection"
-msgstr ""
-
-msgid "Create New Collection"
 msgstr ""
 
 msgid "Delete"
 msgstr ""
 
 msgid "Description"
-msgstr ""
-
-msgid "Drop Here!"
-msgstr ""
-
-msgid "Edit"
 msgstr ""
 
 msgid "Email:"
@@ -68,6 +47,9 @@ msgid "Go"
 msgstr ""
 
 msgid "Invalid Request. Make sure the address you are trying to reach is correct."
+msgstr ""
+
+msgid "Language"
 msgstr ""
 
 msgid "Last Name:"
@@ -100,9 +82,6 @@ msgstr ""
 msgid "Preferred Language:"
 msgstr ""
 
-msgid "Remove"
-msgstr ""
-
 msgid "Role:"
 msgstr ""
 
@@ -118,16 +97,13 @@ msgstr ""
 msgid "Searching"
 msgstr ""
 
-msgid "Section Number"
-msgstr ""
-
 msgid "Select an authentication provider below"
 msgstr ""
 
-msgid "Semester"
+msgid "Superuser:"
 msgstr ""
 
-msgid "Superuser:"
+msgid "Term"
 msgstr ""
 
 msgid "The item you select below will determine how subtitles, audio tracks, and other annotations and modifications are made to your video. If you have been assigned to watch this video for a class, select the option most relevant to your class."
