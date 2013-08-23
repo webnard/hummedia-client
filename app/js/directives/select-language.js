@@ -16,7 +16,7 @@ HUMMEDIA_DIRECTIVES.
         return {
             link: SLH.linkFn,
             scope: false,
-            template: '<select data-ng-options="lang.value as lang.label | language for lang in __languages"></select>',
+            template: '<select data-ng-options="lang.value as lang.label for lang in __languages"></select>',
             replace: true
         };
     }]);
