@@ -144,22 +144,29 @@ HUMMEDIA_SERVICES.factory('language', ['analytics','$http', 'user', 'appConfig',
 
     /** 
      * Returns a language's English name based on its code.
-     * @TODO: Remove dependency on Angular internals by using deffered objects or something similar
+     * This should typically be used in a filter or something
+     * that is digested frequently, as it depends on the result of
+     * an initial AJAX call before it can return a good value.
+     *
+     * @example: language.nameFromCode("en") [returns "English"]
      */
-    language.nameFromCode = function(code) {
-        if(language.all.$$v) {
-            var data = language.all.$$v,
-                len = language.all.$$v.length;
+    language.nameFromCode = (function generateNameFromCodeFn() {
+        var data = {};
 
-            /** @TODO: could be improved with a BST **/
+        // I would normally have put my logic in here and return a promise, but since this is used in filters it would cause an infinite loop
+        language.all.then(function setDataToLanguages(list) {
+            var len = list.length;
+            
             for(var i = 0; i<len; i++) {
-                if(code == data[i]["value"]) {
-                    return data[i]["label"];
-                }
+                data[list[i]["value"]] = list[i]["label"];
             }
-        }
-        return code;
-    };
+        });
+
+        return function(code) {
+            return data[code] || code;
+        };
+    })();
+
     Object.seal(language);
     Object.freeze(language);
 
