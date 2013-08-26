@@ -77,7 +77,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         var params = new Object();
             params['dc:title'] = $scope.collection_data['dc:title'];
             params['dc:description'] = $scope.collection_data['dc:description'];
-            params['faculty_authorized'] = $scope.collection_data['faculty_authorized'];
+            params['authorized'] = $scope.collection_data['authorized'];
             params['semester'] = $scope.collection_data['semester'];
         Collection.save(params, function(data){
             params['pid'] = data.pid;
