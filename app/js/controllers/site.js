@@ -29,8 +29,34 @@ function SiteCtrl($scope, $http, appConfig) {
         $scope.copyright = "http:\/\/creativecommons.org\/licenses\/by-sa\/2.0\/";
     };
     
-    var photo_ids = ['510175383','30950009', '2685376029', '5803011292', '7608871682', '3814815269', '202917381', '3438611399',
-    '5912999510', '6026030129', '6231476868', '537896598','6159637428','3958348428','101363489','366959006','1171187321','259669867'];
+    var photo_ids = [
+    '510175383', // unripe strawberry
+    '30950009', // the sloth
+    '2685376029', // yellow "Fresh Flower" piece of architecture
+    '5803011292', // cactus
+    '7608871682', // Goat in Mozambique
+    '3814815269', // Lombard St.
+    '202917381', // Versailles
+    '3438611399', // Beach
+    '5912999510', // Mountains
+    '6026030129', // Windmill's leg
+    '6231476868', // Fish swimmin' around
+    '537896598', // Cylindrical paper lamps
+    '6159637428', // Boat sittin' around on a foggy, green lake
+    '3958348428', // Pipe in a junkyard
+    '101363489', // German subway
+    '366959006', // Eiffel Tower ground-up shot
+    '1171187321', // some river valley place
+    '259669867', // fall leaves
+    '8580742715', // boring seascape (?)
+    '9270932324', // boring seascape (?)
+    '2094464365', // boring seascape (?)
+    '333248753', // boring seascape (?)
+    '3266055425', // boring seascape (?)
+    '6811476562', // boring seascape (?)
+    '994551622' // boring seascape (?)
+    ];
+
     //var photo_ids = ['7608871682'];
     var imagecount = photo_ids.length;
     var num = getRandomInt(0,imagecount-1);
