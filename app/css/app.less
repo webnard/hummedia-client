@@ -52,6 +52,7 @@
 .filter(@rule) {
     -webkit-filter: @rule;
     -moz-filter: @rule;
+    -ie-filter: @rule;
     filter: @rule;
 }
 .box {
@@ -433,6 +434,7 @@ footer{
     left: 0;
     top: 0;
     opacity: 0;
+    .filter(brightness(70%));
     .transition(opacity 1s ease-in);
 }
 #login{
