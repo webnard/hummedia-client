@@ -16,26 +16,16 @@
         <form>
         <h2>{{"Collection Info" | tr}}</h2>
         <hr>
-        <h2>Add Course<i class="collToggle icon-plus" id="add_course_toggle" data-ng-click="togglePanel('#add_course_panel','#add_course_toggle')"></i></h2>
-        <div id="add_course_panel" style="display:none;">
-            <p>Enter the course number and section<br />
-               Include the "R" if necessary (358R)</p>
-            <br />
-            <p>
-                <select data-ng-model="course_department">
-                    <option data-ng-repeat="dept in course_departments" value="{{dept}}">{{dept}}</option>
-                </select>
-                <input data-ng-model='course_number' type="text" size="6" placeholder="Course" pattern="\d{3}R?$" title="Enter the course number (101 or 101R)"/>
-                <input data-ng-model='section_number' type="number" style='width: 4em;' placeholder="Section" title="Enter the section number" />
-            </p>
-            <br />
-            <p>
-                {{"Term" | tr}}:
-                <select id="semester_select" data-ng-model='collection_data.semester' data-ng-show="semesters.length">
-                    <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
-                </select>
-            </p>
-        </div>
+        <h2>Courses Using the Collection</h2>
+        
+        <ul>
+            <li>ENGL 351</li>
+            <li>PWS 340</li>
+        </ul>
+        
+        <button class='bwbuttondark' data-ng-click="toggleModal('#modal-add-course')">Add New Course</button>
+        
+        <!--<h2>Add Course<i class="collToggle icon-plus" id="add_course_toggle" data-ng-click="togglePanel('#add_course_panel','#add_course_toggle')"></i></h2>-->
         <hr>
         <h3>Title & Description (optional)<i class="collToggle icon-plus" id="title_toggle" data-ng-click="togglePanel('#title_panel','#title_toggle')"></i></h3>
         <div id="title_panel" style="display: none;">
@@ -74,5 +64,29 @@
             </ul>
         </div>
         <div class="centered-bwbutton"><button class="bwbuttondark">Add Video</button></div>
+    </div>
+    <!-- Modal Windows -->
+    <div id='blur-box'>        
+    </div>
+    <div class='modal' id='modal-add-course'>
+        <i data-ng-click="toggleModal('#modal-add-course')" class="icon-remove-sign close-icon"></i>
+        <h2>Add Course</h2>
+        <p>Enter the course number and section<br />
+           Include the "R" if necessary (358R)</p>
+        <br />
+        <p>
+            <select data-ng-model="course_department">
+                <option data-ng-repeat="dept in course_departments" value="{{dept}}">{{dept}}</option>
+            </select>
+            <input data-ng-model='course_number' type="text" size="6" placeholder="Course" pattern="\d{3}R?$" title="Enter the course number (101 or 101R)"/>
+            <input data-ng-model='section_number' type="number" style='width: 4em;' placeholder="Section" title="Enter the section number" />
+        </p>
+        <br />
+        <p>
+            {{"Term" | tr}}:
+            <select id="semester_select" data-ng-model='collection_data.semester' data-ng-show="semesters.length">
+                <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
+            </select>
+        </p>
     </div>
 </div>

@@ -8,6 +8,11 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         $(toggle_id).toggleClass("icon-plus icon-minus");
     }
     
+    $scope.toggleModal = function(modal_id){
+        $('#blur-box').toggle();
+        $(modal_id).toggle();
+    }
+    
     //Set variables
     $scope.collections = Collection.query();
     $scope.semesters = Course.getSemesterArray();
