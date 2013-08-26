@@ -28,7 +28,9 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
     $scope.$watch(function(){return $routeParams.id;}, function(){
         $scope.id = $routeParams.id;
         if($scope.id){
-            $scope.collection_data = Collection.get({identifier:$routeParams.id});        
+            $scope.collection_data = Collection.get({identifier:$routeParams.id}, function getCoursesAsReadableStrings(){
+                $scope.collection_data.courses = Course.getReadableStringsFromArray($scope.collection_data['dc:relation']);
+            });
         }
     });
     

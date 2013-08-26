@@ -78,17 +78,17 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
                 'ITAL','JAPAN','KOREA','LATIN','LING','LT AM','MESA','NE LG','NORWE',
                 'PHIL','POLSH','PORT','ROM','RUSS','SCAND','SLAT','SPAN','SWED','TESOL',
                 'WELSH','WS','WRTG'];
-    }
+    };
     
     //Conversion functions
     
     var courseFieldsToString = function(course_department, course_number, section_number, semester){
-        course_string = course_department + course_number + ' ' + section_number + ' ' + semester;
+        course_string = course_department + ' ' + course_number + ' ' + section_number + ' ' + semester;
         return course_string;
     };
     
-    var courseStringToFields = function(){
-        
+    var courseStringToReadableString = function(course_string){
+        return course_string;
     };
     
     //Return Course object
@@ -96,7 +96,7 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
     var Course = {getSemesterArray: getSemesterArray,
                   getCourseDepartments: getCourseDepartments,
                   courseFieldsToString: courseFieldsToString,
-                  courseStringToFields: courseStringToFields
+                  courseStringToReadableString: courseStringToReadableString
             };
     
     Object.seal(Course);
