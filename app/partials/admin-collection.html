@@ -19,8 +19,7 @@
         <h2>Courses Using the Collection</h2>
         
         <ul>
-            <li data-ng-repeat="course in collection_data.courses"></li>
-            <li>PWS 340</li>
+            <li data-ng-repeat="course in collection_data.courses">{{course.readable_string}}<button data-ng-click="deleteCourse(course.string)"><i class="icon-trash"></i> Delete</button></li>
         </ul>
         
         <button class='bwbuttondark' data-ng-click="toggleModal('#modal-add-course')">Add New Course</button>

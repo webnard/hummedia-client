@@ -87,8 +87,42 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
         return course_string;
     };
     
+    var termNumberToString = function(term){
+        if(term==1 || term==2){
+            return "Winter";
+        }else if(term==3){
+            return "Spring";
+        }else if(term==4){
+            return "Summer";
+        }else if(term==5 || term==6){
+            return "Fall";
+        }
+    };
+    
     var courseStringToReadableString = function(course_string){
-        return course_string;
+        
+        var matches = course_string.match(/([a-zA-Z\ ]+?)\ +([0-9]{3}R?)\ +([0-9]{3})\ +([0-9]{4})([0-9])/);
+        var department = matches[1];
+        var course_number = matches[2];
+        var section_number = matches[3];
+        var year = matches[4];
+        var term = matches[5];
+        
+        term = termNumberToString(term);
+        
+        return department+course_number+' - Section '+section_number+' - '+term+' '+year;
+    };
+    
+    var getReadableStringsFromArray = function(course_strings){
+        var readable_strings = [];
+        for(var i=0; i<course_strings.length; i++){
+            var readable_string = courseStringToReadableString(course_strings[i]);
+            var course_object = {'string':course_strings[i],
+                                 'readable_string':readable_string
+            };
+            readable_strings.push(course_object);
+        }
+        return readable_strings;
     };
     
     //Return Course object
@@ -96,8 +130,9 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
     var Course = {getSemesterArray: getSemesterArray,
                   getCourseDepartments: getCourseDepartments,
                   courseFieldsToString: courseFieldsToString,
-                  courseStringToReadableString: courseStringToReadableString
-            };
+                  courseStringToReadableString: courseStringToReadableString,
+                  getReadableStringsFromArray: getReadableStringsFromArray
+    };
     
     Object.seal(Course);
     Object.freeze(Course);
