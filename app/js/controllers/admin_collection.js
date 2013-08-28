@@ -1,6 +1,13 @@
 'use strict';
 function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location, Course) {
     
+    $scope.tempvid = [
+        {'ma:title':'Jaws'},
+        {'ma:title':'Rocky III'},
+        {'ma:title':'Oprah: The Complete Collection'},
+        {'ma:title':'The Land Before Time 532: Littlefoot\'s First Winter'}
+    ];
+    
     //Simple display logic
     
     $scope.togglePanel = function(panel_id, toggle_id){
