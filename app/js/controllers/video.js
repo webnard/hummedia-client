@@ -1,5 +1,5 @@
 'use strict';
-function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATION_MODE, user) {
+function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATION_MODE, user, analytics) {
 
     /**
      * Starts up Butter and enables the plugins found in $scope.annotations.
@@ -270,21 +270,30 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
     }
     
     $scope.toggleAnnotations = function() {
+
+        if(annotations_enabled) {
+            analytics.event('annotations', 'disable', $scope.video['ma:title']);
+        }
+        else
+        {
+            analytics.event('annotations', 'enable', $scope.video['ma:title']);
+        }
+
         $scope.annotations.forEach(function(a) {
             if(a.required) {
                 return; // this can't be toggled; it should always be on
             }
             
             if(annotations_enabled) {
-                annotations_enabled = false;
                 disableAnnotation(a);
             }
             else
             {
-                annotations_enabled = true;
                 enableAnnotation(a);
             }
         });
+        
+        annotations_enabled = !annotations_enabled;
     };
     
     $scope.$on('$locationChangeStart', function disableAllAnnotations() {
@@ -310,4 +319,4 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
     });
 }
 // always inject this in so we can later compress this JavaScript
-VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'appConfig', 'ANNOTATION_MODE', 'user'];
+VideoCtrl.$inject = ['$scope', '$routeParams', 'Video', 'Annotation', 'appConfig', 'ANNOTATION_MODE', 'user', 'analytics'];
