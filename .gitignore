@@ -2,6 +2,7 @@
 nbproject
 manifest.mf
 production
+production.*.tar.gz
 
 .project
 .settings
