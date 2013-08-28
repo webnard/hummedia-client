@@ -83,6 +83,8 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
     //Conversion functions
     
     var courseFieldsToString = function(course_department, course_number, section_number, semester){
+        //Pad the section number with 0s
+        section_number = ("000"+section_number).slice(-3);
         course_string = course_department + ' ' + course_number + ' ' + section_number + ' ' + semester;
         return course_string;
     };
@@ -102,15 +104,19 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
     var courseStringToReadableString = function(course_string){
         
         var matches = course_string.match(/([a-zA-Z\ ]+?)\ +([0-9]{3}R?)\ +([0-9]{3})\ +([0-9]{4})([0-9])/);
-        var department = matches[1];
-        var course_number = matches[2];
-        var section_number = matches[3];
-        var year = matches[4];
-        var term = matches[5];
-        
-        term = termNumberToString(term);
-        
-        return department+course_number+' - Section '+section_number+' - '+term+' '+year;
+        if(matches){
+            var department = matches[1];
+            var course_number = matches[2];
+            var section_number = matches[3];
+            var year = matches[4];
+            var term = matches[5];
+
+            term = termNumberToString(term);
+
+            return department+course_number+' - Section '+section_number+' - '+term+' '+year;
+        }else{
+            return '';
+        }
     };
     
     var getReadableStringsFromArray = function(course_strings){

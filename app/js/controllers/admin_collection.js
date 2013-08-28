@@ -1,13 +1,6 @@
 'use strict';
 function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location, Course) {
     
-    $scope.tempvid = [
-        {'ma:title':'Jaws'},
-        {'ma:title':'Rocky III'},
-        {'ma:title':'Oprah: The Complete Collection'},
-        {'ma:title':'The Land Before Time 532: Littlefoot\'s First Winter'}
-    ];
-    
     //Simple display logic
     
     $scope.togglePanel = function(panel_id, toggle_id){
@@ -24,13 +17,17 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
     $scope.collections = Collection.query();
     $scope.semesters = Course.getSemesterArray();
     $scope.course_departments = Course.getCourseDepartments();
+    $scope.videos = [];
+    $scope.selected_videos = {};
     
     $scope.tinymceOptions = {
         plugins: "link",
         toolbar: "bold italic | link image",
         menubar: false
     };
-
+    
+    //Watch Functions
+    
     //Watch the route params and keep $scope.collection_data updated
     $scope.$watch(function(){return $routeParams.id;}, function(){
         $scope.id = $routeParams.id;
@@ -41,7 +38,23 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         }
     });
     
-
+    $scope.$watch("selected_videos", function(){
+        $scope.selected_videos_count = getCount($scope.selected_videos);
+    },true);
+    
+    //Helper Functions
+    
+    var getCount = function(checkbox_object){
+        var count = 0;
+        for(var prop in checkbox_object){
+            if(checkbox_object[prop]==true){
+                count++;
+            }
+        }
+        return count;
+    };
+    
+    
     
     
     $scope.toggleCreateCollection = function(){
@@ -165,6 +178,47 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
             
         });
     };
+    
+    $scope.getVideos = function(){
+        $scope.videos =  Video.query();
+    };
+
+    $scope.addVideosToCollection = function(){
+        //todo
+    };
+    $scope.addCourse = function(){
+        //Validate input
+        if($scope.course_department==undefined){
+            alert("Please select a department.");
+            return;
+        }
+        if($scope.collection_data.semester==undefined){
+            alert("Please select a term.")
+            return;
+        }
+        //Create a course_string
+        var course_string = Course.courseFieldsToString($scope.course_department, $scope.course_number, $scope.section_number, $scope.collection_data.semester);
+
+        $scope.collection_data['dc:relation'].push(course_string);
+        
+        //Update the api
+        var params = new Object();
+            params['dc:relation'] = $scope.collection_data['dc:relation'];
+        Collection.update({"identifier":$scope.collection_data.pid}, params);
+        
+        //Update the current scope
+        var readable_string = Course.courseStringToReadableString(course_string);
+        
+        var course_object = {
+            "readable_string" : readable_string,
+            "string" : course_string
+        };
+        
+        $scope.collection_data.courses.push(course_object);
+        
+        //Close out of the modal
+        $scope.toggleModal('#modal-add-course');
+    }
 }
 // always inject this in so we can later compress this JavaScript
 AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location', 'Course'];

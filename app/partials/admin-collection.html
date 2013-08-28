@@ -59,7 +59,7 @@
                 </li>
             </ul>
         </div>
-        <div class="centered-bwbutton"><button class="bwbuttondark" data-ng-click="toggleModal('#modal-add-video')">Add Video</button></div>
+        <div class="centered-bwbutton"><button class="bwbuttondark" data-ng-click="getVideos(); toggleModal('#modal-add-video')">Add Video</button></div>
     </div>
     <!-- Modal Windows -->
     <div id='blur-box'>        
@@ -70,12 +70,13 @@
         <p>Enter the course number and section<br />
            Include the "R" if necessary (358R)</p>
         <br />
+        <form data-ng-submit="addCourse()">
         <p>
             <select data-ng-model="course_department">
                 <option data-ng-repeat="dept in course_departments" value="{{dept}}">{{dept}}</option>
             </select>
-            <input data-ng-model='course_number' type="text" size="6" placeholder="Course" pattern="\d{3}R?$" title="Enter the course number (101 or 101R)"/>
-            <input data-ng-model='section_number' type="number" style='width: 4em;' placeholder="Section" title="Enter the section number" />
+            <input required data-ng-model='course_number' type="text" size="6" placeholder="Course" pattern="\d{3}R?$" title="Enter the course number (101 or 101R)"/>
+            <input required max="999" min="0" data-ng-model='section_number' type="number" style='width: 4em;' placeholder="Section" title="Enter the section number" />
         </p>
         <br />
         <p>
@@ -84,6 +85,8 @@
                 <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
             </select>
         </p>
+        <button type="submit" class="bwbuttondark">Add Course</button>
+        </form>
     </div>
     <div class='modal' id='modal-add-video'>
         <i data-ng-click="toggleModal('#modal-add-video')" class="icon-remove-sign close-icon"></i>
@@ -92,13 +95,14 @@
                 Filter: <input type="search" data-ng-model="title_filter">
         </div>
         <hr>
-        <ul>
-            <li data-ng-repeat="video in tempvid | filter: {'ma:title': title_filter}" style="margin-top:5px; font-size:100%;">
-                <label><input type='checkbox' /> {{video['ma:title']}}</label>
+        <ul style='max-height: 300px; overflow-y: scroll;'>
+            <li data-ng-repeat="video in videos | filter: {'ma:title': title_filter}" style="margin-top:5px; font-size:100%;">
+                <label><input data-ng-model="selected_videos[video.pid]" type='checkbox' value='{{video.pid}}'/> {{video['ma:title']}}</label>
             </li>
         </ul>
         <br />
-        <button class="bwbuttondark">Add Selected to Collection</button>
+        <p>{{selected_videos_count}} Videos Selected</p>
+        <button class="bwbuttondark" data-ng-click="addVideosToCollection()">Add Selected to Collection</button>
         <hr>
         <p>Can't find what you're looking for?  <a href='#/admin/video' class='classic_link'>Create</a> a new video.</p>
     </div>
