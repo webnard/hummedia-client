@@ -31,10 +31,8 @@ function SiteCtrl($scope, $http, appConfig) {
     
     var photo_ids = [
     '510175383', // unripe strawberry
-    '30950009', // the sloth
     '2685376029', // yellow "Fresh Flower" piece of architecture
     '5803011292', // cactus
-    '7608871682', // Goat in Mozambique
     '3814815269', // Lombard St.
     '202917381', // Versailles
     '3438611399', // Beach

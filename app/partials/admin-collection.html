@@ -93,7 +93,7 @@
         <p>
             {{"Term" | tr}}:
             <select id="semester_select" data-ng-model='collection_data.semester' data-ng-show="semesters.length">
-                <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
+                <option data-ng-repeat="semester in semesters" value="{{semester['value']}}">{{semester['name']}}</option>
             </select>
         </p>
         <button type="submit" class="bwbuttondark">Add Course</button>

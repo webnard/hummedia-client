@@ -5,53 +5,53 @@
 HUMMEDIA_SERVICES.factory('Course', [function() {
     //Semester Functions
     var getSemesterObject = function(month, year){
-        var int;
+        var value;
         var name;
         
         if(month>=1 && month<=4){
-            int = year*10+1;
+            value = year*10+1;
             name = "Winter " + year;
         }else if(month>=5 && month<=6){
-            int = year*10+3;
+            value = year*10+3;
             name = "Spring " + year;
         }else if(month>=7 && month<=8){
-            int = year*10+4;
+            value = year*10+4;
             name = "Summer " + year;
         }else if(month>=9 && month<=12){
-            int = year*10+5;
+            value = year*10+5;
             name = "Fall " + year;
         }
-        return {int: int, name: name};
+        return {value: value, name: name};
     };
     
     var getNextTerm = function(semester){//Takes a semester object and returns a semester object for the next term
-        var int;
+        var value;
         var name;
         
-        //Turn the semester int into a string
-        var i = semester.int + "";
-        //Get the last digit of the semester int
+        //Turn the semester value valueo a string
+        var i = semester.value + "";
+        //Get the last digit of the semester value
         var term = i.substring(i.length-1);
         term = parseInt(term);
         //Get the first digits for the yar
-        var year = (semester.int-term)/10;        
+        var year = (semester.value-term)/10;        
         
         var new_term = term+1;
         
         if(new_term==2){
-            int = semester.int+2;
+            value = semester.value+2;
             name = "Spring " + year;
         }else if(new_term==4){
-            int = semester.int+1;
+            value = semester.value+1;
             name = "Summer " + year;
         }else if(new_term==5){
-            int = semester.int+1;
+            value = semester.value+1;
             name = "Fall " + year;
         }else if(new_term==6){
-            int = (year+1)*10 + 1;
-            name = "Winter " + (year+1);
+            value = (year+1)*10 + 1;
+            name = "Wvalueer " + (year+1);
         }
-        return {int: int, name: name};
+        return {value: value, name: name};
     };
     
     var getSemesterArray = function(){//returns an array of 4 semester objects starting from the current term
