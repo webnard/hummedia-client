@@ -18,6 +18,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.when('/admin/collection', {title: "Hummedia | Collections", admin: true, templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/user', {title: "Hummedia | Users", admin: true, templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/video', {title: "Hummedia | Videos", admin: true, templateUrl: 'partials/admin-video.html', controller: AdminVideoCtrl, reloadOnSearch: false});
+    $routeProvider.when('/admin/video/ingest', {title: "Hummedia | Ingest Video", admin: true, templateUrl: 'partials/admin-ingest.html', controller: AdminIngestCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/video/create', {title: "Hummedia | Create Video", admin: true, templateUrl: 'partials/admin-create-video.html', controller: AdminCreateVideo, reloadOnSearch: false});
     $routeProvider.when('/collection', {title: "Hummedia | Collections", templateUrl: 'partials/collections.html', controller: CollectionsCtrl});
     $routeProvider.when('/select-course/:video', {title: "Hummedia | Select Course", templateUrl: 'partials/select-course.html', controller: SelectCourseCtrl});

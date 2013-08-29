@@ -50,6 +50,7 @@
            <a href="#/admin/collection" analytics="{category: 'admin-nav', label: 'collections'}">{{"Collections" | tr}}</a>
            <a href="#/admin/video" analytics="{category: 'admin-nav', label: 'videos'}">{{"Videos" | tr}}</a>
            <a href="#/admin/user" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Users" | tr}}</a> 
+           <a href="#/admin/video/ingest" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Ingest Videos" | tr}}</a> 
         </nav>
         <div id="warn-login" data-ng-class="!user.exists && hasCheckedUser ? 'active' : ''" data-ng-show="!user.exists && hasCheckedUser && !warningDismissed" data-ng-cloak data-ng-animate="'warn'"><i class="icon-remove-sign" ng-click="warningDismissed = true" analytics="{category: 'login-warning', label: 'dismiss'}"></i>You are not logged in. You may not be able to view all of your courses' material until you <a data-ng-click="user.prompt(true)" analytics="{category: 'login-warning', label: 'login'}">login</a>.</div>
     </div>
@@ -156,6 +157,7 @@
   <script src="js/controllers/admin_user.js"></script>
   <script src="js/controllers/admin_video.js"></script>
   <script src="js/controllers/admin_create_video.js"></script>
+  <script src="js/controllers/admin_ingest_video.js"></script>
   <script src="js/controllers/video_search.js"></script>
   <script src="js/controllers/video.js"></script>
   <script src="js/controllers/developer.js" data-remove="true"></script>

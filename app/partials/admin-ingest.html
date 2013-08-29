@@ -1,0 +1,15 @@
+<section class="admin" id="admin-video-select">
+    <div id="listwrapper">
+        <div id="list_scrolling_block">
+            <h2>{{"Media Files" | tr}}</h2>
+            <div class="filter">
+                Filter: <input type="search" ng-model="title_filter">
+            </div>
+            <div data-ng-show="!videos.length" id="loading_message">Loading Videos...</div>
+            <ul>
+                <li class="selectable" data-ng-repeat="v in videos | filter: title_filter" data-ng-class="{selected: v == video['url']}" data-ng-click="setVideo(v)">{{v}}</li>
+            </ul>
+        </div>
+        <a ng-click="createVideo()" id=admin-video-add-button ng-show="!!video"><h2 class="ng-binding">Create Video for {{video['url']}}</h2></a>
+    </div>
+</section>
