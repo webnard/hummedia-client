@@ -24,7 +24,10 @@ var output_dir = __dirname + "/../production/"
         '/js/directives/',
         '/js/services/',
         '/js/controllers/',
+        '/js/resources/',
         '/lib/popcorn-js/',
+        '/lib/angular/',
+        '/lib/angular-ui/',
         '/lib/hummedia-popcorn-plugins/'
     ]; 
 
