@@ -18,7 +18,15 @@ var output_dir = __dirname + "/../production/"
     jsdom = require("jsdom"),
     less = require("less"),
     closure = require('closurecompiler'),
-    versionstamp = (new Date()).getTime();
+    versionstamp = (new Date()).getTime(), // for cachebusting old app.min files
+    remove_dirs = [ // array of directories to remove from the final production directory
+        '/lib/popcorn-js/modules/sequence/test/',
+        '/js/directives/',
+        '/js/services/',
+        '/js/controllers/',
+        '/lib/popcorn-js/',
+        '/lib/hummedia-popcorn-plugins/'
+    ]; 
 
 /**
  * Tells us whether or not our url is local
@@ -160,6 +168,10 @@ jsdom.env(input, [jquery], function(errors, window) {
                 fs.write(output,window.document.doctype + window.document.innerHTML);
                 fs.close(output);
                 fs.rename(output_file, output_dir + '/index.html');
+
+                remove_dirs.forEach(function(dir) {
+                    deleteFolderRecursive(output_dir + dir);
+                });
             });
         });
     });
