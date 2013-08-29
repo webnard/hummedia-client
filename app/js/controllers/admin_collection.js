@@ -19,6 +19,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
     $scope.course_departments = Course.getCourseDepartments();
     $scope.videos = [];
     $scope.selected_videos = {};
+    $scope.selected_courses = {};
     
     $scope.tinymceOptions = {
         plugins: "link",
@@ -186,6 +187,28 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
     $scope.addVideosToCollection = function(){
         //todo
     };
+    
+    $scope.deleteCourses = function(){
+        var confirmed = confirm('Are you sure you want to delete the selected courses?');
+        if(confirmed){
+            var courses_to_delete = [];
+            
+            for(var i in $scope.selected_courses){
+                if(!$scope.selected_courses.hasOwnProperty(i)){
+                    return;
+                }else{
+                    if($scope.selected_courses[i]==true){
+                        courses_to_delete.push(i);
+                    }
+                }    
+            }
+            
+            $scope.collection_data['dc:relation'] = $scope.collection_data['dc:relation'].filter(function(el){
+                return (courses_to_delete.indexOf(el)<0);
+            });           
+        }        
+    };
+    
     $scope.addCourse = function(){
         //Validate input
         if($scope.course_department==undefined){
@@ -218,7 +241,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         
         //Close out of the modal
         $scope.toggleModal('#modal-add-course');
-    }
+    };
 }
 // always inject this in so we can later compress this JavaScript
 AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location', 'Course'];

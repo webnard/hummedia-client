@@ -30,11 +30,18 @@
         <hr>
         <h2>Courses Using the Collection</h2>
         
-        <ul>
-            <li data-ng-repeat="course in collection_data.courses">{{course.readable_string}}<button data-ng-click="deleteCourse(course.string)"><i class="icon-trash"></i> Delete</button></li>
+        <ul style="">
+            <li style="margin-top:5px;" data-ng-repeat="course in collection_data.courses">
+                <label>
+                <input data-ng-model="selected_courses[course.string]" type='checkbox' />{{course.readable_string}}
+                </label>
+            </li>
         </ul>
         
-        <button class='bwbuttondark' data-ng-click="toggleModal('#modal-add-course')">Add New Course</button>
+        <button data-ng-click="toggleModal('#modal-add-course')">Add New Course</button>
+        <button data-ng-click="deleteCourses();">
+                <i class="icon-trash"></i> Delete Selected Courses
+        </button>
         
         <hr>
         <p style="max-width: 300px;">I certify that these videos are required assignments for this class.</p><br />
