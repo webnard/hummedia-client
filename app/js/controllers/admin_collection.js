@@ -1,5 +1,5 @@
 'use strict';
-function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location, Course) {
+function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location, Course, $http) {
     
     //Simple display logic
     
@@ -177,7 +177,25 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
     };
 
     $scope.addVideosToCollection = function(){
-        //todo
+        $scope.videos_to_add=[];
+        
+        for(var i in $scope.selected_videos){
+            if($scope.selected_videos[i]==true){
+                $scope.videos_to_add.push(i);
+            }
+        }
+        
+        $scope.toggleModal('#modal-add-video');
+        
+        var packet = [
+            {"collection":
+                {"id": $scope.collection_data['pid'],"title": $scope.collection_data['dc:title']},
+             "videos": $scope.videos_to_add} //this is an array of pids
+        ];        
+        
+         $http.post('/api/v2/batch/video/membership', packet).success(function(data){
+         });
+        
     };
     
     $scope.deleteCourses = function(){
@@ -244,4 +262,4 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
     };
 }
 // always inject this in so we can later compress this JavaScript
-AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location', 'Course'];
+AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location', 'Course', '$http'];
