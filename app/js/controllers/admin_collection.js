@@ -113,6 +113,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         var params = new Object();
             params['dc:title'] = newtitle;
             params['dc:description'] = newdescription;
+            params['authorized'] = $scope.collection_data['authorized'];
         
         Collection.update({"identifier":pid}, params);
         for(var i=0; i<$scope.collections.length; i++) {
