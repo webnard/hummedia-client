@@ -6,7 +6,8 @@
  */
 
 var fs = require('fs');
-    ncp = require('ncp').ncp;
+    ncp = require('ncp').ncp,
+    htmlmin = require('html-minifier');
 
 var output_dir = __dirname + "/../production/"
     app_dir = __dirname + "/../app/",
@@ -29,7 +30,20 @@ var output_dir = __dirname + "/../production/"
         '/lib/angular/',
         '/lib/angular-ui/',
         '/lib/hummedia-popcorn-plugins/'
-    ]; 
+    ],
+    htmlmin_opts = {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeCDATASectionsFromCDATA: false,
+        removeCommentsFromCDATA: false,
+        collapseBooleanAttributes: true,
+        removeAttributeQuotes: true,
+        removeEmptyAttributes: false,
+        removeOptionalTags: true,
+        removeEmptyElements: false,
+        removeRedundantAttributes: false,
+        lint: false
+    }
 
 /**
  * Tells us whether or not our url is local
@@ -167,7 +181,10 @@ jsdom.env(input, [jquery], function(errors, window) {
         compressCSS(window, function() {
             compressJS(window, function() {
                 var output = fs.openSync(output_file,"w");
-                fs.write(output,window.document.doctype + window.document.innerHTML);
+                    newContents = window.document.doctype.toString() + window.document.innerHTML,
+                    minified = htmlmin.minify(newContents, htmlmin_opts);//.replace(/&amp;&amp;/g,'&');
+
+                fs.write(output, minified);
                 fs.close(output);
                 fs.rename(output_file, output_dir + '/index.html');
 
