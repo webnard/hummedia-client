@@ -40,8 +40,16 @@
     </target>
     
     <target name="compress" depends="scripts" description="Compresses and combines CSS and JavaScript and links them with index-production.html">
+        <exec executable="git" outputproperty="version">
+            <arg value="describe" />
+        </exec>
         <exec executable="node" failonerror="true">
             <arg value="scripts/compressor.js" />
+        </exec>
+        <exec executable="tar" failonerror="true">
+            <arg value="-zcvf" />
+            <arg value="production.${version}.tar.gz" />
+            <arg value="production" />
         </exec>
     </target>
     <target name="production" depends="compress" />
