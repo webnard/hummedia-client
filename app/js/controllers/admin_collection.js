@@ -1,124 +1,82 @@
 'use strict';
-function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location) {
+function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location, Course, $http) {
     
-    //Faculty Authorization
-    $scope.faculty_checkbox = false;
+    //Simple display logic
     
-    var getSemesterObject = function(month, year){
-        var semester;
-        var name;
-        
-        if(month>=1 && month<=4){
-            semester = year*10+1;
-            name = "Winter " + year;
-        }else if(month>=5 && month<=6){
-            semester = year*10+3;
-            name = "Spring " + year;
-        }else if(month>=7 && month<=8){
-            semester = year*10+4;
-            name = "Summer " + year;
-        }else if(month>=9 && month<=12){
-            semester = year*10+5;
-            name = "Fall " + year;
-        }
-        return {value: semester, name: name};
-    };
-    
-    var getNextTerm = function(semester){//Takes a semester object and returns a semester object for the next term
-        var value;
-        var name;
-        
-        //Turn the semester int into a string
-        var i = semester.value + "";
-        //Get the last digit of the semester int
-        var term = i.substring(i.length-1);
-        term = parseInt(term);
-        //Get the first digits for the yar
-        var year = (semester.value-term)/10;        
-        
-        var new_term = term+1;
-        
-        if(new_term==2){
-            value = semester.value+2;
-            name = "Spring " + year;
-        }else if(new_term==4){
-            value = semester.value+1;
-            name = "Summer " + year;
-        }else if(new_term==5){
-            value = semester.value+1;
-            name = "Fall " + year;
-        }else if(new_term==6){
-            value = (year+1)*10 + 1;
-            name = "Winter " + (year+1);
-        }
-        return {value: value, name: name};
-    };
-    
-    $scope.getSemesterArray = function(){//returns an array of 4 semester objects starting from the current term
-        var d = new Date();
-        var year = d.getFullYear();
-        var month = d.getMonth();
-        
-        var semesters = [];        
-        var semester = getSemesterObject(month, year);
-        
-        for(var i=0; i<4; i++){
-            semesters.push(semester);
-            semester=getNextTerm(semester);
-        }
-        return semesters;
+    $scope.togglePanel = function(panel_id, toggle_id){
+        $(panel_id).slideToggle('slow');
+        $(toggle_id).toggleClass("icon-plus icon-minus");
     }
-            
-    $scope.semesters = $scope.getSemesterArray();    
     
-    //Set the semester to the current semester after all the others load
-    setTimeout(function(){
-        $('#create_semester_select').val($scope.semesters[0].value);
-    }, 0);
-        
+    $scope.toggleModal = function(modal_id){
+        $('#blur-box').toggle();
+        $(modal_id).toggle();
+    }
+    
+    //Set variables
+    $scope.collections = Collection.query();
+    $scope.semesters = Course.getSemesterArray();
+    $scope.course_departments = Course.getCourseDepartments();
+    $scope.videos = [];
+    $scope.selected_videos = {};
+    $scope.selected_courses = {};
+    
     $scope.tinymceOptions = {
         plugins: "link",
         toolbar: "bold italic | link image",
         menubar: false
-    }
-
-    $scope.newCollection = function(){        
-        if($scope.newtitle === ''){$scope.newtitle = 'New Hummedia Collection';}
-        var params = new Object();
-            params['dc:title'] = $scope.newtitle;
-            params['dc:description'] = $scope.newdescription;
-            params['faculty_authorized'] = $scope.create_authorization_checkbox;
-            params['semester'] = $scope.create_semester_select;
-        Collection.save(params, function(data){
-            params['pid'] = data.pid;
-            $scope.collections.push(params);
-        });        
-        $scope.newtitle = '';
-        $scope.newdescription ='';
-        $scope.create_authorization_checkbox = false;
     };
     
-    $scope.showCollection = function(pid){
-        $location.search({'id':pid});
-    };
+    //Watch Functions
     
-    $scope.showCreateCollection = function(){
-        $('#createcollection').slideToggle('slow');
-        $('#collToggle').toggleClass("icon-plus icon-minus");
-    };
-    
-    $scope.collections = Collection.query();
-    
+    //Watch the route params and keep $scope.collection_data updated
     $scope.$watch(function(){return $routeParams.id;}, function(){
         $scope.id = $routeParams.id;
         if($scope.id){
-            $scope.collection_data = Collection.get({identifier:$routeParams.id});
-            
-            //Set faculty authorization stuff
-            //$('#edit_semester_select').val($scope.collection_data.semester);        
-            //$scope.edit_authorization_checkbox = $scope.collection_data.faculty_authorized;
+            $scope.collection_data = Collection.get({identifier:$routeParams.id}, function getCoursesAsReadableStrings(){
+                $scope.collection_data.courses = Course.getReadableStringsFromArray($scope.collection_data['dc:relation']);
+            });
         }
     });
+    
+    $scope.$watch("selected_videos", function(){
+        $scope.selected_videos_count = getCount($scope.selected_videos);
+    },true);
+    
+    //Helper Functions
+    
+    var getCount = function(checkbox_object){
+        var count = 0;
+        for(var prop in checkbox_object){
+            if(checkbox_object[prop]==true){
+                count++;
+            }
+        }
+        return count;
+    };
+    
+    
+    
+    
+    $scope.toggleCreateCollection = function(){
+        $scope.createMode = true;
+        $scope.collection_data = {};
+        $location.search({'create':'true'});
+    }
+    
+    $scope.inCreateOrEditMode = function(){
+        if($scope.collection_data || $scope.createMode){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
+    $scope.showCollection = function(pid){
+        $location.search({'id':pid});
+        $scope.createMode = false;
+    };    
+    
     $scope.annotate = function(pid, collection_pid) {
         $location.path('/video/annotate/' + pid).search({'collection': collection_pid});
     }
@@ -130,27 +88,32 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
         $scope.collections = $scope.collections.filter(function(a){return a.pid !== pid;});
         $location.search({});
     };
-    $scope.editCollection = function(){
-        $('#collectioninfo_title').prop("value", $scope['collection_data']['dc:title']);
-        $('#collectioninfo_description').prop("value", $scope['collection_data']['dc:description']);
-        $('#editbutton').toggleClass('depressed');
-        if($scope.isEditable === true){
-            $('#inputId').attr('readonly', true);
-            $scope.isEditable = false;
-            $('#description-cover').show();
-        }else{
-            $('#inputId').attr('readonly', false);
-            $scope.isEditable = true;
-            $('#description-cover').hide();
-        }
+    
+    var createCollection = function(){
+        
+        $scope.course_string = Course.courseFieldsToString($scope.course_department, $scope.course_number, $scope.section_number, $scope.collection_data.semester);
+
+        
+        var params = new Object();
+            params['dc:title'] = $scope.collection_data['dc:title'];
+            params['dc:description'] = $scope.collection_data['dc:description'];
+            params['authorized'] = $scope.collection_data['authorized'];
+            params['semester'] = $scope.collection_data['semester'];
+        Collection.save(params, function(data){
+            params['pid'] = data.pid;
+            $scope.collections.push(params);
+            $scope.showCollection(data.pid);
+        });        
     };
     
-    $scope.saveChanges = function(pid){
+    var updateCollection = function(){
+        var pid = $scope.collection_data.pid;
         var newtitle = $('#collectioninfo_title').prop("value"),
             newdescription = $scope['collection_data']['dc:description'];
         var params = new Object();
             params['dc:title'] = newtitle;
             params['dc:description'] = newdescription;
+            params['authorized'] = $scope.collection_data['authorized'];
         
         Collection.update({"identifier":pid}, params);
         for(var i=0; i<$scope.collections.length; i++) {
@@ -160,7 +123,14 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
                 }
         }
         $scope['collection_data']['dc:title'] = newtitle;
-        $scope.editCollection();
+    }
+    
+    $scope.saveChanges = function(){
+        if($scope.collection_data.pid){
+            updateCollection();
+        }else{
+            createCollection();
+        }
     };
     $scope.addVideo = function(collectionid, videoid){
         var video_data=Video.get({identifier:videoid}, function(){
@@ -204,15 +174,98 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location)
             
         });
     };
-    // Drag & Drop stuff
-    $("#droppable").droppable({
-        drop: function(event, ui){
-            $(document).ready(function() {
-                var id = ui['helper']['0']['firstChild']['id'];
-                $scope.addVideo($routeParams.id, id);   
+    
+    $scope.getVideos = function(){
+        $scope.videos =  Video.query();
+    };
+
+    $scope.addVideosToCollection = function(){
+        $scope.videos_to_add=[];
+        
+        for(var i in $scope.selected_videos){
+            if($scope.selected_videos[i]==true){
+                $scope.videos_to_add.push(i);
+            }
+        }        
+        var packet = [
+            {"collection":
+                {"id": $scope.collection_data['pid'],"title": $scope.collection_data['dc:title']},
+             "videos": $scope.videos_to_add} //this is an array of pids
+        ];        
+        
+        $http.post('/api/v2/batch/video/membership', packet).success(function(data){
+        });
+         
+        $scope.selected_videos = {};
+                
+        $scope.collection_data = Collection.get({identifier:$routeParams.id});
+        
+        $scope.toggleModal('#modal-add-video');
+        
+    };
+    
+    $scope.deleteCourses = function(){
+        var confirmed = confirm('Are you sure you want to delete the selected courses?');
+        if(confirmed){
+            var courses_to_delete = [];
+            
+            for(var i in $scope.selected_courses){
+                if(!$scope.selected_courses.hasOwnProperty(i)){
+                    return;
+                }else{
+                    if($scope.selected_courses[i]==true){
+                        courses_to_delete.push(i);
+                    }
+                }    
+            }
+            
+            $scope.collection_data['dc:relation'] = $scope.collection_data['dc:relation'].filter(function(el){
+                return (courses_to_delete.indexOf(el)<0);
             });
+            
+            //Update the api
+            var params = new Object();
+            params['dc:relation'] = $scope.collection_data['dc:relation'];
+            Collection.update({"identifier":$scope.collection_data.pid}, params);
+            
+            //Update the scope
+            $scope.collection_data.courses = Course.getReadableStringsFromArray($scope.collection_data['dc:relation']);
+        }        
+    };
+    
+    $scope.addCourse = function(){
+        //Validate input
+        if($scope.course_department==undefined){
+            alert("Please select a department.");
+            return;
         }
-    });
+        if($scope.collection_data.semester==undefined){
+            alert("Please select a term.")
+            return;
+        }
+        //Create a course_string
+        var course_string = Course.courseFieldsToString($scope.course_department, $scope.course_number, $scope.section_number, $scope.collection_data.semester);
+
+        $scope.collection_data['dc:relation'].push(course_string);
+        
+        //Update the api
+        var params = new Object();
+            params['dc:relation'] = $scope.collection_data['dc:relation'];
+        Collection.update({"identifier":$scope.collection_data.pid}, params);
+        
+        //Update the current scope
+        var readable_string = Course.courseStringToReadableString(course_string);
+        
+        var course_object = {
+            "readable_string" : readable_string,
+            "string" : course_string
+        };
+        
+        $scope.collection_data.courses.push(course_object);
+        
+        //Close out of the modal
+        $scope.toggleModal('#modal-add-course');
+    };
 }
 // always inject this in so we can later compress this JavaScript
-AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location'];
+AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location', 'Course', '$http'];

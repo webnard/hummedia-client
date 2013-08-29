@@ -1,4 +1,4 @@
-<div class="admin">
+<div class="admin" style="text-align:center; width:100%;">
     <div id="listwrapper">
         <div id="list_scrolling_block">
             <h2>{{"My Collections" | tr}}</h2>
@@ -9,84 +9,112 @@
             </ul>
         </div>
         <hr>
-        <h2>{{"Create New Collection" | tr}} <i data-ng-click="showCreateCollection()" id="collToggle" class="icon-plus"></i></h2>
-        <div id="createcollection">
-        <table>
-            <tr><td>{{"Title" | tr}}:</td><td><input data-ng-model="newtitle" type="text" /></td></tr>
-            <tr>
-                <td>{{"Semester" | tr}}:</td>
-                <td>
-                    <select id="create_semester_select" data-ng-model='create_semester_select' data-ng-show="semesters.length">
-                        <option data-ng-repeat="semester in semesters" value="{{semester['value']}}">{{semester['name']}}</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <hr>
-        <p>I certify that these videos are required assignments for this class.</p><br />
-        <input data-ng-model='create_authorization_checkbox' type='checkbox'> Authorize Collection<br />
-        <hr>
-        <button id="createcollectionbutton" data-ng-click="newCollection()">{{"Create Collection" | tr}}</button>
-        </div>
+        <div class="centered-bwbutton"><button class="bwbuttondark" data-ng-click="toggleCreateCollection()">Create New Collection</button></div>
     </div>
-    <div data-ng-show="collection_data" id="admincollection" class="admin-editor">
+    
+    <div data-ng-show="inCreateOrEditMode()" id="admincollection" class="admin-editor">
+        <form>
         <h2>{{"Collection Info" | tr}}</h2>
-        <p>
-            {{"Title" | tr}}:
-            <input data-ng-readonly="!isEditable" class="collectioninfo" id="collectioninfo_title" type="text" ng-model="collection_data['dc:title']"/>
-        </p>
-        <p>
-            {{"Description" | tr}}:
-        </p>
-        <div id='editable-description-wrapper'>
-                <textarea ui-tinymce="tinymceOptions" ng-model="collection_data['dc:description']" class="tinymce-textarea">{{collection_data['dc:description']}}</textarea>
-                <div id='description-cover'></div>
+        <hr>
+            <p>
+                {{"Title" | tr}}:
+                <input class="collectioninfo" id="collectioninfo_title" type="text" ng-model="collection_data['dc:title']"/>
+            </p>
+            <p>
+                {{"Description" | tr}}
+                <i class='collToggle icon-plus' id='description_toggle' data-ng-click="togglePanel('#editable-description-wrapper', '#description_toggle')"></i>
+            </p>
+            <div style='display:none; text-align: left;' id='editable-description-wrapper'>
+                    <textarea ui-tinymce="tinymceOptions" ng-model="collection_data['dc:description']" class="tinymce-textarea">{{collection_data['dc:description']}}</textarea>
+            </div>
+        <hr>
+        <div data-ng-hide="createMode">
+            <h2>Courses Using the Collection</h2>
+
+            <ul style="">
+                <li style="margin-top:5px;" data-ng-repeat="course in collection_data.courses">
+                    <label>
+                    <input data-ng-model="selected_courses[course.string]" type='checkbox' />{{course.readable_string}}
+                    </label>
+                </li>
+            </ul>
+
+            <button data-ng-click="toggleModal('#modal-add-course')">Add New Course</button>
+            <button data-ng-click="deleteCourses();">
+                    <i class="icon-trash"></i> Delete Selected Courses
+            </button>
+
+            <hr>
+        <p style="max-width: 300px;">I certify that these videos are required assignments for this class.</p><br />
+        <input data-ng-model="collection_data['authorized']" type='checkbox'> Authorize Collection<br />
+        <hr>
         </div>
             <p>    
-                <button id="deletebutton" class="conditionalbutton" data-ng-readonly="!id" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> {{"Delete" | tr}}</button>
-                <button id="editbutton" class="conditionalbutton" data-ng-readonly="!id" data-ng-click="editCollection()"><i class="icon-edit"></i> {{"Edit" | tr}}</button>
-                <button id="savebutton" data-ng-readonly="!isEditable" data-ng-click="saveChanges(collection_data.pid)"><i class="icon-save"></i> {{"Save Changes" | tr}}</button>
+                <button data-ng-hide="createMode" id="deletebutton" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> {{"Delete" | tr}}</button>
+                <button type='submit' id="savebutton" data-ng-click="saveChanges()"><i class="icon-save"></i> {{"Save Changes" | tr}}</button>
             </p>
-            <hr>
-            
-            <table>
-            <tr>
-                <td>{{"Semester" | tr}}:</td>
-                <td>
-                    <select id="edit_semester_select" data-ng-model='edit_semester_select' data-ng-show="semesters.length">
-                        <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
-                    </select>
-                </td>
-            </tr>
-            </table>
-            <input data-ng-model="collection_data['faculty_authorized']" type='checkbox'> Authorize Collection<br />
-            <hr>
-            
-            <div id="droppable">
-                <div id="dragdrop"><h2>{{"Drop Here!" | tr}}</h2></div>
-                <div id="defaultdrop">
-            <h2>{{"Videos" | tr}}</h2>
-                <ul>
-                    <li data-ng-repeat="video in collection_data.videos">
-                        <table id="listvideotable"><tr>
-                                <td>{{video['ma:title']}}</td>
-                                <td id="righttd"><button data-ng-click="annotate(video.pid, collection_data.pid)">{{"Annotate" | tr}}</button><button data-ng-click="deleteVideo(video.pid, collection_data.pid)">{{"Remove" | tr}}</button></td></tr>
-                        </table>
-                    </li>
-                </ul>
-                </div>
-                </div>
-            </div>
-    <div data-ng-show="collection_data" id="videopool" data-ng-controller="VideoSearchCtrl">
-        <h2>{{"Videos to Add" | tr}}</h2>
-        <form data-ng-submit="search()">
-            <input placeholder='{{"Video title" | tr}}' type="search" data-ng-model="query" > <input type="submit" value="Search">
         </form>
-
-        <p data-ng-hide="searching"><ng-pluralize count="videos.length" when="{0: 'No results.', 1: 'One result.', other: '{} results.'}"></ng-pluralize></p>
-        <p data-ng-show="searching">{{"Searching" | tr}}</p>
-        <ul>
-            <li class="draggable" data-ng-repeat="video in videos" data-draggable><p id="{{video.pid}}" title="{{video['ma:description']}}">{{video['ma:title']}}</p></li>
+    </div>
+    
+    <span data-ng-hide="createMode">
+    <div id="listwrapper" data-ng-show="inCreateOrEditMode()" data-ng-animate=" 'blur' ">
+        <div id="list_scrolling_block">
+            <h2>{{"Videos" | tr}}</h2>
+            <ul>
+                <li data-ng-repeat="video in collection_data.videos">
+                    <table id="listvideotable"><tr>
+                            <td>{{video['ma:title']}}</td>
+                            <td id="righttd"><button data-ng-click="annotate(video.pid, collection_data.pid)">{{"Annotate" | tr}}</button><button data-ng-click="deleteVideo(video.pid, collection_data.pid)">{{"Remove" | tr}}</button></td></tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <div class="centered-bwbutton"><button class="bwbuttondark" data-ng-click="getVideos(); toggleModal('#modal-add-video')">Add Video</button></div>
+    </div>
+    </span>
+    <!-- Modal Windows -->
+    <div id='blur-box'>        
+    </div>
+    <div class='modal' id='modal-add-course'>
+        <i data-ng-click="toggleModal('#modal-add-course')" class="icon-remove-sign close-icon"></i>
+        <h2>Add Course</h2>
+        <p>Enter the course number and section<br />
+           Include the "R" if necessary (358R)</p>
+        <br />
+        <form data-ng-submit="addCourse()">
+        <p>
+            <select data-ng-model="course_department">
+                <option data-ng-repeat="dept in course_departments" value="{{dept}}">{{dept}}</option>
+            </select>
+            <input required data-ng-model='course_number' type="text" size="6" placeholder="Course" pattern="\d{3}R?$" title="Enter the course number (101 or 101R)"/>
+            <input required max="999" min="0" data-ng-model='section_number' type="number" style='width: 4em;' placeholder="Section" title="Enter the section number" />
+        </p>
+        <br />
+        <p>
+            {{"Term" | tr}}:
+            <select id="semester_select" data-ng-model='collection_data.semester' data-ng-show="semesters.length">
+                <option data-ng-repeat="semester in semesters" value="{{semester['int']}}">{{semester['name']}}</option>
+            </select>
+        </p>
+        <button type="submit" class="bwbuttondark">Add Course</button>
+        </form>
+    </div>
+    <div class='modal' id='modal-add-video'>
+        <i data-ng-click="toggleModal('#modal-add-video')" class="icon-remove-sign close-icon"></i>
+        <h2>Select a Video</h2>
+        <div class="filter">
+                Filter: <input type="search" data-ng-model="title_filter">
+        </div>
+        <hr>
+        <ul style='max-height: 300px; overflow-y: scroll;'>
+            <li data-ng-repeat="video in videos | filter: {'ma:title': title_filter}" style="margin-top:5px; font-size:100%;">
+                <label><input data-ng-model="selected_videos[video.pid]" type='checkbox' value='{{video.pid}}'/> {{video['ma:title']}}</label>
+            </li>
         </ul>
+        <br />
+        <p>{{selected_videos_count}} Videos Selected</p>
+        <button class="bwbuttondark" data-ng-click="addVideosToCollection()">Add Selected to Collection</button>
+        <hr>
+        <p>Can't find what you're looking for?  <a href='#/admin/video' class='classic_link'>Create</a> a new video.</p>
     </div>
 </div>

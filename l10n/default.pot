@@ -31,22 +31,10 @@ msgstr ""
 msgid "Courses"
 msgstr ""
 
-msgid "Create Collection"
-msgstr ""
-
-msgid "Create New Collection"
-msgstr ""
-
 msgid "Delete"
 msgstr ""
 
 msgid "Description"
-msgstr ""
-
-msgid "Drop Here!"
-msgstr ""
-
-msgid "Edit"
 msgstr ""
 
 msgid "Email:"
@@ -118,10 +106,10 @@ msgstr ""
 msgid "Select an authentication provider below"
 msgstr ""
 
-msgid "Semester"
+msgid "Superuser:"
 msgstr ""
 
-msgid "Superuser:"
+msgid "Term"
 msgstr ""
 
 msgid "The item you select below will determine how subtitles, audio tracks, and other annotations and modifications are made to your video. If you have been assigned to watch this video for a class, select the option most relevant to your class."
@@ -143,12 +131,6 @@ msgid "Users"
 msgstr ""
 
 msgid "Videos"
-msgstr ""
-
-msgid "Videos to Add"
-msgstr ""
-
-msgid "Video title"
 msgstr ""
 
 msgid "Which annotation experience do you prefer?"
