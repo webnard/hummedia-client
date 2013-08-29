@@ -106,28 +106,30 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         });        
     };
     
-    //! Make this function work for saving changes as well as new collections
+    var updateCollection = function(){
+        var pid = $scope.collection_data.pid;
+        var newtitle = $('#collectioninfo_title').prop("value"),
+            newdescription = $scope['collection_data']['dc:description'];
+        var params = new Object();
+            params['dc:title'] = newtitle;
+            params['dc:description'] = newdescription;
+        
+        Collection.update({"identifier":pid}, params);
+        for(var i=0; i<$scope.collections.length; i++) {
+                if(pid===$scope.collections[i]['pid']){
+                    $scope.collections[i]['dc:title'] = newtitle;
+                    $scope.collections[i]['dc:description'] = newdescription;
+                }
+        }
+        $scope['collection_data']['dc:title'] = newtitle;
+    }
+    
     $scope.saveChanges = function(){
         if($scope.collection_data.pid){
             updateCollection();
         }else{
             createCollection();
         }
-//        var newtitle = $('#collectioninfo_title').prop("value"),
-//            newdescription = $scope['collection_data']['dc:description'];
-//        var params = new Object();
-//            params['dc:title'] = newtitle;
-//            params['dc:description'] = newdescription;
-//        
-//        Collection.update({"identifier":pid}, params);
-//        for(var i=0; i<$scope.collections.length; i++) {
-//                if(pid===$scope.collections[i]['pid']){
-//                    $scope.collections[i]['dc:title'] = newtitle;
-//                    $scope.collections[i]['dc:description'] = newdescription;
-//                }
-//        }
-//        $scope['collection_data']['dc:title'] = newtitle;
-//        $scope.editCollection();
     };
     $scope.addVideo = function(collectionid, videoid){
         var video_data=Video.get({identifier:videoid}, function(){
