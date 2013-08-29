@@ -11,14 +11,14 @@ var fs = require('fs');
 var output_dir = __dirname + "/../production/"
     app_dir = __dirname + "/../app/",
     input = app_dir + "index.html",
+    versionstamp = (new Date()).getTime(), // for cachebusting old app.min files
     output_file = output_dir + "index-production.html",
-    minified_css = output_dir + "css/app.min.css",
-    minified_js = output_dir + "js/app.min.js",
+    minified_css = output_dir + "css/app.min." + versionstamp + ".css",
+    minified_js = output_dir + "js/app.min." + versionstamp + ".js",
     jquery = app_dir + "lib/jquery-2.0.0.js",
     jsdom = require("jsdom"),
     less = require("less"),
     closure = require('closurecompiler'),
-    versionstamp = (new Date()).getTime(), // for cachebusting old app.min files
     remove_dirs = [ // array of directories to remove from the final production directory
         '/lib/popcorn-js/modules/sequence/test/',
         '/js/directives/',
@@ -58,7 +58,7 @@ function compressCSS(window, callback) {
         
         if(!new_css_link_added) {
             new_css_link_added = true;
-            $(this).before("<link rel='stylesheet' href='css/app.min.css?"+ versionstamp + "'></link>");
+            $(this).before("<link rel='stylesheet' href='css/app.min." + versionstamp + ".css'></link>");
         }
         
         total_css += fs.readFileSync(app_dir + href);
@@ -110,7 +110,7 @@ function compressJS(window, callback) {
             return false;
         }
     });
-    $script_tags.first().before("<script src='js/app.min.js?"+ versionstamp +"'></script>");
+    $script_tags.first().before("<script src='js/app.min." + versionstamp + ".js'></script>");
     $script_tags.remove();
     closure.compile(toCompress,{}, function(err, output) {
         if(err) {
