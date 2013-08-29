@@ -183,18 +183,21 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
             if($scope.selected_videos[i]==true){
                 $scope.videos_to_add.push(i);
             }
-        }
-        
-        $scope.toggleModal('#modal-add-video');
-        
+        }        
         var packet = [
             {"collection":
                 {"id": $scope.collection_data['pid'],"title": $scope.collection_data['dc:title']},
              "videos": $scope.videos_to_add} //this is an array of pids
         ];        
         
-         $http.post('/api/v2/batch/video/membership', packet).success(function(data){
-         });
+        $http.post('/api/v2/batch/video/membership', packet).success(function(data){
+        });
+         
+        $scope.selected_videos = {};
+                
+        $scope.collection_data = Collection.get({identifier:$routeParams.id});
+        
+        $scope.toggleModal('#modal-add-video');
         
     };
     

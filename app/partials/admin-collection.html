@@ -28,25 +28,27 @@
                     <textarea ui-tinymce="tinymceOptions" ng-model="collection_data['dc:description']" class="tinymce-textarea">{{collection_data['dc:description']}}</textarea>
             </div>
         <hr>
-        <h2>Courses Using the Collection</h2>
-        
-        <ul style="">
-            <li style="margin-top:5px;" data-ng-repeat="course in collection_data.courses">
-                <label>
-                <input data-ng-model="selected_courses[course.string]" type='checkbox' />{{course.readable_string}}
-                </label>
-            </li>
-        </ul>
-        
-        <button data-ng-click="toggleModal('#modal-add-course')">Add New Course</button>
-        <button data-ng-click="deleteCourses();">
-                <i class="icon-trash"></i> Delete Selected Courses
-        </button>
-        
-        <hr>
+        <div data-ng-hide="createMode">
+            <h2>Courses Using the Collection</h2>
+
+            <ul style="">
+                <li style="margin-top:5px;" data-ng-repeat="course in collection_data.courses">
+                    <label>
+                    <input data-ng-model="selected_courses[course.string]" type='checkbox' />{{course.readable_string}}
+                    </label>
+                </li>
+            </ul>
+
+            <button data-ng-click="toggleModal('#modal-add-course')">Add New Course</button>
+            <button data-ng-click="deleteCourses();">
+                    <i class="icon-trash"></i> Delete Selected Courses
+            </button>
+
+            <hr>
         <p style="max-width: 300px;">I certify that these videos are required assignments for this class.</p><br />
         <input data-ng-model="collection_data['authorized']" type='checkbox'> Authorize Collection<br />
         <hr>
+        </div>
             <p>    
                 <button data-ng-hide="createMode" id="deletebutton" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> {{"Delete" | tr}}</button>
                 <button type='submit' id="savebutton" data-ng-click="saveChanges()"><i class="icon-save"></i> {{"Save Changes" | tr}}</button>
@@ -54,7 +56,7 @@
         </form>
     </div>
     
-    <div id="listwrapper" data-ng-show="inCreateOrEditMode()" data-ng-animate=" 'blur' ">
+    <div id="listwrapper" data-ng-show="inCreateOrEditMode()" data-ng-hide="createMode" data-ng-animate=" 'blur' ">
         <div id="list_scrolling_block">
             <h2>{{"Videos" | tr}}</h2>
             <ul>
