@@ -56,7 +56,8 @@
         </form>
     </div>
     
-    <div id="listwrapper" data-ng-show="inCreateOrEditMode()" data-ng-hide="createMode" data-ng-animate=" 'blur' ">
+    <span data-ng-hide="createMode">
+    <div id="listwrapper" data-ng-show="inCreateOrEditMode()" data-ng-animate=" 'blur' ">
         <div id="list_scrolling_block">
             <h2>{{"Videos" | tr}}</h2>
             <ul>
@@ -70,6 +71,7 @@
         </div>
         <div class="centered-bwbutton"><button class="bwbuttondark" data-ng-click="getVideos(); toggleModal('#modal-add-video')">Add Video</button></div>
     </div>
+    </span>
     <!-- Modal Windows -->
     <div id='blur-box'>        
     </div>
