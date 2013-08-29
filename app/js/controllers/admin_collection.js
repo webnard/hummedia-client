@@ -75,15 +75,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
     $scope.showCollection = function(pid){
         $location.search({'id':pid});
         $scope.createMode = false;
-    };
-    
-//    $scope.$watch(function returnCourseInformation(){
-//            return [$scope.course_department, $scope.course_number, $scope.section_number, $scope.collection_data.semester];
-//        }, function updateCourseInformation(newval, oldval){
-//            $scope.course_string = Course.courseFieldsToString(newval[0], newval[1], newval[2], newval[3]);
-//        },true
-//    );
-    
+    };    
     
     $scope.annotate = function(pid, collection_pid) {
         $location.path('/video/annotate/' + pid).search({'collection': collection_pid});
@@ -205,7 +197,15 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
             
             $scope.collection_data['dc:relation'] = $scope.collection_data['dc:relation'].filter(function(el){
                 return (courses_to_delete.indexOf(el)<0);
-            });           
+            });
+            
+            //Update the api
+            var params = new Object();
+            params['dc:relation'] = $scope.collection_data['dc:relation'];
+            Collection.update({"identifier":$scope.collection_data.pid}, params);
+            
+            //Update the scope
+            $scope.collection_data.courses = Course.getReadableStringsFromArray($scope.collection_data['dc:relation']);
         }        
     };
     
