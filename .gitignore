@@ -3,6 +3,7 @@ nbproject
 manifest.mf
 production
 production.*.tar.gz
+app/CONFIG.js
 
 .project
 .settings
