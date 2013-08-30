@@ -10,6 +10,7 @@ function AdminIngestCtrl($scope, Video, $location) {
     $scope.createVideo = function() {
         $scope.creating = true;
         Video.save($scope.video,function(data){
+            Video.ingest($scope.video.url, data.pid);
             $location.path("/admin/video").search({id: data.pid});
         });
     }
