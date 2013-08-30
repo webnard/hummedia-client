@@ -50,7 +50,12 @@ HUMMEDIA_DIRECTIVES
                         });
 
                     scope[placeholder] = newArray;
-                    scope.$eval(model + "=" + placeholder);
+
+                    /** @TODO: Super hackish, but otherwise I get an error. **/
+                    try {
+                        scope.$eval(model + "=" + placeholder);
+                    }
+                    catch(e) {}
                 }
             );
         }

@@ -141,7 +141,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
             }
         }
         
-        var required_annotation = $scope.video['ma:hasPolicy'][0];
+        var required_annotation = ($scope.video['ma:hasPolicy'] ? $scope.video['ma:hasPolicy'][0] : false);
         
         if($routeParams.collection === undefined && !required_annotation) {
             // we're done here. there are no annotations.
