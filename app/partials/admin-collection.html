@@ -31,8 +31,8 @@
         <div data-ng-hide="createMode">
             <h2>Courses Using the Collection</h2>
 
-            <ul style="">
-                <li style="margin-top:5px;" data-ng-repeat="course in collection_data.courses">
+            <ul>
+                <li data-ng-repeat="course in collection_data.courses">
                     <label>
                     <input data-ng-model="selected_courses[course.string]" type='checkbox' />{{course.readable_string}}
                     </label>
@@ -73,7 +73,7 @@
     </div>
     </span>
     <!-- Modal Windows -->
-    <div id='blur-box'>        
+    <div id='blur-box'> 
     </div>
     <div class='modal' id='modal-add-course'>
         <i data-ng-click="toggleModal('#modal-add-course')" class="icon-remove-sign close-icon"></i>
@@ -106,8 +106,8 @@
                 Filter: <input type="search" data-ng-model="title_filter">
         </div>
         <hr>
-        <ul style='max-height: 300px; overflow-y: scroll;'>
-            <li data-ng-repeat="video in videos | filter: {'ma:title': title_filter}" style="margin-top:5px; font-size:100%;">
+        <ul>
+            <li data-ng-repeat="video in videos | filter: {'ma:title': title_filter}">
                 <label><input data-ng-model="selected_videos[video.pid]" type='checkbox' value='{{video.pid}}'/> {{video['ma:title']}}</label>
             </li>
         </ul>

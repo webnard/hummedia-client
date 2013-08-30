@@ -28,3 +28,38 @@
         </form>
     </div>
 </section>
+<section class="admin" data-ng-show="!!video && user.isSuperuser">
+    <div id="listwrapper" data-ng-animate=" 'blur' ">
+        <div id="list_scrolling_block">
+            <h2>{{"Attached Collections" | tr}}</h2>
+            <ul>
+                <li data-ng-repeat="course in video['ma:isMemberOf']">
+                    <table id="listvideotable"><tr>
+                            <td>{{course['title']}}</td>
+                            <td id="righttd"><button data-ng-click="annotate(course['@id'])">{{"Annotate" | tr}}</button><button data-ng-click="deleteCollection(course['@id'], course['title'])">{{"Remove" | tr}}</button></td></tr>
+                    </table>
+                </li>
+            </ul>
+        </div>
+        <div class="centered-bwbutton"><button class="bwbuttondark" data-ng-click="getCollections(); toggleModal('#modal-add-video')">Add Collection</button></div>
+    </div>
+</section>
+
+<div id='blur-box'> 
+</div>
+<div class='modal' id='modal-add-video'>
+    <i data-ng-click="toggleModal('#modal-add-video')" class="icon-remove-sign close-icon"></i>
+    <h2>Select a Collection</h2>
+    <div class="filter">
+            Filter: <input type="search" data-ng-model="collection_filter">
+    </div>
+    <hr>
+    <ul>
+        <li data-ng-repeat="collection in collections | filter: {'dc:title': collection_filter}">
+            <label><input data-ng-model="selected_collections[collection.pid]" type='checkbox' value='{{collection.pid}}'/> {{collection["dc:title"]}}</label>
+        </li>
+    </ul>
+    <br />
+    <p>{{selected_collections_count}} Collections Selected</p>
+    <button class="bwbuttondark" data-ng-click="toggleModal('#modal-add-video'); addVideoToCollections()">Add Video to Selected</button>
+</div>
