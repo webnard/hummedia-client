@@ -1,8 +1,10 @@
 'use strict';
-function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location, Course, $http) {
+function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location, Course, $http, user) {
     
     //Simple display logic
     
+    $scope.user = user;
+
     $scope.togglePanel = function(panel_id, toggle_id){
         $(panel_id).slideToggle('slow');
         $(toggle_id).toggleClass("icon-plus icon-minus");
@@ -114,6 +116,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
             params['dc:title'] = newtitle;
             params['dc:description'] = newdescription;
             params['authorized'] = $scope.collection_data['authorized'];
+            params['dc:creator'] = $scope.collection_data['dc:creator'];
         
         Collection.update({"identifier":pid}, params);
         for(var i=0; i<$scope.collections.length; i++) {
@@ -268,4 +271,4 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
     };
 }
 // always inject this in so we can later compress this JavaScript
-AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location', 'Course', '$http'];
+AdminCollectionCtrl.$inject = ['$scope', 'Collection', 'Video', '$routeParams', '$location', 'Course', '$http', 'user'];

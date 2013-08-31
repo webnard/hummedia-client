@@ -20,6 +20,10 @@
                 {{"Title" | tr}}:
                 <input class="collectioninfo" id="collectioninfo_title" type="text" ng-model="collection_data['dc:title']"/>
             </p>
+            <p ng-show="user.isSuperuser">
+                {{"Owner's NetID" | tr}}:
+                <input class="collectioninfo" id="collectioninfo_owner" type="text" ng-model="collection_data['dc:creator']" />
+            </p>
             <p>
                 {{"Description" | tr}}
                 <i class='collToggle icon-plus' id='description_toggle' data-ng-click="togglePanel('#editable-description-wrapper', '#description_toggle')"></i>
