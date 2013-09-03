@@ -21,16 +21,14 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location) {
         if(!$scope.collections.length){
             $scope.message = 'There are no collections to display.';
         }
-    });
-    $scope.$watch(function(){return $scope.collections.length;}, function(){
-        if(!$scope.collection) { // if we're not already focused on a collection
-            $scope.collection = $scope.collections[0];
-        }
+        
         $scope.collections_data=[];
+        showVideos($scope.collections[0]['pid']);
         
         for(var coll=0; coll<$scope.collections.length; coll++){
             (function(){
                 var pid = $scope.collections[coll]['pid'];
+
                 var item = Collection.get({identifier:pid}, function(){
                     for(var vid=0; vid<item.videos.length; vid++){
                         setCurrentImage(item, vid);
