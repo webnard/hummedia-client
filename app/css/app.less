@@ -337,17 +337,19 @@ strong {
     padding: 5px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, .75);
-    p{
-        &[id|=tab] {
-            &:not(:first-child) {
-                padding-top: .3em;
-            }
-            &:not(:last-child) {
-                padding-bottom: .3em;
-                border-bottom: solid rgb(163, 163, 163) 1px;
-            } 
+    li{
+        &:not(:first-child) {
+            padding-top: .3em;
         }
+        &:not(:last-child) {
+            padding-bottom: .3em;
+            border-bottom: solid rgb(163, 163, 163) 1px;
+        } 
         padding-left: 2px;
+        a {
+            text-decoration: none;
+            color: black;
+        }
     }
     .highlighted{
         background-color: rgba(255, 255, 255, 1);

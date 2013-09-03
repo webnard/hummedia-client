@@ -1,5 +1,5 @@
 'use strict';
-function CollectionsCtrl($scope, Collection) {
+function CollectionsCtrl($scope, Collection, $routeParams, $location) {
         
     function loadPosterImage(collection, video){
         var image = document.createElement("img");
@@ -14,7 +14,7 @@ function CollectionsCtrl($scope, Collection) {
         collection.videos[video].currentImage = collection.videos[video]['ma:image'][0]['thumb'];
         setTimeout(function(){
             loadPosterImage(collection, video);
-        },1000);
+        },1);
     };
     
     $scope.collections = Collection.query(function(){
@@ -23,7 +23,9 @@ function CollectionsCtrl($scope, Collection) {
         }
     });
     $scope.$watch(function(){return $scope.collections.length;}, function(){
-        $scope.collection = $scope.collections[0];        
+        if(!$scope.collection) { // if we're not already focused on a collection
+            $scope.collection = $scope.collections[0];
+        }
         $scope.collections_data=[];
         
         for(var coll=0; coll<$scope.collections.length; coll++){
@@ -39,13 +41,22 @@ function CollectionsCtrl($scope, Collection) {
         }
     });
     
-    $scope.showVideos = function(pid){
-        for(var i=0; i<$scope.collections.length; i++){
-            if($scope.collections[i]['pid']===pid){
-                $scope.collection = $scope.collections[i];
+    function showVideos(pid){
+        $scope.collections.$then(function() {
+            for(var i=0; i<$scope.collections.length; i++){
+                if($scope.collections[i]['pid']===pid){
+                    $scope.collection = $scope.collections[i];
+                    break;
+                }
             }
-        }       
+        });
     };
+
+    $scope.$watch(function(){ return $location.search().id; }, function(val) {
+        if(val) {
+            showVideos(val);
+        }
+    });
 }
 // always inject this in so we can later compress this JavaScript
-CollectionsCtrl.$inject = ['$scope', 'Collection'];
+CollectionsCtrl.$inject = ['$scope', 'Collection', '$routeParams', '$location'];
