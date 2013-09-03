@@ -49,7 +49,7 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
             name = "Fall " + year;
         }else if(new_term==6){
             value = (year+1)*10 + 1;
-            name = "Wvalueer " + (year+1);
+            name = "Winter " + (year+1);
         }
         return {value: value, name: name};
     };
