@@ -11,7 +11,7 @@ HUMMEDIA_DIRECTIVES
      * 
      * ATTRIBUTES:
      *      arrayCast - the ngModel you want to have set as your array 
-     *      ngModel -- a bogus value to update when
+     *      ngModel -- a bogus value to update when we type in our field
      *  
      */
     .directive('arrayCast', ['$compile', function($compile) {
@@ -38,13 +38,15 @@ HUMMEDIA_DIRECTIVES
                         });
                         iElement.val(ar.join('\n'));
                     }
-                }
-            );
+            }, true);
 
             // we watch this ngModel value because otherwise digest isn't called when we update our element
             scope.$watch(iAttrs['ngModel'],
                 function updateModelValue(val) {
-                    var newArray = typeof val == "undefined" ? [""] : val.split('\n');
+                    if(typeof val == "undefined") {
+                        return;
+                    }
+                    var newArray = val.split('\n');
                     newArray = newArray.map(function(a) {
                             return {"@id": "", "name": a};
                         });
