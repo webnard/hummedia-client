@@ -24,6 +24,7 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location) {
         
         $scope.collections_data=[];
         
+        //If no id is specified then show the first collection
         if(!$location.search().id){
             showVideos($scope.collections[0]['pid']);
         }
@@ -49,6 +50,12 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location) {
                     $scope.collection = $scope.collections[i];
                     break;
                 }
+            }
+            //If the id is not in $scope.collections then display an error
+            if($scope.collection===undefined){
+                $scope.collection = {'dc:title':'Permission Denied',
+                                     'dc:description':'You do not have permission to view this collection.'
+                };
             }
         });
     };
