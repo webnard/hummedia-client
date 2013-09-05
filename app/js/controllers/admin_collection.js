@@ -29,15 +29,19 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         menubar: false
     };
     
+    var updateCollectionData = function(){
+        $scope.collection_data = Collection.get({identifier:$routeParams.id}, function getCoursesAsReadableStrings(){
+            $scope.collection_data.courses = Course.getReadableStringsFromArray($scope.collection_data['dc:relation']);
+        });    
+    };
+    
     //Watch Functions
     
     //Watch the route params and keep $scope.collection_data updated
     $scope.$watch(function(){return $routeParams.id;}, function(){
         $scope.id = $routeParams.id;
         if($scope.id){
-            $scope.collection_data = Collection.get({identifier:$routeParams.id}, function getCoursesAsReadableStrings(){
-                $scope.collection_data.courses = Course.getReadableStringsFromArray($scope.collection_data['dc:relation']);
-            });
+            updateCollectionData();
         }
     });
     
@@ -201,7 +205,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
          
         $scope.selected_videos = {};
                 
-        $scope.collection_data = Collection.get({identifier:$routeParams.id});
+        updateCollectionData();
         
         $scope.toggleModal('#modal-add-video');
         
