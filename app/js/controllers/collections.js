@@ -48,15 +48,12 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location) {
             for(var i=0; i<$scope.collections.length; i++){
                 if($scope.collections[i]['pid']===pid){
                     $scope.collection = $scope.collections[i];
-                    break;
+                    return;
                 }
             }
-            //If the id is not in $scope.collections then display an error
-            if($scope.collection===undefined){
-                $scope.collection = {'dc:title':'Permission Denied',
-                                     'dc:description':'You do not have permission to view this collection.'
-                };
-            }
+            $scope.collection = {'dc:title':'Unable to Access Course',
+                                 'dc:description':'Make sure the URL you are trying to reach is correct and that you are enrolled in this course'
+            };
         });
     };
 
