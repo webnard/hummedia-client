@@ -23,7 +23,10 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location) {
         }
         
         $scope.collections_data=[];
-        showVideos($scope.collections[0]['pid']);
+        
+        if(!$location.search().id){
+            showVideos($scope.collections[0]['pid']);
+        }
         
         for(var coll=0; coll<$scope.collections.length; coll++){
             (function(){

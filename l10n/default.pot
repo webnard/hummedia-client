@@ -13,6 +13,9 @@ msgstr ""
 msgid "Annotate"
 msgstr ""
 
+msgid "Attached Collections"
+msgstr ""
+
 msgid "Basic"
 msgstr ""
 
@@ -49,6 +52,9 @@ msgstr ""
 msgid "Go"
 msgstr ""
 
+msgid "Ingest Videos"
+msgstr ""
+
 msgid "Invalid Request. Make sure the address you are trying to reach is correct."
 msgstr ""
 
@@ -70,6 +76,9 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
+msgid "Media Files"
+msgstr ""
+
 msgid "Media for My Courses"
 msgstr ""
 
@@ -80,6 +89,9 @@ msgid "My Collections"
 msgstr ""
 
 msgid "None"
+msgstr ""
+
+msgid "Owner's NetID"
 msgstr ""
 
 msgid "Preferred Language:"
