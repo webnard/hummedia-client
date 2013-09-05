@@ -8,16 +8,16 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
         var value;
         var name;
         
-        if(month>=1 && month<=4){
+        if(month>=0 && month<=3){
             value = year*10+1;
             name = "Winter " + year;
-        }else if(month>=5 && month<=6){
+        }else if(month>=4 && month<=5){
             value = year*10+3;
             name = "Spring " + year;
-        }else if(month>=7 && month<=8){
+        }else if(month>=6 && month<=7){
             value = year*10+4;
             name = "Summer " + year;
-        }else if(month>=9 && month<=12){
+        }else if(month>=8 && month<=11){
             value = year*10+5;
             name = "Fall " + year;
         }
