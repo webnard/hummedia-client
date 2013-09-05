@@ -50,4 +50,4 @@ function CollectionsCtrl($scope, Collection) {
     };
 }
 // always inject this in so we can later compress this JavaScript
-CollectionsCtrl.$inject = ['$scope', 'Collection'];
+CollectionsCtrl.$inject = ['$scope', 'Collection', '$routeParams', '$location'];
