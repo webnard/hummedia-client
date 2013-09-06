@@ -16,8 +16,8 @@ angular.module('hummedia.services').
             });
         };
 
-        resource.ingest = function(filepath, pid) {
-            return $http.post(config.apiBase + '/batch/video/ingest',[{filepath: filepath, pid: pid}]);
+        resource.ingest = function(filepath, pid, uniqueID) {
+            return $http.post(config.apiBase + '/batch/video/ingest',[{filepath: filepath, pid: pid, id: uniqueID}]);
         }
 
         return resource;
