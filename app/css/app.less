@@ -772,6 +772,10 @@ footer{
 	padding:6px 24px;
 	text-decoration:none;
 	text-shadow:1px 1px 0px #ffffff;
+    &[disabled] {
+        color: gray;
+        cursor: default;
+    }
 }.bwbuttondark:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #b8b8b8), color-stop(1, #ededed) );
 	background:-moz-linear-gradient( center top, #b8b8b8 5%, #ededed 100% );
