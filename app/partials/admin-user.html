@@ -2,8 +2,11 @@
     <div id="listwrapper">
         <div id="list_scrolling_block">
             <h2>{{"Users" | tr}}</h2>
+            <div class="filter">
+                Filter: <input type="search" ng-model="nameQuery">
+            </div>
             <ul>
-                <li class="selectable" data-ng-repeat="u in users" data-ng-class="{selected: u._id == user._id}" data-ng-click="setUser(u)">{{u.fullname}}</li>
+                <li class="selectable" data-ng-repeat="u in users | filter: nameFilter" data-ng-class="{selected: u._id == user._id}" data-ng-click="setUser(u)">{{u.fullname}}</li>
             </ul>
         <div>
     </div>

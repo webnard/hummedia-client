@@ -57,5 +57,9 @@ function AdminUserCtrl($scope, account, language, $routeParams, $location) {
             u.isSaving = false;
         });
     }
+
+    $scope.nameFilter = function(user) {
+        return (user.firstname + " " + user.lastname).indexOf($scope.nameQuery) !== -1;
+    };
 };
 AdminUserCtrl.$inject = ['$scope','Account', 'language', '$routeParams', '$location'];
