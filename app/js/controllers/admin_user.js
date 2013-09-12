@@ -57,5 +57,16 @@ function AdminUserCtrl($scope, account, language, $routeParams, $location) {
             u.isSaving = false;
         });
     }
+
+    $scope.nameFilter = function(user) {
+        if([undefined, null, ""].indexOf($scope.nameQuery) !== -1) {
+            return true;
+        }
+        var query = $scope.nameQuery.toLowerCase();
+
+        return user.fullname.toLowerCase().indexOf(query) !== -1
+               ||
+               (user.lastname + ", " + user.firstname).toLowerCase().indexOf(query) !== -1
+    };
 };
 AdminUserCtrl.$inject = ['$scope','Account', 'language', '$routeParams', '$location'];
