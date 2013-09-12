@@ -22,9 +22,10 @@
                 <div resource-form="video" resource-model="video"></div>
             </div>
             <div class="control-buttons">
-                <button id="admin-video-cancel" data-ng-readonly="video.isSaving" data-ng-click="cancel()" class="icon-cancel"> {{"Cancel" | tr}}</button>
+                <button id="admin-video-cancel" data-ng-readonly="video.isSaving" data-ng-click="cancel()"> {{"Cancel" | tr}}</button>
                 <button id="admin-video-delete" data-ng-readonly="video.isSaving" data-ng-click="delete(video)" class="icon-trash"> {{"Delete" | tr}}</button>
                 <button id="admin-video-save" data-ng-readonly="video.isSaving" data-ng-click="update()"class="icon-save"> <span data-ng-switch="video.isSaving"><span data-ng-switch-default>{{"Save Changes" | tr}}</span><span data-ng-switch-when="true">{{"Saving…" | tr}}</span></span></button>
+                <button><i class="icon-play"></i> Preview Video</button>
             </div>
         </form>
     </div>
