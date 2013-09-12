@@ -38,7 +38,7 @@
             <a id="navtitle" href="#" analytics="{category: 'nav', label: 'logo'}">Humanities Online Media</a>
             <a data-ng-click="user.prompt(true)" analytics="{category: 'nav', label: 'login'}" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>
             <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired" analytics="{category: 'nav', label: 'link BYU NetID'}">{{"Link BYU NetID" | tr}}</a>
-            <a data-ng-show="user.exists" analytics="{category: 'nav', label: 'user\'s name, has no effect'}">{{user.data.fullname}}</a>
+            <span data-ng-show="user.exists" analytics="{category: 'nav', label: 'user\'s name, has no effect'}">{{user.data.fullname}}</span>
             <a data-ng-show="user.canCreate" ng-click="toggleAdmin()" analytics="{category: 'nav', label: 'admin'}">{{"Admin" | tr}}</a>
             <a href="#/collection" analytics="{category: 'nav', label: 'courses'}">{{"Courses" | tr}}</a>
             <a href="#/search" id="nav-search" analytics="{category: 'nav', label: 'search'}">{{"Search" | tr}}</a>
