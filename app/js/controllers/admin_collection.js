@@ -121,6 +121,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
             params['dc:description'] = newdescription;
             params['authorized'] = $scope.collection_data['authorized'];
             params['dc:creator'] = $scope.collection_data['dc:creator'];
+            params['dc:rights'] = $scope.collection_data['dc:rights'];
         
         Collection.update({"identifier":pid}, params);
         for(var i=0; i<$scope.collections.length; i++) {
@@ -239,6 +240,51 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
             $scope.collection_data.courses = Course.getReadableStringsFromArray($scope.collection_data['dc:relation']);
         }        
     };
+
+    $scope.revokeRead = function(netID) {
+        var read = $scope.collection_data['dc:rights']['read'],
+            idx = read.indexOf(netID);
+
+        if(idx === -1) {
+            return;
+        }
+
+        read.splice(idx, 1);
+    }
+    
+    $scope.grantRead = function(netID) {
+        if(!netID) {
+            return;
+        }
+        var read = $scope.collection_data['dc:rights']['read'];
+        if(read.indexOf(netID) !== -1) {
+            return;
+        }
+        read.push(netID);
+    };
+    
+    $scope.revokeWrite = function(netID) {
+        var write = $scope.collection_data['dc:rights']['write'],
+            idx = write.indexOf(netID);
+
+        if(idx === -1) {
+            return;
+        }
+
+        write.splice(idx, 1);
+    }
+
+    $scope.grantWrite = function(netID) {
+        if(!netID) {
+            return;
+        }
+        var write = $scope.collection_data['dc:rights']['write'];
+        if(write.indexOf(netID) !== -1) {
+            return;
+        }
+        write.push(netID);
+        $scope.grantRead(netID);
+    }
     
     $scope.addCourse = function(){
         //Validate input
@@ -272,6 +318,7 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         
         //Close out of the modal
         $scope.toggleModal('#modal-add-course');
+
     };
 }
 // always inject this in so we can later compress this JavaScript
