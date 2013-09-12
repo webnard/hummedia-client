@@ -1,7 +1,11 @@
 function AdminVideoCtrl($scope, Video, language, $routeParams, $location, Collection) {
     "use strict";
     
-    $scope.videos =  Video.query();
+    $scope.videos =  Video.query(function(){
+        if(!$scope.videos.length){
+            $scope.no_videos = true;
+        }  
+    });
     $scope.video = null;
     $scope.title_filter = "";
     $scope.selected_collections = {};

@@ -5,7 +5,8 @@
             <div class="filter">
                 Filter: <input type="search" ng-model="title_filter">
             </div>
-            <div data-ng-show="!videos.length" id="loading_message">Loading Videos...</div>
+            <div data-ng-show="!videos.length && !no_videos" class="loading_message">Loading Videos...</div>
+            <div data-ng-show="no_videos" class="loading_message">No Videos</div>
             <ul>
                 <li class="selectable" data-ng-repeat="v in videos | filter: {'ma:title': title_filter}" data-ng-class="{selected: v.pid == video.pid}" data-ng-click="setVideo(v)">{{v["ma:title"]}}</li>
             </ul>
