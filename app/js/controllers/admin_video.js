@@ -149,5 +149,11 @@ function AdminVideoCtrl($scope, Video, language, $routeParams, $location, Collec
 
         $location.path('/video/annotate/' + $scope.video.pid).search({collection: collection_id});
     }
+    
+    $scope.previewVideo = function(){
+        if(confirm('Are you sure you want to preview this video?  All your unsaved changes will be lost.')){
+            $location.path('video/' + $scope.video.pid);
+        }
+    };
 };
 AdminVideoCtrl.$inject = ['$scope','Video', 'language', '$routeParams', '$location', 'Collection'];
