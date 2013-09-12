@@ -120,6 +120,9 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
     };
     
     var getReadableStringsFromArray = function(course_strings){
+        if(course_strings==null){
+            return [];
+        }
         var readable_strings = [];
         for(var i=0; i<course_strings.length; i++){
             var readable_string = courseStringToReadableString(course_strings[i]);
