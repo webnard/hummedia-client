@@ -13,7 +13,6 @@
     </div>
     
     <div data-ng-show="inCreateOrEditMode()" id="admincollection" class="admin-editor">
-        <form>
         <h2>{{"Collection Info" | tr}}</h2>
         <hr>
             <p>
@@ -30,6 +29,32 @@
             </p>
             <div style='display:none; text-align: left;' id='editable-description-wrapper'>
                     <textarea ui-tinymce="tinymceOptions" ng-model="collection_data['dc:description']" class="tinymce-textarea">{{collection_data['dc:description']}}</textarea>
+            </div>
+            <hr>
+            <div class="access-list-container">
+                {{"Read Access"}}
+                <table class='access-list'>
+                    <tr data-ng-repeat="netid in collection_data['dc:rights']['read']">
+                        <td class="netid">{{netid}}</td>
+                        <td class="button"><button ng-click="revokeRead(netid)">Revoke</button></td>
+                    </tr>
+                </table>
+                <form>
+                    <input ng-model="addReader" placeholder="Net ID" type="text"> <input type="submit" class="icon-user" ng-click="grantRead(addReader); addReader=''" value="Grant" />
+                </form>
+            </div>
+            <hr>
+            <div class="access-list-container">
+                {{"Write Access"}}
+                <table class='access-list'>
+                    <tr data-ng-repeat="netid in collection_data['dc:rights']['write']">
+                        <td class="netid">{{netid}}</td>
+                        <td class="button"><button ng-click="revokeWrite(netid)">Revoke</button></td>
+                    </tr>
+                </table>
+                <form>
+                    <input ng-model="addWriter" placeholder="Net ID" type="text"> <input type="submit" class="icon-user" ng-click="grantWrite(addWriter); addWriter=''" value="Grant" />
+                </form>
             </div>
         <hr>
         <div data-ng-hide="createMode">
@@ -53,11 +78,10 @@
         <input data-ng-model="collection_data['authorized']" type='checkbox'> Authorize Collection<br />
         <hr>
         </div>
-            <p>    
-                <button data-ng-hide="createMode" id="deletebutton" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> {{"Delete" | tr}}</button>
-                <button type='submit' id="savebutton" data-ng-click="saveChanges()"><i class="icon-save"></i> {{"Save Changes" | tr}}</button>
-            </p>
-        </form>
+        <p>    
+            <button data-ng-hide="createMode" id="deletebutton" data-ng-click="deleteCollection(collection_data.pid)"><i class="icon-trash"></i> {{"Delete" | tr}}</button>
+            <button type='submit' id="savebutton" data-ng-click="saveChanges()"><i class="icon-save"></i> {{"Save Changes" | tr}}</button>
+        </p>
     </div>
     
     <span data-ng-hide="createMode">
