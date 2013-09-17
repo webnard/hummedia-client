@@ -17,12 +17,13 @@
 <section class="admin" data-ng-show="!!video">
     <div class="admin-editor">
         <h2>{{"Modify" | tr}} {{video["ma:title"]}}</h2>
+        <button data-ng-click="previewVideo()"><i class="icon-play"></i> Preview Video</button>
         <form>
             <div class="form-table">
                 <div resource-form="video" resource-model="video"></div>
             </div>
             <div class="control-buttons">
-                <button id="admin-video-cancel" data-ng-readonly="video.isSaving" data-ng-click="cancel()" class="icon-cancel"> {{"Cancel" | tr}}</button>
+                <button id="admin-video-cancel" data-ng-readonly="video.isSaving" data-ng-click="cancel()"> {{"Cancel" | tr}}</button>
                 <button id="admin-video-delete" data-ng-readonly="video.isSaving" data-ng-click="delete(video)" class="icon-trash"> {{"Delete" | tr}}</button>
                 <button id="admin-video-save" data-ng-readonly="video.isSaving" data-ng-click="update()"class="icon-save"> <span data-ng-switch="video.isSaving"><span data-ng-switch-default>{{"Save Changes" | tr}}</span><span data-ng-switch-when="true">{{"Saving…" | tr}}</span></span></button>
             </div>
