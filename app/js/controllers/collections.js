@@ -36,8 +36,10 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location) {
                 var item = Collection.get({identifier:pid}, function(){
                     for(var vid=0; vid<item.videos.length; vid++){
                         setCurrentImage(item, vid);
-                    }      
+                    }; 
+                    item.isLoading = false;
                 });
+                item.isLoading = true;
                 $scope['collections_data'][pid] = item;
             })();
         }
