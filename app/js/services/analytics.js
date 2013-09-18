@@ -5,8 +5,10 @@ window.HUMMEDIA_SERVICES
      *  event(category, action, opt_label, opt_value, opt_noninteraction)
      *  See https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide#SettingUpEventTracking
      *  for all parameters.
-     *  
-     *  Some credit is due to Harlan Dobrev for this
+     */  
+    /**
+     *  @license
+     *  Some credit is due to Harlan Dobrev for the Google Analytics integration with Angular
      *  http://stackoverflow.com/a/12262820/390977
      */
     .service('analytics', ['appConfig', '$rootScope', '$location', function(appConfig, $rootScope, $location){
