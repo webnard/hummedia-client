@@ -28,8 +28,7 @@ var output_dir = __dirname + "/../production/"
         '/js/resources/',
         '/lib/popcorn-js/',
         '/lib/angular/',
-        '/lib/angular-ui/',
-        '/lib/hummedia-popcorn-plugins/'
+        '/lib/angular-ui/'
     ],
     htmlmin_opts = {
         collapseWhitespace: true,
