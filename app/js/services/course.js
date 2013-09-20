@@ -2,7 +2,7 @@
  * 
  */
 
-HUMMEDIA_SERVICES.factory('Course', [function() {
+HUMMEDIA_SERVICES.factory('Course', ['$q', '$http', 'appConfig', function($q, $http, appConfig) {
     //Semester Functions
     var getSemesterObject = function(month, year){
         var value;
@@ -70,15 +70,21 @@ HUMMEDIA_SERVICES.factory('Course', [function() {
     };
     
     //Course Department Functions
-    
-    var getCourseDepartments = function(){
-        return ['AFRIK','AMST','ARAB','ASIAN','ASL','BULGN','CANT','CHIN','CLSCS',
-                'CMLIT','CZECH','DANSH','DIGHT','DUTCH','ELANG','ENGL','ESL','FINN',
-                'FLANG','FREN','GERM','GREEK','HCOLL','HEB','IAS','ICLND','IHUM',
-                'ITAL','JAPAN','KOREA','LATIN','LING','LT AM','MESA','NE LG','NORWE',
-                'PHIL','POLSH','PORT','ROM','RUSS','SCAND','SLAT','SPAN','SWED','TESOL',
-                'WELSH','WS','WRTG'];
-    };
+    //lazily loads the department list from the server
+    var getCourseDepartments = (function(){
+        var departments = $q.defer(),
+            checked = false;
+
+        return function() {
+            if(!checked) {
+                checked = true;
+                $http.get(appConfig.apiBase + 'courseDepartments').success(function(data) {
+                    departments.resolve(data);   
+                });
+            }
+            return departments.promise;
+        }
+    })();
     
     //Conversion functions
     
