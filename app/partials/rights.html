@@ -1,0 +1,27 @@
+<div class="rights-allocator">
+    <div class="access-list-container">
+        {{"Read Access"}}
+        <table class='access-list'>
+            <tr data-ng-repeat="netid in ngModel['read']">
+                <td class="netid">{{netid}}</td>
+                <td class="button"><button ng-click="revokeRead(netid)">Revoke</button></td>
+            </tr>
+        </table>
+        <form>
+            <input placeholder="Net ID" ng-model="reader" type="text"> <input type="submit" class="icon-user" ng-click="grantRead(reader); reader=''" value="Grant" />
+        </form>
+    </div>
+    <hr>
+    <div class="access-list-container">
+        {{"Write Access"}}
+        <table class='access-list'>
+            <tr data-ng-repeat="netid in ngModel['write']">
+                <td class="netid">{{netid}}</td>
+                <td class="button"><button ng-click="revokeWrite(netid)">Revoke</button></td>
+            </tr>
+        </table>
+        <form>
+            <input ng-model="writer" placeholder="Net ID" type="text"> <input type="submit" class="icon-user" ng-click="grantWrite(writer); writer=''" value="Grant" />
+        </form>
+    </div>
+</div>
