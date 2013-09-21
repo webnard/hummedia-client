@@ -11,60 +11,42 @@ HUMMEDIA_DIRECTIVES
     // IN THE PARTIAL:
     //  <div rights ng-model="mymodel"></div>
     .directive('rights', [function() {
-        var template = null;
         return {
             restrict: 'A',
             templateUrl: 'partials/rights.html',
             replace: true,
             require: '^ngModel',
             scope: {
-                ngModel: '=',
+                ngModel: '='
             },
             link: function(scope, iElement, iAttrs, controller) {
-                scope.revokeRead = function(netID) {
-                    var read = scope.ngModel['read'],
-                        idx = read.indexOf(netID);
+
+                scope.revoke = function(permission, netID) {
+                    var arr = scope.ngModel[permission],
+                        idx = arr.indexOf(netID);
 
                     if(idx === -1) {
                         return;
                     }
 
-                    read.splice(idx, 1);
-                }
-                
-                scope.grantRead = function(netID) {
-                    if(!netID) {
-                        return;
-                    }
-                    var read = scope.ngModel['read'];
-                    if(read.indexOf(netID) !== -1) {
-                        return;
-                    }
-                    read.push(netID);
+                    arr.splice(idx, 1);
                 };
                 
-                scope.revokeWrite = function(netID) {
-                    var write = scope.ngModel['write'],
-                        idx = write.indexOf(netID);
-
-                    if(idx === -1) {
-                        return;
-                    }
-
-                    write.splice(idx, 1);
-                }
-
-                scope.grantWrite = function(netID) {
+                scope.grant = function(permission, netID) {
                     if(!netID) {
                         return;
                     }
-                    var write = scope.ngModel['write'];
-                    if(write.indexOf(netID) !== -1) {
+                    var arr = scope.ngModel[permission];
+                    
+                    if(arr.indexOf(netID) !== -1) {
                         return;
                     }
-                    write.push(netID);
-                    scope.grantRead(netID);
-                }
+                    arr.push(netID);
+
+                    if(permission == 'write') {
+                        scope.grant('read', netID);
+                    }
+                };
             }
         }
     }]);
