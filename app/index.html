@@ -15,6 +15,7 @@
   <link rel="stylesheet/less" href="css/video.less"/>
   <link rel="stylesheet/less" href="css/app.less"/>
   <link rel="stylesheet/less" href="css/font-awesome.less"/>
+  <script src="CONFIG.js" data-exclude-compress></script>
 </head>
 <body>
     <!--[if lte IE 8]>
@@ -28,6 +29,17 @@
          e.setAttribute("src", "http://browser-update.org/update.js"); 
          document.body.appendChild(e); 
         };
+    </script>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', HUMMEDIA_GLOBALS.googleAnalyticsKey]);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
     </script>
     <![endif]-->
     <div id='error-modal' api-error-modal blur='#background, #view'></div>
@@ -114,7 +126,6 @@
   <script src="lib/hummedia-popcorn-plugins/imagePlugin/popcorn.imagePlugin.js"></script>  
 
   <!-- APP FILES -->
-  <script src="CONFIG.js" data-exclude-compress></script>
   <script src="js/config-helper.js"></script>
   <script src="js/app.js"></script>
   
