@@ -1,5 +1,5 @@
 'use strict';
-function CollectionsCtrl($scope, Collection, $routeParams, $location) {
+function CollectionsCtrl($scope, Collection, $routeParams, $location, user) {
         
     function loadPosterImage(collection, video){
         var image = document.createElement("img");
@@ -64,6 +64,10 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location) {
             showVideos(val);
         }
     });
+
+    $scope.canEdit = function(collection) {
+        return collection['dc:rights']['write'].indexOf(user.data.username) !== -1;
+    }
 }
 // always inject this in so we can later compress this JavaScript
-CollectionsCtrl.$inject = ['$scope', 'Collection', '$routeParams', '$location'];
+CollectionsCtrl.$inject = ['$scope', 'Collection', '$routeParams', '$location', 'user'];

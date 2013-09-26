@@ -16,6 +16,23 @@
     opacity: 1;
 }
 
+/*************
+ * Tooltips
+*************/
+[data-tooltip]:hover:after {
+    content: attr(data-tooltip);
+    border-radius: 0px 5px 5px 0px;
+    position: absolute;
+    background-color: rgba(0,0,0,.9);
+    color: white;
+    text-shadow: none;
+    font-size: 10px;
+    padding: 5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px 5px 1px black;
+}
+
 /*************************
  * "Functions"
 **************************/
@@ -346,17 +363,25 @@ strong {
     border-radius: 5px;
     background-color: rgba(255, 255, 255, .75);
     li{
-        &:not(:first-child) a {
+        &:not(:first-child) {
             padding-top: .3em;
         }
-        &:not(:last-child) a {
+        &:not(:last-child) {
             padding-bottom: .3em;
             border-bottom: solid rgb(163, 163, 163) 1px;
         } 
         a {
+            display: inline;
             padding-left: 2px;
             text-decoration: none;
             color: black;
+        }
+        a.edit-button i {
+            color: rgb(100, 100, 100);
+            &:hover {
+                color: rgb(0,0,0);
+                text-shadow: 1px 1px 1px black;
+            }
         }
     }
     .highlighted{

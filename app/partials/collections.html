@@ -1,8 +1,9 @@
 <div id="collections_content">
 
 <ul id="tabs" data-ng-show="collections.length">
-    <li data-ng-repeat="tabcollection in collections">
-        <a ng-href="#/collection?id={{tabcollection['pid']}}" data-ng-class="{highlighted: collection.pid==tabcollection.pid}" id="tab-{{tabcollection['pid']}}">{{tabcollection['dc:title']}}</a>
+    <li data-ng-repeat="tabcollection in collections" data-ng-class="{highlighted: collection.pid==tabcollection.pid}">
+        <a ng-show='canEdit(tabcollection)' class='edit-button' ng-href="#/admin/collection?id={{tabcollection.pid}}"><i data-tooltip="Edit this collection" class="icon-edit"></i></a>
+        <a ng-href="#/collection?id={{tabcollection['pid']}}" id="tab-{{tabcollection['pid']}}">{{tabcollection['dc:title']}}</a>
     </li>
 </ul>    
 <div id="collections_wrapper">
@@ -24,6 +25,6 @@
             <p style="font-size:.8em; color: rgba(0,0,0,.75);">{{video['ma:date']}} [{{video['ma:hasLanguage'][0] | language}}]</p>
         </div>
     </div>
-</div>        
+</div> 
 </div>
 </div>
