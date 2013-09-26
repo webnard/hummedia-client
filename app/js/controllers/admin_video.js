@@ -200,5 +200,9 @@ function AdminVideoCtrl($scope, Video, language, $routeParams, $location, Collec
             $location.path('video/' + $scope.video.pid);
         }
     };
+
+    $scope.orderTitle = function(video) {
+        return video['ma:title'];
+    };
 };
 AdminVideoCtrl.$inject = ['$scope','Video', 'language', '$routeParams', '$location', 'Collection'];
