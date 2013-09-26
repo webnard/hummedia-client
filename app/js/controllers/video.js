@@ -128,6 +128,18 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
             /** @TODO: Allow for multiple subtitles **/
             var url = resource[0]['@id'];
             var type = resource[0]['type'];
+            $scope.has_subtitles = true;
+            $scope.subtitlesEnabled = true;
+
+            $scope.$watch('subtitlesEnabled', function(val) {
+                if(val) {
+                    pop.enable('subtitle');
+                }
+                else
+                {
+                    pop.disable('subtitle');
+                }
+            });
 
             switch(type) {
                 case 'vtt':
