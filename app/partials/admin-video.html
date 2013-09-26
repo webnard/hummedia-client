@@ -23,31 +23,7 @@
                 <div resource-form="video" resource-model="video"></div>
             </div>
             <hr>
-            <div class="access-list-container">
-                {{"Read Access"}}
-                <table class='access-list'>
-                    <tr data-ng-repeat="netid in video['dc:rights']['read']">
-                        <td class="netid">{{netid}}</td>
-                        <td class="button"><button ng-click="revokeRead(netid)">Revoke</button></td>
-                    </tr>
-                </table>
-                <form>
-                    <input ng-model="addReader" placeholder="Net ID" type="text"> <input type="submit" class="icon-user" ng-click="grantRead(addReader); addReader=''" value="Grant" />
-                </form>
-            </div>
-            <hr>
-            <div class="access-list-container">
-                {{"Write Access"}}
-                <table class='access-list'>
-                    <tr data-ng-repeat="netid in video['dc:rights']['write']">
-                        <td class="netid">{{netid}}</td>
-                        <td class="button"><button ng-click="revokeWrite(netid)">Revoke</button></td>
-                    </tr>
-                </table>
-                <form>
-                    <input ng-model="addWriter" placeholder="Net ID" type="text"> <input type="submit" class="icon-user" ng-click="grantWrite(addWriter); addWriter=''" value="Grant" />
-                </form>
-            </div>
+            <div data-rights data-ng-model="video['dc:rights']"></div>
             <div class="control-buttons">
                 <button id="admin-video-cancel" data-ng-readonly="video.isSaving" data-ng-click="cancel()"> {{"Cancel" | tr}}</button>
                 <button id="admin-video-delete" data-ng-readonly="video.isSaving" data-ng-click="delete(video)" class="icon-trash"> {{"Delete" | tr}}</button>

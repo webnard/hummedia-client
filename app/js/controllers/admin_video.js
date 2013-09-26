@@ -141,51 +141,6 @@ function AdminVideoCtrl($scope, Video, language, $routeParams, $location, Collec
         Video.update({identifier: $scope.video.pid, "ma:isMemberOf": selected});
         $scope.selected_collections = {}; // reset
     }
-    
-    $scope.revokeRead = function(netID) {
-        var read = $scope.video['dc:rights']['read'],
-            idx = read.indexOf(netID);
-
-        if(idx === -1) {
-            return;
-        }
-
-        read.splice(idx, 1);
-    }
-    
-    $scope.grantRead = function(netID) {
-        if(!netID) {
-            return;
-        }
-        var read = $scope.video['dc:rights']['read'];
-        if(read.indexOf(netID) !== -1) {
-            return;
-        }
-        read.push(netID);
-    };
-    
-    $scope.revokeWrite = function(netID) {
-        var write = $scope.video['dc:rights']['write'],
-            idx = write.indexOf(netID);
-
-        if(idx === -1) {
-            return;
-        }
-
-        write.splice(idx, 1);
-    }
-
-    $scope.grantWrite = function(netID) {
-        if(!netID) {
-            return;
-        }
-        var write = $scope.video['dc:rights']['write'];
-        if(write.indexOf(netID) !== -1) {
-            return;
-        }
-        write.push(netID);
-        $scope.grantRead(netID);
-    }
 
     $scope.annotate = function(collection_id) {
         if(!$scope.video) {

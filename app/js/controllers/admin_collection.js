@@ -241,51 +241,6 @@ function AdminCollectionCtrl($scope, Collection, Video, $routeParams, $location,
         }        
     };
 
-    $scope.revokeRead = function(netID) {
-        var read = $scope.collection_data['dc:rights']['read'],
-            idx = read.indexOf(netID);
-
-        if(idx === -1) {
-            return;
-        }
-
-        read.splice(idx, 1);
-    }
-    
-    $scope.grantRead = function(netID) {
-        if(!netID) {
-            return;
-        }
-        var read = $scope.collection_data['dc:rights']['read'];
-        if(read.indexOf(netID) !== -1) {
-            return;
-        }
-        read.push(netID);
-    };
-    
-    $scope.revokeWrite = function(netID) {
-        var write = $scope.collection_data['dc:rights']['write'],
-            idx = write.indexOf(netID);
-
-        if(idx === -1) {
-            return;
-        }
-
-        write.splice(idx, 1);
-    }
-
-    $scope.grantWrite = function(netID) {
-        if(!netID) {
-            return;
-        }
-        var write = $scope.collection_data['dc:rights']['write'];
-        if(write.indexOf(netID) !== -1) {
-            return;
-        }
-        write.push(netID);
-        $scope.grantRead(netID);
-    }
-    
     $scope.addCourse = function(){
         //Validate input
         if($scope.course_department==undefined){
