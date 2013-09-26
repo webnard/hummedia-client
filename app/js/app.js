@@ -15,7 +15,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
             ANNOTATION_MODE: function() { return true; }
         }
     });    
-    $routeProvider.when('/admin/collection', {title: "Hummedia | Collections", admin: true, templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
+    $routeProvider.when('/admin/collection', {title: "Hummedia | Collections", templateUrl: 'partials/admin-collection.html', controller: AdminCollectionCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/user', {title: "Hummedia | Users", admin: true, templateUrl: 'partials/admin-user.html', controller: AdminUserCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/video', {title: "Hummedia | Videos", admin: true, templateUrl: 'partials/admin-video.html', controller: AdminVideoCtrl, reloadOnSearch: false});
     $routeProvider.when('/admin/video/ingest', {title: "Hummedia | Ingest Video", admin: true, templateUrl: 'partials/admin-ingest.html', controller: AdminIngestCtrl, reloadOnSearch: false});
