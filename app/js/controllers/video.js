@@ -308,10 +308,12 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         annotations_enabled = !annotations_enabled;
     };
     
-    $scope.$on('$locationChangeStart', function disableAllAnnotations() {
-        $scope.annotations.forEach(function(a) {
-            disableAnnotation(a);
-        });
+    $scope.$on('$locationChangeStart', function disableAllAnnotations() {        
+        if($scope.annotations instanceof Array) {                
+            $scope.annotations.forEach(function(a) {
+                disableAnnotation(a);
+            });        
+        }
     });
     
     $scope.toggleDescription = function() {
