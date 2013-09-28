@@ -121,7 +121,22 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
      * Initializes page for viewing video
      */
     function viewer_init() {
-        pop = Popcorn.smart("video", $scope.video.url);
+        pop = Popcorn.smart("video", $scope.video.url, {
+            frameAnimation: true
+        });
+
+        // Unless we pause the movie when the page loses focus, annotations
+        // will not continue to be used even though the movie will play in
+        // the background
+        function pauseVideo() {
+            if(pop) {
+                pop.pause();
+            }
+        };
+        $(window).on('blur', pauseVideo);
+        $scope.$on('$locationChangeStart', function disablePauseOnBlur() {
+            $(window).off('blur', pauseVideo);
+        });
         
         var resource = $scope.video['ma:hasRelatedResource'];
         if(resource && resource.length) {
