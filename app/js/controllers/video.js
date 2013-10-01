@@ -128,14 +128,9 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         // Unless we pause the movie when the page loses focus, annotations
         // will not continue to be used even though the movie will play in
         // the background
-        function pauseVideo() {
-            if(pop) {
-                pop.pause();
-            }
-        };
         $(window).on('blur', pauseVideo);
         $scope.$on('$locationChangeStart', function disablePauseOnBlur() {
-            $(window).off('blur', pauseVideo);
+            $(window).off('blur', pop.pause);
         });
         
         var resource = $scope.video['ma:hasRelatedResource'];
