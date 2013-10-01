@@ -67,7 +67,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
             $scope.annotations = Annotation.query(params, function(){
                 var annotation_id = null;
                 for(var i = 0; i<$scope.annotations.length; i++) {
-                    // @TODO: ought to just be on $scope.annotations[i].pid
+                    // @TODO: the API could probably return something easier to access
                     var id = $scope.annotations[i].media[0].tracks[0].id;
                     if(id != required_annotation) {
                         annotation_id = id;
@@ -79,7 +79,7 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         }
         else
         {
-            // there is only one required annotation; load it
+            // there are no predefined annotations, aside from a set of required annotations
             $scope.annotations = Annotation.get({identifier: required_annotation}, function(){
                 butter_with_plugins(null, required_annotation)
             });
@@ -121,7 +121,22 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
      * Initializes page for viewing video
      */
     function viewer_init() {
-        pop = Popcorn.smart("video", $scope.video.url);
+        pop = Popcorn.smart("video", $scope.video.url, {
+            frameAnimation: true
+        });
+
+        // Unless we pause the movie when the page loses focus, annotations
+        // will not continue to be used even though the movie will play in
+        // the background
+        function pauseVideo() {
+            if(pop) {
+                pop.pause();
+            }
+        };
+        $(window).on('blur', pauseVideo);
+        $scope.$on('$locationChangeStart', function disablePauseOnBlur() {
+            $(window).off('blur', pauseVideo);
+        });
         
         var resource = $scope.video['ma:hasRelatedResource'];
         if(resource && resource.length) {
@@ -241,6 +256,10 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         if(isNaN(annotation.popcornOptions.end) || annotation.popcornOptions.start >= annotation.popcornOptions.end) {
             annotation.popcornOptions.end = annotation.popcornOptions.start + 1;
         }
+        
+        //Add some slush time to annotations
+        annotation.popcornOptions.start -= .2;
+        
     }
     
     /**
