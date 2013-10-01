@@ -46,13 +46,18 @@ function SiteCtrl($scope, $http, appConfig) {
     '366959006', // Eiffel Tower ground-up shot
     '1171187321', // some river valley place
     '259669867', // fall leaves
-    '8580742715', // boring seascape (?)
-    '9270932324', // boring seascape (?)
-    '2094464365', // boring seascape (?)
-    '333248753', // boring seascape (?)
-    '3266055425', // boring seascape (?)
-    '6811476562', // boring seascape (?)
-    '994551622' // boring seascape (?)
+    '8580742715', // blossoming tree branch
+    '9270932324', // seagulls at the pier
+    '2094464365', // dog running in from ocean
+    '333248753', // frosty-looking field
+    '3266055425', // cottage garden
+    '6811476562', // snowy, New-England-looking suburb
+    '994551622', // ocean cityscape
+    '5484698286', // Lake Titicaca
+    '9697199115', // Austrian mountains
+    '10032796135', // Big horn sheep
+    '3334136414', // Rabbit islands
+    '10040023903' // Tahoe sunrise
     ];
 
     //var photo_ids = ['7608871682'];
