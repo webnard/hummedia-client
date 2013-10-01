@@ -256,6 +256,10 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         if(isNaN(annotation.popcornOptions.end) || annotation.popcornOptions.start >= annotation.popcornOptions.end) {
             annotation.popcornOptions.end = annotation.popcornOptions.start + 1;
         }
+        
+        //Add some slush time to annotations
+        annotation.popcornOptions.start -= .2;
+        
     }
     
     /**

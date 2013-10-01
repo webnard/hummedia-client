@@ -13,6 +13,9 @@ msgstr ""
 msgid "Annotate"
 msgstr ""
 
+msgid "Annotations"
+msgstr ""
+
 msgid "Attached Collections"
 msgstr ""
 
@@ -43,6 +46,9 @@ msgstr ""
 msgid "Email:"
 msgstr ""
 
+msgid "Filter:"
+msgstr ""
+
 msgid "First Name:"
 msgstr ""
 
@@ -70,6 +76,9 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
+msgid "Loading Videos..."
+msgstr ""
+
 msgid "Login"
 msgstr ""
 
@@ -89,6 +98,9 @@ msgid "My Collections"
 msgstr ""
 
 msgid "None"
+msgstr ""
+
+msgid "No Videos"
 msgstr ""
 
 msgid "Owner's NetID"
@@ -116,6 +128,9 @@ msgid "Searching"
 msgstr ""
 
 msgid "Select an authentication provider below"
+msgstr ""
+
+msgid "Subtitles"
 msgstr ""
 
 msgid "Superuser:"
