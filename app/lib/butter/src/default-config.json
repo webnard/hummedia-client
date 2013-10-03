@@ -74,6 +74,10 @@
       {
         "type": "modal",
         "displayName": "Modal"
+      },
+      {
+        "type": "blank",
+        "displayName": "Blank"
       }
     ]
   },
