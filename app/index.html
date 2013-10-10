@@ -19,28 +19,28 @@
 </head>
 <body>
     <!--[if lte IE 8]>
-    <script type="text/javascript"> 
-        var $buoop = {vs:{i:8,f:3.6,o:10.6,s:4,n:9}} 
-        $buoop.ol = window.onload; 
-        window.onload=function(){ 
-         try {if ($buoop.ol) $buoop.ol();}catch (e) {} 
-         var e = document.createElement("script"); 
-         e.setAttribute("type", "text/javascript"); 
-         e.setAttribute("src", "http://browser-update.org/update.js"); 
-         document.body.appendChild(e); 
-        };
-    </script>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', HUMMEDIA_GLOBALS.googleAnalyticsKey]);
-      _gaq.push(['_trackPageview']);
+        <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', HUMMEDIA_GLOBALS.googleAnalyticsKey]);
+            _gaq.push(['_trackPageview']);
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+        </script>
+        <style>
+            div{ display: none; }
+            #iewarning { display: block; color: black; background-color: white;}
+        </style>
+        <div id="iewarning">
+            <h1>Your browser is out of date!</h1>
+            <p>
+                Internet Explorer 6, 7, and 8 are not supported. <a href='http://browsehappy.com/'>Please upgrade your browser to a newer version,
+                or download a different browser</a>.
+            </p>
+        </div>
     <![endif]-->
     <div id='error-modal' api-error-modal blur='#background, #view'></div>
     <div id="container">
