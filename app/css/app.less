@@ -19,7 +19,7 @@
 /*************
  * Tooltips
 *************/
-[data-tooltip]:hover:after {
+[data-tooltip]:not(.time-bar-scrubber-node):hover:after {
     content: attr(data-tooltip);
     border-radius: 0px 5px 5px 0px;
     position: absolute;
