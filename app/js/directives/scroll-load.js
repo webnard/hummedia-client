@@ -1,18 +1,27 @@
 "use strict";
 HUMMEDIA_DIRECTIVES
-.directive('scrollLoad', [function(){
+
+/**
+ * Enables the browser to lazily load images only when they are scrolled into
+ * view. For example:
+ *
+ * <img scroll-load="large-image.jpeg">
+ *
+ * Will not start downloading until its element is within the bounds of the window
+ */
+.directive('scrollLoad', ['$window', function($window){
     return function($scope, elm, attrs) {
-        var interval = setInterval(setSrc, 500);
+        $window.addEventListener('scroll', setSrc);
 
         function setSrc(scrollY) {
-            if( elm.offset()['top'] - window.scrollY <= $(window).height() ) {
+            if( elm.offset()['top'] - $window.scrollY <= $($window).height() ) {
                 elm[0].src = attrs['scrollLoad'];
-                clearInterval(interval);
+                $window.removeEventListener('scroll', setSrc);
             }
         };
 
         $scope.$on('$destroy', function() {
-            clearInterval(interval);
+            $window.removeEventListener('scroll', setSrc);
         });
 
     }
