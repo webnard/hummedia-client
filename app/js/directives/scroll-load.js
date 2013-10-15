@@ -11,6 +11,8 @@ HUMMEDIA_DIRECTIVES
  */
 .directive('scrollLoad', ['$window', function($window){
     return function($scope, elm, attrs) {
+        elm.on('load', setSrc);
+
         $window.addEventListener('scroll', setSrc);
 
         function setSrc() {
