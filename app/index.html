@@ -49,7 +49,7 @@
     <div id="background" data-ng-style="style"></div>
     <div data-ng-controller="NavCtrl" id="nav-wrapper">
         <nav id="navtable" data-ng-cloak>
-            <a id="navtitle" href="#" analytics="{category: 'nav', label: 'logo'}">Humanities Online Media</a>
+            <a id="navtitle" href="/" analytics="{category: 'nav', label: 'logo'}">Humanities Online Media</a>
             <a data-ng-click="user.prompt(true)" analytics="{category: 'nav', label: 'login'}" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>
             <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired" analytics="{category: 'nav', label: 'link BYU NetID'}">{{"Link BYU NetID" | tr}}</a>
             <span data-ng-show="user.exists" analytics="{category: 'nav', label: 'user\'s name, has no effect'}">{{user.data.fullname}}</span>
