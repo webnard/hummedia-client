@@ -4,7 +4,7 @@
 angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.services', 'hummedia.directives', 'ngLocale', 'ngSanitize','ui.tinymce']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/search', {title: "Hummedia | Search", templateUrl: '/partials/search/search.html', controller: SearchCtrl, reloadOnSearch: false});
-    $routeProvider.when('/', {title: "Hummedia", templateUrl: '/partials/home.html'});
+    $routeProvider.when('/', {title: "Hummedia", templateUrl: '/partials/home.html', controller: HomeCtrl});
     $routeProvider.when('/video/:id', {title: "Hummedia | Video", templateUrl: '/partials/video.html', controller: VideoCtrl,
         resolve: {
             ANNOTATION_MODE: function(){ return false; }
