@@ -13,7 +13,7 @@ HUMMEDIA_DIRECTIVES
     return function($scope, elm, attrs) {
         $window.addEventListener('scroll', setSrc);
 
-        function setSrc(scrollY) {
+        function setSrc() {
             if( elm.offset()['top'] - $window.scrollY <= $($window).height() ) {
                 elm[0].src = attrs['scrollLoad'];
                 $window.removeEventListener('scroll', setSrc);
