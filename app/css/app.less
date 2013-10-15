@@ -442,26 +442,6 @@ strong {
     }
     }
 }
-footer{
-    z-index: 1000; /* above the error modal */
-    width:100%;
-    background-color: @smoke;
-    color: gray;
-    position: absolute;
-    bottom: 0px;
-    text-align: right;
-    img {
-        display: inline-block;
-        vertical-align: bottom;
-    }
-    a{
-        text-decoration: none;
-        color: gray;
-    }
-    small {
-        float: left;
-    }
-}
 #container{
     min-height: 100%;
     position: absolute;
@@ -1050,9 +1030,28 @@ footer{
     margin: auto;
     margin-top: 10%;
     padding: 10px;
-    a{
-        color: black;
+    a {
+        color: rgb(71, 71, 213);
         text-decoration: none;
+    }
+    p:not(:last-child) {
+        margin-bottom: 10px;
+    }
+    small {
+        opacity: 0.9;
+        a{
+            color: black;
+            text-decoration: none;
+        }
+    }
+}
+
+#footer-license {
+    .cc-logo {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        vertical-align: bottom;
     }
 }
 
