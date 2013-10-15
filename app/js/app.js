@@ -27,7 +27,7 @@ angular.module('hummedia', ['hummedia.config','hummedia.filters', 'hummedia.serv
     $routeProvider.otherwise({redirectTo: '/'});
   }]).
   config(['$locationProvider', function($locationProvider) {
-    //$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
   }]).
   config(['$httpProvider', function($httpProvider) {
       $httpProvider.defaults.headers.patch = {"Content-Type": "application/json"};
