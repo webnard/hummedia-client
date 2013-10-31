@@ -38,6 +38,7 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location, user) {
                                  'dc:description':'Make sure the URL you are trying to reach is correct and that you are enrolled in this course'
             };
         });
+        $('html,body').scrollTop(0);
     };
 
     $scope.$watch(function(){ return $location.search().id; }, function(val) {
