@@ -26,6 +26,10 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location, user) {
         }
     });
     
+    $scope.showVideos = function(pid){
+        $location.search({'id':pid});
+    };
+    
     function showVideos(pid){
         $scope.collections.$then(function() {
             for(var i=0; i<$scope.collections.length; i++){
