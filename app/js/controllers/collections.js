@@ -2,6 +2,18 @@
 function CollectionsCtrl($scope, Collection, $routeParams, $location, user) {
     
     $scope.collections = Collection.query(function(){
+        
+        //Alphabetize the Collections
+        $scope.collections.sort(function(a, b) {
+            if(a['dc:title']<b['dc:title']){
+                return -1;
+            }
+            if(a['dc:title']>b['dc:title']){
+                return 1;
+            }
+            return 0;
+        });
+        
         if(!$scope.collections.length){
             $scope.message = 'There are no collections to display.';
         }
