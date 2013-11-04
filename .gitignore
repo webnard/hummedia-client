@@ -9,3 +9,4 @@ app/CONFIG.js
 .project
 .settings
 .idea/*
+.vagrant
