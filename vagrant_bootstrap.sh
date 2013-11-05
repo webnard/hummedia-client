@@ -1,13 +1,12 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 
 apt-get update
 apt-get install -y apache2
 rm -rf /var/www
 ln -fs /vagrant /var/www
 
-a2enmod proxy*
-a2enmod rewrite
-a2enmod ssl
+a2enmod proxy proxy_connect proxy_http rewrite headers ssl
 
 cat << 'EOF' > /etc/apache2/sites-available/zelda.byu.edu
 <VirtualHost *:443>
@@ -15,7 +14,7 @@ cat << 'EOF' > /etc/apache2/sites-available/zelda.byu.edu
 
     SSLEngine On
     SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
-    SSLCertificateFile /etc/ssl/private/ssl-cert-snakeoil.key
+    SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
 
     RewriteEngine On
     ProxyPreserveHost On
@@ -36,9 +35,14 @@ cat << 'EOF' > /etc/apache2/sites-available/zelda.byu.edu
 
     # APP
     ProxyPass / !
-    Alias / /var/www/hummedia/
+    Alias / /var/www/app/
 </VirtualHost>
 EOF
 
+if [ ! -f /var/www/app/CONFIG.js ]; then
+    cp /var/www/app/CONFIG.default.js /var/www/app/CONFIG.js
+fi
+
 a2ensite zelda.byu.edu
 service apache2 restart
+

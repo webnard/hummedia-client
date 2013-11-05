@@ -1,6 +1,22 @@
 HUMMEDIA
 =========
 
+Starting Off
+--------------
+This project can be set up using (Vagrant)[http://docs.vagrantup.com/v2/].
+
+* `$ apt-get install vagrant`
+* `$ apt-get install vagrant-hostsupdater`
+* `$ vagrant up`
+
+The virtual machine will run on IP 192.168.99.99. This can be changed in the Vagrantfile if necessary.
+
+You can access the website at (https://zelda.byu.edu)[https://zelda.byu.edu]. While the Vagrant box is running,
+your hosts file will be updated to point to the virtual machine. Suspend the virtual machine to remove the changes
+to the hosts file.
+
+Configure the website by editing `app/CONFIG.js`.
+
 Adding Plugins
 -----------------------
 We are using the (Popcorn Plugins submodule)[https://bitbucket.org/htrscdev/popcorn-plugins] to store our plugins. To load additional plugins,
