@@ -6,7 +6,7 @@ Starting Off
 This project can be set up using (Vagrant)[http://docs.vagrantup.com/v2/].
 
 * `$ apt-get install vagrant`
-* `$ apt-get install vagrant-hostsupdater`
+* `$ vagrant plugin install vagrant-hostsupdater`
 * `$ vagrant up`
 
 The virtual machine will run on IP 192.168.99.99. This can be changed in the Vagrantfile if necessary.
