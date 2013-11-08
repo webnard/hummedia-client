@@ -1,9 +1,9 @@
 <div id="collections_content">
 
 <ul id="tabs" data-ng-show="collections.length">
-    <li data-ng-repeat="tabcollection in collections" data-ng-class="{highlighted: collection.pid==tabcollection.pid}" data-ng-click="showVideos(tabcollection.pid)">
-        <a ng-show='canEdit(tabcollection)' class='edit-button' ng-href="#/admin/collection?id={{tabcollection.pid}}"><i data-tooltip="Edit this collection" class="icon-edit"></i></a>
-        <a ng-href="#/collection?id={{tabcollection['pid']}}" id="tab-{{tabcollection['pid']}}">{{tabcollection['dc:title']}}</a>
+    <li data-ng-repeat="tabcollection in collections" data-ng-class="{highlighted: collection.pid==tabcollection.pid}">
+        <a ng-show='canEdit(tabcollection)' class='edit-button' ng-href="/admin/collection?id={{tabcollection.pid}}"><i data-tooltip="Edit this collection" class="icon-edit"></i></a>
+        <a ng-href="/collection?id={{tabcollection['pid']}}" id="tab-{{tabcollection['pid']}}">{{tabcollection['dc:title']}}</a>
     </li>
 </ul>    
 <div id="collections_wrapper">
@@ -16,12 +16,12 @@
             <progress data-ng-show="collections_data[collection['pid']].isLoading" title="Loading videos">Loading videos&hellip;</progress>
         </div>
         <div data-ng-repeat="video in collections_data[collection['pid']]['videos']" class="video_blocks" style="vertical-align: top;">
-            <a title="{{video['ma:description']}}" href="#/video/{{video.pid}}?collection={{collection.pid}}">
+            <a title="{{video['ma:description']}}" href="/video/{{video.pid}}?collection={{collection.pid}}">
                 <div id="video-wrapper"><div id="video-clipper">
                     <img width="300" height="200" data-ng-src="{{video['ma:image'][0]['thumb'] || 'img/vhs.svg'}}" scroll-load="{{video['ma:image'][0]['poster']}}" onerror="this.src='img/vhs.svg'"/>
                 </div></div>
             </a>
-            <a title="{{video['ma:description']}}" style="text-align:center;" class="plain_link" href="#/video/{{video.pid}}?collection={{collection.pid}}">{{video['ma:title']}}</a>
+            <a title="{{video['ma:description']}}" style="text-align:center;" class="plain_link" href="/video/{{video.pid}}?collection={{collection.pid}}">{{video['ma:title']}}</a>
             <p style="font-size:.8em; color: rgba(0,0,0,.75);">{{video['ma:date']}} [{{video['ma:hasLanguage'][0] | language}}]</p>
         </div>
     </div>

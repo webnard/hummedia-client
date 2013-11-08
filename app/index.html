@@ -49,22 +49,22 @@
     <div id="background" data-ng-style="style"></div>
     <div data-ng-controller="NavCtrl" id="nav-wrapper">
         <nav id="navtable" data-ng-cloak>
-            <a id="navtitle" href="#" analytics="{category: 'nav', label: 'logo'}">Humanities Online Media</a>
+            <a id="navtitle" href="/" analytics="{category: 'nav', label: 'logo'}">Humanities Online Media</a>
             <a data-ng-click="user.prompt(true)" analytics="{category: 'nav', label: 'login'}" id="login-link" data-ng-show="showLogin">{{"Login" | tr}}</a>
             <a data-ng-click="user.prompt(true)" data-ng-show="user.netIDRequired" analytics="{category: 'nav', label: 'link BYU NetID'}">{{"Link BYU NetID" | tr}}</a>
             <span data-ng-show="user.exists" analytics="{category: 'nav', label: 'user\'s name, has no effect'}">{{user.data.fullname}}</span>
             <a data-ng-show="user.canCreate" ng-click="toggleAdmin()" analytics="{category: 'nav', label: 'admin'}">{{"Admin" | tr}}</a>
-            <a href="#/collection" analytics="{category: 'nav', label: 'courses'}">{{"Courses" | tr}}</a>
-            <a href="#/search" id="nav-search" analytics="{category: 'nav', label: 'search'}">{{"Search" | tr}}</a>
-            <a href="#/about" analytics="{category: 'nav', label: 'about'}">{{"About" | tr}}</a>
+            <a href="/collection" analytics="{category: 'nav', label: 'courses'}">{{"Courses" | tr}}</a>
+            <a href="/search" id="nav-search" analytics="{category: 'nav', label: 'search'}">{{"Search" | tr}}</a>
+            <a href="/about" analytics="{category: 'nav', label: 'about'}">{{"About" | tr}}</a>
             <a id="logout-link" data-ng-click="user.logout()" data-ng-show="user.exists || user.netIDRequired" analytics="{category: 'nav', label: 'logout'}">{{"Logout" | tr}}</a>
-            <a href="#/developer" data-ng-show="debug">Developer</a>
+            <a href="/developer" data-ng-show="debug">Developer</a>
         </nav>
         <nav data-ng-show="showAdminMenu && user.canCreate" id="nav-admin" data-ng-cloak>
-           <a href="#/admin/collection" analytics="{category: 'admin-nav', label: 'collections'}">{{"Collections" | tr}}</a>
-           <a href="#/admin/video" analytics="{category: 'admin-nav', label: 'videos'}">{{"Videos" | tr}}</a>
-           <a href="#/admin/user" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Users" | tr}}</a> 
-           <a href="#/admin/video/ingest" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Ingest Videos" | tr}}</a> 
+           <a href="/admin/collection" analytics="{category: 'admin-nav', label: 'collections'}">{{"Collections" | tr}}</a>
+           <a href="/admin/video" analytics="{category: 'admin-nav', label: 'videos'}">{{"Videos" | tr}}</a>
+           <a href="/admin/user" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Users" | tr}}</a> 
+           <a href="/admin/video/ingest" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Ingest Videos" | tr}}</a> 
         </nav>
         <div id="warn-login" data-ng-class="!user.exists && hasCheckedUser ? 'active' : ''" data-ng-show="!user.exists && hasCheckedUser && !warningDismissed" data-ng-cloak data-ng-animate="'warn'"><i class="icon-remove-sign" ng-click="warningDismissed = true" analytics="{category: 'login-warning', label: 'dismiss'}"></i>You are not logged in. You may not be able to view all of your courses' material until you <a data-ng-click="user.prompt(true)" analytics="{category: 'login-warning', label: 'login'}">login</a>.</div>
     </div>
@@ -164,6 +164,7 @@
 
   <!-- CONTROLLERS -->
   <script src="js/controllers/nav.js"></script>
+  <script src="js/controllers/home.js"></script>
   <script src="js/controllers/search.js"></script>
   <script src="js/controllers/select-course.js"></script>
   <script src="js/controllers/login.js"></script>
