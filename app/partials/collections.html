@@ -2,8 +2,13 @@
 
 <ul id="tabs" data-ng-show="collections.length">
     <li data-ng-repeat="tabcollection in collections" data-ng-class="{highlighted: collection.pid==tabcollection.pid}" data-ng-click="showVideos(tabcollection.pid)">
+<<<<<<< HEAD
         <a ng-show='canEdit(tabcollection)' class='edit-button' ng-href="#/admin/collection?id={{tabcollection.pid}}"><i data-tooltip="Edit this collection" class="icon-edit"></i></a>
         <a ng-href="#/collection?id={{tabcollection['pid']}}" id="tab-{{tabcollection['pid']}}">{{tabcollection['dc:title']}}</a>
+=======
+         <a ng-show='canEdit(tabcollection)' class='edit-button' ng-href="#/admin/collection?id={{tabcollection.pid}}"><i data-tooltip="Edit this collection" class="icon-edit"></i></a>
+         <a ng-href="#/collection?id={{tabcollection['pid']}}" id="tab-{{tabcollection['pid']}}">{{tabcollection['dc:title']}}</a>
+>>>>>>> collections.html edited online with Bitbucket
     </li>
 </ul>    
 <div id="collections_wrapper">
