@@ -260,6 +260,9 @@ function VideoCtrl($scope, $routeParams, Video, Annotation, appConfig, ANNOTATIO
         //Add some slush time to annotations
         annotation.popcornOptions.start -= .2;
         
+        // round each annotation time
+        annotation.popcornOptions.start = Math.round(annotation.popcornOptions.start*100)/100;
+        annotation.popcornOptions.end = Math.round(annotation.popcornOptions.end*100)/100;
     }
     
     /**
