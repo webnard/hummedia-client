@@ -31,6 +31,9 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location, user) {
 
                 var item = Collection.get({identifier:pid}, function(){
                     item.isLoading = false;
+                    item.videos.sort(function(a, b) {
+                        return a['ma:title'].toLowerCase() > b['ma:title'].toLowerCase();
+                    });
                 });
                 item.isLoading = true;
                 $scope['collections_data'][pid] = item;
