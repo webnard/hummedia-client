@@ -15,10 +15,23 @@ HUMMEDIA_DIRECTIVES
 
         $window.addEventListener('scroll', setSrc);
 
+        //Set a variable to determine if setSrc has already succeeded
+        var alreadySetSrc = false;
+
         function setSrc() {
-            if( elm.offset()['top'] - $window.scrollY <= $($window).height() ) {
-                elm[0].src = attrs['scrollLoad'];
-                $window.removeEventListener('scroll', setSrc);
+            if( elm.offset()['top'] - $window.scrollY <= $($window).height() && !alreadySetSrc) {
+                alreadySetSrc = true;
+                
+                var tmp = new Image();
+                tmp.src = attrs['scrollLoad'];
+                
+                //Make sure the image is valid -- otherwise just let the onerror image load
+                tmp.onload = function(){
+                    
+                    elm[0].src = attrs['scrollLoad'];
+                    $window.removeEventListener('scroll', setSrc);
+                }
+                
             }
         };
 
