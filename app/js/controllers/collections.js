@@ -46,7 +46,7 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location, user) {
     };
     
     function showVideos(pid){
-        $scope.collections.$then(function() {
+        $scope.collections.$promise.then(function() {
             for(var i=0; i<$scope.collections.length; i++){
                 if($scope.collections[i]['pid']===pid){
                     $scope.collection = $scope.collections[i];
