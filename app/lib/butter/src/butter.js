@@ -78,7 +78,7 @@ window.Butter = {
     /* @TODO: the path for this should be configurable */
     var style = document.createElement('link');
     style.rel = 'stylesheet/less';
-    style.href = 'lib/butter/css/editor/edit-annotations.less';
+    style.href = '/lib/butter/css/editor/edit-annotations.less';
     document.body.appendChild(style);
     Less.sheets.push(style);
     Less.refresh();
