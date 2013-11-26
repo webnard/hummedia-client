@@ -1,5 +1,5 @@
 <div id="collections_content">
-
+        
 <ul id="tabs" data-ng-show="collections.length">
     <li data-ng-repeat="tabcollection in collections" data-ng-class="{highlighted: collection.pid==tabcollection.pid}" data-ng-click="showVideos(tabcollection.pid)">
         <a ng-show='canEdit(tabcollection)' class='edit-button' ng-href="/admin/collection?id={{tabcollection.pid}}"><i data-tooltip="Edit this collection" class="icon-edit"></i></a>
@@ -13,9 +13,18 @@
         <div>
             <h2>{{collection['dc:title']}}</h2>
             <p data-ng-bind-html="collection['dc:description']"></p>
+                        
+            <div class="filter">
+                {{"Search:" | tr}} <input type="search" ng-model="video_filter">
+            </div>         
+            
             <progress data-ng-show="collections_data[collection['pid']].isLoading" title="Loading videos">Loading videos&hellip;</progress>
+            
+            <hr>
+        
         </div>
-        <div data-ng-repeat="video in collections_data[collection['pid']]['videos']" class="video_blocks" style="vertical-align: top;">
+        
+        <div data-ng-repeat="video in collections_data[collection['pid']]['videos'] | filter: {'ma:title': video_filter}" class="video_blocks" style="vertical-align: top;">
             <a title="{{video['ma:description']}}" href="/video/{{video.pid}}?collection={{collection.pid}}">
                 <div id="video-wrapper"><div id="video-clipper">
                     <img width="300" height="200" data-ng-src="{{video['ma:image'][0]['thumb'] || 'img/vhs.svg'}}" scroll-load="{{video['ma:image'][0]['poster']}}" onerror="this.src='img/vhs.svg'"/>
