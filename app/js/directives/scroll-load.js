@@ -15,12 +15,10 @@ HUMMEDIA_DIRECTIVES
 
         $window.addEventListener('scroll', setSrc);
 
-        //Set a variable to determine if setSrc has already succeeded
-        var alreadySetSrc = false;
-
         function setSrc() {
-            if( elm.offset()['top'] - $window.scrollY <= $($window).height() && !alreadySetSrc) {
-                alreadySetSrc = true;
+            if( elm.offset()['top'] - $window.scrollY <= $($window).height()) {
+                elm.off('load');
+                $window.removeEventListener('scroll', setSrc);
                 
                 var tmp = new Image();
                 tmp.src = attrs['scrollLoad'];
