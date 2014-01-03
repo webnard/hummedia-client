@@ -1,6 +1,28 @@
 
 'use strict';
 function SiteCtrl($scope, $http, appConfig) {
+/*
+var div = $("<div/>");
+div.css("-webkit-filter","brightness(90%)");
+
+if(div.css("-webkit-filter") == "") {
+	alert("False");
+}
+else {
+
+	alert("True");
+}
+*/
+/*
+var oldBrightnessModel = $("<div/>").css("-webkit-filter","brightness(101%)").css("-webkit-filter")==""?true:false;
+if(oldBrightnessModel){
+	alert("True");
+}
+else
+{
+	alert("False");
+}
+*/
     function getRandomInt (min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
