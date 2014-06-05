@@ -2,7 +2,8 @@
     <h1>Authentication</h1>
     <br />
     <h2>Login as:</h2>
-    <button data-ng-click="login(2)">Superuser</button>
-    <button data-ng-click="login(1)">Faculty</button>
-    <button data-ng-click="login(0)">Student</button>
+    <button data-ng-click="login('adminuser')">Superuser</button>
+    <button data-ng-click="login('teacheruser')">Faculty</button>
+    <button data-ng-click="login('studentuser')">Student</button>
+    <button data-ng-click="login('gnorris')">Student (no classes)</button>
 </section>
