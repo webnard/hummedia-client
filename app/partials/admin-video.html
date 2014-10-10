@@ -87,6 +87,17 @@
             </div>
         </div>
     </section>
+    <section class="admin" data-ng-show="!!video">
+        <div id="listwrapper" data-ng-animate=" 'blur' ">
+            <div id="list_scrolling_block">
+                <h2>{{"Replace Video" | tr}}</h2>
+                <select>
+                  <option data-ng-repeat="ingest in video.files()">{{ingest}}</option>
+                </select>
+            </div>
+            <div class="centered-bwbutton"><button class="bwbuttondark" data-ng-click="getCollections(); toggleModal('#modal-add-video')">Add Collection</button></div>
+        </div>
+    </section>
 </section>
 
 <div id='blur-box'> 

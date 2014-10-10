@@ -21,6 +21,10 @@ angular.module('hummedia.services').
         resource.ingest = function(filepath, pid, uniqueID) {
             return $http.post(config.apiBase + '/batch/video/ingest',[{filepath: filepath, pid: pid, id: uniqueID}]);
         };
+        
+        resource.replace = function(pid, replacement) {
+            return $http.patch(config.apiBase + '/video/' + pid, {replacement_file: replacement});
+        };
 
         /* @TODO: refactor. Will take some work on the backend. */
         resource.toggleTranscript = function(pid, collectionID, enabled) {
