@@ -1,5 +1,6 @@
 'use strict';
-function CollectionsCtrl($scope, Collection, $routeParams, $location, user, $http) {
+function CollectionsCtrl($scope, Collection, $routeParams, $location,
+     user, $http, config) {
     
     $scope.all = true;
 
@@ -68,6 +69,10 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location, user, $htt
     $scope.showVideos = function(pid){
         $location.search({'id':pid});
     };
+
+    $scope.getAnnotationDownloadLink = function(video_id, collection_id) {
+      return config.apiBase + '/annotation?client=ic&dc:relation=' + video_id + '&collection=' + collection_id;
+    }
     
     function showVideos(pid){
         $scope.collection = Collection.get({identifier:pid}, function success(){
@@ -93,4 +98,4 @@ function CollectionsCtrl($scope, Collection, $routeParams, $location, user, $htt
     };
 }
 // always inject this in so we can later compress this JavaScript
-CollectionsCtrl.$inject = ['$scope', 'Collection', '$routeParams', '$location', 'user', '$http'];
+CollectionsCtrl.$inject = ['$scope', 'Collection', '$routeParams', '$location', 'user', '$http', 'appConfig'];
