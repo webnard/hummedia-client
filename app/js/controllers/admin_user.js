@@ -1,8 +1,7 @@
-function AdminUserCtrl($scope, account, language, $routeParams, $location) {
+function AdminUserCtrl($scope, account, $routeParams, $location) {
     "use strict";
     
     $scope.roles = account.availableRoles;
-    $scope.languages = language.list;
     $scope.users =  account.search();
     $scope.user = null;
     var copy = null; // used for updating the user list while removing $scope.user
@@ -69,4 +68,4 @@ function AdminUserCtrl($scope, account, language, $routeParams, $location) {
                (user.lastname + ", " + user.firstname).toLowerCase().indexOf(query) !== -1
     };
 };
-AdminUserCtrl.$inject = ['$scope','Account', 'language', '$routeParams', '$location'];
+AdminUserCtrl.$inject = ['$scope','Account', '$routeParams', '$location'];
