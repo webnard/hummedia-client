@@ -15,6 +15,8 @@ define( [ "./scrubber" ], function( Scrubber ) {
         _tracksContainer = tracksContainer,
         _scrubber = new Scrubber( butter, _element, _media, _tracksContainer, hScrollbar );
 
+    this.scrubber = _scrubber;
+
     function drawTicks() {
       var tracksContainerWidth = tracksContainer.container.getBoundingClientRect().width,
           width = Math.min( tracksContainerWidth, _tracksContainer.container.scrollWidth ),

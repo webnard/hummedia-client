@@ -14,6 +14,7 @@ define( [
   var Timeline = function( butter ){
 
     var _media = {},
+        _this = this,
         _currentMedia,
         _parentElement = document.createElement( "div" );
 
@@ -25,6 +26,8 @@ define( [
       onModuleReady();
     };
 
+    this.scrubber = null;
+
     this.getCurrentTrackWidth = function() {
       return _currentMedia.trackContainer.getTrackWidth();
     };
@@ -35,6 +38,8 @@ define( [
 
       _media[ mediaObject.id ] = media;
       _parentElement.appendChild( media.element );
+
+      _this.scrubber = media.timebar.scrubber;
 
       function mediaChanged( event ){
         if ( _currentMedia !== _media[ event.data.id ] ){

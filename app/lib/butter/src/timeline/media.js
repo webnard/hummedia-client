@@ -37,6 +37,8 @@ define( [ "core/trackevent", "core/track", "core/eventmanager",
         _trackHandles = new TrackHandles( butter, _media, _rootElement, _tracksContainer ),
         _status;
 
+    this.timebar = _timebar;
+
     _status = new Status( _media, butter, butter.ui.tray.statusArea );
 
     _tracksContainer.setScrollbars( _vScrollBar, _hScrollBar );

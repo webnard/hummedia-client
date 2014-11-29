@@ -2,8 +2,8 @@
  * If a copy of the MIT license was not distributed with this file, you can
  * obtain one at https://raw.github.com/mozilla/butter/master/LICENSE */
 
-define( [ "util/time" ],
-  function( util ) {
+define( [ "util/time", "../core/eventmanager" ],
+  function( util, EventManager ) {
 
   var SCROLL_INTERVAL = 16,
       SCROLL_DISTANCE = 20,
@@ -31,7 +31,10 @@ define( [ "util/time" ],
         _lastScrollWidth = _tracksContainer.element.scrollWidth,
         _lineWidth = 0,
         _isSeeking = false,
+        _this = this,
         _seekMouseUp = false;
+
+    EventManager.extend( _this );
 
     function setNodePosition() {
       var duration = _media.duration,
@@ -211,6 +214,7 @@ define( [ "util/time" ],
       _isSeeking = true;
       _seekMouseUp = false;
       _media.listen( "mediaseeked", onSeeked );
+      _this.enableKeyboard();
 
       if( _isPlaying ){
         _media.pause();
@@ -243,6 +247,16 @@ define( [ "util/time" ],
 
     this.enable = function() {
       _container.addEventListener( "mousedown", onMouseDown, false );
+    };
+
+    this.enableKeyboard = function() {
+      _node.classList.add('active');
+      _this.dispatch('keyboardenabled');
+    };
+
+    this.disableKeyboard = function() {
+      _node.classList.remove('active');
+      _this.dispatch('keyboarddisabled');
     };
 
     this.disable = function() {

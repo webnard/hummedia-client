@@ -297,6 +297,10 @@ window.Butter = {
       }
 
       function onTrackEventSelected( notification ) {
+        if(_this.timeline.scrubber) {
+          _this.timeline.scrubber.disableKeyboard();
+        }
+
         var trackEvent = notification.origin;
         for ( var i = _selectedEvents.length - 1; i >= 0; i-- ) {
           if ( _selectedEvents[ i ] === trackEvent ) {
@@ -1018,6 +1022,8 @@ window.Butter = {
           preparePopcornScriptsAndCallbacks( function(){
             preparePage( function(){
               moduleCollection.ready( function(){
+                _this.timeline.scrubber.listen( "keyboardenabled", _this.deselectAllTrackEvents );
+
                 // We look for an old project backup in localStorage and give the user
                 // a chance to load or discard. If there isn't a backup, we continue
                 // loading as normal.
