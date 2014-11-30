@@ -14,6 +14,7 @@ define( [ "util/lang",  "./logo-spinner",
     var statusAreaFragment = LangUtils.domFragment( STATUS_AREA_LAYOUT, ".media-status-container" );
     var timelineAreaFragment = LangUtils.domFragment( TIMELINE_AREA_LAYOUT, ".butter-timeline" );
     var trayRoot = LangUtils.domFragment( TRAY_LAYOUT, ".butter-tray" );
+    var trayHandle = trayRoot.querySelector( ".butter-tray-drag" );
 
     var _loadingContainer = trayRoot.querySelector( ".butter-loading-container" );
 
@@ -26,6 +27,11 @@ define( [ "util/lang",  "./logo-spinner",
 
     this.statusArea.appendChild( statusAreaFragment );
     this.timelineArea.appendChild( timelineAreaFragment );
+
+    trayHandle.addEventListener('drag', function(e) {
+      // TODO -- scale down
+      console.log(e.offsetY);
+    });
 
     this.attachToDOM = function() {
       document.body.appendChild( trayRoot );
