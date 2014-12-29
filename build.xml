@@ -23,7 +23,7 @@
         <exec executable="git" outputproperty="version">
             <arg value="describe" />
         </exec>
-        <exec executable="nodejs" failonerror="true">
+        <exec executable="node" failonerror="true">
             <arg value="scripts/compressor.js" />
             <arg value="${version}" />
         </exec>
