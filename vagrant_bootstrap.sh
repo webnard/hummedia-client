@@ -12,7 +12,7 @@ if [[ -z "$DOCROOT" ]]; then
 fi
 
 apt-get update
-apt-get install -y apache2 mongodb python libapache2-mod-python libapache2-mod-wsgi python-pip python-dev libxml2-dev libxslt1-dev gearman imagemagick make automake apache2-threaded-dev
+apt-get install -y apache2 mongodb python libapache2-mod-python libapache2-mod-wsgi python-pip python-dev libxml2-dev libxslt1-dev gearman imagemagick make automake apache2-threaded-dev git
 
 rm -rf /var/www
 ln -fs /vagrant /var/www
