@@ -1,7 +1,7 @@
 function AdminVideoCtrl($scope, Video, language, $routeParams, $location, Collection, Subtitle) {
     "use strict";
     
-    $scope.videos =  Video.query(function(){
+    $scope.videos =  Video.query({'concise': true}, function(){
         if(!$scope.videos.length){
             $scope.no_videos = true;
         }  
