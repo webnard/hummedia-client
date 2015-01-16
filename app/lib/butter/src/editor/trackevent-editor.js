@@ -206,15 +206,7 @@ define([ "util/lang", "util/keys", "util/time", "./base-editor", "ui/widget/tool
     };
 
     extendObject.showPluginPreview = function( trackEvent ) {
-      var startTime = trackEvent.popcornOptions.start,
-          endTime = trackEvent.popcornOptions.end,
-          currentTime = butter.currentTime,
-          accuracy = startTime * Math.pow( 10, TimeUtils.timeAccuracy - 1 );
-
-      if ( currentTime < startTime || currentTime > endTime ) {
-        // Account for accuracy
-        butter.currentTime = startTime === 0 ? startTime : Math.ceil( startTime * accuracy ) / accuracy;
-      }
+      // noop
     };
 
     /**
