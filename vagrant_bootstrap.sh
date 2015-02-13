@@ -11,11 +11,22 @@ if [[ -z "$DOCROOT" ]]; then
   DOCROOT="/var/www/app"
 fi
 
-apt-get update
-apt-get install -y apache2 mongodb python libapache2-mod-python libapache2-mod-wsgi python-pip python-dev libxml2-dev libxslt1-dev gearman imagemagick make automake apache2-threaded-dev git
+apt-get update # python-software-properties doesn't exist unless we update first
+apt-get install -y python-software-properties
+add-apt-repository ppa:andrewrk/libgroove --yes
+apt-get update # just added a repository, so need to update
+DEBIAN_FRONTEND="noninteractive" apt-get install --allow-unauthenticated -y --force-yes libgroove-dev ffmpeg libpng3
+DEBIAN_FRONTEND="noninteractive" apt-get install -y --force-yes apache2 mongodb python libapache2-mod-python\
+                   libapache2-mod-wsgi python-pip python-dev libxml2-dev\
+                   libxslt1-dev gearman imagemagick make automake\
+                   apache2-threaded-dev git
 
 rm -rf /var/www
 ln -fs /vagrant /var/www
+
+# compile waveform generator
+cd /var/www/api/flask/hummedia/utils/waveform-2.0.0 && make
+cd -
 
 # Download the authentication module if we need it
 if ! apache2ctl -M | grep auth_token_module; then
