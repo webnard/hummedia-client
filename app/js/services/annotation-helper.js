@@ -44,6 +44,7 @@ HUMMEDIA_SERVICES
                 _nonReqIDs   = [], // all annotation IDs that are non-required
                 // full list of IDs added
                 _addedSets   = [],
+                _length      = 0, // the total number of annotations added
                 _self        = this,
                 _transcript  = false, // whether or not transcripts are allowed
                 _ready       = $q.defer(), // relies on _reqLoad and _nonreqLoad
@@ -112,6 +113,12 @@ HUMMEDIA_SERVICES
             };
             
             window.Object.defineProperties(this, {
+                "length": {
+                  enumerable: true,
+                  get: function() {
+                    return _length;
+                  }
+                },
                 "hasNonrequired": {
                     enumerable: true,
                     get: function() {
@@ -163,6 +170,7 @@ HUMMEDIA_SERVICES
             // This will return the event ID if in popcorn mode
             // otherwise, if in editor mode, it will return undefined
             function _addEvent(event) {
+                _length++;
                 if(_isEditor) {
                     popcornInstance.generateSafeTrackEvent(event.type, event.popcornOptions);
                     return;
