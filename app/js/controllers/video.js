@@ -145,7 +145,18 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
           var annotation = new AnnotationHelper(pop, vid, coll, video['ma:hasPolicy']),
               subtitles  = new SubtitleHelper(pop, video['ma:hasRelatedResource']);
 
+          function unsupportedDevice() {
+            pop.destroy();
+            pop.media.remove();
+            $("#hum-video").html("<h1>We're sorry, but this film is currently unsupported on your device. " +
+            "If you are using a mobile device (iPad, iPhone, or iPod), please move to a desktop computer "+
+            "or a laptop. Thank you for your patience.</h2>");
+          }
+
           annotation.ready(function handleSettings() {
+            if(annotation.length && navigator.userAgent.match(/(iPad|iPod|iPhone)/)) {
+              unsupportedDevice();
+            }
             if(video['ma:hasRelatedResource'].length && annotation.transcriptEnabled) {
                 $scope.annotationsLayout = true;
             };
