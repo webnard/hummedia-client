@@ -1,7 +1,7 @@
 'use strict';
 function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
     Video, AnnotationHelper, SubtitleHelper, Butter, $window, config,
-    $compile) {
+    $compile, analytics) {
 
   //Code to style the page correctly
   //
@@ -77,6 +77,7 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
             children: {}
         };
         var pop = null,
+            vjs = null,
             pop_opts =  {frameAnimation: true}; // allows for more accurate timing
         
         if(video.type === 'yt') {
@@ -94,7 +95,7 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
             vjs_opts.children.bigPlayButton = false;
             vjs_opts.children.posterImage = false;
 
-            var vjs = videojs("hum-video", vjs_opts, function() {
+            vjs = videojs("hum-video", vjs_opts, function() {
                 var media_el = Popcorn.HTMLVideojsVideoElement( vjs );
                 pop = Popcorn(media_el, pop_opts);
                 placeCaptionButton.apply(this);
@@ -115,7 +116,7 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
             pop.media.classList.add('vjs-default-skin');
             pop.media.classList.add('vjs-big-play-centered');
         
-            videojs(pop.media, vjs_opts, placeCaptionButton);
+            vjs = videojs(pop.media, vjs_opts, placeCaptionButton);
             initializePopcornDependents( pop );
         }
 
@@ -141,6 +142,34 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
               });
           };
 
+          // GOOGLE ANALYTICS
+          vjs.on('playButtonClicked', function() {
+            analytics.event('Video', 'Play', video['ma:title'], pop.currentTime());
+          });
+          vjs.on('pauseButtonClicked', function() {
+            analytics.event('Video', 'Pause', video['ma:title'], pop.currentTime());
+          });
+          vjs.on('scrubStart', function() {
+            analytics.event('Video', 'ScrubStart', video['ma:title'], pop.currentTime());
+          });
+          vjs.on('scrubEnd', function() {
+            analytics.event('Video', 'ScrubEnd', video['ma:title'], pop.currentTime());
+          });
+          vjs.on('muteClick', function() {
+            analytics.event('Video', 'Mute', video['ma:title'], pop.currentTime());
+          });
+          vjs.on('unMuteClick', function() {
+            analytics.event('Video', 'UnMute', video['ma:title'], pop.currentTime());
+          });
+          vjs.on('fullscreenClick', function() {
+            analytics.event('Video', 'Fullscreen', video['ma:title'], pop.currentTime());
+          });
+          vjs.on('windowedClick', function() {
+            analytics.event('Video', 'Windowed', video['ma:title'], pop.currentTime());
+          });
+          vjs.on('playbackRateClick', function() {
+            analytics.event('Video', 'Playback Rate', video['ma:title'], pop.playbackRate());
+          });
 
           var annotation = new AnnotationHelper(pop, vid, coll, video['ma:hasPolicy']),
               subtitles  = new SubtitleHelper(pop, video['ma:hasRelatedResource']);
@@ -255,4 +284,4 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
     });
 }
 // always inject this in so we can later compress this JavaScript
-VideoCtrl.$inject = ['$scope', '$routeParams', 'ANNOTATION_MODE', 'Video', 'AnnotationHelper', 'SubtitleHelper', 'Butter', '$window', 'appConfig','$compile'];
+VideoCtrl.$inject = ['$scope', '$routeParams', 'ANNOTATION_MODE', 'Video', 'AnnotationHelper', 'SubtitleHelper', 'Butter', '$window', 'appConfig','$compile', 'analytics'];
