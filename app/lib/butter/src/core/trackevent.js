@@ -182,7 +182,8 @@ define( [ "./logger", "./eventmanager", "./observer",
       }
 
       if ( newStart > newEnd ) {
-        throw new TrackEventUpdateException( "start-greater-than-end", "[start] must be less than [end]." );
+        newEnd = newStart + 5;
+        updateOptions.end = newEnd;
       }
 
       if ( newStart !== _popcornOptions.start || newEnd !== _popcornOptions.end ) {
