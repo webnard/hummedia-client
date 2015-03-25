@@ -5689,6 +5689,7 @@ vjs.BigPlayButton.prototype.createEl = function(){
 
 vjs.BigPlayButton.prototype.onClick = function(){
   this.player_.play();
+  this.player_.trigger('playButtonClicked');
 };
 /**
  * Display that an error has occurred making the video unplayable

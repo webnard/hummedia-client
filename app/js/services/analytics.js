@@ -3,6 +3,8 @@ window.HUMMEDIA_SERVICES
      * METHODS:
      *  pageView(url) tracks a view of a specific URL
      *  event(category, action, opt_label, opt_value, opt_noninteraction)
+     *  -- category can be found from analytics.categories.*
+     *  sessionVariable(category, value)
      *  See https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide#SettingUpEventTracking
      *  for all parameters.
      */  
@@ -25,6 +27,29 @@ window.HUMMEDIA_SERVICES
             _gaq.push(['_setAllowLinker',true]);
             _gaq.push(['_setDomainName', 'none']);
         }
+
+        this.userVariable = function(category, value) {
+          var catName = null;
+          for(var i in this.categories) {
+            if(this.categories[i] === category) {
+              catName = i;
+              break;
+            }
+          }
+          if(catName === null) {
+            throw "Category " + category + " does not exist.";
+          }
+
+          var toGA = [
+            '_setCustomVar',
+            category,
+            catName,
+            value,
+            1 // visitor wide
+          ];
+
+          _gaq.push(toGA);
+        }
         
         this.pageView = function(url) {
             if(typeof url !== "string") {
@@ -37,6 +62,10 @@ window.HUMMEDIA_SERVICES
         {
             var event = ['_trackEvent'].concat(Array.prototype.slice.call(arguments));
             _gaq.push(event);
+        };
+
+        this.categories = {
+          "Role": 1
         };
         
         var that = this;

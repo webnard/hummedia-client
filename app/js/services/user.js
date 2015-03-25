@@ -13,8 +13,7 @@
  *  
  * Methods:
  *  {void} prompt [BOOL toggle, STRING returnPath] -- opens a modal window prompting the user to log in.
- *                                 if toggle is set to true, this will close the window
- *                                 if already open. returnPath tells the server where to return to after logging in
+ *                                 if toggle is set to true, this will close the window *                                 if already open. returnPath tells the server where to return to after logging in
  *                                 If returnPath is falsy, defaults to current URL
  *
  * {void} closePrompt -- closes the prompt window if it exists
@@ -23,7 +22,7 @@
  * {http promise} logout -- logs out the current user
  * {$q promise} checkStatus -- forces a refresh of the user's data
  */
-HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', '$q', function($http, config, $location, $templateCache, $compile, $scope, $window, $q) {
+HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$templateCache', '$compile', '$rootScope', '$window', '$q', 'analytics', function($http, config, $location, $templateCache, $compile, $scope, $window, $q, analytics) {
      "use strict";
      
      var _exists = false,
@@ -129,6 +128,16 @@ HUMMEDIA_SERVICES.factory('user', ['$http', 'appConfig', '$location', '$template
 
         $http.get(api + '/account/profile', _httpConfig)
         .success(function(data) {
+             if(data.role !== _data.role) {
+                 var role = null;
+                 if(data.role === null) {
+                     role = 'anonymous';
+                 }
+                 else {
+                     role = data.superuser ? "superuser" : data.role;
+                 }
+                 analytics.userVariable(analytics.categories.Role, role);
+             }
              _data = data;
              if(user.data.username !== null) {
                  _exists = true;
