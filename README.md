@@ -27,7 +27,7 @@ Production Prep
 ------------------------
 *REQUIREMENTS*
 
-    *    nodejs
+    *    nodejs version 0.10.X
     *    npm
 
 By adding a `data-cdn` attribute to your `<script>` tags in the index.html file, 
