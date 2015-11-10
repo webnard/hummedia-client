@@ -58,7 +58,7 @@
     <div id="angular_error_message" data-ng-hide="true" style="display:none">
         <p>Unable to load AngularJS<br />Check if your browser extensions are disabling AngularJS</p>
     </div>
-    
+
     <div id='error-modal' api-error-modal blur='#background, #view'></div>
     <div id="container">
     <div id="background" data-ng-style="style">
@@ -80,9 +80,9 @@
         <nav data-ng-show="showAdminMenu && (user.canCreate || user.isTA)" id="nav-admin" data-ng-cloak>
            <a href="/admin/collection" analytics="{category: 'admin-nav', label: 'collections'}">{{"Collections" | tr}}</a>
            <a href="/admin/video" analytics="{category: 'admin-nav', label: 'videos'}">{{"Media" | tr}}</a>
-           <a href="/admin/user" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Users" | tr}}</a> 
-           <a href="/admin/video/ingest" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Ingest Videos" | tr}}</a> 
-           <a href="/admin/audio/create" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Ingest Audio" | tr}}</a> 
+           <a href="/admin/user" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Users" | tr}}</a>
+           <a href="/admin/video/ingest" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Ingest Videos" | tr}}</a>
+           <a href="/admin/audio/create" data-ng-show="user.isSuperuser" analytics="{category: 'admin-nav', label: 'users'}">{{"Ingest Audio" | tr}}</a>
         </nav>
         <div id="warn-login" data-ng-class="!user.exists && hasCheckedUser ? 'active' : ''" data-ng-show="!user.exists && hasCheckedUser && !warningDismissed" data-ng-cloak data-ng-animate="'warn'"><i class="icon-cancel-circled" ng-click="warningDismissed = true" analytics="{category: 'login-warning', label: 'dismiss'}"></i>You are not logged in. You may not be able to view all of your courses' material until you <a data-ng-click="user.prompt(true)" analytics="{category: 'login-warning', label: 'login'}">login</a>.</div>
         <div id="warn-maintenance" data-ng-class="maintenance ? 'active' : ''" data-ng-show="maintenance" data-ng-cloak data-ng-animate="'warn'"><i class="icon-cancel-circled" ng-click="maintenance = null"></i>{{maintenance}}</div>
@@ -109,13 +109,14 @@
       });
   </script>
   <script src="/lib/jquery-2.0.0.js" data-cdn="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  <script data-remove>less = {async: "true"};</script><!--prevents synchronous XMLHTTPRequest warnings-->
   <script src="/lib/less/less-1.3.3.min.js" data-remove></script>
   <script src="/lib/angular/angular.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular.min.js"></script>
   <script src="/lib/angular/angular-resource.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular-resource.min.js"></script>
   <script src="/lib/angular/angular-route.js" data-cdn="//ajax.googleapis.com/ajax/libs/angularjs/1.2.2/angular-route.min.js"></script>
   <script src="/lib/video-js/plugins/youtube.js"></script>
   <script src="/js/custom-sanitize.js"></script>
-  
+
   <!-- POPCORN -->
   <script src="/lib/popcorn-956693f8/popcorn.js"></script>
   <script src="/lib/popcorn._MediaElementProto.js"></script>
@@ -136,14 +137,14 @@
   <script src="/lib/hummedia-popcorn-plugins/skip/popcorn.skip.js"></script>
   <script src="/lib/butter/assets/plugins/pausePlugin/popcorn.pausePlugin.js"></script>
   <script src="/lib/hummedia-popcorn-plugins/mutePlugin/popcorn.mutePlugin.js"></script>
-  <script src="/lib/hummedia-popcorn-plugins/imagePlugin/popcorn.imagePlugin.js"></script>  
-  <script src="/lib/hummedia-popcorn-plugins/blank/popcorn.blank.js"></script>  
-  <script src="/lib/hummedia-popcorn-plugins/transcript/popcorn.transcript.js"></script>  
+  <script src="/lib/hummedia-popcorn-plugins/imagePlugin/popcorn.imagePlugin.js"></script>
+  <script src="/lib/hummedia-popcorn-plugins/blank/popcorn.blank.js"></script>
+  <script src="/lib/hummedia-popcorn-plugins/transcript/popcorn.transcript.js"></script>
 
   <!-- APP FILES -->
   <script src="/js/config-helper.js"></script>
   <script src="/js/app.js"></script>
-  
+
   <!-- SERVICES -->
   <script src="/js/services.js"></script>
   <script src="/js/services/analytics.js"></script>
@@ -157,7 +158,7 @@
   <script src="/js/services/butter.js"></script>
   <script src="/js/services/sanitize.js"></script>
   <script src="/js/services/send_file.js"></script>
-  
+
   <!-- DIRECTIVES -->
   <script src="/js/directives.js"></script>
   <script src="/js/directives/api-error-modal.js"></script>
@@ -171,8 +172,8 @@
   <script src="/js/directives/resource-form.js"></script>
   <script src="/js/directives/rights.js"></script>
   <script src="/js/directives/scroll-load.js"></script>
- 
-  <!-- RESOURCES --> 
+
+  <!-- RESOURCES -->
   <script src="/js/resources/video.js"></script>
   <script src="/js/resources/collection.js"></script>
   <script src="/js/resources/account.js"></script>
