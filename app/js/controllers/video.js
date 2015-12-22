@@ -14,25 +14,25 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
     //Initialize resized view
     resizeView();
     window.addEventListener("resize", resizeView);
-    
+
     //Add page-specific styles
     $('html').addClass('video-page');
-    
+
     //Event handler for leaving the page
     $scope.$on('$locationChangeStart', function removeResizeListener() {
         window.removeEventListener("resize", resizeView);
         $('#view').css('height','');
         $('html').removeClass('video-page');
     });
-    
+
     var coll = $routeParams.collection;
     var vid  = $routeParams.id;
-    
+
     $scope.annotationsEnabled = true;
     $scope.subtitlesEnabled = true;
     $scope.editorMode = ANNOTATION_MODE;
     $scope.annotationsLayout = false;
-    
+
     if($scope.editorMode){
         //In editor mode, use the annotation layout
         $scope.annotationsLayout = true;
@@ -52,7 +52,6 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
                 ev.preventDefault();
                 if(confirm("Are you sure you want to navigate away from this page? Your unsaved work will be lost.")) {
                     $window.location = newUrl;
-                    $window.location.reload();
                 }
             });
             return;
@@ -79,14 +78,14 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
         var pop = null,
             vjs = null,
             pop_opts =  {frameAnimation: true}; // allows for more accurate timing
-        
+
         if(video.type === 'yt') {
             var el = $('#hum-video')[0];
-           
+
             el.classList.add('video-js'); // IE <=11 won't let us combine all these into one statement
             el.classList.add('vjs-default-skin');
             el.classList.add('vjs-big-play-centered');
-            
+
             vjs_opts['techOrder'] = ['youtube'];
             vjs_opts['src'] = video.url[0];
             vjs_opts['controls'] = true;
@@ -115,15 +114,15 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
             pop.media.classList.add('video-js'); // IE <=11 won't let us combine all these into one statement
             pop.media.classList.add('vjs-default-skin');
             pop.media.classList.add('vjs-big-play-centered');
-        
+
             vjs = videojs(pop.media, vjs_opts, placeCaptionButton);
             initializePopcornDependents( pop );
         }
 
         function initializePopcornDependents( pop ) {
           //Adding Event Listeners to video element
-         
-          if(pop.media) { 
+
+          if(pop.media) {
               //Hide the video before the data loads
               pop.media.addEventListener("loadstart",function(){
                   $('#video-loading').show();
@@ -219,7 +218,7 @@ function VideoCtrl($scope, $routeParams, ANNOTATION_MODE,
                     }else{
                       sub.displayName = sub.name;
                     }
-                    
+
                     if(sub.language) {
                       sub.displayName += " [" + sub.language + "]";
                     }
