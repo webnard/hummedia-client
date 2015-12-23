@@ -54,18 +54,18 @@ cat << EOF > /etc/apache2/sites-available/milo.byu.edu
     ServerName $HOSTNAME
 
     DocumentRoot $DOCROOT
-    
+
     <Directory $DOCROOT/>
         AllowOverride All
     </Directory>
-    
-    Alias /movies/ /var/www/api/movies/ 
+
+    Alias /movies/ /var/www/api/movies/
     <Location /movies/>
         AuthTokenSecret     "secret string"
         AuthTokenPrefix     /movies/
-        
-        #4 hours 
-        AuthTokenTimeout    14400 
+
+        #4 hours
+        AuthTokenTimeout    14400
         AuthTokenLimitByIp  on
     </Location>
 
@@ -87,12 +87,12 @@ cat << EOF > /etc/apache2/sites-available/milo.byu.edu
     RewriteCond %{REQUEST_METHOD} !PUT
     RewriteCond %{REQUEST_METHOD} !DELETE
     RewriteRule ^/text/(.*)$ /var/www/api/text/\$1
-    
+
     RewriteMap subtitles rnd:/etc/apache2/maps/subtitles.txt
-    
+
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_URI} ^/text/.*
-    RewriteRule ^.*.(srt|vtt)$ /var/www/api/text/\${subtitles:file}.\$1 [L] 
+    RewriteRule ^.*.(srt|vtt)$ /var/www/api/text/\${subtitles:file}.\$1 [L]
 </VirtualHost>
 EOF
 
@@ -204,7 +204,7 @@ if [ ! -f trailer.webm ]; then
 fi
 
 if [ ! -f trailer.mp4 ]; then
-    wget --no-verbose http://hlrdev.byu.edu/downloads/how-to-draw.mp4 -O trailer.mp4 --no-verbose
+    wget --no-verbose https://vjs.zencdn.net/v/oceans.mp4 -O trailer.mp4 --no-verbose
 fi
 
 cd ../ingest
