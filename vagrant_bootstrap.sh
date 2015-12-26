@@ -189,6 +189,19 @@ cd /var/www/api/
 
 # install all required python modules
 pip install -r flask/requirements.txt
+# Even though the special commit of pycaption is in requirements.txt
+# it doesn't seem to install so I've added it explicitly here
+pip install git+git://github.com/BYU-ODH/pycaption.git@33d96456310d84c9acc78d0d2bde18aa9dea0cf7#egg=pycaption
+
+#Requirements missing from requirements.txt
+pip install Werkzeug
+pip install jinja2
+pip install markupsafe
+pip install itsdangerous
+pip install httplib2
+pip install oauth2
+pip install simplejson
+pip install requests
 
 #rm -rf real_files ingest movies posters
 mkdir -p real_files
