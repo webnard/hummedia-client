@@ -200,8 +200,6 @@ jsdom.env(input, [jquery], function(errors, window) {
                 fs.close(output);
                 fs.rename(output_file, output_dir + '/index.html');
 
-                fs.rename(output_dir + '/CONFIG.default.js', output_dir + '/CONFIG.js');
-
                 remove_dirs.forEach(function(dir) {
                     deleteFolderRecursive(output_dir + dir);
                 });
