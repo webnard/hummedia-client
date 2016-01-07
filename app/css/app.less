@@ -116,7 +116,7 @@
 /**************************
  * Main
 ***************************/
-html { 
+html {
 
     font-family: sans-serif;
     overflow-x:hidden;
@@ -226,7 +226,7 @@ strong {
     }
     #list_scrolling_block{
         max-height: 400px;
-        overflow-y: auto;   
+        overflow-y: auto;
     }
     .selectable{
         border-style: solid;
@@ -262,7 +262,7 @@ strong {
           width: 50px;
         }
     }
-    
+
     .collectioninfo{
         &:disabled{
             background-color: white;
@@ -280,7 +280,7 @@ strong {
         border-style: solid;
         border-radius: 10px;
         padding: 10px;
-        
+
     }
     #dragdrop{
         display: none;
@@ -295,12 +295,12 @@ strong {
     }
 }
 #editable-description-wrapper{
-    position:relative;    
+    position:relative;
 }
 #description-cover{
-    width:100%; 
-    height:100px; 
-    position:absolute; 
+    width:100%;
+    height:100px;
+    position:absolute;
     top:0;
 }
 .admin-editor{
@@ -476,13 +476,16 @@ a {
     border-radius: 5px;
     background-color: rgba(255, 255, 255, .75);
     li{
+        &:first-child {
+            cursor: default;
+        }
         &:not(:first-child) {
             padding-top: .3em;
         }
         &:not(:last-child) {
             padding-bottom: .3em;
             border-bottom: solid rgb(163, 163, 163) 1px;
-        } 
+        }
         a {
             display: inline;
             padding-left: 2px;
@@ -501,7 +504,7 @@ a {
         background-color: rgba(255, 255, 255, 1);
     }
     cursor: pointer;
-    
+
 }
 #home_content{
         .ghost;
@@ -810,7 +813,7 @@ a {
 	*display: inline;
 	border: solid 1px #d2d2d2;
 	padding: 3px 5px;
-	
+
 	-webkit-border-radius: 2em;
 	-moz-border-radius: 2em;
 	border-radius: 2em;
@@ -1212,7 +1215,7 @@ a {
     h2 {
         font-size: 1.4em;
     }
-    
+
     ul {
         li {
             margin-top: 10px;
@@ -1280,7 +1283,7 @@ a {
     box-shadow: 0px 6px 6px -3px black;
     text-align: center;
     padding: 2px;
-    
+
     &.active {
         display: block;
     }
