@@ -5,7 +5,8 @@
             <button ng-class="{active: !all}" ng-click="loadCollectionList(false)">Mine</button>
         </div>
         <ul id="tabs" data-ng-show="collections.length || showTabs">
-            <li data-ng-repeat="tabcollection in collections | orderColon:'dc:title'" data-ng-class="{highlighted: collection.pid==tabcollection.pid}" data-ng-click="showVideos(tabcollection.pid)">
+            <li><input type="search" placeholder='Filter Courses…' ng-model="collection_filter"></li>
+            <li data-ng-repeat="tabcollection in collections | orderColon:'dc:title' | filter: collection_filter" data-ng-class="{highlighted: collection.pid==tabcollection.pid}" data-ng-click="showVideos(tabcollection.pid)">
                 <a ng-show='canEdit(tabcollection)' class='edit-button' ng-href="/admin/collection?id={{tabcollection.pid}}"><i data-tooltip="Edit this collection" class="icon-edit"></i></a>
                 <a ng-href="/collection?id={{tabcollection['pid']}}" id="tab-{{tabcollection['pid']}}">{{tabcollection['dc:title']}}</a>
             </li>
@@ -18,7 +19,7 @@
     <div ng-show=ready>
       <h2 ng-show=!collections.length>There are no collections to display.</h2>
       <p ng-show='!collections.length && loggedIn'>
-        We could not find any videos assigned to you. Please contact your instructor to determine if the assigned videos have been linked to the current semester's classes. 
+        We could not find any videos assigned to you. Please contact your instructor to determine if the assigned videos have been linked to the current semester's classes.
       </p>
     </div>
 <div ng-show=collections.length class='collection_blocks'>
@@ -37,11 +38,11 @@
               <h2>{{collection['dc:title']}}</h2>
               <p data-ng-bind-html="collection['dc:description']"></p>
             </div>
-            
+
             <div id='collection-film-filter' class="filter" data-ng-show="!collection.isLoading">
                <input type="search" placeholder='Filter…' ng-model="video_filter">
-            </div>         
-            
+            </div>
+
             <i class='icon-cog icon-spin' data-ng-show="collection.isLoading" title="Loading videos"></i>
         </div>
         <hr>
@@ -81,6 +82,6 @@
           </li>
         </ul>
     </div>
-</div> 
+</div>
 </div>
 </div>
