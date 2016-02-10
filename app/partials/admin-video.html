@@ -64,7 +64,7 @@
                                 <span ng-hide="subtitle.name">{{subtitle['@id'].split("/").pop()}}</span>
                                 <span ng-show="subtitle.language">[{{subtitle.language}}]</span>
                               </td>
-                              <td id="righttd"><button data-ng-click="deleteSubtitle(subtitle['@id'])">{{"Delete" | tr}}</button></td>
+                              <td id="righttd"><button><a href="{{subtitle['@id']}}" target="_self" download="{{subtitle['@id'].split('/').pop()}}">Download</a></button><button data-ng-click="deleteSubtitle(subtitle['@id'])">{{"Delete" | tr}}</button></td>
                             </tr>
                         </table>
                     </li>
@@ -89,7 +89,7 @@
     </section>
 </section>
 
-<div id='blur-box'> 
+<div id='blur-box'>
 </div>
 <div class='modal' id='modal-add-video'>
     <i data-ng-click="toggleModal('#modal-add-video')" class="icon-cancel-circled close-icon"></i>
