@@ -6,4 +6,4 @@
 	url = git@github.com:BYU-ODH/ODH-popcornjs-plugins.git
 [submodule "api/flask"]
 	path = api/flask
-	url = git@github.com:jlmcdonald/byu-hummedia-api.git
+	url = git@github.com:BYU-ODH/byu-hummedia-api.git
