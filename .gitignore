@@ -16,6 +16,7 @@ api/movies
 api/real_files
 api/posters
 api/text
+api/src
 
 *.pyc
 **/__pycache__
