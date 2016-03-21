@@ -20,7 +20,7 @@
                 <label for="lastname">{{"Last Name:" | tr}}</label><input id="lastname" data-ng-model="user.lastname">
                 <label for="ta">{{"TA:" | tr}}</label><input id="ta" type="checkbox" data-ng-model="user.ta">
                 <label for="superuser">{{"Superuser:" | tr}}</label><input id="superuser" type="checkbox" data-ng-model="user.superuser">
-                <label for="role">{{"Role:" | tr}}</label><select id="role" data-ng-options="value for value in roles" data-ng-model="user.role"></select>
+                <label>{{"Role:" | tr}}</label><input type=text disabled data-ng-model="user.role">
                 <label for="email">{{"Email:" | tr}}</label><input type="email" id="email" data-ng-model="user.email">
             </div>
             <div class="control-buttons">
