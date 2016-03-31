@@ -1,18 +1,4 @@
 <project name="Hummedia" default="create" basedir=".">
-    <target name="json_translations">
-        <exec executable="make" failonerror="true">
-            <arg value="--directory=l10n" />
-            <arg value="json" />
-        </exec>
-    </target>
-
-    <target name="pot_files">
-        <exec executable="make" failonerror="true">
-            <arg value="--directory=l10n" />
-            <arg value="pot" />
-        </exec>
-    </target>
-
     <target name="scripts" description="Builds any scripts in the scripts directory.">
         <exec executable="npm" failonerror="true" dir="scripts">
             <arg value="install" />

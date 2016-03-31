@@ -1,7 +1,6 @@
 function AdminUserCtrl($scope, account, $routeParams, $location) {
     "use strict";
     
-    $scope.roles = account.availableRoles;
     $scope.users =  account.search();
     $scope.user = null;
     var copy = null; // used for updating the user list while removing $scope.user
