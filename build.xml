@@ -1,4 +1,4 @@
-<project name="Hummedia" default="create" basedir=".">
+<project name="Hummedia" default="production" basedir=".">
     <target name="scripts" description="Builds any scripts in the scripts directory.">
         <exec executable="npm" failonerror="true" dir="scripts">
             <arg value="install" />
@@ -20,5 +20,4 @@
         </exec>
     </target>
     <target name="production" depends="compress" />
-    <target name="create" depends="json_translations"/>
 </project>
